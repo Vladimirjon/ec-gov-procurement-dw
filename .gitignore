@@ -1,0 +1,55 @@
+# --- Datos ---------------------------------------------------------------
+# La foto (snapshot) y cualquier dato derivado viven fuera de git
+# (ver docs/adr/0002-foto-inmutable.md). Solo se versiona el README de data/.
+data/*
+!data/README.md
+
+# --- Material del curso ----------------------------------------------------
+# Material entregado por el profesor; no se redistribuye.
+Instrucciones_Curso/
+
+# --- Entornos virtuales ----------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# --- Secretos y configuración local --------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Python ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# --- Cachés de herramientas ------------------------------------------------
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# --- dbt (si se adopta, ver D2) -----------------------------------------------
+warehouse/dbt/target/
+warehouse/dbt/dbt_packages/
+warehouse/dbt/logs/
+
+# --- Documentación generada (MkDocs) -----------------------------------------
+site/
+
+# --- Logs ------------------------------------------------------------------
+*.log
+
+# --- Editores y sistema operativo ------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
