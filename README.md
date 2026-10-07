@@ -95,6 +95,8 @@ Detalle: [propuesta de arquitectura](docs/PROPUESTA.md),
 ```
 ├─ AGENTS.md                  # reglas para asistentes de IA
 ├─ CONTRIBUTING.md            # flujo de trabajo del equipo
+├─ LICENSE
+├─ .github/                   # CODEOWNERS y plantillas de PR e issues
 ├─ docs/
 │  ├─ PROPUESTA.md            # propuesta de arquitectura
 │  ├─ adr/                    # decisiones de arquitectura
@@ -114,9 +116,8 @@ Detalle: [propuesta de arquitectura](docs/PROPUESTA.md),
 ```
 
 Pendientes de aprobación del líder: `pyproject.toml`, `compose.yaml`,
-`Makefile`, `.pre-commit-config.yaml` y `.github/` (plantillas y
-`CODEOWNERS`). El CI se implementará más adelante, cuando haya código y
-pruebas que verificar.
+`Makefile` y `.pre-commit-config.yaml`. El CI se implementará más adelante,
+cuando haya código y pruebas que verificar.
 
 ## Decisiones pendientes con el profesor
 

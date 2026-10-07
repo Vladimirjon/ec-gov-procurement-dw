@@ -3,11 +3,10 @@
 Guía de trabajo del equipo (5 personas). Se basa en la sección 8 de la
 [propuesta de arquitectura](docs/PROPUESTA.md).
 
-> **Estado:** la protección de `main`, el CI y las plantillas de PR e issues
-> todavía no están configurados. El CI se implementará cuando el repositorio
-> tenga código y pruebas que verificar. Hasta entonces, las reglas se cumplen
-> por acuerdo del equipo y en la revisión de cada PR, y la regla "el CI debe
-> pasar" se sustituye por una verificación manual descrita en el PR.
+> **Estado:** `main` está protegida y hay plantillas de PR e issues. El CI se
+> implementará cuando el repositorio tenga código y pruebas que verificar.
+> Hasta entonces, la regla "el CI debe pasar" se sustituye por una
+> verificación manual descrita en el PR.
 
 ## Roles por capa
 
@@ -28,9 +27,9 @@ para que nadie sea el único que conoce una capa.
 
 Aplican a todo el código y la documentación, con o sin asistentes de IA.
 
-- `main` está protegida: solo cambia mediante PR con al menos una revisión
-  aprobada.
-- El CI debe pasar antes de fusionar.
+- `main` está protegida: solo cambia mediante PR aprobado por el líder (ver
+  [Protección de `main`](#protección-de-main)).
+- El CI debe pasar antes de fusionar (cuando exista).
 - Commits pequeños y descriptivos con
   [Conventional Commits](https://www.conventionalcommits.org/).
 - Toda decisión de arquitectura se registra en un ADR (`docs/adr/`).
@@ -40,21 +39,67 @@ Aplican a todo el código y la documentación, con o sin asistentes de IA.
 
 ## Flujo de trabajo
 
-1. **Issue.** Describe la tarea y su criterio de aceptación.
-2. **Rama.** Crea una rama desde `main` para ese issue.
-3. **Commits.** Pequeños, con Conventional Commits. Ejemplos:
+1. **Issue.** Ábrelo con la plantilla "Tarea": objetivo y criterio de
+   aceptación.
+2. **Rama.** Desde `main` actualizada, con el formato
+   `tipo/NN-descripcion-corta`, donde `NN` es el número del issue:
+
+   ```bash
+   git switch main
+   git pull
+   git switch -c docs/12-documento-requerimientos
+   ```
+
+3. **Commits.** Pequeños, con Conventional Commits. Tipos:
    - `feat(load): ...` para funcionalidad nueva
    - `fix(quality): ...` para corrección de errores
    - `docs(adr): ...` para documentación
    - `test(snapshot): ...` para pruebas
+   - `refactor: ...` para cambios sin efecto funcional
    - `chore: ...` para mantenimiento
-4. **PR.** Enlaza el issue, explica qué cambia y cómo se verificó.
-5. **Revisión.** Al menos una persona distinta del autor; de preferencia de
-   otra capa (revisión cruzada).
-6. **Fusión.** Solo con CI en verde y revisión aprobada.
+4. **PR.** Publica la rama y abre el PR contra `main`. El título sigue
+   Conventional Commits, porque será el mensaje del commit final. Completa la
+   plantilla: issue que cierra (`Cierra #NN`) y cómo se verificó. Si aún no
+   está listo, ábrelo como borrador (draft).
+5. **Revisión.** El líder (@Vladimirjon) revisa y aprueba todos los PR.
+   Cualquier integrante puede comentar; la revisión cruzada de otra capa es
+   bienvenida, pero no reemplaza la aprobación del líder. Todas las
+   conversaciones deben quedar resueltas.
+6. **Correcciones.** Si haces push después de la aprobación, la aprobación se
+   descarta y el PR debe aprobarse de nuevo.
+7. **Fusión.** Solo con squash merge: el PR entra a `main` como un único
+   commit. GitHub borra la rama remota automáticamente al fusionar.
+8. **Limpieza local.**
 
-**[PENDIENTE]** Convención de nombres de ramas y estrategia de fusión
-(merge, squash o rebase).
+   ```bash
+   git switch main
+   git pull
+   git fetch --prune
+   git branch -d docs/12-documento-requerimientos
+   ```
+
+## Protección de `main`
+
+Configurada en GitHub; no depende de la buena voluntad de nadie.
+
+| Regla | Efecto |
+|---|---|
+| PR obligatorio | Nadie del equipo puede hacer push directo a `main`. |
+| 1 aprobación de code owner | `.github/CODEOWNERS` asigna todo al líder; sin su aprobación el PR no se fusiona. |
+| Aprobación descartada al hacer push | Un cambio posterior a la aprobación exige revisarlo otra vez. |
+| Aprobación del último push | Quien hizo el último push no puede ser quien aprueba. |
+| Conversaciones resueltas | No se fusiona con comentarios abiertos. |
+| Historial lineal | Sin commits de merge en `main`. |
+| Sin force push ni borrado | `main` no se reescribe ni se elimina. |
+| Solo squash merge | Merge commit y rebase merge están desactivados en el repositorio. |
+| Borrado automático de ramas | La rama del PR se elimina al fusionar. |
+
+**Excepción del administrador.** El líder, como dueño del repositorio, puede
+saltarse estas reglas. Lo usa solo para fusionar sus propios PR (GitHub no
+permite aprobar un PR propio) y nunca para hacer push directo a `main`. En
+sus PR pide igual la revisión de un integrante.
+
+Cuando exista CI, se añadirá como verificación obligatoria antes de fusionar.
 
 ## Definición de hecho
 
