@@ -2,7 +2,7 @@
 
 - **Estado:** Propuesto (borrador)
 - **Fecha:** 2026-10-06
-- **Decide:** líder del equipo, con validación del profesor
+- **Decide:** líder del equipo
 - **Referencias:** [PROPUESTA.md](../PROPUESTA.md), secciones 1, 2, 3 y 10
 
 ## Contexto
@@ -42,17 +42,17 @@ fuente.
    - Instituto dependiente de un ministerio
    - Fuera de alcance
 6. **Casos dudosos** (por ejemplo, entidades adscritas con régimen propio): se
-   registran junto a la semilla con su justificación y se consultan con el
-   profesor. Mientras no se resuelvan, no se incluyen en los indicadores.
+   registran junto a la semilla con su justificación y los decide el líder.
+   Mientras no se resuelvan, no se incluyen en los indicadores.
 
 ## Pendiente
 
 | Tema | Estado | Quién lo resuelve |
 |---|---|---|
-| Fuente oficial para la clasificación de entidades | **[PENDIENTE]** | Equipo, con validación del profesor |
-| Criterios de inclusión de entidades | **[PENDIENTE]** | Profesor |
-| Tratamiento de casos dudosos | **[PENDIENTE]** | Profesor |
-| Qué es "la foto", quién la entrega y de qué periodo (D1) | **[PENDIENTE]** | Profesor |
+| Fuente oficial para la clasificación de entidades | **[PENDIENTE]** | Rol 5 propone, líder aprueba |
+| Criterios de inclusión de entidades | **[PENDIENTE]** | Líder |
+| Casos dudosos concretos | **[PENDIENTE]** al construir la semilla | Líder |
+| Periodo de la foto (ver ADR 0002) | **[PENDIENTE]** tras reconocer la fuente | Líder |
 | Atributo de la fuente que identifica a la entidad compradora | **[PENDIENTE]** verificar en `docs/sources/` | Rol 1 (fuente y foto) |
 
 La regla 6 (excluir casos dudosos de los indicadores hasta resolverlos) es una

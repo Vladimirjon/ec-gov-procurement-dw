@@ -5,6 +5,9 @@
 - **Decide:** líder del equipo
 - **Referencias:** [PROPUESTA.md](../PROPUESTA.md), secciones 3 (D1), 4 y 10
 
+**Decidido (D1):** el equipo toma la foto del portal de datos abiertos de
+contratación pública de SERCOP (formato OCDS). No la entrega nadie más.
+
 ## Contexto
 
 El proyecto trabaja sobre una foto (snapshot) de los datos de contratación. El
@@ -38,7 +41,7 @@ regenerarse desde ella.
 
 | Tema | Estado | Quién lo resuelve |
 |---|---|---|
-| Qué es "la foto", quién la entrega y de qué periodo (D1) | **[PENDIENTE]** | Profesor |
+| Periodo de la foto (uno o más años) | **[PENDIENTE]** tras medir el volumen por año | Líder |
 | Cómo se obtiene: descarga masiva por año o extracción por API | **[PENDIENTE]** verificar en la preparación | Rol 1 (fuente y foto) |
 | Límite de peticiones de la API (la propuesta anota "unas 60"; falta documentar unidad y ventana de tiempo) | **[PENDIENTE]** verificar y documentar en `docs/sources/` | Rol 1 |
 | Formato de almacenamiento: Parquet o JSON | **[PENDIENTE]** | Líder |
