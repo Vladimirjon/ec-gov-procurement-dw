@@ -6,7 +6,7 @@
 > Este documento sirve de punto de partida del repositorio nuevo. Se divide en
 > una propuesta para el equipo (secciones 1 a 11) y un prompt inicial para
 > asistentes de IA (sección 12). Lo marcado como **[CONFIRMAR]** no es una
-> decisión: depende del profesor o de una verificación pendiente.
+> decisión: depende de una verificación pendiente o de la aprobación del líder.
 
 ---
 
@@ -55,19 +55,21 @@ pertenecen a la planta central. Hay que construir una tabla de clasificación
 fuente oficial, versionada en el repo como semilla. Cada entidad debe
 resolverse en una de estas categorías: Presidencia, ministerio, instituto
 dependiente de un ministerio, o **fuera de alcance**. Los casos dudosos (por
-ejemplo, entidades adscritas con régimen propio) se registran y se consultan
-con el profesor. **[CONFIRMAR]** la fuente oficial y los criterios de
-inclusión.
+ejemplo, entidades adscritas con régimen propio) se registran con su
+justificación y los decide el líder. **[CONFIRMAR]** la fuente oficial y los
+criterios de inclusión.
 
-## 3. Decisiones por confirmar con el profesor
+## 3. Decisiones del equipo
 
-| # | Pregunta | Por qué importa |
+No hay consultas previstas con el profesor: el equipo decide.
+
+| # | Tema | Decisión |
 |---|---|---|
-| D1 | ¿Qué es "la foto"? ¿La entrega el profesor o la tomamos nosotros? ¿De qué periodo? | Define si hay extracción propia o solo carga. |
-| D2 | ¿Se acepta PostgreSQL y herramientas como dbt? Los PDFs usan SQL Server como ejemplo. | Afecta la pila completa. |
-| D3 | ¿Fechas exactas de cada etapa hasta el 22 de enero? | Ajusta el calendario de la sección 9. |
-| D4 | ¿Idioma de los entregables? | Define el idioma de la documentación. |
-| D5 | ¿Cuánto pesa la parte "profesional o tesis" en la evaluación? | Decide cuánto invertir en rigor extra. |
+| D1 | La foto | La toma el equipo, del portal de datos abiertos de SERCOP (OCDS). El periodo lo fija el líder tras reconocer la fuente (volumen por año). |
+| D2 | Herramientas | Libre elección del equipo. Se adopta la pila de la sección 6, con PostgreSQL y dbt. |
+| D3 | Calendario | El de la sección 9, con cierre el 2027-01-22. |
+| D4 | Idioma | Documentos en español; código y nombres técnicos en inglés. |
+| D5 | Rigor | Nivel profesional, para que el trabajo pueda crecer hacia tesis (sección 1). |
 
 ## 4. Arquitectura
 
@@ -155,8 +157,8 @@ semana 2.
 | Lenguaje | Python 3.13 | Experiencia previa del líder y ecosistema de datos | Propuesto |
 | Gestión de entorno | `uv` | Entornos y dependencias reproducibles | Propuesto |
 | Calidad de código | `ruff`, `pytest`, tipado estático | Convenciones y pruebas automáticas | Propuesto |
-| Base de datos | PostgreSQL en Docker Compose | Compatible con Power BI | **D2** |
-| Transformación y pruebas | dbt | Pruebas de integridad, documentación y linaje | **D2** |
+| Base de datos | PostgreSQL en Docker Compose | Compatible con Power BI | Decidido (D2) |
+| Transformación y pruebas | dbt | Pruebas de integridad, documentación y linaje | Decidido (D2) |
 | Foto cruda | Parquet o JSON con manifiesto de checksums | Reproducible y verificable | Propuesto |
 | Orquestación | CLI primero; Airflow o Dagster después | Evitar complejidad prematura | Fase posterior |
 | CI | GitHub Actions + `pre-commit` | Revisión automática en cada PR | Propuesto |
@@ -241,7 +243,7 @@ asistente pasa por las mismas reglas que lo escrito a mano. Nadie debe
 pegar secretos, credenciales ni datasets completos en prompts, logs o
 documentación.
 
-## 9. Mapa curso → entregables → repo (calendario tentativo, **D3**)
+## 9. Mapa curso → entregables → repo (calendario del equipo, D3)
 
 | Etapa HEFESTO | Entregables del curso | Ubicación | Ventana tentativa |
 |---|---|---|---|
@@ -273,7 +275,7 @@ usa `fact_quality_check`.
 1. Crear el repositorio, proteger `main` y añadir CI mínimo.
 2. Redactar `AGENTS.md` y `CONTRIBUTING.md` a partir de este documento.
 3. Escribir los ADR 0001 (alcance), 0002 (foto inmutable) y 0003 (pila).
-4. Enviar al profesor las preguntas D1 a D5.
+4. Registrar las decisiones D1 a D5 en los ADR.
 5. Reconocer la fuente: campos, volumen para un año, descargas masivas.
 6. Redactar el documento de requerimientos (semana 1).
 
@@ -318,8 +320,8 @@ Ejecuta las pruebas y el linter relevantes después de cada cambio y reporta el
 resultado real, incluidos los fallos.
 
 ## Convenciones
-Código y nombres técnicos en inglés. Documentos de entrega en español
-(sujeto a la decisión D4). Commits con Conventional Commits.
+Código y nombres técnicos en inglés. Documentos de entrega en español.
+Commits con Conventional Commits.
 ```
 
 ## 13. Nombre del repositorio

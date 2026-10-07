@@ -109,7 +109,7 @@ Detalle: [propuesta de arquitectura](docs/PROPUESTA.md),
 ├─ src/ec_gov_procurement_dw/ # extract, snapshot, load, quality (vacíos)
 ├─ warehouse/
 │  ├─ ddl/                    # DDL físico (vacío)
-│  └─ dbt/                    # sujeto a D2 (vacío)
+│  └─ dbt/                    # modelos y pruebas dbt (vacío)
 ├─ reports/powerbi/           # tableros (vacío)
 ├─ tests/                     # unit, integration, fixtures (vacíos)
 └─ data/                      # ignorado por git
@@ -119,21 +119,28 @@ Pendientes de aprobación del líder: `pyproject.toml`, `compose.yaml`,
 `Makefile` y `.pre-commit-config.yaml`. El CI se implementará más adelante,
 cuando haya código y pruebas que verificar.
 
-## Decisiones pendientes con el profesor
+## Decisiones del equipo
 
-| # | Pregunta |
-|---|---|
-| D1 | ¿Qué es "la foto"? ¿La entrega el profesor o la toma el equipo? ¿De qué periodo? |
-| D2 | ¿Se acepta PostgreSQL y herramientas como dbt? |
-| D3 | ¿Fechas exactas de cada etapa hasta el cierre? |
-| D4 | ¿Idioma de los entregables? |
-| D5 | ¿Cuánto pesa la parte "profesional o tesis" en la evaluación? |
+| # | Tema | Decisión |
+|---|---|---|
+| D1 | La foto | La toma el equipo, de SERCOP (OCDS). Periodo **[PENDIENTE]** tras reconocer la fuente. |
+| D2 | Herramientas | Libres; se adopta PostgreSQL y dbt ([ADR 0003](docs/adr/0003-pila-tecnologica.md)). |
+| D3 | Calendario | El de la sección 9 de la [propuesta](docs/PROPUESTA.md). |
+| D4 | Idioma | Documentos en español; código y nombres técnicos en inglés. |
+| D5 | Rigor | Nivel profesional, con proyección a tesis. |
 
 ## Calendario
 
-Entrega por etapas HEFESTO; cierre del proyecto el **22 de enero**. Las
-ventanas por etapa son tentativas hasta resolver D3 (ver la sección 9 de la
-[propuesta](docs/PROPUESTA.md)).
+Entrega por etapas HEFESTO; cierre del proyecto el **22 de enero de 2027**.
+
+| Etapa | Ventana |
+|---|---|
+| Preparación | 6 a 19 oct |
+| 1. Requerimientos | 20 oct a 2 nov |
+| 2. Diseño conceptual y lógico | 3 a 23 nov |
+| 3. Diseño físico y ETL | 24 nov a 14 dic |
+| 4. Carga y pruebas | 15 dic a 8 ene |
+| 5. Visualización y cierre | 9 a 22 ene |
 
 ## Cómo contribuir
 

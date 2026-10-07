@@ -40,6 +40,6 @@ resultado real, incluidos los fallos. Mientras no estén configurados, dilo
 explícitamente en lugar de dar el cambio por verificado.
 
 ## Convenciones
-Código y nombres técnicos en inglés. Documentos de entrega en español
-(sujeto a la decisión D4). Commits con Conventional Commits. El flujo de
+Código y nombres técnicos en inglés. Documentos de entrega en español.
+Commits con Conventional Commits. El flujo de
 trabajo del equipo está en CONTRIBUTING.md.
