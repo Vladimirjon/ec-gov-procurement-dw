@@ -8,7 +8,7 @@ Se usa como mensaje del commit al fusionar (squash).
 
 <!-- Resumen breve del cambio. -->
 
-Cierra #<!-- número del issue -->
+Closes #<!-- número del issue; la palabra clave debe ir en inglés -->
 
 ## Cómo se verificó
 

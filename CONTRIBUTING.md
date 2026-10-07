@@ -59,8 +59,10 @@ Aplican a todo el código y la documentación, con o sin asistentes de IA.
    - `chore: ...` para mantenimiento
 4. **PR.** Publica la rama y abre el PR contra `main`. El título sigue
    Conventional Commits, porque será el mensaje del commit final. Completa la
-   plantilla: issue que cierra (`Cierra #NN`) y cómo se verificó. Si aún no
-   está listo, ábrelo como borrador (draft).
+   plantilla: issue que cierra y cómo se verificó. Escribe `Closes #NN` en
+   inglés: GitHub solo reconoce `Closes`, `Fixes` o `Resolves`, y con esa
+   línea el issue se cierra solo al fusionar. Si aún no está listo, ábrelo
+   como borrador (draft).
 5. **Revisión.** El líder (@Vladimirjon) revisa y aprueba todos los PR.
    Cualquier integrante puede comentar; la revisión cruzada de otra capa es
    bienvenida, pero no reemplaza la aprobación del líder. Todas las
