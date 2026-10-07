@@ -17,7 +17,7 @@ para que nadie sea el único que conoce una capa.
 | # | Capa | Responsabilidades |
 |---|---|---|
 | 1 | Fuente y foto | Extracción, manifiesto, reconocimiento de la fuente |
-| 2 | Modelo dimensional | Modelo dimensional y transformaciones (dbt, sujeto a D2) |
+| 2 | Modelo dimensional | Modelo dimensional y transformaciones (dbt) |
 | 3 | Calidad | Reglas de calidad, pruebas y CI |
 | 4 | Visualización | Power BI y tableros |
 | 5 | Coordinación | Requerimientos, documentación y coordinación |
@@ -70,7 +70,7 @@ Una tarea está terminada cuando tiene:
 - Un archivo por decisión: `docs/adr/NNNN-titulo-corto.md`, numeración
   correlativa.
 - Estados: Propuesto, Aceptado, Reemplazado por ADR NNNN, Descartado.
-- Lo que dependa del profesor o de una verificación se marca como
+- Lo que dependa de una verificación o de la aprobación del líder se marca como
   **[PENDIENTE]** y no se trata como decisión.
 - Un ADR aceptado no se reescribe; si cambia la decisión, se crea uno nuevo
   que lo reemplace.
