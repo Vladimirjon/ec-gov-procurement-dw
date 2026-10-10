@@ -8,20 +8,15 @@ Guía de trabajo del equipo (5 personas). Se basa en la sección 8 de la
 > Hasta entonces, la regla "el CI debe pasar" se sustituye por una
 > verificación manual descrita en el PR.
 
-## Roles por capa
+## Roles y rotación
 
-Cada capa tiene una persona responsable. Los roles rotan a mitad del proyecto
-para que nadie sea el único que conoce una capa.
+El trabajo se divide en cinco carriles: Ingesta y fuente, Modelado y
+almacenamiento, Transformación, Calidad y operación, y Negocio y servicio.
+El líder lleva fijo el carril de Ingesta y fuente; el resto del equipo
+cambia de carril en cada fase.
 
-| # | Capa | Responsabilidades |
-|---|---|---|
-| 1 | Fuente y foto | Extracción, manifiesto, reconocimiento de la fuente |
-| 2 | Modelo dimensional | Modelo dimensional y transformaciones (dbt) |
-| 3 | Calidad | Reglas de calidad, pruebas y CI |
-| 4 | Visualización | Power BI y tableros |
-| 5 | Coordinación | Requerimientos, documentación y coordinación |
-
-**[PENDIENTE]** Asignación de personas a cada rol y fecha de rotación.
+Las tareas de cada persona por fase, las fechas internas y la matriz de
+rotación están en [docs/PLAN.md](docs/PLAN.md).
 
 ## Reglas comunes
 
