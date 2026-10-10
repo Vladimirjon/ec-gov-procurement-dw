@@ -109,6 +109,11 @@ Principios:
 
 ## 5. Modelo dimensional preliminar
 
+> **Actualización:** para las entregas del curso manda el
+> [ADR 0004](adr/0004-alcance-del-modelo.md): un hecho y de 4 a 5
+> dimensiones, con la calidad y la bitácora en un esquema `audit`. Esta
+> sección queda como visión ampliada.
+
 Es una constelación de hechos que comparte dimensiones. Los campos observados
 en la fuente (a re-verificar en este repo) son: `id`, `ocid`, `year`, `month`,
 `method`, `internal_type`, `locality`, `region`, `suppliers`, `buyer`,
