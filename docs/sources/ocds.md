@@ -93,3 +93,21 @@ Registra la decisión de a quién se le entrega el contrato. Un proceso de contr
 Alberga los detalles formales y vinculantes del acuerdo firmado con el proveedor. Es fundamental que **todo contrato haga referencia cruzada a la adjudicación (`awardID`)** que lo originó, ya que múltiples contratos (ej. órdenes de compra) pueden salir de una sola adjudicación marco.
 * **Datos del Acuerdo:** Fechas de firma, periodo legal de vigencia (inicio y fin) y el valor final acordado.
 * **Implementación (`implementation`):** Esta subsección es crítica para el seguimiento. Permite registrar las **transacciones financieras** (pagos reales realizados al proveedor) y el cumplimiento de hitos durante la ejecución de la obra o servicio, cerrando el ciclo de la contratación abierta. ([Fuente oficial: Esquema de Contrato](https://standard.open-contracting.org/latest/es/schema/reference/#contract))
+
+## Conceptos Avanzados y de Utilidad Futura
+
+Con base en la especificación técnica, existen herramientas adicionales en OCDS que pueden ser útiles para las siguientes fases del Data Warehouse:
+
+### Manejo de Múltiples Idiomas (`language`)
+El estándar permite publicar datos en varios idiomas dentro del mismo JSON. Para campos de texto libre (como descripciones), se añade un sufijo con el código de idioma ISO639-1. 
+* Ejemplo: En lugar de usar solo `description`, se puede enviar `description_es` para el español y `description_en` para el inglés.
+* Cada entrega debe declarar un idioma por defecto en la raíz del documento.
+
+### Procesos Relacionados (`relatedProcesses`)
+En adquisiciones complejas, una compra no está aislada. El arreglo `relatedProcesses` permite relacionar diferentes `ocid` entre sí. 
+* **Caso de uso:** Vincular compras derivadas de un "Acuerdo Marco" general, o conectar un contrato con un proceso previo de planificación a nivel macro.
+
+### Extensiones del Estándar (`extensions`)
+OCDS permite añadir campos que no vienen en el estándar base usando extensiones. 
+* Ejemplos comunes incluyen: agregar títulos a nivel proceso (`process_title`), dueños beneficiarios o accionistas de las empresas (`shareholders`), escala de la empresa (micro, pyme, grande con `partyScale`), o vincular compras a proyectos específicos de infraestructura.
+
