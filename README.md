@@ -98,6 +98,7 @@ Detalle: [propuesta de arquitectura](docs/PROPUESTA.md),
 ├─ LICENSE
 ├─ .github/                   # CODEOWNERS y plantillas de PR e issues
 ├─ docs/
+│  ├─ PLAN.md                 # plan de trabajo, tareas y rotación
 │  ├─ PROPUESTA.md            # propuesta de arquitectura
 │  ├─ adr/                    # decisiones de arquitectura
 │  ├─ requirements/           # semana 1
@@ -110,8 +111,10 @@ Detalle: [propuesta de arquitectura](docs/PROPUESTA.md),
 ├─ warehouse/
 │  ├─ ddl/                    # DDL físico (vacío)
 │  └─ dbt/                    # modelos y pruebas dbt (vacío)
+├─ notebooks/                 # notebooks entregables: perfilado, ETL (vacío)
 ├─ reports/powerbi/           # tableros (vacío)
 ├─ tests/                     # unit, integration, fixtures (vacíos)
+├─ deliverables/              # versiones finales de cada entrega
 └─ data/                      # ignorado por git
 ```
 
