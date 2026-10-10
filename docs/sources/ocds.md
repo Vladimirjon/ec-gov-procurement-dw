@@ -2,7 +2,14 @@
 
 ## ¿Qué es OCDS?
 
-Está diseñado para brindar soporte a la publicación de datos de procesos de contratación pública, desde la etapa inicial de planificación hasta la ejecución y finalización del contrato. (Fuente: [Introducción a OCDS](https://standard.open-contracting.org/latest/es/))
+El Estándar de Datos de Contrataciones Abiertas (OCDS) es un estándar de datos abiertos gratuito y de acceso público para las contrataciones públicas, implementado por más de 30 gobiernos alrededor de todo el mundo. Este Estándar describe cómo publicar datos y documentos relacionados a los procesos de contrataciones de bienes, obras y servicios. (Fuente: [¿Qué es OCDS y por qué utilizarlo?](https://standard.open-contracting.org/latest/es/primer/what/))
+
+Hay tres conceptos fundamentales detrás de este estándar:
+* **Contratación Abierta:** Publicación y uso de información accesible y oportuna para involucrar a ciudadanos y sector privado, mejorando la eficiencia e integridad.
+* **Datos Abiertos:** Datos que pueden ser utilizados libremente, legibles por máquina, y que conceden permiso para su reutilización.
+* **Estándar de datos:** Define la estructura y el significado de los datos para resolver ambigüedades.
+
+El OCDS no es un sistema electrónico de compra o base de datos; es un modelo de datos común estructurado que ayuda a incrementar la transparencia, hace posible un análisis profundo y facilita el uso de los datos para investigar y mejorar la relación calidad-precio.
 
 > [!NOTE]
 > **Separación de responsabilidades:** Este documento describe la teoría oficial del estándar OCDS. Para ver cómo se aplican estos conceptos en los datos reales publicados por el SERCOP de Ecuador, y qué campos vienen realmente, consultar el documento de reconocimiento de la fuente de la Fase 0.
