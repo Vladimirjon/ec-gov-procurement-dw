@@ -5,59 +5,91 @@
 
 ## ¿Qué es OCDS?
 
-El Estándar de Datos de Contrataciones Abiertas (OCDS) es un estándar global, gratuito y de acceso público que describe cómo publicar datos y documentos relacionados a los procesos de contrataciones públicas (bienes, obras y servicios). 
+El Estándar de Datos de Contrataciones Abiertas (OCDS) es un estándar global de datos abiertos, gratuito y de acceso público, implementado por más de 30 gobiernos alrededor de todo el mundo. Describe cómo estructurar y publicar datos y documentos relacionados a los procesos de contrataciones de bienes, obras y servicios. 
 
-Se basa en tres conceptos fundamentales:
-1. **Contratación Abierta:** La publicación y uso de información accesible y oportuna sobre compras públicas para involucrar a los ciudadanos y al sector privado, mejorando la eficiencia e integridad.
-2. **Datos Abiertos:** Datos estructurados que pueden ser utilizados libremente, modificados y compartidos, siendo legibles por máquina.
-3. **Estándar de datos:** Un conjunto de reglas que define la estructura y el significado de los datos para resolver ambigüedades.
+Se sustenta en tres conceptos clave:
+1. **Contratación Abierta:** Busca publicar información accesible y oportuna para involucrar a los ciudadanos y al sector privado, mejorando así la eficiencia, efectividad e integridad de las compras públicas.
+2. **Datos Abiertos:** Consiste en publicar datos legibles por máquina que cualquier persona pueda utilizar libremente, modificar y compartir.
+3. **Estándar de datos:** Define una estructura y un significado común para los datos, resolviendo ambigüedades técnicas y conceptuales.
 
-El OCDS **no es un sistema electrónico de compra ni una base de datos**; es un modelo de datos común estructurado. Su objetivo es proporcionar un formato unificado para que la información de contrataciones pueda cruzarse, analizarse y utilizarse para detectar ineficiencias o banderas rojas de corrupción. ([Fuente oficial: ¿Qué es OCDS?](https://standard.open-contracting.org/latest/es/primer/what/))
-
----
-
-## El Identificador del Proceso: OCID
-
-Para hacer seguimiento a una compra pública desde que se planea hasta que se finaliza, es vital poder unir todos sus datos. Para ello se utiliza el **OCID (Open Contracting Identifier)**.
-
-* **¿Qué es?:** Es un identificador único global asignado a un único proceso de contratación de principio a fin.
-* **¿Cómo se forma?:** Se compone de un prefijo registrado para la agencia o publicador (por ejemplo, `ocds-87sd3t`) unido al identificador interno que usa la institución (por ejemplo, `0005`). Resultando en algo como `ocds-87sd3t-0005`.
-* **Propósito:** Garantiza que no haya colisiones de IDs entre diferentes instituciones o países, actuando como la clave principal (Primary Key conceptual) que vincula todas las etapas de una misma compra. ([Fuente oficial: Identificadores / OCID](https://standard.open-contracting.org/latest/es/schema/identifiers/#contracting-process-identifier-ocid))
+El OCDS **no es un sistema electrónico de compra ni una base de datos**; es un modelo de datos común que estandariza la recolección, almacenamiento y publicación de datos. Proporciona herramientas, listas de códigos, un mecanismo de extensión y soporte global, permitiendo a los analistas realizar investigaciones profundas sobre transparencia, competencia y valor por el dinero invertido. ([Fuente oficial: ¿Qué es OCDS?](https://standard.open-contracting.org/latest/es/primer/what/))
 
 ---
 
-## Historial de Cambios: Releases y Compiled Releases
+## Identificadores en OCDS
 
-Los datos de contratación cambian mucho con el tiempo (se publican pliegos, se reciben ofertas, se firma el contrato, hay enmiendas). OCDS maneja esto mediante "entregas" y "registros".
+Para que los datos de contrataciones puedan vincularse correctamente entre diferentes sistemas, OCDS hace un uso riguroso de identificadores tanto globales como locales.
 
-* **Release (Entrega o Lanzamiento):** Es un documento JSON inmutable que se publica cada vez que hay un evento o actualización en el proceso de contratación. Cada *release* representa una "fotografía" de la información en un momento dado. Una colección de entregas de un mismo proceso (mismo `ocid`) constituye su **historial de cambios**. ([Fuente oficial: Releases](https://standard.open-contracting.org/latest/es/primer/releases_and_records/))
-  
-* **Compiled Release (Entrega Compilada):** Dado que leer todo el historial de *releases* para saber el estado actual es complejo, el estándar define el *Compiled Release*. Es un registro consolidado que contiene el **estado más reciente y actualizado** del proceso de contratación. Se genera combinando automáticamente todos los *releases* anteriores de un mismo `ocid`, sobreescribiendo los valores viejos con los nuevos. ([Fuente oficial: Compiled Release](https://standard.open-contracting.org/latest/es/schema/records_reference/#compiledrelease))
+### 1. El Identificador del Proceso de Contratación: OCID (Global)
+
+El **OCID (Open Contracting Identifier)** es el identificador único global para un proceso de contratación de principio a fin. Funciona como la llave primaria que une la información publicada en distintos momentos y lugares (desde la planificación hasta el contrato).
+
+* **Composición:** Todo OCID está formado por dos partes: 
+  1. Un **prefijo registrado** (ej. `ocds-87sd3t`) asignado exclusivamente por el equipo de Open Contracting a un publicador específico.
+  2. El **identificador interno** del proceso de la institución (ej. `OM-DGRMSG-004-13`).
+  *Resultado:* `ocds-87sd3t-OM-DGRMSG-004-13`.
+* **Propósito:** Evitar colisiones. Si la Ciudad A y la Ciudad B tienen internamente un contrato "0005", el prefijo único de cada ciudad garantiza que sus procesos no se mezclen en un sistema global de datos.
+* **Sensibilidad:** El OCID distingue estrictamente entre mayúsculas y minúsculas. ([Fuente oficial: Identificadores / OCID](https://standard.open-contracting.org/latest/es/schema/identifiers/#contracting-process-identifier-ocid))
+
+### 2. Identificadores Locales (IDs de Entregas, Adjudicaciones, Contratos e Ítems)
+
+No todos los IDs deben ser únicos a nivel mundial. La mayoría solo necesita ser única *dentro del ámbito de su propio proceso* (dentro del mismo OCID).
+* **ID de Entrega (Release ID):** Debe ser único y consistente para cada "fotografía" de datos publicada dentro de ese proceso. No debe contener el caracter `#`.
+* **IDs de Adjudicaciones y Contratos:** Un contrato debe hacer una referencia cruzada estricta a una adjudicación relacionada usando el campo `awardID`. Múltiples contratos pueden referirse a una misma adjudicación (como en los acuerdos marco).
+* **IDs de Artículos (`items`), Documentos e Hitos:** Son únicos dentro de su propia matriz. Si una entrega posterior vuelve a usar el mismo ID de ítem (ej. ID "3"), el estándar interpreta que se está actualizando la información de ese artículo existente, sin necesidad de volver a publicar los artículos que no han cambiado.
 
 ---
 
-## Secciones Clave del Proceso de Contratación
+## Manejo del Historial de Datos: Releases y Registros
 
-La estructura principal del esquema de OCDS (el JSON) agrupa la información cronológicamente en las siguientes cinco secciones o bloques principales:
+Los procesos de contratación pública son vivos y cambian constantemente. OCDS captura estos cambios a través de una arquitectura basada en "Entregas" (Releases) y "Registros" (Records).
+
+### Release (Entrega)
+Un **Release** es un paquete de datos JSON que representa una fotografía de la información en un momento particular en la vida de un proceso de contratación. 
+* **Inmutabilidad:** Las entregas son **estrictamente inmutables**. Una vez publicadas, un publicador no debe editarlas. Si hay nueva información o se debe corregir un error, se debe generar un nuevo *release* con una nueva fecha (`date`) y un nuevo ID (`id`).
+* **Manejo de campos:** Si un campo se deja de usar, se excluye del archivo. Si un valor que antes existía debe ser eliminado explícitamente, se debe enviar el campo con el valor nulo (`null`).
+* **Etiquetas (`tag`):** Cada entrega lleva una etiqueta (como `tender`, `award`, `contract`) para indicar de qué etapa del proceso trae información principal, aunque puede contener datos de etapas anteriores para dar contexto completo. ([Fuente oficial: Releases](https://standard.open-contracting.org/latest/es/primer/releases_and_records/))
+
+### Record (Registro) y Compiled Release (Entrega Compilada)
+El **Record** actúa como un índice maestro que agrupa todos los *releases* asociados a un mismo OCID. Dentro de un Record, encontramos el **Compiled Release**.
+* **Compiled Release:** Dado que revisar decenas de entregas inmutables es complejo para un analista, el Compiled Release procesa todas esas entregas cronológicamente y las "fusiona" (merge). El resultado es un único JSON consolidado que muestra el **estado final, más reciente y actualizado** de cada campo del proceso de contratación. ([Fuente oficial: Compiled Release](https://standard.open-contracting.org/latest/es/schema/records_reference/#compiledrelease))
+
+---
+
+## Organización y Partes Involucradas (`parties`)
+
+A partir de la versión 1.1, OCDS introdujo una sección matriz principal llamada `parties` para registrar a todos los actores (compradores, proveedores, auditores, etc.). 
+Esto evita repetir los datos de la misma empresa en la licitación, la adjudicación y el contrato. Se declaran una vez en `parties` y luego solo se hace referencia a su `id`.
+
+* **Identificadores de Organización:** Identificar legalmente a una entidad es vital para la transparencia. OCDS exige un identificador compuesto por un `scheme` (el prefijo del registro legal, ej. `GB-COH` para el registro de empresas británico) y un `id` (el número de registro oficial de la empresa). 
+* **Registros Primarios vs Secundarios:** OCDS prefiere fuertemente identificadores de **Registros Primarios** (el registro mercantil o tributario nacional, como el RUC) porque otorgan estatus legal, por sobre registros secundarios (como bases de datos privadas o listas locales).
+* **Roles (`roles`):** A cada organización en `parties` se le asigna un rol desde una lista oficial. Ejemplos incluyen `buyer` (quien pone el presupuesto), `procuringEntity` (la entidad que gestiona el proceso), `supplier` (el proveedor ganador) o `tenderer` (el oferente). ([Fuente oficial: Esquema de Partes](https://standard.open-contracting.org/latest/es/schema/reference/#parties))
+
+---
+
+## Secciones del Proceso de Contratación
+
+La estructura del estándar divide la cronología de la compra en cuatro grandes bloques de información.
 
 ### 1. Planificación (`planning`)
-Contiene los antecedentes y preparativos antes de lanzar oficialmente una licitación. Permite entender por qué se hace la compra y cómo se financia.
-* **Incluye:** La justificación de la compra, información del presupuesto (montos y fuentes de financiamiento), proyectos relacionados (ej. un proyecto de infraestructura), documentos de estudio de viabilidad y los hitos planificados. ([Fuente oficial: Esquema de Planificación](https://standard.open-contracting.org/latest/es/schema/reference/#planning))
+Describe el contexto, los antecedentes y los presupuestos antes de que el proceso salga al mercado.
+* **Justificación (`rationale`):** Explica por qué se realiza la compra.
+* **Presupuesto (`budget`):** Desglosa el monto reservado, la descripción de la fuente de los fondos y el ID de la partida presupuestaria (ideal para cruzar con sistemas financieros del Estado). También vincula si la compra pertenece a un macro-proyecto (`project`).
+* **Hitos (`milestones`) y Documentos (`documents`):** Permite adjuntar estudios de viabilidad, planes de necesidad o fechas límite para preparar la compra. ([Fuente oficial: Esquema de Planificación](https://standard.open-contracting.org/latest/es/schema/reference/#planning))
 
 ### 2. Licitación (`tender`)
-Describe cómo se llevará a cabo el proceso de compra para invitar a los proveedores a presentar ofertas.
-* **Incluye:** Fechas de publicación y de recepción de ofertas, método de contratación (ej. licitación abierta, adjudicación directa), el detalle exacto de los bienes o servicios que se buscan (matriz de `items`), criterios de evaluación y documentos de los pliegos. ([Fuente oficial: Esquema de Licitación](https://standard.open-contracting.org/latest/es/schema/reference/#tender))
+Documenta las reglas del juego: cómo se buscarán proveedores y qué se está pidiendo.
+* **Detalles del Proceso:** Incluye las fechas de publicación, inicio y fin del periodo de recepción de ofertas, y el tipo de proceso de iniciación (`initiationType`).
+* **Ítems (`items`):** Una lista detallada y estandarizada de los bienes o servicios exactos que se desean adquirir (con nombres, cantidades y clasificaciones estándar).
+* **Criterios:** Reglas y criterios de evaluación que se usarán para elegir al ganador. ([Fuente oficial: Esquema de Licitación](https://standard.open-contracting.org/latest/es/schema/reference/#tender))
 
 ### 3. Adjudicación (`award`)
-Detalla el resultado del proceso de evaluación de ofertas. Un mismo proceso puede tener múltiples adjudicaciones (ej. si se divide en lotes entre varios proveedores).
-* **Incluye:** El ID de la adjudicación, el proveedor o proveedores ganadores, la fecha en la que se tomó la decisión de adjudicar, el valor económico total adjudicado, y los artículos (`items`) específicos que se le otorgaron a ese proveedor. ([Fuente oficial: Esquema de Adjudicación](https://standard.open-contracting.org/latest/es/schema/reference/#award))
+Registra la decisión de a quién se le entrega el contrato. Un proceso de contratación puede tener **múltiples adjudicaciones** (por ejemplo, cuando se compra por lotes separados a diferentes proveedores).
+* **Proveedores Ganadores:** Vincula a los proveedores elegidos (que deben estar listados en `parties`).
+* **Datos Financieros:** Documenta el valor económico final de la oferta ganadora y la fecha oficial de la decisión.
+* **Ítems Adjudicados:** Define exactamente cuáles de los ítems solicitados en el `tender` le fueron otorgados a este proveedor en específico. ([Fuente oficial: Esquema de Adjudicación](https://standard.open-contracting.org/latest/es/schema/reference/#award))
 
 ### 4. Contrato (`contract`)
-Contiene los detalles legales y formales del acuerdo firmado entre la entidad y el proveedor ganador. Los contratos hacen referencia cruzada a la adjudicación de la que provienen (`awardID`).
-* **Incluye:** El ID del contrato, las fechas de firma y de vigencia (inicio y fin), el valor final acordado, y una sub-sección de **Implementación (`implementation`)** que permite hacer seguimiento a las transacciones de pago e hitos de entrega durante la ejecución del contrato. ([Fuente oficial: Esquema de Contrato](https://standard.open-contracting.org/latest/es/schema/reference/#contract))
-
-### 5. Partes Involucradas (`parties`)
-Identificar a las organizaciones de manera confiable es vital. Para evitar repetir los datos de una empresa o entidad en múltiples lugares (planeación, licitación, contrato), OCDS agrupa a **todos** los actores en un solo arreglo llamado `parties`.
-* **Organización:** Se registran sus datos completos: nombre legal, identificador legal oficial (compuesto por un esquema, ej. `EC-RUC`, y el ID de la empresa), dirección física y punto de contacto.
-* **Roles (`roles`):** A cada parte se le asigna uno o más roles oficiales en el proceso. Los más comunes son: comprador (`buyer`), entidad contratante (`procuringEntity`), proveedor (`supplier`), oferente (`tenderer`), pagador (`payer`), entre otros.
-* **Uso:** En el resto del documento (por ejemplo en `award`), solo se hace referencia al ID de la parte, lo que mantiene los datos limpios y normalizados. ([Fuente oficial: Esquema de Partes](https://standard.open-contracting.org/latest/es/schema/reference/#parties))
+Alberga los detalles formales y vinculantes del acuerdo firmado con el proveedor. Es fundamental que **todo contrato haga referencia cruzada a la adjudicación (`awardID`)** que lo originó, ya que múltiples contratos (ej. órdenes de compra) pueden salir de una sola adjudicación marco.
+* **Datos del Acuerdo:** Fechas de firma, periodo legal de vigencia (inicio y fin) y el valor final acordado.
+* **Implementación (`implementation`):** Esta subsección es crítica para el seguimiento. Permite registrar las **transacciones financieras** (pagos reales realizados al proveedor) y el cumplimiento de hitos durante la ejecución de la obra o servicio, cerrando el ciclo de la contratación abierta. ([Fuente oficial: Esquema de Contrato](https://standard.open-contracting.org/latest/es/schema/reference/#contract))
