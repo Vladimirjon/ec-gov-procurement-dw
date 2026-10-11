@@ -221,4 +221,3 @@ Todo lo anterior describe **lo que define el estándar OCDS**. Lo que SERCOP rea
 | `planning` / `tender` / `awards` / `contracts` | Bloques y campos del estándar | *Por completar* (campos presentes/ausentes) |
 | `implementation` | Transacciones e hitos de ejecución | *Por completar* |
 | Extensiones | Opcionales | *Por completar* |
-
