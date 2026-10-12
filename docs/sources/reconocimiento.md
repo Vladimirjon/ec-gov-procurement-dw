@@ -284,10 +284,17 @@ Evaluar el CSV nuevo antes de repetir:
    de programarla. No usar el timestamp X como duración. Tras esa captura se
    detiene el experimento, incluso si continúa el 429. Un 200 posterior solo
    prueba recuperación; no demuestra una cuota de 60 por ese intervalo.
-4. Si no se publica el periodo, sigue haciendo falta una definición técnica
-   oficial o configuración publicada vinculada a la versión desplegada. No
-   agotar el contador deliberadamente, asumir exclusividad por IP ni cerrar
-   #9 con el tiempo de recuperación como si fuera la ventana de cuota.
+4. Si no se publica el periodo, hay dos vías de investigación: obtener una
+   definición técnica oficial o configuración vinculada a la versión
+   desplegada, o diseñar una medición reproducible de la ventana observable.
+   La segunda necesita registrar reinicios repetidos, las horas y cabeceras,
+   las condiciones de tráfico y cualquier evidencia de caché. Antes de
+   ejecutarla, definir qué resultado distinguiría las hipótesis y cuándo
+   detenerse; con los contadores actuales todavía no existe ese diseño.
+   Una conclusión experimental debe quedar limitada a las condiciones
+   observadas y no presentarse como política interna confirmada por SERCOP.
+   No agotar el contador deliberadamente, asumir exclusividad por IP ni
+   cerrar #9 con el tiempo de recuperación como si fuera la ventana de cuota.
 
 **Primer intento real con v3:** el 11/10/2026 a las 20:02:40 de Ecuador
 (`request_started_utc=2026-10-12T01:02:40.3959572+00:00`) se ejecutó una sola

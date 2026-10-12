@@ -9,11 +9,14 @@ Se usa como mensaje del commit al fusionar (squash).
 <!-- Resumen breve del cambio. -->
 
 <!--
-PR completo: Closes #NN (palabra clave en inglés).
-Avance parcial: Relacionado con #NN; abrir como borrador y listar pendientes.
-No usar Closes si todavía falta un criterio de aceptación.
+Si este PR satisface todos los criterios del issue: Closes #NN (en inglés).
+Si completa una parte del issue: Relacionado con #NN y listar pendientes.
+Un avance del issue puede estar listo para revisión e integración cuando
+el alcance declarado del PR esté completo y verificado. Usar borrador
+si el propio PR todavía no está listo para revisión.
+No usar Closes si todavía falta un criterio de aceptación del issue.
 -->
-Closes #<!-- número del issue; reemplazar esta línea si el avance es parcial -->
+Relacionado con #<!-- número del issue; usar Closes solo si se completa el issue -->
 
 ## Cómo se verificó
 

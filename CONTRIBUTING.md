@@ -56,11 +56,15 @@ Aplican a todo el código y la documentación, con o sin asistentes de IA.
    Conventional Commits, porque será el mensaje del commit final. Completa la
    plantilla: issue que cierra y cómo se verificó. Escribe `Closes #NN` en
    inglés: GitHub solo reconoce `Closes`, `Fixes` o `Resolves`, y con esa
-   línea el issue se cierra solo al fusionar. Si aún no está listo, ábrelo
-   como borrador (draft). Para un avance parcial, usar `Relacionado con #NN`
-   y enumerar los criterios pendientes; reservar `Closes #NN` para un PR que
-   efectivamente cumpla todos los criterios. Un issue abierto no significa que
-   su evidencia local no exista: el estado se actualiza al publicar el avance.
+   línea el issue se cierra solo al fusionar. Reservar `Closes #NN` para un PR
+   que efectivamente cumpla todos los criterios del issue. Para un avance
+   parcial, usar `Relacionado con #NN` y enumerar los criterios pendientes.
+   Un PR de avance puede revisarse e integrarse si su alcance declarado está
+   completo y verificado, aunque el issue siga abierto. Usar borrador (draft)
+   cuando el propio PR todavía no esté listo para revisión. La integración de
+   un avance no reduce los criterios pendientes ni aprueba decisiones de
+   arquitectura fuera de su alcance. Un issue abierto no significa que su
+   evidencia local no exista: el estado se actualiza al publicar el avance.
 5. **Revisión.** El líder (@Vladimirjon) revisa y aprueba todos los PR.
    Cualquier integrante puede comentar; la revisión cruzada de otra capa es
    bienvenida, pero no reemplaza la aprobación del líder. Todas las
