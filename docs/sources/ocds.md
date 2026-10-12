@@ -1,8 +1,8 @@
 # Resumen del Estándar OCDS (Open Contracting Data Standard)
 
 
-> [!NOTE] Separación de responsabilidades:
-> Este documento describe la teoría oficial y el modelo de datos del estándar OCDS. Para ver cómo se aplican estos conceptos en los datos reales publicados por el SERCOP de Ecuador (y qué campos vienen realmente), consultar el documento de reconocimiento de la fuente de la Fase 0 (Issue #9).
+> [!NOTE]
+> Este documento resume OCDS 1.1, contrastado con la documentación oficial 1.1.5. Las observaciones de SERCOP se mantienen en [reconocimiento.md](reconocimiento.md), correspondiente al [issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9). La tabla final enlaza esa evidencia y distingue lo observado de lo pendiente.
 
 
 ## ¿Qué es OCDS?
@@ -27,7 +27,7 @@ Para que los datos de contrataciones puedan vincularse correctamente entre difer
 
 ### 1. El Identificador del Proceso de Contratación: OCID (Global)
 
-El **OCID (Open Contracting Identifier)** es el identificador único global para un proceso de contratación de principio a fin. Funciona como la llave primaria que une la información publicada en distintos momentos y lugares (desde la planificación hasta el contrato).
+El **OCID (Open Contracting Identifier)** es el identificador único global para un proceso de contratación de principio a fin. Permite vincular la información del mismo proceso publicada en distintos momentos y lugares, incluidas su planificación y ejecución. ([Fuente oficial: OCID](https://standard.open-contracting.org/latest/es/schema/identifiers/#contracting-process-identifier-ocid))
 
 * **Composición:** Todo OCID está formado por dos partes:
 
@@ -40,10 +40,10 @@ El **OCID (Open Contracting Identifier)** es el identificador único global para
 
 * **Propósito:** Evitar colisiones. Si la Ciudad A y la Ciudad B tienen internamente un contrato "0005", el prefijo único de cada ciudad garantiza que sus procesos no se mezclen en un sistema global de datos.
 
-* **Sensibilidad:** El OCID distingue strictly entre mayúsculas y minúsculas. ([Fuente oficial: Identificadores / OCID](https://standard.open-contracting.org/latest/es/schema/identifiers/#contracting-process-identifier-ocid))
+* **Sensibilidad:** El OCID distingue estrictamente entre mayúsculas y minúsculas. ([Fuente oficial: Identificadores / OCID](https://standard.open-contracting.org/latest/es/schema/identifiers/#contracting-process-identifier-ocid))
 
 
-> [!example] Ejemplo
+> **Ejemplo oficial: Ciudad de México.**
 > En la Ciudad de México, cada vez que se inicia un proceso de licitación o adjudicación directa, la oficina responsable le asigna un identificador.
 
 > Estos se generan a partir de un identificador del departamento responsable de la adquisición, un número de licitación y el año.
@@ -58,14 +58,14 @@ El **OCID (Open Contracting Identifier)** es el identificador único global para
 ### 2. Identificadores Locales (IDs de Entregas, Adjudicaciones, Contratos e Ítems)
 
 
-No todos los IDs deben ser únicos a nivel mundial. La mayoría solo necesita ser única *dentro del ámbito de su propio proceso* (dentro del mismo OCID). ([Fuente oficial: Identificadores locales](https://standard.open-contracting.org/latest/es/schema/identifiers/#local-identifiers))
+Los IDs locales tienen distintos ámbitos: los de entregas, adjudicaciones y contratos deben ser únicos dentro del proceso (`ocid`); los de ítems, documentos e hitos, dentro de la lista que los contiene. Deben mantenerse consistentes entre entregas. ([Fuente oficial: Identificadores locales](https://standard.open-contracting.org/latest/es/schema/identifiers/#local-identifiers))
 
 
-* **ID de Entrega (Release ID):** Debe ser único y consistente para cada "fotografía" de datos publicada dentro de ese proceso. No debe contener el caracter `#`. ([Fuente oficial: ID de Entrega](https://standard.open-contracting.org/latest/es/schema/identifiers/#release-id))
+* **ID de Entrega (Release ID):** Debe ser único y consistente para cada "fotografía" de datos publicada dentro de ese proceso. No debe contener el caracter `#`. ([Fuente oficial: ID de Entrega](https://standard.open-contracting.org/latest/es/schema/reference/#release))
 
-* **IDs de Adjudicaciones y Contratos:** Un contrato debe hacer una referencia cruzada estricta a una adjudicación relacionada usando el campo `awardID`. Múltiples contratos pueden referirse a una misma adjudicación (como en los acuerdos marco). ([Fuente oficial: IDs de Adjudicaciones y Contratos](https://standard.open-contracting.org/latest/es/schema/identifiers/#award-and-contract-ids))
+* **IDs de Adjudicaciones y Contratos:** Un contrato debe hacer una referencia cruzada estricta a una adjudicación relacionada usando el campo `awardID`. Múltiples contratos pueden referirse a una misma adjudicación (como en los acuerdos marco). ([Fuente oficial: IDs de Adjudicaciones y Contratos](https://standard.open-contracting.org/latest/es/schema/identifiers/#local-identifiers))
 
-* **IDs de Artículos (`items`), Documentos e Hitos:** Son únicos dentro de su propia matriz. Si una entrega posterior vuelve a usar el mismo ID de ítem (ej. ID "3"), el estándar interpreta que se está actualizando la información de ese artículo existente, sin necesidad de volver a publicar los artículos que no han cambiado. ([Fuente oficial: IDs de Artículo, Documento e Hitos](https://standard.open-contracting.org/latest/es/schema/identifiers/#item-document-and-milestone-ids))
+* **IDs de Artículos (`items`), Documentos e Hitos:** Son únicos dentro de su propia matriz. Si una entrega posterior vuelve a usar el mismo ID de ítem (ej. ID "3"), el estándar interpreta que se está actualizando la información de ese artículo existente, sin necesidad de volver a publicar los artículos que no han cambiado. ([Fuente oficial: IDs de Artículo, Documento e Hitos](https://standard.open-contracting.org/latest/es/schema/identifiers/#local-identifiers))
 
 
 ## Manejo del Historial de Datos: Releases y Registros
@@ -82,19 +82,19 @@ El estándar OCDS distingue claramente entre la información del proceso y el co
 
 * **Inmutabilidad:** Las entregas son **estrictamente inmutables**. Una vez publicadas, un publicador no debe editarlas. Si hay nueva información o se debe corregir un error, se debe generar un nuevo *release* con una nueva fecha (`date`) y un nuevo ID (`id`).
 
-* **Manejo de campos:** Si un campo se deja de usar, se excluye del archivo. Si un valor que antes existía debe ser eliminado explícitamente, se debe enviar el campo con el valor nulo (`null`).
+* **Manejo de campos:** Los campos sin valor que no se usan se omiten. Omitir un campo en una entrega posterior no elimina su valor anterior al compilar; para eliminarlo explícitamente se envía `null`. ([Fuente oficial: campos vacíos y eliminación de valores](https://standard.open-contracting.org/latest/es/schema/reference/#release-handling))
 
-* **Etiquetas (`tag`):** Cada entrega lleva una etiqueta (como `tender`, `award`, `contract`) para indicar de qué etapa del proceso trae información principal, aunque puede contener datos de etapas anteriores para dar contexto completo.
+* **Etiquetas (`tag`):** Es una lista con una o más etiquetas, como `tender`, `award` o `contract`, que describen el tipo de información publicada. La entrega puede incluir datos de otras etapas para dar contexto. ([Fuente oficial: Release](https://standard.open-contracting.org/latest/es/schema/reference/#release))
 
-* **Tipo de Iniciación (`initiationType`):** Se ubica en la raíz del *Release* (junto a `ocid`, `id`, `date` y `tag`). Especifica cómo se inició el proceso de contratación (por ejemplo, mediante una licitación pública usando el valor por defecto `tender`). ([Fuente oficial: Releases](https://standard.open-contracting.org/latest/es/primer/releases_and_records/))
+* **Tipo de Iniciación (`initiationType`):** Es obligatorio y se ubica en la raíz del *Release*, junto a `ocid`, `id`, `date` y `tag`. En OCDS 1.1 su lista cerrada admite únicamente `tender`; no permite deducir que una compra sea una licitación pública. El procedimiento se describe por separado en `tender.procurementMethod`, que admite `open`, `selective`, `limited` y `direct`. ([Fuente oficial: Release](https://standard.open-contracting.org/latest/es/schema/reference/#release); [listas de códigos](https://standard.open-contracting.org/latest/es/schema/codelists/#initiation-type))
 
 
 ### Record (Registro) y Compiled Release (Entrega Compilada)
 
-El **Record** actúa como un índice maestro que agrupa todos los *releases* asociados a un mismo OCID. Dentro de un Record, encontramos el **Compiled Release**.
+El **Record** funciona como un índice de todas las entregas de un proceso identificado por su `ocid`. Las entregas pueden estar incluidas o enlazadas. Se recomienda que el registro incluya un **Compiled Release**; no es obligatorio en su esquema. ([Fuente oficial: estructura del registro](https://standard.open-contracting.org/latest/es/schema/records_reference/#record-structure))
 
 
-* **Compiled Release:** Dado que revisar decenas de entregas inmutables es complejo para un analista, el Compiled Release procesa todas esas entregas cronológicamente y las "fusiona" (merge). El resultado es un único JSON consolidado que muestra el **estado final, más reciente y actualizado** de cada campo del proceso de contratación. ([Fuente oficial: Compiled Release](https://standard.open-contracting.org/latest/es/schema/records_reference/#compiledrelease))
+* **Compiled Release:** Es el resultado de fusionar las entregas de un proceso según las reglas de OCDS. Representa el estado más reciente de sus datos al publicar el registro; no significa que el proceso haya terminado ni garantiza que todos sus campos estén completos. ([Fuente oficial: entrega compilada](https://standard.open-contracting.org/latest/es/schema/records_reference/#compiled-release); [reglas de fusión](https://standard.open-contracting.org/latest/es/schema/merging/))
 
 
 ## Organización y Partes Involucradas (`parties`)
@@ -103,15 +103,15 @@ El **Record** actúa como un índice maestro que agrupa todos los *releases* aso
 
 A partir de la versión 1.1, OCDS introdujo una sección matriz principal llamada `parties` para registrar a todos los actores (compradores, proveedores, auditores, etc.).
 
-Esto evita repetir los datos de la misma empresa en la licitación, la adjudicación y el contrato. Se declaran una vez en `parties` y luego solo se hace referencia a su `id`.
+Esto reduce la repetición de los datos de organizaciones. Sus detalles se incluyen en `parties`; otras secciones utilizan referencias mediante `id` y pueden incluir `name`. Cada parte referenciada debe figurar en `parties`. ([Fuente oficial: partes y referencias](https://standard.open-contracting.org/latest/es/schema/reference/#parties))
 
 
-* **Identificadores de Organización (`identifier`):** Permite describir el identificador legal de la entidad. Cuando se informa, utiliza campos como `scheme` (el prefijo del registro legal, ej. `EC-RUC` o `GB-COH`) e `id` (el número de registro oficial). El objeto `identifier` es opcional en la especificación del esquema de OCDS, por lo que no es estrictamente obligatorio incluirlo en todos los casos.
+* **Identificadores de Organización (`identifier`):** Permite describir el identificador legal de la entidad. Cuando se informa, utiliza campos como `scheme` (el prefijo del registro legal, ej. `GB-COH`) e `id` (el número de registro oficial). El objeto `identifier` es opcional en la especificación del esquema de OCDS, por lo que no es estrictamente obligatorio incluirlo en todos los casos.
 
-* **Registros Primarios vs Secundarios:** OCDS prefiere fuertemente identificadores de **Registros Primarios** (el registro mercantil o tributario nacional, como el RUC) porque otorgan estatus legal, por sobre registros secundarios (como bases de datos privadas o listas locales).
+* **Registros Primarios, Secundarios y de Terceros:** OCDS prefiere identificadores de registros primarios que identifican una entidad legal constituida. Los registros secundarios describen una propiedad, como la inscripción para IVA; las bases de terceros son otra categoría. No se presupone aquí qué registro o `scheme` utiliza SERCOP. ([Fuente oficial: elección del identificador](https://standard.open-contracting.org/latest/es/schema/identifiers/#choosing-an-identifier))
 
 * **Roles (`roles`):** A cada organización en `parties` se le asigna uno o más roles desde una lista de códigos oficial (`partyRole`). Ejemplos comunes incluyen:
-  * `buyer`: La entidad legal que administra el presupuesto con el que se pagarán los bienes, obras o servicios adquiridos (quien financia la compra).
+  * `buyer`: La entidad cuyo presupuesto se utilizará para pagar los bienes, obras o servicios del contrato. Puede ser distinta de la entidad que gestiona la contratación.
   * `procuringEntity`: La entidad que gestiona directamente el proceso de licitación o contratación (puede coincidir o no con el `buyer`).
   * `supplier`: El proveedor o contratista adjudicado.
   * `tenderer`: El oferente o participante en la licitación. ([Fuente oficial: Esquema de Partes](https://standard.open-contracting.org/latest/es/schema/reference/#parties))
@@ -123,7 +123,7 @@ Esto evita repetir los datos de la misma empresa en la licitación, la adjudicac
 |---|---|
 |`id`|ID usado para referenciar a la parte desde otras secciones. Estructura sugerida: `{identifier.scheme}-{identifier.id}(-{identificador-del-departamento})`.|
 |`name`|Nombre común (puede incluir departamento o sub-unidad involucrada).|
-|`identifier`|**Identificador principal**: `scheme`, `id`, `legalName`, `uri`. Permite describir el identificador legal de la entidad (preferir registro primario, p. ej. RUC).|
+|`identifier`|**Identificador principal**: `scheme`, `id`, `legalName`, `uri`. Permite describir el identificador legal de la entidad (preferir registro primario).|
 |`additionalIdentifiers`|Identificadores complementarios (ej. un código interno o de IVA, además del legal).|
 |`address`|`streetAddress`, `locality`, `region`, `postalCode`, `countryName`.|
 |`contactPoint`|`name`, `email`, `telephone`, `faxNumber`, `url`.|
@@ -150,7 +150,7 @@ Describe el contexto, los antecedentes y los presupuestos antes de que el proces
 
 Documenta las reglas del juego: cómo se buscarán proveedores y qué se está pidiendo.
 
-* **Detalles del Proceso:** Incluye las fechas de publicación, inicio y fin del periodo de recepción de ofertas, método de contratación (`procurementMethod`), entre otros. *(Nota: el campo `initiationType` se ubica en el nivel raíz del Release).*
+* **Detalles del Proceso:** Incluye el periodo de recepción de ofertas (`tenderPeriod`), el método de contratación (`procurementMethod`), estado y descripción. Las fechas de publicación de documentos se registran en sus objetos `documents`. El campo `initiationType` pertenece a la raíz del *Release*.
 
 * **Ítems (`items`):** Una lista detallada y estandarizada de los bienes o servicios exactos que se desean adquirir (con nombres, cantidades y clasificaciones estándar).
 
@@ -158,24 +158,24 @@ Documenta las reglas del juego: cómo se buscarán proveedores y qué se está p
 * **Criterios:** Reglas y criterios de evaluación que se usarán para elegir al ganador. ([Fuente oficial: Esquema de Licitación](https://standard.open-contracting.org/latest/es/schema/reference/#tender))
 
 
-### 3. Adjudicación (`award`)
+### 3. Adjudicaciones (`awards`)
 
 
 Registra la decisión de a quién se le entrega el contrato. Un proceso de contratación puede tener **múltiples adjudicaciones** (por ejemplo, cuando se compra por lotes separados a diferentes proveedores).
 
 * **Proveedores Ganadores:** Vincula a los proveedores elegidos (que deben estar listados en `parties`).
 
-* **Datos Financieros:** Documenta el valor económico final de la oferta ganadora y la fecha oficial de la decisión.
+* **Datos Financieros:** Cada objeto puede registrar el valor total de esa adjudicación (`value`) y su fecha (`date`). En acuerdos marco, el valor puede ser el total estimado durante su vigencia o el máximo del acuerdo; no equivale automáticamente al importe contratado ni al pagado.
 
-* **Ítems Adjudicados:** Define exactamente cuáles de los ítems solicitados en el `tender` le fueron otorgados a este proveedor en específico. ([Fuente oficial: Esquema de Adjudicación](https://standard.open-contracting.org/latest/es/schema/reference/#award))
+* **Ítems Adjudicados:** Describe los bienes y servicios adjudicados en ese objeto, con cantidades y clasificaciones. No se presupone una correspondencia uno a uno entre las listas de licitación y adjudicación. ([Fuente oficial: Esquema de Adjudicación](https://standard.open-contracting.org/latest/es/schema/reference/#award))
 
-### 4. Contrato (`contract`)
+### 4. Contratos (`contracts`)
 
 Alberga los detalles formales y vinculantes del acuerdo firmado con el proveedor. Es fundamental que **todo contrato haga referencia cruzada a la adjudicación (`awardID`)** que lo originó, ya que múltiples contratos (ej. órdenes de compra) pueden salir de una sola adjudicación marco.
 
-* **Datos del Acuerdo:** Fechas de firma, periodo legal de vigencia (inicio y fin) y el valor final acordado.
+* **Datos del Acuerdo:** Cada objeto puede incluir fecha de firma (`dateSigned`), periodo de vigencia (`period`), estado (`status`) y valor total del contrato (`value`). Este valor se distingue del presupuesto, la estimación de la licitación, la adjudicación y los pagos.
 
-* **Implementación (`implementation`):** Esta subsección es crítica para el seguimiento. Permite registrar las **transacciones financieras** (pagos reales realizados al proveedor) y el cumplimiento de hitos durante la ejecución de la obra o servicio, cerrando el ciclo de la contratación abierta. ([Fuente oficial: Esquema de Contrato](https://standard.open-contracting.org/latest/es/schema/reference/#contract))
+* **Implementación (`implementation`):** Se encuentra dentro de cada contrato. Puede registrar transacciones realizadas (`transactions`), con pagador (`payer`), receptor (`payee`), fecha y valor, además de hitos y documentos de ejecución. En la mayoría de los casos el pagador es el comprador y el receptor el proveedor; esos flujos no deben confundirse con el valor total del contrato. ([Fuente oficial: implementación y transacciones](https://standard.open-contracting.org/latest/es/schema/reference/#implementation))
 
 
 ## Conceptos Avanzados y de Utilidad Futura
@@ -185,12 +185,12 @@ Con base en la especificación técnica, existen herramientas adicionales en OCD
 
 ### Manejo de Múltiples Idiomas (`language`)
 
-El estándar permite publicar datos en varios idiomas dentro del mismo JSON. Para campos de texto libre (como descripciones), se añade un sufijo con el código de idioma ISO639-1.
+El estándar permite publicar variantes de idioma para campos de texto mediante sufijos con etiquetas BCP47. Se recomiendan códigos ISO639-1 de dos letras minúsculas cuando no haga falta distinguir variantes.
 
 
-* Ejemplo: En lugar de usar solo `description`, se puede enviar `description_es` para el español y `description_en` para el inglés.
+* Ejemplo: con `language: "es"`, el campo `description` contiene el texto en español y `description_en` añade su traducción al inglés.
 
-* Cada entrega debe declarar un idioma por defecto en la raíz del documento. ([Fuente oficial: Idioma](https://standard.open-contracting.org/latest/es/schema/reference/#language))
+* La guía recomienda declarar el idioma predeterminado en `language`, en la raíz de la entrega, para interpretar los campos sin sufijo. El esquema permite omitirlo: no aparece entre los campos obligatorios. ([Fuente oficial: idioma](https://standard.open-contracting.org/latest/en/schema/reference/#language); [esquema oficial](https://standard.open-contracting.org/schema/1__1__5/release-schema.json))
 
 
 ### Procesos Relacionados (`relatedProcesses`)
@@ -201,23 +201,32 @@ En adquisiciones complejas, una compra no está aislada. El arreglo `relatedProc
 
 ### Extensiones del Estándar (`extensions`)
 
-OCDS permite añadir campos que no vienen en el estándar base usando extensiones.
+OCDS permite añadir campos y listas de códigos mediante extensiones. Se declaran en la lista `extensions` del paquete mediante las URL de sus archivos `extension.json`; el nombre de una extensión no es necesariamente el nombre del campo que añade. ([Fuente oficial: metadatos del paquete](https://standard.open-contracting.org/latest/es/schema/reference/#package-metadata))
 
-* Ejemplos comunes incluyen: agregar títulos a nivel proceso (`process_title`), dueños beneficiarios o accionistas de las empresas (`shareholders`), escala de la empresa (micro, pyme, grande con `partyScale`), o vincular compras a proyectos específicos de infraestructura. ([Fuente oficial: Entrega, extensiones disponibles](https://standard.open-contracting.org/latest/es/schema/reference/#release))
+* **Título y descripción del proceso (`process_title`):** Añade `title` y `description` a la raíz de la entrega. ([Extensión oficial](https://extensions.open-contracting.org/en/extensions/process_title/v1.1.5/))
+* **Accionistas (`shareholders`):** Añade información sobre propiedad societaria en `parties[].shareholders`. No acredita por sí sola la identificación de los beneficiarios finales. ([Documentación de la extensión](https://extensions.open-contracting.org/en/extensions/shareholders/master/))
+* **Escala de la organización (`partyScale`):** Añade `parties[].details.scale`, con códigos para tamaños de empresa definidos según el contexto local. ([Documentación de la extensión](https://extensions.open-contracting.org/en/extensions/partyScale/master/))
+
+Estos ejemplos describen posibilidades del estándar; no afirman que SERCOP utilice esas extensiones.
 
 
 ---
 
 ## Estándar vs. fuente real (SERCOP)
 
-Todo lo anterior describe **lo que define el estándar OCDS**. Lo que SERCOP realmente publica (qué campos vienen, cuáles faltan, qué extensiones usa, cómo arma su `ocid`) **no se afirma aquí**: se documenta en el reconocimiento de la fuente de la Fase 0 ([Issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9)). Completar esa tabla con observaciones verificadas sobre datos reales:
+Los apartados anteriores describen **lo que define OCDS**. La evidencia de SERCOP procede de [reconocimiento.md](reconocimiento.md), integrado mediante el PR #22 como avance del [issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9). La tabla siguiente resume esa documentación al 11 de octubre de 2026; no sustituye su evidencia ni una validación de esquemas.
 
-| Concepto del estándar | Qué define OCDS (este documento) | Qué se observa en SERCOP (Issue #9) |
+| Concepto | Qué define OCDS | Evidencia documentada de SERCOP y límites |
 |---|---|---|
-| `ocid` | Prefijo registrado + identificador interno | *Por completar* |
-| `release` / `tag` | Entrega inmutable con etiqueta de etapa | *Por completar* |
-| `compiled release` | Estado más reciente tras fusionar releases | *Por completar* |
-| `parties` / identificador | `scheme` + `id`, preferir registro primario | *Por completar* (¿RUC? ¿qué `scheme`?) |
-| `planning` / `tender` / `awards` / `contracts` | Bloques y campos del estándar | *Por completar* (campos presentes/ausentes) |
-| `implementation` | Transacciones e hitos de ejecución | *Por completar* |
-| Extensiones | Opcionales | *Por completar* |
+| `ocid` | Identificador global del proceso | La inspección anual documenta 190.619 `ocid` distintos. Son datos nacionales; la clasificación de la planta central sigue pendiente. No certifica el historial completo. |
+| Release y paquete | Objeto del proceso y contenedor con `releases` | El JSON mensual tiene una lista raíz de paquetes, con un release por paquete y versión declarada 1.1. La inspección anual cuenta 190.619 paquetes y releases. No acredita conformidad OCDS ni el significado de sus etiquetas `tag`. |
+| Compiled release | Estado más reciente obtenido por fusión | No se verificó que las descargas sean entregas compiladas. Un release por `ocid` no demuestra que exista todo su historial. |
+| `buyer` y `parties` | Comprador y partes referenciadas | `buyer` aparece en todos los releases anuales; en la inspección mensual se observaron `buyer.id`, `buyer.name` y campos de `parties`, incluido `identifier`. La completitud y los esquemas de identificación siguen sin validarse. |
+| `planning`, `tender`, `awards` y `contracts` | Secciones con presupuestos, estimaciones, adjudicaciones y contratos | La inspección mensual documenta sus campos y presencia. Hay procesos con varias adjudicaciones o contratos: contar objetos o combinar listas no equivale a contar procesos. |
+| Montos | Presupuesto en `planning.budget.amount`, estimación en `tender.value`, adjudicación en `awards[].value`, contrato en `contracts[].value` y pagos en `contracts[].implementation.transactions[].value` | El reconocimiento distingue esas rutas; numerosos contratos carecen de importe numérico. No convertir ausencia en cero ni sustituir un monto por otro. Monedas, estados y agregación requieren validación posterior. |
+| `implementation` | Transacciones, hitos y documentos por contrato | El reconocimiento no documenta una inspección específica de esta sección; no se afirma su presencia, ausencia ni completitud. |
+| Extensiones | Campos adicionales declarados en el paquete | En enero se observó `extensions` y propiedades como `auctions` y `bids`. No se validaron sus URL ni los esquemas aplicables, y no se deduce de esos nombres qué extensiones se usan. |
+
+La respuesta resumida de `search_ocds` y el JSON anidado de descarga son estructuras distintas. Sus campos `amount`, `budget` y `suppliers` no se equiparan automáticamente a las rutas OCDS. Las fechas del archivo mensual tampoco permiten fijar por sí solas la fecha de negocio. Estos límites se detallan en [campos observados](reconocimiento.md#campos-evidencia-y-límites-de-lo-observado), [inspección mensual](reconocimiento.md#inspección-local-de-la-descarga-mensual-json) e [inspección anual](reconocimiento.md#inspección-del-zip-anual-json).
+
+El criterio pendiente de cuota y ventana de API pertenece al #9; este resumen no lo resuelve ni propone medidas o decisiones definitivas del DW.
