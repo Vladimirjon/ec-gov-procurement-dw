@@ -114,11 +114,18 @@ Principios:
 > dimensiones, con la calidad y la bitácora en un esquema `audit`. Esta
 > sección queda como visión ampliada.
 
-Es una constelación de hechos que comparte dimensiones. Los campos observados
-en la fuente (a re-verificar en este repo) son: `id`, `ocid`, `year`, `month`,
-`method`, `internal_type`, `locality`, `region`, `suppliers`, `buyer`,
-`amount`, `date`, `title`, `description`, `budget`. `suppliers` y `budget`
-pueden venir nulos, y `suppliers` no tiene estructura observada todavía.
+La visión ampliada es una constelación de hechos que comparte dimensiones.
+El [reconocimiento real](sources/reconocimiento.md) distingue la respuesta
+resumida de búsqueda (`id`, `ocid`, `year`, `month`, `method`, `internal_type`,
+`locality`, `region`, `suppliers`, `buyer`, `amount`, `date`, `title`,
+`description`, `budget`) del JSON masivo anidado (`buyer`, `planning`,
+`tender`, `awards`, `contracts`, `parties`). No son estructuras equivalentes.
+
+Los nombres `amount`, `budget` y `suppliers` de las tablas preliminares que
+siguen son conceptos por mapear. No se ha probado que sean columnas utilizables
+directamente desde la descarga: esta distingue montos estimados, presupuestados,
+adjudicados y contractuales, y puede contener varias adjudicaciones o contratos
+por proceso. El mapeo y las medidas definitivas se resolverán en las fases 1 y 2.
 
 ### Hechos
 

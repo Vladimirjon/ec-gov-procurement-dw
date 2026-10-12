@@ -9,13 +9,15 @@ dimensional de Kimball.
 
 ## Estado actual
 
-**Fase: preparación.** El repositorio contiene solo el esqueleto de carpetas y
-la documentación de planificación. Todavía **no** existe:
+**Fase: preparación.** El repositorio contiene el esqueleto de carpetas,
+documentación y scripts auxiliares de reconocimiento de SERCOP. Se descargaron
+localmente el JSON de enero y el anual de 2025, fuera de Git, y se midieron
+estructura, volumen y algunas limitaciones. Todavía **no** existe:
 
 - código de extracción, carga, transformación ni reglas de calidad;
 - base de datos, DDL, modelos dbt, vistas ni tableros de Power BI;
 - dependencias declaradas, entorno reproducible, pruebas ni CI;
-- una foto (snapshot) de datos ni fixtures.
+- una foto definitiva aprobada con manifiesto ni fixtures.
 
 Todo lo descrito en [Arquitectura prevista](#arquitectura-prevista) es un
 diseño propuesto, no funcionalidad implementada.
@@ -69,10 +71,30 @@ Detalle y justificación: [ADR 0001](docs/adr/0001-alcance.md).
 
 ## Fuente de datos
 
-Fuente prevista: el portal de datos abiertos de contratación pública de SERCOP
-(formato OCDS). **[PENDIENTE]** Los campos, el volumen y la forma de descarga
-aún no se han verificado en este repositorio; las observaciones se
-documentarán en [`docs/sources/`](docs/sources/).
+Fuente: el portal de datos abiertos de contratación pública de SERCOP (OCDS).
+El [reconocimiento](docs/sources/reconocimiento.md) documenta los enlaces de
+descarga y API, campos reales y la lectura del ZIP anual de 2025: **190.619
+`ocid` distintos**, coincidentes con el contador del portal; 160.930.685 bytes
+comprimidos y 1.721.952.613 bytes sin comprimir.
+
+**[PENDIENTE]** La ventana y el ámbito de la cuota de la API, la clasificación
+de entidades y las decisiones de periodo/formato de la foto. Los conteos son
+nacionales; no representan todavía el subconjunto de la planta central.
+
+### Dónde estamos y qué le toca al líder
+
+- [Issue #9: reconocimiento de la fuente](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9):
+  evidencia preparada en esta rama; falta resolver el criterio completo de
+  cuota y publicar/revisar los cambios. Estado detallado en
+  [reconocimiento.md](docs/sources/reconocimiento.md#estado-de-los-criterios-del-issue-9).
+- [Issue #14: integrar y entregar E0](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/14):
+  integrar el contenido de Jorge (#10), la plantilla de Francis (#13) y los
+  hallazgos de la fuente; fecha interna **17 de octubre**. Ver la
+  [ruta del líder en fase 0](docs/PLAN.md#ruta-del-líder-en-la-fase-0).
+- El periodo definitivo de la foto pertenece al
+  [issue #15, fase 1](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/15).
+  La toma formal de la foto con manifiesto pertenece al inicio de la fase 2;
+  las descargas de reconocimiento no sustituyen esas decisiones.
 
 ## Arquitectura prevista
 
@@ -112,6 +134,7 @@ Detalle: [propuesta de arquitectura](docs/PROPUESTA.md),
 │  ├─ ddl/                    # DDL físico (vacío)
 │  └─ dbt/                    # modelos y pruebas dbt (vacío)
 ├─ notebooks/                 # notebooks entregables: perfilado, ETL (vacío)
+├─ scripts/                   # auxiliares de reconocimiento; no son el ETL del DW
 ├─ reports/powerbi/           # tableros (vacío)
 ├─ tests/                     # unit, integration, fixtures (vacíos)
 ├─ deliverables/              # versiones finales de cada entrega

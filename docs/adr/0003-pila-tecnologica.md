@@ -53,9 +53,11 @@ la fase 2.
 | Aprobación de cada dependencia antes de instalarla | **[PENDIENTE]** | Líder |
 | Orquestador (Airflow o Dagster), si llega a hacer falta | Fase posterior, requiere ADR propio | Líder |
 
-Ninguna de estas herramientas está instalada ni configurada todavía. El
-repositorio no tiene `pyproject.toml`, `compose.yaml`, `Makefile`,
-`.pre-commit-config.yaml` ni CI.
+La pila del proyecto no está configurada todavía: no hay `pyproject.toml`,
+`compose.yaml`, `Makefile`, `.pre-commit-config.yaml` ni CI. Los auxiliares de
+reconocimiento usan Python 3.13.9 instalado en el equipo del líder y PowerShell,
+sin nuevas dependencias. Esa ejecución local no constituye un entorno
+reproducible del DW ni confirma la instalación de las demás herramientas.
 
 ## Consecuencias
 

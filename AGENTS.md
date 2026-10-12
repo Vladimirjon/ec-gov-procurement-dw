@@ -7,9 +7,11 @@ y sus empresas están fuera de alcance. Es académico e independiente; no tiene
 relación con SERCOP ni con ninguna entidad.
 
 ## Estado actual
-El repositorio está en fase de preparación: solo hay esqueleto de carpetas y
-documentación. No hay código, dependencias, base de datos, pruebas ni CI. No
-afirmes ni documentes funcionalidad que no exista.
+El repositorio está en fase de preparación: hay documentación, esqueleto de
+carpetas y scripts auxiliares de reconocimiento en `scripts/`. No hay ETL del
+DW, dependencias declaradas, base de datos, suite de pruebas ni CI. Las descargas
+locales de reconocimiento no constituyen todavía la foto definitiva aprobada.
+No afirmes ni documentes funcionalidad que no exista.
 
 ## Orden de lectura
 README.md, docs/adr/, docs/design/ y la propuesta de arquitectura

@@ -42,13 +42,25 @@ regenerarse desde ella.
 | Tema | Estado | Quién lo resuelve |
 |---|---|---|
 | Periodo de la foto (uno o más años) | **[PENDIENTE]** tras medir el volumen por año | Líder |
-| Cómo se obtiene: descarga masiva por año o extracción por API | **[PENDIENTE]** verificar en la preparación | Rol 1 (fuente y foto) |
-| Límite de peticiones de la API (la propuesta anota "unas 60"; falta documentar unidad y ventana de tiempo) | **[PENDIENTE]** verificar y documentar en `docs/sources/` | Rol 1 |
+| Cómo se obtiene: descarga masiva por año o extracción por API | Descarga masiva JSON anual comprobada en el reconocimiento; decisión final **[PENDIENTE]** | Rol 1 (fuente y foto) |
+| Límite de peticiones de la API | Observado `X-RateLimit-Limit: 60`; ventana y ámbito del contador **[PENDIENTE]**. Evidencia en `docs/sources/reconocimiento.md` | Rol 1 |
 | Formato de almacenamiento: Parquet o JSON | **[PENDIENTE]** | Líder |
 | Contenido del manifiesto, algoritmo de checksum y ubicación en el repo | **[PENDIENTE]** | Líder |
 | Tamaño de la partición incremental (la propuesta da "mes a mes" como ejemplo) | **[PENDIENTE]** | Equipo |
-| Que `ocid` sea único por proceso dentro de una foto | **[PENDIENTE]** verificar con datos reales | Rol 1 |
+| Que `ocid` sea único por proceso dentro de una foto | Verificado en la descarga anual de reconocimiento 2025: 190.619 releases y 190.619 `ocid` distintos. Repetir la comprobación en cada foto definitiva | Rol 1 |
 | Campos usados en el hash de contenido | **[PENDIENTE]** tras reconocer la fuente | Roles 1 y 3 |
+
+### Evidencia disponible; decisiones aún pendientes
+
+La [inspección anual](../sources/reconocimiento.md#inspección-del-zip-anual-json)
+del 11/10/2026 mide 160.930.685 bytes comprimidos, 1.721.952.613 bytes sin
+comprimir y 190.619 procesos distintos. El ZIP está en `data/reconnaissance/`,
+ignorado por Git. Es evidencia para decidir, no una aprobación del periodo,
+formato, manifiesto ni de este ADR completo. El resumen de inspección registra
+hashes y conteos; el manifiesto de la foto definitiva sigue pendiente.
+
+Según el plan, el líder decide el periodo en la fase 1 (issue #15); la toma
+formal de la foto y su manifiesto se realiza al inicio de la fase 2.
 
 ## Consecuencias
 
