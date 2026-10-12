@@ -53,7 +53,7 @@ fuente.
 | Criterios de inclusión de entidades | **[PENDIENTE]** | Líder |
 | Casos dudosos concretos | **[PENDIENTE]** al construir la semilla | Líder |
 | Periodo de la foto (ver ADR 0002) | **[PENDIENTE]** tras reconocer la fuente | Líder |
-| Atributo de la fuente que identifica a la entidad compradora | **[PENDIENTE]** verificar en `docs/sources/` | Rol 1 (fuente y foto) |
+| Atributo de la fuente que identifica a la entidad compradora | Observados `buyer.id` y `buyer.name` en el JSON OCDS; `buyer` aparece en todos los releases de la descarga anual 2025. Validar completitud, correspondencia con `parties` y clasificación **[PENDIENTE]**; ver el reconocimiento en `docs/sources/` | Rol 1 (fuente y foto) |
 
 La regla 6 (excluir casos dudosos de los indicadores hasta resolverlos) es una
 propuesta de este borrador y también requiere aprobación.
