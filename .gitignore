@@ -1,8 +1,9 @@
 # --- Datos ---------------------------------------------------------------
-# La foto (snapshot) y cualquier dato derivado viven fuera de git
-# (ver docs/adr/0002-foto-inmutable.md). Solo se versiona el README de data/.
-data/*
-!data/README.md
+# Descargas de reconocimiento, foto y derivados locales: nunca se versionan.
+# Solo se versiona el README de data/. Los resúmenes sin registros reales
+# y las cabeceras HTTP seleccionadas se guardan en docs/sources/.
+/data/*
+!/data/README.md
 
 # --- Material del curso ----------------------------------------------------
 # Material entregado por el profesor; no se redistribuye.
