@@ -19,6 +19,7 @@ Este reconocimiento documenta lo que ofrece el portal y una inspección inicial 
 |---|---|---|
 | [CSV v1](sercop-api-rate-limit-observations.csv) | Dos mediciones HTTP 429 iniciales, con sus horas y cabeceras registradas | Histórico cerrado. Mezcla las variantes de cabecera de cuota y no tiene hora de recepción. No usarlo para deducir la ventana ni anexarle nuevas filas. |
 | [CSV v2](sercop-api-rate-limit-observations-v2.csv) | Seis muestras posteriores, con variantes `RateLimit-*` y `X-RateLimit-*` separadas | Evidencia histórica cerrada en el esquema vigente. Una fila conserva un error local conocido y explicado en el apartado de recuperación. Las nuevas ejecuciones usan otros archivos. |
+| [Primer intento v3](sercop-api-rate-limit-observations-v3-9d609acf-6a81-417f-aebd-1064cc78e2b5.csv) | Una consulta con la nueva configuración de traza | Se detuvo por `SocketException` sin capturar respuesta HTTP; las celdas vacías no prueban ausencia de cabeceras en SERCOP. |
 | [Resumen anual JSON](sercop-2025-download-observation-67ea5265effd4f98b55338529dce81c0.json) | Conteos, tamaños, hashes y datos de ejecución, sin valores de registros | Captura completa del recorrido anual; no sobrescribirla ni confundirla con un manifiesto de snapshot aprobado. |
 | ZIP originales mensual y anual en `data/reconnaissance/` | Evidencia de las descargas inspeccionadas | Locales e ignorados por Git. Hashes y ubicaciones en sus apartados de inspección. |
 
@@ -99,8 +100,8 @@ rechazo de un archivo ya existente. Se verificaron la configuración del
 handler y la directiva de petición, sin comprobarlas contra un servidor real.
 Los archivos sintéticos se eliminaron y los hashes históricos v1/v2
 permanecieron iguales. Estas comprobaciones ad hoc no configuran una suite,
-linter ni CI; no se volvió a recorrer el ZIP anual ni se ejecutó la consulta
-de API con v3.
+linter ni CI; no se volvió a recorrer el ZIP anual. El intento real de API
+con v3 realizado después se registra por separado en el protocolo de cuota.
 
 ## Procedencia y actualización
 
@@ -288,9 +289,20 @@ Evaluar el CSV nuevo antes de repetir:
    agotar el contador deliberadamente, asumir exclusividad por IP ni cerrar
    #9 con el tiempo de recuperación como si fuera la ventana de cuota.
 
-Este protocolo está preparado; no se ejecutó contra SERCOP durante esta
-revisión. La descarga masiva comprobada permite avanzar por esa vía mientras
-se resuelve este criterio específico, conservándolo abierto.
+**Primer intento real con v3:** el 11/10/2026 a las 20:02:40 de Ecuador
+(`request_started_utc=2026-10-12T01:02:40.3959572+00:00`) se ejecutó una sola
+muestra, con `run_id=9d609acf-6a81-417f-aebd-1064cc78e2b5`. El cliente no
+capturó respuesta y registró `System.Net.Sockets.SocketException`; no hay
+estado HTTP, hora de recepción ni cabeceras. El script se detuvo y no
+programó reintentos. Esto documenta un fallo de transporte, no un 429, una
+caída confirmada de SERCOP ni ausencia de política de cuota. Los campos de
+configuración del cliente sí constan en el CSV. No procede programar la
+captura de recuperación porque no se recibió `Retry-After`. Antes de un nuevo
+intento hay que comprobar la conectividad del entorno hacia el sitio oficial,
+sin consultar repetidamente el endpoint.
+
+La descarga masiva comprobada permite avanzar por esa vía mientras se
+resuelve este criterio específico, conservándolo abierto.
 
 **Resultado del intento de contacto:** el líder envió una consulta desde su correo institucional de la EPN el 11/10/2026. Aportó una captura de la notificación de rechazo del servidor para `diego.benavides@sercop.gob.ec`: `550 5.1.1`, destinatario rechazado, y `554 5.5.1`, sin destinatarios válidos. La consulta no fue entregada a ese destinatario; no es una respuesta técnica sobre la API. El correo del catálogo no debe recomendarse como contacto operativo basándose en esa publicación histórica. La [página institucional de contacto](https://portal.compraspublicas.gob.ec/sercop/direcciones/), consultada el 11/10/2026, publica `gestiondocumental@sercop.gob.ec` para ingresar oficios y documentos, y el teléfono de Quito `02 244-0050`. Se puede pedir por ese canal derivación al responsable técnico de datos abiertos/OCDS; no se ha comprobado su entrega ni obtenido respuesta.
 
