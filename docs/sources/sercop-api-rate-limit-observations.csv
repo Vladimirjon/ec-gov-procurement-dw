@@ -1,0 +1,3 @@
+run_id,sample,request_started_utc,response_date,request_url,http_status,rate_limit_limit,rate_limit_remaining,rate_limit_reset,rate_limit_policy,rate_limit_window,retry_after,transport_error
+"c944079b-c514-41e9-99eb-63ec9d9ce3c7","1","2026-10-11T21:48:52.1889747+00:00","Sun, 11 Oct 2026 21:48:44 GMT","https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/api/search_ocds?year=2025&search=agua&page=1","429","60","0","1791755338","","","14",""
+"bd565ca5-397f-4a6e-9117-d631a5a5d632","1","2026-10-11T22:03:56.8045460+00:00","Sun, 11 Oct 2026 22:03:48 GMT","https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/api/search_ocds?year=2025&search=agua&page=1","429","60","0","1791756240","","","12",""
