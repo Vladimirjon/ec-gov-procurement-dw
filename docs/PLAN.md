@@ -157,7 +157,7 @@ se revisan en su issue antes de darla por terminada.
 **Estado consultado el 15/10/2026:** #10 y #11 están cerrados; sus cambios se
 integraron en `main` mediante los PR #23 y #21, respectivamente. #9 y #14
 siguen abiertos. El cierre de #9 está preparado localmente en la rama
-`docs/09-completar-limite-api-sercop` y aún no tiene PR. #12 y #13 siguen
+`docs/09-completar-limite-api-sercop` y se revisa en el PR #24. #12 y #13 siguen
 abiertos. No hay todavía un PDF E0 final ni evidencia de su subida al curso.
 Esto no sustituye la consulta del trabajo que los compañeros tengan en sus
 ramas o PR.

@@ -58,7 +58,8 @@ solicitar revalidación; esto no acredita que todos los intermediarios obedezcan
 la directiva ni que la respuesta provenga directamente del origen. Referencias:
 [AllowAutoRedirect](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclienthandler.allowautoredirect)
 y [RFC 9111, no-cache](https://www.rfc-editor.org/rfc/rfc9111.html#section-5.2.1.4).
-No se ha capturado todavía una respuesta real de SERCOP con v3. Una muestra
+La única respuesta real de SERCOP capturada con v3 es la del cierre del
+15/10/2026 (HTTP 200, sin cabeceras de política, ventana ni reinicio). Una muestra
 sigue siendo una operación lógica; la traza no mide tráfico ajeno ni el
 comportamiento interno de proxies o del servidor.
 
@@ -270,8 +271,9 @@ El 429 reportó `Retry-After: 13` y `X-RateLimit-Reset: 1791758481`, equivalente
 ### Cierre controlado del criterio de cuota, 15/10/2026
 
 El [manual oficial de la API](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/api),
-que el portal fecha el 16/09/2026, se consultó nuevamente y continúa sin
-publicar cantidad, periodo o ámbito de la cuota.
+se consultó nuevamente el 15/10/2026. La página muestra «Fecha de
+actualización: 14/10/2026» y continúa sin publicar cantidad, periodo o ámbito
+de la cuota.
 
 Se ejecutó una sola muestra con el esquema v3, sin consultas auxiliares ni
 reintentos (`run_id=95428e1f-807a-4dc5-b0e2-dabcb8d3fdae`). Respondió HTTP
