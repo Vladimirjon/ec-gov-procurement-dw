@@ -87,8 +87,8 @@ central.
 ### Dónde estamos y qué le toca al líder
 
 - [Issue #9: reconocimiento de la fuente](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9):
-  sus cinco criterios tienen evidencia preparada; el cierre queda sujeto a la
-  revisión e integración del cambio. Estado detallado en
+  cerrado el 15/10/2026 con el PR #24; sus cinco criterios tienen evidencia.
+  Estado detallado en
   [reconocimiento.md](docs/sources/reconocimiento.md#estado-de-los-criterios-del-issue-9).
 - [Issue #14: integrar y entregar E0](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/14):
   integrar el contenido de Jorge (#10), la plantilla de Francis (#13) y los
