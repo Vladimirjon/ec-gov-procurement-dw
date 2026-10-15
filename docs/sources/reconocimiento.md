@@ -6,10 +6,10 @@ Este reconocimiento documenta lo que ofrece el portal y una inspección inicial 
 
 ## Dónde estamos
 
-- **Trabajo actual:** [issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9), reconocimiento de la fuente en fase 0. El issue se leyó y contrastó con la evidencia disponible hasta el 15/10/2026.
+- **Trabajo:** [issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9), reconocimiento de la fuente en fase 0. Se contrastó con la evidencia disponible hasta el 15/10/2026 y se cerró ese día con el PR #24.
 - **Comprobado:** accesos publicados, campos reales, descargas JSON mensual y anual, hashes y reconciliación de 190.619 procesos distintos con el contador anual.
 - **Límite observado:** la API anuncia 60; dos reinicios consecutivos observados quedaron separados por 61 segundos. El contador no se comportó como exclusivo del cliente y SERCOP no publica su ámbito, por lo que la conclusión se limita a una ventana observable cercana a un minuto.
-- **Publicación pendiente:** los cinco criterios tienen evidencia; el issue se cierra únicamente cuando se integre el PR correspondiente.
+- **Cierre:** los cinco criterios tienen evidencia y el issue se cerró al integrarse el PR #24.
 - **Trabajo del líder adicional en fase 0:** integrar E0 en el issue #14, usando contenido de #10 y plantilla de #13; fecha interna 17 oct. La ruta está en [PLAN.md](../PLAN.md#ruta-del-líder-en-la-fase-0).
 - **Fases siguientes:** el periodo definitivo se decide en #15 (fase 1); la foto formal y el manifiesto se preparan al inicio de la fase 2. El docente indicó analizar cinco años o comparar por gobiernos. No se observó en SERCOP un campo de gobierno o administración, por lo que #15 evaluará una delimitación por fechas; `2021–2025` es el candidato inicial de cinco años calendario completos, no una decisión cerrada por este reconocimiento. Estas descargas no son todavía la foto definitiva.
 
@@ -349,5 +349,5 @@ evidencia externa observada.
 
 Los cinco criterios de aceptación tienen evidencia. El cierre de #9 no afirma
 una política contractual ni un contador exclusivo: registra el comportamiento
-externo observado y sus límites. El issue se cierra al integrar el PR que
-contenga esta actualización.
+externo observado y sus límites. El issue se cerró el 15/10/2026 al integrarse
+el PR #24.

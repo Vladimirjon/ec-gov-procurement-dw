@@ -2,7 +2,7 @@
 
 
 > [!NOTE]
-> Este documento resume OCDS 1.1, contrastado con la documentación oficial 1.1.5. Las observaciones de SERCOP se mantienen en [reconocimiento.md](reconocimiento.md), correspondiente al [issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9). La tabla final enlaza esa evidencia y distingue lo observado de lo pendiente.
+> Este documento resume OCDS 1.1, contrastado con la documentación oficial 1.1.5. Las observaciones de SERCOP se mantienen en [reconocimiento.md](reconocimiento.md), correspondiente al [issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9), cerrado con el PR #24. La tabla final enlaza esa evidencia y distingue lo observado de lo pendiente.
 
 
 ## ¿Qué es OCDS?
@@ -214,7 +214,7 @@ Estos ejemplos describen posibilidades del estándar; no afirman que SERCOP util
 
 ## Estándar vs. fuente real (SERCOP)
 
-Los apartados anteriores describen **lo que define OCDS**. La evidencia de SERCOP procede de [reconocimiento.md](reconocimiento.md), integrado mediante el PR #22 como avance del [issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9). La tabla siguiente resume esa documentación al 11 de octubre de 2026; no sustituye su evidencia ni una validación de esquemas.
+Los apartados anteriores describen **lo que define OCDS**. La evidencia de SERCOP procede de [reconocimiento.md](reconocimiento.md), integrado mediante el PR #22 como avance del [issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9) y completado con el PR #24, que lo cerró. La tabla siguiente resume esa documentación al 11 de octubre de 2026; no sustituye su evidencia ni una validación de esquemas.
 
 | Concepto | Qué define OCDS | Evidencia documentada de SERCOP y límites |
 |---|---|---|
