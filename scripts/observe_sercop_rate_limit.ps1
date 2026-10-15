@@ -23,6 +23,10 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+# Windows PowerShell 5.1 does not always load this assembly before resolving
+# HttpClient types. Fail before creating an evidence file if it is unavailable.
+Add-Type -AssemblyName System.Net.Http -ErrorAction Stop
+
 $requestUri = 'https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/api/search_ocds?year=2025&search=agua&page=1'
 $runId = [guid]::NewGuid().ToString('D')
 if ([string]::IsNullOrWhiteSpace($OutputPath)) {

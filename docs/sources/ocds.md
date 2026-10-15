@@ -229,4 +229,7 @@ Los apartados anteriores describen **lo que define OCDS**. La evidencia de SERCO
 
 La respuesta resumida de `search_ocds` y el JSON anidado de descarga son estructuras distintas. Sus campos `amount`, `budget` y `suppliers` no se equiparan automáticamente a las rutas OCDS. Las fechas del archivo mensual tampoco permiten fijar por sí solas la fecha de negocio. Estos límites se detallan en [campos observados](reconocimiento.md#campos-evidencia-y-límites-de-lo-observado), [inspección mensual](reconocimiento.md#inspección-local-de-la-descarga-mensual-json) e [inspección anual](reconocimiento.md#inspección-del-zip-anual-json).
 
-El criterio pendiente de cuota y ventana de API pertenece al #9; este resumen no lo resuelve ni propone medidas o decisiones definitivas del DW.
+La cuota y ventana observadas pertenecen a #9 y se documentan en el
+[reconocimiento de SERCOP](reconocimiento.md#límites-de-la-api). Este resumen
+del estándar no aporta evidencia adicional ni propone medidas o decisiones
+definitivas del DW.
