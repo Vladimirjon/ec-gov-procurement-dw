@@ -149,25 +149,26 @@ se revisan en su issue antes de darla por terminada.
 
 | Orden | Tarea | Qué debe completar el líder |
 |---|---|---|
-| 1 | [#9 · Reconocer la fuente](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9) | Contrastar los cinco criterios con las evidencias, documentar el resultado y revisar/publicar el avance por PR. La ventana de cuota todavía no está determinada; no cerrar el issue con ese criterio pendiente. |
-| 2 | Revisión del [PR #21 de Harry](https://github.com/Vladimirjon/ec-gov-procurement-dw/pull/21), relacionado con #11 | Se publicó una revisión con cambios pedidos el 11/10/2026. Los commits `93844f0` y `1b6ff9a` incorporan las cuatro correcciones solicitadas; la revisión formal y tres conversaciones siguen pendientes. Verificar el estado actual antes de aprobar o integrar. |
-| 3 | Coordinar las entradas para E0 | Revisar el contenido de Jorge en [#10](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/10), fecha interna 15 oct, y la plantilla/glosario de Francis en [#13](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/13), fecha interna 14 oct. Usar los hallazgos comprobados de #9 para orientar las preguntas de negocio. |
-| 4 | [#14 · Integrar y entregar E0](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/14) | Armar el PDF de 1–2 páginas con los cuatro puntos, título y encabezado del curso; comprobar nombre, guardarlo en `deliverables/fase0/` por PR y subirlo al curso. Fecha interna 17 oct. |
+| 1 | [#9 · Reconocer la fuente](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9) | Los cinco criterios tienen evidencia. Revisar e integrar el PR de cierre, limitado al comportamiento externo observado de la cuota; la política interna y el ámbito del contador no se presentan como confirmados por SERCOP. |
+| 2 | Coordinar las entradas para E0 | #10 (contextualización) y #11/PR #21 (resumen OCDS) ya están integrados. Revisar la propuesta de entidades de #12 y la plantilla/glosario de #13 cuando estén disponibles, y usar los hallazgos comprobados de #9 para orientar las preguntas de negocio. |
+| 3 | [#14 · Integrar y entregar E0](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/14) | Armar el PDF de 1–2 páginas con los cuatro puntos, título y encabezado del curso; comprobar nombre, guardarlo en `deliverables/fase0/` por PR y subirlo al curso. Fecha interna 17 oct. |
 | Transversal | Revisión y decisiones del equipo | Revisar los PR según el plazo de 48 horas. Evaluar la propuesta de entidades de Ismael en [#12](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/12). Conservar las decisiones de arquitectura pendientes hasta su aprobación explícita. |
 
-**Estado consultado el 11/10/2026:** #9 y #14 están abiertos y sus criterios
-en GitHub siguen sin marcar. La evidencia de fuente está preparada localmente
-en la rama `docs/09-reconocimiento-fuente-sercop`; aún no se ha publicado un PR
-de este avance. El PR #21 está abierto y su última revisión publicada pide
-cambios. En este checkout, `deliverables/fase0/` y `deliverables/plantilla/`
-contienen solo `.gitkeep`; no hay un PDF E0 final ni evidencia de su subida al
-curso. Esto no sustituye la consulta del trabajo que los compañeros tengan en
-sus ramas o PR.
+**Estado consultado el 15/10/2026:** #10 y #11 están cerrados; sus cambios se
+integraron en `main` mediante los PR #23 y #21, respectivamente. #9 y #14
+siguen abiertos. El cierre de #9 está preparado localmente en la rama
+`docs/09-completar-limite-api-sercop` y aún no tiene PR. #12 y #13 siguen
+abiertos. No hay todavía un PDF E0 final ni evidencia de su subida al curso.
+Esto no sustituye la consulta del trabajo que los compañeros tengan en sus
+ramas o PR.
 
 **Frontera entre fases:** decidir el periodo definitivo de la foto corresponde
 al líder en [#15](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/15),
-fase 1. Tomar y registrar la foto formal con manifiesto corresponde al inicio
-de la fase 2. El reconocimiento actual no exige implementar staging, DW, ETL,
+fase 1. La indicación docente es analizar cinco años o comparar por gobiernos;
+como SERCOP no expone un campo de gobierno, #15 evaluará el periodo por fechas,
+con `2021–2025` como candidato inicial de cinco años calendario completos.
+Tomar y registrar la foto formal con manifiesto corresponde al inicio de la
+fase 2. El reconocimiento actual no exige implementar staging, DW, ETL,
 clasificación completa de entidades ni tableros.
 
 ### Fase 1 · Requerimientos (20 oct – 2 nov)

@@ -6,12 +6,12 @@ Este reconocimiento documenta lo que ofrece el portal y una inspección inicial 
 
 ## Dónde estamos
 
-- **Trabajo actual:** [issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9), reconocimiento de la fuente en fase 0. El issue se leyó y contrastó con la evidencia; los cambios están locales en la rama `docs/09-reconocimiento-fuente-sercop`.
+- **Trabajo actual:** [issue #9](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9), reconocimiento de la fuente en fase 0. El issue se leyó y contrastó con la evidencia disponible hasta el 15/10/2026.
 - **Comprobado:** accesos publicados, campos reales, descargas JSON mensual y anual, hashes y reconciliación de 190.619 procesos distintos con el contador anual.
-- **Criterio todavía pendiente:** ventana y ámbito de la cuota de API. El límite anunciado de 60 no tiene una unidad temporal verificada.
-- **Publicación pendiente:** revisión y PR del avance. Los criterios del issue en GitHub siguen sin marcar y el issue permanece abierto.
+- **Límite observado:** la API anuncia 60; dos reinicios consecutivos observados quedaron separados por 61 segundos. El contador no se comportó como exclusivo del cliente y SERCOP no publica su ámbito, por lo que la conclusión se limita a una ventana observable cercana a un minuto.
+- **Publicación pendiente:** los cinco criterios tienen evidencia; el issue se cierra únicamente cuando se integre el PR correspondiente.
 - **Trabajo del líder adicional en fase 0:** integrar E0 en el issue #14, usando contenido de #10 y plantilla de #13; fecha interna 17 oct. La ruta está en [PLAN.md](../PLAN.md#ruta-del-líder-en-la-fase-0).
-- **Fases siguientes:** el periodo definitivo se decide en #15 (fase 1); la foto formal y el manifiesto se preparan al inicio de la fase 2. Estas descargas de reconocimiento no son todavía la foto definitiva.
+- **Fases siguientes:** el periodo definitivo se decide en #15 (fase 1); la foto formal y el manifiesto se preparan al inicio de la fase 2. El docente indicó analizar cinco años o comparar por gobiernos. No se observó en SERCOP un campo de gobierno o administración, por lo que #15 evaluará una delimitación por fechas; `2021–2025` es el candidato inicial de cinco años calendario completos, no una decisión cerrada por este reconocimiento. Estas descargas no son todavía la foto definitiva.
 
 ## Inventario y conservación de la evidencia
 
@@ -20,6 +20,7 @@ Este reconocimiento documenta lo que ofrece el portal y una inspección inicial 
 | [CSV v1](sercop-api-rate-limit-observations.csv) | Dos mediciones HTTP 429 iniciales, con sus horas y cabeceras registradas | Histórico cerrado. Mezcla las variantes de cabecera de cuota y no tiene hora de recepción. No usarlo para deducir la ventana ni anexarle nuevas filas. |
 | [CSV v2](sercop-api-rate-limit-observations-v2.csv) | Seis muestras posteriores, con variantes `RateLimit-*` y `X-RateLimit-*` separadas | Evidencia histórica cerrada en el esquema vigente. Una fila conserva un error local conocido y explicado en el apartado de recuperación. Las nuevas ejecuciones usan otros archivos. |
 | [Primer intento v3](sercop-api-rate-limit-observations-v3-9d609acf-6a81-417f-aebd-1064cc78e2b5.csv) | Una consulta con la nueva configuración de traza | Se detuvo por `SocketException` sin capturar respuesta HTTP; las celdas vacías no prueban ausencia de cabeceras en SERCOP. |
+| [Captura de cierre v3](sercop-api-rate-limit-observations-v3-95428e1f-807a-4dc5-b0e2-dabcb8d3fdae.csv) | Una consulta controlada del 15/10/2026 con la traza completa | HTTP 200, límite 60 y restantes 0; no anunció política, ventana ni reinicio. No hubo redirección ni error local y el script se detuvo sin repetir. |
 | [Resumen anual JSON](sercop-2025-download-observation-67ea5265effd4f98b55338529dce81c0.json) | Conteos, tamaños, hashes y datos de ejecución, sin valores de registros | Captura completa del recorrido anual; no sobrescribirla ni confundirla con un manifiesto de snapshot aprobado. |
 | ZIP originales mensual y anual en `data/reconnaissance/` | Evidencia de las descargas inspeccionadas | Locales e ignorados por Git. Hashes y ubicaciones en sus apartados de inspección. |
 
@@ -66,24 +67,33 @@ comportamiento interno de proxies o del servidor.
 - `scripts/inspect_sercop_zip.py`: inspección local de un ZIP, sin llamadas a la API. Guarda el resumen en un archivo nuevo mediante `--output`; se detiene ante una estructura no admitida o si cambia el hash del ZIP. El comando anual aparece en su apartado de inspección.
 - `scripts/observe_sercop_rate_limit.ps1`: observa el estado y las cabeceras de una consulta GET fija de búsqueda. Parámetros: `Samples` (1–48, predeterminado 10), `InitialDelaySeconds` (0–86400, predeterminado 0), `IntervalMinutes` (1–1440, predeterminado 10) o `IntervalSeconds` (10–86400), `StopAtRemaining` (0–59, predeterminado 10) y `OutputPath` para una ruta nueva. Los dos intervalos son excluyentes. Cada ejecución crea por defecto `sercop-api-rate-limit-observations-v3-<run_id>.csv`; rechaza una salida existente antes de consultar la fuente. Se detiene ante estado distinto de 200, margen de cuota o error. No ejecutar para repetir una medición sin una hipótesis y un resultado esperado claros.
 
-Los auxiliares no implementan `extract`, `snapshot`, staging ni cargas del DW. No existe todavía suite de pruebas, linter o CI configurados. Las comprobaciones de lectura y de sintaxis se reportan por separado de pruebas automatizadas y de validación de esquemas.
+Los auxiliares no implementan `extract`, `snapshot`, staging ni cargas del DW.
+La ausencia actual de suite, linter y CI no es un criterio incumplido de #9:
+este issue exige reconocimiento y evidencia, no infraestructura del DW. La
+verificación aplicable aquí es la sintaxis del auxiliar, la estructura del CSV,
+los enlaces, la conservación de evidencia y una consulta HTTP controlada. El
+plan vigente ubica el entorno reproducible, las pruebas unitarias y CI en la
+fase 3 (24 nov–14 dic), y las pruebas de integración, idempotencia y
+reconciliación en la fase 4 (15 dic–8 ene). Adelantar el mínimo de `ruff`,
+`pytest` y CI al primer código de `extract`/`snapshot` de la fase 2 requiere
+una tarea de coordinación separada; no forma parte de este PR.
 
 ### Revisión de conservación y documentación, 11/10/2026
 
-- Se contrastaron en GitHub los criterios del issue #9, las tareas de integración #14 y las dependencias de fase 0. El PR #21 está abierto y conserva una revisión publicada con cambios pedidos; esta comprobación de estado no es una nueva aprobación de su contenido.
+- Se contrastaron en GitHub los criterios del issue #9, las tareas de integración #14 y las dependencias de fase 0. En esa fecha, el PR #21 estaba abierto y conservaba una revisión publicada con cambios pedidos; fue corregido e integrado el 12/10/2026, cerrando #11.
 - Los dos CSV conservaron sus hashes durante la revisión: v1, `6D544C72FCA05198A55C38EB74670B102483985021B843906BC88D1F3A92B9A7`; v2, `960EAFE8839D47C837B30106627AE41ACCA1FA44D7EBEE61C15A1DD5FC558ECE`.
 - Se comprobó con `git check-ignore` que los ZIP y derivados bajo `data/`, `.env`, `.venv/` y cachés de Python quedan ignorados. `data/README.md`, `.env.example`, los resúmenes/CSV de `docs/sources/` y un nombre de ZIP de entrega bajo `deliverables/` permanecen disponibles para versionar. Los archivos originales descargados no están rastreados; `git ls-files -- data` devuelve únicamente `data/README.md`.
 - Se inspeccionaron 31 enlaces locales a archivos en 11 Markdown modificados, sin destinos faltantes. La comprobación de rutas no certifica enlaces externos ni anclas de secciones.
 - La sintaxis de ambos auxiliares se analizó sin errores. El cambio de creación de CSV usa una ruta nueva por ejecución y apertura exclusiva con [FileMode.CreateNew](https://learn.microsoft.com/en-us/dotnet/api/system.io.filemode#fields); no se ejecutó una nueva consulta HTTP para comprobar ese cambio. Las lecturas reales anteriores y las comprobaciones históricas con respuestas sintéticas no se presentan como pruebas del nuevo comportamiento de salida.
 - `git diff --check` no informó errores de espacios en los cambios rastreados. Git emitió un aviso de conversión LF a CRLF para `.gitignore`. No se añadieron ni ejecutaron pruebas automatizadas o linter; no hay configuración para ellos en este proyecto.
 
-**Revisión posterior del mismo día:** GitHub confirma que Harry trabaja en
-#11 mediante el PR #21, cuyo último commit consultado es
-`1b6ff9ad6057033e3b65fd45f8a12c2fd927e7df`. El texto actual incorpora las
-cuatro correcciones solicitadas; sigue abierta la revisión formal con cambios
-pedidos y quedan tres conversaciones sin resolver. Ese resumen del estándar
-no aporta una definición de la ventana de API y no cierra #9. La lectura del
-manual público por HTTP respondió 200: describe `search_ocds` y `record`,
+**Revisión posterior del mismo día (estado histórico):** GitHub confirmó que
+Harry trabajaba en #11 mediante el PR #21, cuyo último commit consultado era
+`1b6ff9ad6057033e3b65fd45f8a12c2fd927e7df`. En ese momento seguían abiertos
+la revisión formal y tres conversaciones. El PR fue corregido e integrado el
+12/10/2026; su resumen del estándar no aporta una definición de la ventana de
+API y no sustituye la evidencia de #9. La lectura del manual público por HTTP
+respondió 200: describe `search_ocds` y `record`,
 pero no se encontró allí una definición de cuota temporal. La búsqueda de
 repositorios públicos tampoco proporcionó configuración verificable de la
 API desplegada; no se deduce la cuota a partir de valores predeterminados de
@@ -245,7 +255,7 @@ Los dos valores de reinicio están separados por 61 segundos. Cada respuesta 429
 
 **Medición de cadencia interrumpida:** se ejecutó `.\scripts\observe_sercop_rate_limit.ps1 -Samples 13 -IntervalSeconds 10 -InitialDelaySeconds 20`, con `run_id=1d87374d-4824-4e81-9e2a-5f8c3da90f78`. La primera muestra, recibida a las 22:26:09 UTC del 11/10/2026, respondió HTTP 200 con límite 60 y restantes 2, sin error de registro. El script se detuvo porque `Remaining <= 10`; solo se realizó una de las 13 muestras solicitadas. Por tanto, esta ejecución no permite estimar una cadencia. La diferencia de 58 a 2 respecto a la muestra anterior no puede atribuirse a esta petición ni explica por sí sola si la cuota es compartida, qué tráfico se cuenta o qué ventana se aplica.
 
-**Verificación pendiente de la política de cuota:** la guía oficial de API revisada describe operaciones, parámetros y ejemplos, pero no especifica la unidad temporal, el ámbito del contador ni cómo se reinicia. Para documentar la política como definida por el proveedor se requiere una referencia técnica oficial, configuración publicada de la implementación o confirmación de SERCOP. La consulta debe pedir: cuota y ventana de `search_ocds` y `record`; si se aplica por IP, cliente o de forma global; si ambos endpoints y el portal comparten contador; y el significado de `X-RateLimit-Reset`. Las cabeceras observadas y las mediciones pueden contrastar esa definición, pero no sustituyen la confirmación de una política interna que no se publica en la guía. No se recomienda repetir la ejecución de cadencia con el contador casi agotado.
+**Alcance de la política observada:** la guía oficial de API revisada describe operaciones, parámetros y ejemplos, pero no especifica la unidad temporal, el ámbito del contador ni cómo se reinicia. Para documentar la política como definida por el proveedor se requeriría una referencia técnica oficial, configuración publicada de la implementación o confirmación de SERCOP. Las cabeceras y mediciones permiten documentar el comportamiento externo exigido por este reconocimiento, pero no sustituyen una definición interna del proveedor. No se recomienda repetir la ejecución de cadencia con el contador casi agotado.
 
 **Medición con las ventanas relacionadas cerradas:** el usuario confirmó primero que había usado o mantenido abierto el portal entre las observaciones anteriores, y después que cerró las ventanas relacionadas para ejecutar `.\scripts\observe_sercop_rate_limit.ps1 -Samples 19 -IntervalSeconds 10 -InitialDelaySeconds 120`. En esta ejecución (`run_id=403bae00-1d01-4978-bfcf-9adddd0ab9b9`), del 11/10/2026, la muestra 1 llegó a las 22:41:06,386 UTC con HTTP 200, límite 60 y restantes 15; la muestra 2 llegó a las 22:41:16,441 UTC con HTTP 429, límite 60 y restantes 0. Ambas filas carecen de error local. Las respuestas se separaron por 10,055 segundos y el script se detuvo tras dos de las 19 muestras solicitadas. La primera petición tardó 2,631 segundos y la segunda 0,039; el intervalo de 10 segundos se espera después de recibir la respuesta anterior, por lo que se suma al tiempo de las peticiones.
 
@@ -257,44 +267,34 @@ El 429 reportó `Retry-After: 13` y `X-RateLimit-Reset: 1791758481`, equivalente
 
 **Reproducción de las observaciones:** v1 y v2 quedan preservados. El esquema actual v3 registra cada variante de cabecera por separado, inicio y recepción del cliente, `Date` del servidor y la traza descrita arriba. El script acepta `-IntervalSeconds` o `-IntervalMinutes`, pero no ambos. Con `-Samples 1` no hay espera entre muestras; la espera inicial predeterminada es cero y se controla mediante `-InitialDelaySeconds`. Se detiene ante estado distinto de 200, el margen configurado de `Remaining` (10 por defecto) o un error, y no reintenta automáticamente ni lee o guarda el cuerpo de respuesta. Las comprobaciones locales con respuestas sintéticas no se añadieron a los CSV de SERCOP. Las primeras ejecuciones se acumularon en los dos archivos históricos; para conservarlos, el script actual crea un CSV nuevo por ejecución y rechaza rutas existentes.
 
-### Próximo paso controlado para el criterio de cuota
+### Cierre controlado del criterio de cuota, 15/10/2026
 
-La siguiente captura tiene una pregunta acotada: ¿se reciben cabeceras que
-declaran el periodo o que permiten detectar una respuesta de caché o una
-redirección? Mantener cerradas las ventanas relacionadas y registrar cualquier
-otro uso conocido de la fuente. Ejecutar una sola muestra, sin espera inicial
-arbitraria ni consultas auxiliares al endpoint:
+El [manual oficial de la API](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/api),
+que el portal fecha el 16/09/2026, se consultó nuevamente y continúa sin
+publicar cantidad, periodo o ámbito de la cuota.
 
-```powershell
-.\scripts\observe_sercop_rate_limit.ps1 -Samples 1
-```
+Se ejecutó una sola muestra con el esquema v3, sin consultas auxiliares ni
+reintentos (`run_id=95428e1f-807a-4dc5-b0e2-dabcb8d3fdae`). Respondió HTTP
+200 y anunció `X-RateLimit-Limit: 60` y `X-RateLimit-Remaining: 0`. No envió
+`RateLimit-Policy`, cabecera de ventana, reinicio o `Retry-After`; tampoco hubo
+redirección, error local ni evidencia de caché compartida. El script respetó
+el margen y terminó después de esa única solicitud.
 
-Evaluar el CSV nuevo antes de repetir:
+La evidencia acumulada permite cerrar el criterio en el sentido literal del
+issue —límites **observados**— con esta delimitación:
 
-1. Si aparece `RateLimit-Policy` o una cabecera de ventana, conservar su valor
-   literal y contrastar su significado con documentación del proveedor. Una
-   cabecera X no se interpreta como una norma por su nombre.
-2. Si hay una redirección, error o indicios de caché, detener la medición y
-   resolver primero la interpretación de esa respuesta. La ausencia de esas
-   cabeceras tampoco prueba ausencia de intermediarios.
-3. Si responde 429 con `Retry-After` numérico válido, puede prepararse una
-   única captura de recuperación después de
-   `response_received_utc + Retry-After`, sin volver a consultar antes. Si
-   expresa una fecha HTTP, evaluar esa fecha y la diferencia de relojes antes
-   de programarla. No usar el timestamp X como duración. Tras esa captura se
-   detiene el experimento, incluso si continúa el 429. Un 200 posterior solo
-   prueba recuperación; no demuestra una cuota de 60 por ese intervalo.
-4. Si no se publica el periodo, hay dos vías de investigación: obtener una
-   definición técnica oficial o configuración vinculada a la versión
-   desplegada, o diseñar una medición reproducible de la ventana observable.
-   La segunda necesita registrar reinicios repetidos, las horas y cabeceras,
-   las condiciones de tráfico y cualquier evidencia de caché. Antes de
-   ejecutarla, definir qué resultado distinguiría las hipótesis y cuándo
-   detenerse; con los contadores actuales todavía no existe ese diseño.
-   Una conclusión experimental debe quedar limitada a las condiciones
-   observadas y no presentarse como política interna confirmada por SERCOP.
-   No agotar el contador deliberadamente, asumir exclusividad por IP ni
-   cerrar #9 con el tiempo de recuperación como si fuera la ventana de cuota.
+| Aspecto | Conclusión sustentada | Límite de la conclusión |
+|---|---|---|
+| Cantidad | El servidor anuncia un límite de 60 mediante `X-RateLimit-Limit` | No equivale a 60 solicitudes disponibles exclusivamente para este cliente |
+| Ventana observable | Dos reinicios anunciados consecutivos del 11/10/2026 quedaron separados por 61 segundos; se documenta como una cadencia aproximada de un minuto | No identifica una ventana fija o deslizante ni constituye una garantía contractual |
+| Ámbito | La caída de `Remaining` de 15 a 0 entre dos solicitudes del script, y el HTTP 200 con restantes 0 del 15/10/2026, no concuerdan con un contador simple y exclusivo | SERCOP no publica si el contador se comparte por IP, endpoint, portal o infraestructura |
+
+Para el proyecto, la descarga masiva sigue siendo la vía preferida. Si una
+fase posterior usa la API, debe serializar solicitudes, detenerse al alcanzar
+el margen y, ante HTTP 429, respetar `Retry-After` sin interpretar
+`X-RateLimit-Reset` como una duración. Un cambio futuro de la política del
+proveedor exigiría una observación nueva; no reabre la evidencia histórica de
+este issue.
 
 **Primer intento real con v3:** el 11/10/2026 a las 20:02:40 de Ecuador
 (`request_started_utc=2026-10-12T01:02:40.3959572+00:00`) se ejecutó una sola
@@ -308,18 +308,31 @@ captura de recuperación porque no se recibió `Retry-After`. Antes de un nuevo
 intento hay que comprobar la conectividad del entorno hacia el sitio oficial,
 sin consultar repetidamente el endpoint.
 
-La descarga masiva comprobada permite avanzar por esa vía mientras se
-resuelve este criterio específico, conservándolo abierto.
+La descarga masiva comprobada permite avanzar sin depender del contador opaco
+de la API. La captura fallida se conserva como evidencia histórica y no se usa
+para el cierre del criterio.
 
-**Resultado del intento de contacto:** el líder envió una consulta desde su correo institucional de la EPN el 11/10/2026. Aportó una captura de la notificación de rechazo del servidor para `diego.benavides@sercop.gob.ec`: `550 5.1.1`, destinatario rechazado, y `554 5.5.1`, sin destinatarios válidos. La consulta no fue entregada a ese destinatario; no es una respuesta técnica sobre la API. El correo del catálogo no debe recomendarse como contacto operativo basándose en esa publicación histórica. La [página institucional de contacto](https://portal.compraspublicas.gob.ec/sercop/direcciones/), consultada el 11/10/2026, publica `gestiondocumental@sercop.gob.ec` para ingresar oficios y documentos, y el teléfono de Quito `02 244-0050`. Se puede pedir por ese canal derivación al responsable técnico de datos abiertos/OCDS; no se ha comprobado su entrega ni obtenido respuesta.
+**Resultado de los intentos de contacto:** el líder envió una consulta desde
+su correo institucional de la EPN el 11/10/2026. El servidor rechazó el
+destinatario histórico `diego.benavides@sercop.gob.ec` con `550 5.1.1` y
+`554 5.5.1`; la consulta no fue entregada y eso no constituye una respuesta
+técnica. Gestión Documental respondió después que su correo es exclusivo para
+recibir oficios y remitió las consultas generales al chat de SERCOP, la
+atención presencial y los canales de denuncias o reclamaciones. El 15/10/2026,
+el navegador rechazó la conexión segura al chat porque el certificado de
+`asesorvirtual.sercop.gob.ec` aparecía vencido desde hacía 985 días. No se
+omitió la advertencia ni se enviaron datos por una conexión insegura. Por
+tanto, el proyecto no espera una confirmación técnica de SERCOP para cerrar
+#9: conserva la falta de política publicada como limitación y trabaja con la
+evidencia externa observada.
 
 ## Conclusiones para el proyecto
 
 1. Hay descarga masiva en tres formatos y una API con búsqueda por palabra clave y consulta por `ocid`.
 2. El portal transforma y publica datos de más de una fuente primaria; no se debe asumir que todo registro procede únicamente de SOCE.
 3. El buscador abarca entidades fuera del alcance del DW, así que antes de usar totales debe definirse cómo identificar la planta central y sus entidades dependientes.
-4. Se midió el tamaño comprimido del JSON anual y se observaron propiedades de una respuesta API real. Se confirmó la recuperación de `Remaining` de 0 a 58 entre una respuesta 429 y otra 200. En los 429 de v2, `X-RateLimit-Reset`, interpretado como timestamp Unix UTC, coincide con `Date + Retry-After`; la duración y el comportamiento de la cuota siguen sin determinarse. Esta incertidumbre afecta a la planificación de consultas por API; no impide evaluar la descarga masiva, cuyos límites y contenido se deben comprobar por separado.
-5. El líder descargó el ZIP mensual de enero de 2025. Se verificaron su hash, su estructura JSON y los conteos descritos arriba: 2.186 releases con 2.186 `ocid` distintos. La inspección permite avanzar por la vía masiva, pero no fija el periodo definitivo de la foto ni garantiza todavía la cobertura necesaria. La consulta a SERCOP sobre la cuota puede realizarse en paralelo.
+4. Se midió el tamaño comprimido del JSON anual y se observaron propiedades de respuestas API reales. El servidor anunció un límite de 60 y dos reinicios consecutivos quedaron separados por 61 segundos, por lo que se documenta una ventana observable cercana a un minuto. La recuperación de `Remaining` de 0 a 58 quedó confirmada, pero el contador no se comportó como exclusivo del cliente y su ámbito no está publicado. Esta limitación afecta a la planificación de consultas por API; no impide usar la descarga masiva, cuyos límites y contenido se comprueban por separado.
+5. El líder descargó el ZIP mensual de enero de 2025. Se verificaron su hash, su estructura JSON y los conteos descritos arriba: 2.186 releases con 2.186 `ocid` distintos. La inspección permite avanzar por la vía masiva, pero no fija el periodo definitivo de la foto ni garantiza todavía la cobertura necesaria. No se espera una confirmación técnica de SERCOP para continuar; cualquier política publicada en el futuro se contrastará como evidencia nueva.
 6. La descarga anual de 2025 fue leída localmente y contiene 190.619 `ocid` distintos, coincidentes con el contador de la interfaz. Se midieron 160.930.685 bytes comprimidos y 1.721.952.613 bytes sin comprimir; la lectura por partes tardó 22,092 segundos en la ejecución del líder. Esto demuestra que la vía masiva permite obtener y recorrer este archivo anual en su equipo. El periodo definitivo, la clasificación de entidades, el formato final de la foto y las reglas de negocio siguen pendientes de sus decisiones y fases correspondientes.
 
 ## Estado de los criterios del issue #9
@@ -329,7 +342,10 @@ resuelve este criterio específico, conservándolo abierto.
 | Formas de descarga y enlaces | Documentado: descarga masiva y API |
 | Campos reales separados de supuestos | Documentado: respuesta de búsqueda y estructura anidada de las descargas |
 | Volumen de al menos un año | Medido: ZIP anual 2025, tamaños y 190.619 `ocid` distintos |
-| Cantidad de peticiones y ventana de la API | Parcial: se observó `X-RateLimit-Limit: 60` y respuestas 429; la ventana y el ámbito del contador no están determinados |
-| Documento con evidencia mínima, sin datasets completos | Preparado en esta rama: documento, resúmenes y CSV de cabeceras; ZIP y datos originales ignorados por Git |
+| Cantidad de peticiones y ventana de la API | Documentado: límite anunciado de 60 y cadencia observable cercana a un minuto entre reinicios; el ámbito interno no publicado queda expresamente fuera de la conclusión |
+| Documento con evidencia mínima, sin datasets completos | Documentado: documento, resúmenes y CSV de cabeceras; ZIP y datos originales ignorados por Git |
 
-No se considera satisfecho todavía el criterio completo de límites de la API. Un PR de este avance debe vincularse al issue sin prometer su cierre; la descarga masiva comprobada permite continuar el reconocimiento sin hacer depender todo el proyecto de resolver esa cuota.
+Los cinco criterios de aceptación tienen evidencia. El cierre de #9 no afirma
+una política contractual ni un contador exclusivo: registra el comportamiento
+externo observado y sus límites. El issue se cierra al integrar el PR que
+contenga esta actualización.

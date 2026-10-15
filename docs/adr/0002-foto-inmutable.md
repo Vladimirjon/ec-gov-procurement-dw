@@ -41,9 +41,9 @@ regenerarse desde ella.
 
 | Tema | Estado | Quién lo resuelve |
 |---|---|---|
-| Periodo de la foto (uno o más años) | **[PENDIENTE]** tras medir el volumen por año | Líder |
+| Periodo de la foto (uno o más años) | **[PENDIENTE]** en #15. La indicación docente es analizar cinco años o comparar por gobiernos; como la fuente no expone un campo de gobierno, el candidato inicial es `2021–2025`, cinco años calendario completos, sujeto a medir sus volúmenes | Líder |
 | Cómo se obtiene: descarga masiva por año o extracción por API | Descarga masiva JSON anual comprobada en el reconocimiento; decisión final **[PENDIENTE]** | Rol 1 (fuente y foto) |
-| Límite de peticiones de la API | Observado `X-RateLimit-Limit: 60`; ventana y ámbito del contador **[PENDIENTE]**. Evidencia en `docs/sources/reconocimiento.md` | Rol 1 |
+| Límite de peticiones de la API | Observado `X-RateLimit-Limit: 60` y una cadencia aproximada de un minuto entre dos reinicios anunciados consecutivos. El ámbito del contador no está publicado y no se asume exclusivo del cliente. Evidencia en `docs/sources/reconocimiento.md` | Rol 1 |
 | Formato de almacenamiento: Parquet o JSON | **[PENDIENTE]** | Líder |
 | Contenido del manifiesto, algoritmo de checksum y ubicación en el repo | **[PENDIENTE]** | Líder |
 | Tamaño de la partición incremental (la propuesta da "mes a mes" como ejemplo) | **[PENDIENTE]** | Equipo |

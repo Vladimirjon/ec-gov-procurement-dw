@@ -77,15 +77,18 @@ descarga y API, campos reales y la lectura del ZIP anual de 2025: **190.619
 `ocid` distintos**, coincidentes con el contador del portal; 160.930.685 bytes
 comprimidos y 1.721.952.613 bytes sin comprimir.
 
-**[PENDIENTE]** La ventana y el ámbito de la cuota de la API, la clasificación
-de entidades y las decisiones de periodo/formato de la foto. Los conteos son
-nacionales; no representan todavía el subconjunto de la planta central.
+La API anuncia un límite de 60 y las observaciones muestran reinicios con una
+cadencia cercana a un minuto, pero el ámbito del contador no está publicado y
+no se comportó como una cuota exclusiva del cliente. Siguen pendientes la
+clasificación de entidades y las decisiones de periodo/formato de la foto. Los
+conteos son nacionales; no representan todavía el subconjunto de la planta
+central.
 
 ### Dónde estamos y qué le toca al líder
 
 - [Issue #9: reconocimiento de la fuente](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9):
-  evidencia preparada en esta rama; falta resolver el criterio completo de
-  cuota y publicar/revisar los cambios. Estado detallado en
+  sus cinco criterios tienen evidencia preparada; el cierre queda sujeto a la
+  revisión e integración del cambio. Estado detallado en
   [reconocimiento.md](docs/sources/reconocimiento.md#estado-de-los-criterios-del-issue-9).
 - [Issue #14: integrar y entregar E0](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/14):
   integrar el contenido de Jorge (#10), la plantilla de Francis (#13) y los
@@ -93,6 +96,10 @@ nacionales; no representan todavía el subconjunto de la planta central.
   [ruta del líder en fase 0](docs/PLAN.md#ruta-del-líder-en-la-fase-0).
 - El periodo definitivo de la foto pertenece al
   [issue #15, fase 1](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/15).
+  La indicación docente es analizar cinco años o comparar por gobiernos. Como
+  SERCOP no expone un campo de gobierno o administración, #15 evaluará el
+  periodo por fechas; `2021–2025` es el candidato inicial por ser cinco años
+  calendario completos, no una decisión aprobada todavía.
   La toma formal de la foto con manifiesto pertenece al inicio de la fase 2;
   las descargas de reconocimiento no sustituyen esas decisiones.
 
