@@ -150,13 +150,13 @@ se revisan en su issue antes de darla por terminada.
 | Orden | Tarea | Qué debe completar el líder |
 |---|---|---|
 | 1 | [#9 · Reconocer la fuente](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9) | Completado: se cerró el 15/10/2026 con el [PR #24](https://github.com/Vladimirjon/ec-gov-procurement-dw/pull/24). Los cinco criterios tienen evidencia, limitada al comportamiento externo observado de la cuota; la política interna y el ámbito del contador no se presentan como confirmados por SERCOP. |
-| 2 | Coordinar las entradas para E0 | #10 (contextualización) y #11/PR #21 (resumen OCDS) ya están integrados. Revisar la propuesta de entidades de #12 y la plantilla/glosario de #13 cuando estén disponibles, y usar los hallazgos comprobados de #9 para orientar las preguntas de negocio. |
+| 2 | Coordinar las entradas para E0 | #10 (contextualización), #11/PR #21 (resumen OCDS) y #12/PR #26 (fuentes de entidades) ya están integrados. Revisar la plantilla/glosario de #13 cuando esté disponible, y usar los hallazgos comprobados de #9 para orientar las preguntas de negocio. |
 | 3 | [#14 · Integrar y entregar E0](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/14) | Armar el PDF de 1–2 páginas con los cuatro puntos, título y encabezado del curso; comprobar nombre, guardarlo en `deliverables/fase0/` por PR y subirlo al curso. Fecha interna 17 oct. |
-| Transversal | Revisión y decisiones del equipo | Revisar los PR según el plazo de 48 horas. Evaluar la propuesta de entidades de Ismael en [#12](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/12). Conservar las decisiones de arquitectura pendientes hasta su aprobación explícita. |
+| Transversal | Revisión y decisiones del equipo | Revisar los PR según el plazo de 48 horas. La propuesta de entidades de Ismael ([#12](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/12)) se integró con el PR #26. Conservar las decisiones de arquitectura pendientes hasta su aprobación explícita. |
 
-**Estado consultado el 15/10/2026:** #10 y #11 están cerrados; sus cambios se
+**Estado consultado el 16/10/2026:** #10 y #11 están cerrados; sus cambios se
 integraron en `main` mediante los PR #23 y #21, respectivamente. #9 se cerró
-con el PR #24. #12, #13 y #14 siguen abiertos. No hay todavía un PDF E0 final
+con el PR #24 y #12 con el PR #26 (16/10/2026). #13 y #14 siguen abiertos. No hay todavía un PDF E0 final
 ni evidencia de su subida al curso.
 Esto no sustituye la consulta del trabajo que los compañeros tengan en sus
 ramas o PR.
