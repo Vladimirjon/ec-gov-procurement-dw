@@ -1,12 +1,8 @@
 # Glosario del proyecto
 
-- **Estado:** borrador para revisión del líder. Responde al
-  [issue #13](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/13).
-- **Fecha:** 2026-10-17
-
-Define los términos que usa todo el equipo en las entregas, los ADR y el
-código. Cada término lleva su **fuente**, para que nadie tenga que fiarse de
-una definición sin respaldo.
+Define los términos comunes de las entregas, los ADR y el código del proyecto.
+Cada definición indica su fuente y distingue entre conceptos generales,
+decisiones del proyecto y resultados del reconocimiento de datos.
 
 ## Cómo leerlo
 
@@ -17,8 +13,8 @@ una definición sin respaldo.
 - Cada definición separa lo que **define el estándar o la teoría** de lo que
   **decidió o midió el proyecto**. Lo medido es evidencia de reconocimiento
   (descargas de 2025), nacional y no la foto definitiva.
-- Lo marcado como **[PENDIENTE]** no es una decisión; depende del líder o de
-  una verificación posterior. Se conserva igual que en el documento de origen.
+- **[PENDIENTE]** identifica una decisión o verificación que todavía no se ha
+  cerrado en su documento de origen.
 - Las fuentes con ruta (`docs/...`) son documentos de este repositorio. Las
   referencias externas se listan en [Referencias](#referencias).
 
@@ -84,9 +80,8 @@ una definición sin respaldo.
 
 ## Referencias
 
-Las verificaciones de este glosario se hicieron contra los documentos del
-repositorio. Los enlaces y capítulos externos siguientes no se pudieron abrir
-desde el entorno de redacción; conviene comprobarlos antes de fusionar.
+Las definiciones específicas del proyecto se apoyan en los documentos del
+repositorio. Para los conceptos generales se usaron las siguientes referencias:
 
 - Kimball, R. y Ross, M. (2013). *The Data Warehouse Toolkit: The Definitive
   Guide to Dimensional Modeling* (3.ª ed.). Wiley. Los capítulos citados
