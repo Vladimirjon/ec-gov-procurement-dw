@@ -129,6 +129,7 @@ Detalle: [propuesta de arquitectura](docs/PROPUESTA.md),
 ├─ docs/
 │  ├─ PLAN.md                 # plan de trabajo, tareas y rotación
 │  ├─ PROPUESTA.md            # propuesta de arquitectura
+│  ├─ glosario.md             # términos del proyecto, cada uno con su fuente
 │  ├─ adr/                    # decisiones de arquitectura
 │  ├─ requirements/           # semana 1
 │  ├─ design/                 # semana 2
