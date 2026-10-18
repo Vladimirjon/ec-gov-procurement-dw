@@ -27,17 +27,21 @@ diseño propuesto, no funcionalidad implementada.
 La contratación pública de la planta central se publica como datos abiertos,
 pero analizarla exige integrar procesos, entidades compradoras y proveedores en
 un modelo orientado al análisis, y saber qué tan confiables son esos datos.
-El proyecto busca responder preguntas como:
+El proyecto busca responder preguntas como las del entregable E0
+([contextualización](docs/requirements/contextualizacion.md)):
 
-- ¿Cuánto contrata cada entidad, por año y por método de contratación?
-- ¿Cuántos procesos hay por método de contratación?
-- ¿Qué porcentaje de procesos no tiene proveedor o presupuesto registrado?
-- ¿Cuánto se desvía el monto contratado del presupuesto?
-- ¿Qué tan concentrados están los proveedores por entidad?
-- ¿Qué tan completos y consistentes son los datos de cada entidad?
+- ¿Cuántos procesos corresponden a cada entidad compradora incluida?
+- ¿Cómo se distribuyen según el método de contratación registrado?
+- ¿Cómo evoluciona el número de procesos entre periodos comparables?
+- ¿Cómo se distribuye el valor adjudicado entre entidades y métodos?
+- ¿En qué procesos difiere el valor adjudicado del estimado de la licitación?
+- ¿Con qué frecuencia faltan datos utilizables sobre el método, la fecha o el
+  importe?
 
 **[PENDIENTE]** Los indicadores definitivos los confirma el equipo en la
-etapa de requerimientos.
+etapa de requerimientos. Los indicadores de la sección 5 de la
+[propuesta](docs/PROPUESTA.md) (proveedores, desviación contra presupuesto,
+completitud) siguen siendo candidatos hasta verificar qué datos trae la fuente.
 
 ## Alcance
 
