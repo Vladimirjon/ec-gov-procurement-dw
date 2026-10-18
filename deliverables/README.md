@@ -50,7 +50,16 @@ sufijo es el que pide el curso para cada entrega:
 | Presentación | `.Pre.PDF` |
 | Documento final | `.PDW.PDF` |
 
-**[PENDIENTE]** Número de equipo y orden de los apellidos.
+**Orden de los apellidos (decidido el 17/10/2026):** alfabético por apellido,
+es decir `Bravo.Freire.Guajan.Pasquel.Torres`. En «Nombres» se escribe nombre y
+apellido en el mismo orden, separados por comas y con «y» antes del último.
+La fecha del encabezado va como `dd/mm/aa`, porque la fecha de entrega puede
+cambiar.
+
+**[PENDIENTE]** Número de equipo.
+
+En `fase0/` se conserva, además del PDF final, el Word editable desde el que
+se exporta.
 
 ## Reglas
 
