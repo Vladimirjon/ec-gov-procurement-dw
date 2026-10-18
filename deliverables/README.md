@@ -8,7 +8,7 @@ curso. El contenido se escribe y revisa antes en `docs/` (ver
 
 ```
 deliverables/
-├─ plantilla/       # documento base con el encabezado del curso
+├─ plantilla/       # plantilla-entregable.docx: documento base con el encabezado del curso
 ├─ fase0/
 ├─ fase1/
 ├─ fase2/
