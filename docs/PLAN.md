@@ -156,9 +156,10 @@ se revisan en su issue antes de darla por terminada.
 
 **Estado consultado el 17/10/2026:** #9, #10, #11, #12 y #13 están cerrados;
 sus cambios se integraron en `main` mediante los PR #24, #23, #21, #26 y #30,
-respectivamente. #14 sigue abierto: el Word editable de E0 está en
-`deliverables/fase0/` por PR, pero el PDF final aún no existe (lo exporta el
-líder desde ese Word) ni hay evidencia de su subida al curso.
+respectivamente. #14 y #32 se cerraron el 17/10/2026 con los PR #31 y #33. El
+Word editable de E0 está en `deliverables/fase0/`; el PDF final no existe
+todavía: el líder lo exporta desde ese Word después de presentarlo al docente y
+lo agrega por PR, y su subida al curso queda **[PENDIENTE]** del líder.
 Esto no sustituye la consulta del trabajo que los compañeros tengan en sus
 ramas o PR.
 
