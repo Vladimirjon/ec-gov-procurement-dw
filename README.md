@@ -170,7 +170,7 @@ Entrega por etapas HEFESTO; cierre del proyecto el **22 de enero de 2027**.
 
 | Etapa | Ventana |
 |---|---|
-| Preparación | 6 a 19 oct |
+| Preparación | 10 a 19 oct |
 | 1. Requerimientos | 20 oct a 2 nov |
 | 2. Diseño conceptual y lógico | 3 a 23 nov |
 | 3. Diseño físico y ETL | 24 nov a 14 dic |
