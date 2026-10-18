@@ -35,8 +35,10 @@ afiliado ni respaldado por SERCOP ni por ninguna entidad.
 - Procesos de contratación de la planta central: Presidencia de la
   República, ministerios e institutos que dependen de los ministerios,
   sobre una foto fija de uno o más años.
-- Modelo dimensional (constelación de hechos), ETL, carga batch e
-  incremental, pruebas, bitácora de cargas.
+- Modelo dimensional (un hecho y de 4 a 5 dimensiones en las entregas, según
+  el [ADR 0004](adr/0004-alcance-del-modelo.md); la constelación de la
+  sección 5 es la visión ampliada), ETL, carga batch e incremental, pruebas,
+  bitácora de cargas.
 - Indicadores de negocio y de calidad de datos.
 - Tres tableros en Power BI conectados al DW.
 

@@ -47,7 +47,8 @@ etapa de requerimientos.
   República**, **ministerios** e **institutos que dependen de los
   ministerios**, sobre una foto fija de uno o más años.
 - Toda la planta central, no una muestra de entidades.
-- Modelo dimensional (constelación de hechos), ETL, carga batch e
+- Modelo dimensional (un hecho y de 4 a 5 dimensiones en las entregas, según
+  el [ADR 0004](docs/adr/0004-alcance-del-modelo.md)), ETL, carga batch e
   incremental, pruebas y bitácora de cargas.
 - Indicadores de negocio y de calidad de datos.
 - Tres tableros en Power BI conectados al DW.
