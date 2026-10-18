@@ -1,70 +1,132 @@
-# E0 · Contextualización del caso de estudio
+# E0 · Contextualización de negocio y definición del caso de estudio
 
-**Título:** Contratación pública de la planta central del Estado ecuatoriano · **Responsable del borrador:** Jorge Torres · **Fecha:** 14 de octubre de 2026
+**Título:** Contextualización de negocio y definición del caso de estudio ·
+**Borrador original:** Jorge Torres, 14 de octubre de 2026 · **Integración
+para la entrega (#14):** 17 de octubre de 2026
 
-## Nombre y giro de la unidad de estudio
+Este documento es la fuente en Markdown del entregable E0. El Word que se
+exporta a PDF está en
+[`deliverables/fase0/`](../../deliverables/fase0/Bravo.Freire.Guajan.Pasquel.Torres.E1.docx)
+y reproduce este texto con formato APA 7. Si cambia uno, se cambia el otro.
 
-La unidad de estudio es la **planta central del Estado ecuatoriano en su papel
-de comprador público**: Presidencia de la República, ministerios e institutos
-que dependen de los ministerios. Se busca cubrir todas las entidades que
-cumplan esa definición, no una muestra. Los gobiernos autónomos
-descentralizados (GAD), sus empresas y las demás entidades fuera de la planta
-central quedan excluidos. El proyecto es académico e independiente de SERCOP
-y de las entidades estudiadas. Esta delimitación procede de la
+## Nombre y giro de la empresa
+
+La unidad de estudio es la planta central del Estado ecuatoriano: la
+Presidencia de la República, los ministerios y los institutos que dependen de
+ellos. Se la analiza en su función de compradora pública, de modo que el giro
+relevante es la contratación pública: los procesos de compra que estas
+entidades realizan y que el Servicio Nacional de Contratación Pública
+(SERCOP) difunde como datos abiertos. El caso corresponde al sector Gobierno
+y Ministerio y cubre todas las entidades que cumplen esa definición, no una
+muestra. Quedan excluidos los gobiernos autónomos descentralizados (GAD), sus
+empresas y cualquier entidad ajena a la planta central. Los casos dudosos,
+como los institutos con régimen propio, se resolverán con criterios de
+inclusión documentados. El trabajo es académico e independiente de SERCOP y de
+las entidades estudiadas. La delimitación procede de la
 [propuesta del equipo](../PROPUESTA.md#1-contexto-y-objetivo) y del
 [ADR 0001](../adr/0001-alcance.md).
 
-## Área de análisis
+## Área de análisis a desarrollar
 
-El caso se centra en los **procesos de contratación pública** de esas
-entidades. La fuente prevista es el portal de datos abiertos de contratación
-pública de SERCOP, que publica datos en formato OCDS. El
+El área de análisis es la contratación pública, con el proceso de contratación
+como unidad de observación. Cada proceso se examina según su entidad
+compradora, su método de contratación, sus fechas y sus importes
+presupuestado, estimado, adjudicado y contractual. La fuente es el portal de
+datos abiertos de SERCOP (s. f.-a), que según su nota metodológica integra el
+Sistema Oficial de Contratación Pública y los módulos de compras corporativas
+de salud y de alimentación escolar, los transforma al Estándar de Datos de
+Contrataciones Abiertas (OCDS, por sus siglas en inglés) 1.1 y actualiza a
+diario las descargas masivas. OCDS organiza cada proceso en planificación,
+licitación, adjudicación y contrato, y distingue la entidad compradora
+(*buyer*) de la unidad que gestiona el proceso (*procuringEntity*; Open
+Contracting Partnership, s. f.). El análisis se hará sobre una captura fija
+(*snapshot*) de varios años. El periodo se decidirá en la fase de
+requerimientos (issue #15); el candidato inicial es 2021–2025, cinco años
+calendario completos. El
 [reconocimiento de la fuente](../sources/reconocimiento.md#campos-evidencia-y-límites-de-lo-observado)
-distingue la respuesta resumida de búsqueda de las descargas JSON anidadas;
-no se presume que sus propiedades sean equivalentes. El periodo de la foto
-definitiva todavía no está decidido.
+distingue la respuesta resumida de búsqueda de las descargas JSON anidadas y
+no presume que sus propiedades sean equivalentes.
 
-## Problema o necesidad
+## Problema o necesidad del negocio
 
-El portal abarca entidades de todo el país, incluidas algunas fuera del caso
-de estudio. Para analizar únicamente la planta central se necesita identificar
-y justificar qué compradores pertenecen a ella; esa clasificación aún no
-tiene fuente oficial ni criterios de inclusión aprobados. Además, la
-[inspección de las descargas](../sources/reconocimiento.md#inspección-del-zip-anual-json)
-muestra información anidada y procesos con varias adjudicaciones o contratos.
-Los valores presupuestados, estimados, adjudicados y contractuales representan
-conceptos distintos; no se pueden intercambiar para completar ausencias.
-En la descarga anual de reconocimiento de 2025 se contaron 190.619 `ocid`
-distintos y 300 releases con varias adjudicaciones. Esos conteos son
-**nacionales**, no del subconjunto de la planta central.
+Los datos de contratación son públicos, pero no permiten analizar la planta
+central sin un tratamiento previo. El reconocimiento de las descargas de 2025
+(SERCOP, s. f.-b) mostró cuatro brechas. La primera es de alcance: el portal
+reúne compradores de todo el país, por ejemplo una junta parroquial, y no
+indica cuáles integran la planta central. Los directorios oficiales abiertos
+revisados tampoco registran de qué ministerio depende cada instituto, y varias
+carteras se fusionaron recientemente, de modo que la pertenencia cambia en el
+tiempo. Delimitarla exige una clasificación de entidades basada en una fuente
+oficial y en criterios de inclusión que aún no están aprobados
+([entidades.md](../sources/entidades.md)). La segunda es de identificación: en
+la descarga de enero de 2025 (2.186 procesos) hubo 372 identificadores de
+comprador distintos, solo 185 con la forma simple de RUC más 13 dígitos, y
+nombres asociados a más de un identificador, por lo que el nombre no sirve
+como llave de cruce ([ADR 0001](../adr/0001-alcance.md), decisión 7).
 
-La necesidad es disponer de una base analítica con alcance institucional
-explícito y reglas verificables para comparar procesos, modalidades e importes
-sin duplicar procesos ni ocultar datos faltantes. El Data Warehouse es la
-solución prevista por el equipo; todavía no está implementado. La descarga
-de reconocimiento tampoco constituye la foto definitiva.
+La tercera es de granularidad: la descarga anual contiene 190.619 procesos
+distintos, de los cuales 300 tienen varias adjudicaciones y 270 varios
+contratos, por lo que contar objetos en lugar de procesos genera duplicados.
+La cuarta es de comparabilidad: los importes presupuestado, estimado,
+adjudicado y contractual son magnitudes distintas que no se sustituyen entre
+sí, y su cobertura es desigual, pues 27.666 de 180.465 contratos (15,33 %)
+registran un importe numérico, frente a 183.887 de 183.891 adjudicaciones. Sin
+resolver estas brechas, una consulta directa cuenta dos veces un proceso,
+mezcla importes de distinto significado o incluye compradores ajenos al caso.
+Los conteos son nacionales y provienen de descargas de reconocimiento;
+todavía no corresponden a la planta central. Las cifras y su método están en
+la [inspección del ZIP anual](../sources/reconocimiento.md#inspección-del-zip-anual-json).
 
-## Preguntas clave para el futuro Data Warehouse
+La necesidad es contar con una base analítica de alcance institucional
+explícito y reglas verificables para deduplicar procesos y tratar los datos
+ausentes, que permita comparar procesos, métodos de contratación e importes
+sin repetir en cada consulta la delimitación institucional ni la depuración,
+con resultados reproducibles. Se propone un Data Warehouse dimensional,
+construido con la metodología HEFESTO (Bernabeu, 2009) y el modelado de
+Kimball y Ross (2013), que aún no ha sido implementado.
 
-1. ¿Cuántos procesos corresponden a cada entidad compradora incluida y cómo
-   se distribuyen entre Presidencia, ministerios e institutos dependientes?
+## Preguntas clave que busca responder
+
+1. ¿Cuántos procesos de contratación corresponden a cada entidad compradora
+   incluida y cómo se distribuyen entre la Presidencia, los ministerios y los
+   institutos dependientes?
 2. ¿Cómo se distribuyen los procesos de cada entidad según el método de
    contratación registrado?
-3. ¿Cómo varía la cantidad de procesos entre periodos comparables dentro de
-   la foto que se seleccione?
-4. ¿Cómo se distribuye el valor de las adjudicaciones registradas entre
-   entidades y métodos de contratación?
+3. ¿Cómo evoluciona el número de procesos entre periodos comparables dentro de
+   la captura seleccionada?
+4. ¿Cómo se distribuye el valor adjudicado entre entidades y métodos de
+   contratación?
 5. ¿En qué procesos difiere el valor adjudicado del valor estimado de la
    licitación, cuando ambos son comparables?
-6. Entre los procesos atribuibles a entidades incluidas, ¿con qué frecuencia
-   faltan datos utilizables sobre el método o la fecha y, cuando se confirme
-   una adjudicación, sobre su importe?
+6. ¿Con qué frecuencia faltan datos utilizables (método, fecha o, cuando
+   existe adjudicación, importe) en los procesos de las entidades incluidas?
 
-Estas preguntas orientan los requerimientos posteriores; no establecen
-indicadores ni fórmulas. Para responderlas se debe validar la clasificación de
-entidades y la utilidad de `buyer.id` y `buyer.name`; decidir el periodo y la
-fecha de negocio; comprobar la cobertura de `tender.procurementMethod`; y
-definir cómo tratar adjudicaciones múltiples, monedas y estados antes de
-comparar importes o calificar su ausencia como incompletitud. Las rutas de
-importes observadas se documentan en la
+Responderlas exige validar la clasificación de entidades y el uso del
+identificador del comprador, fijar el periodo y la fecha de análisis,
+comprobar la cobertura del método de contratación y definir el tratamiento de
+adjudicaciones múltiples, monedas y estados. Los indicadores y sus fórmulas se
+definirán en la fase de requerimientos. Las rutas de importes observadas se
+documentan en la
 [inspección mensual](../sources/reconocimiento.md#inspección-local-de-la-descarga-mensual-json).
+
+## Referencias
+
+Bernabeu, R. D. (2009). *Data warehousing: Investigación y sistematización de
+conceptos. HEFESTO: Metodología propia para la construcción de un data
+warehouse* (versión 1.0).
+<https://www.dataprix.com/files/DWH_Metodologia_HEFESTO-V1.0.pdf>
+
+Kimball, R., y Ross, M. (2013). *The data warehouse toolkit: The definitive
+guide to dimensional modeling* (3.ª ed.). Wiley.
+
+Open Contracting Partnership. (s. f.). *Estándar de Datos de Contrataciones
+Abiertas* (versión 1.1.5). <https://standard.open-contracting.org/latest/es/>
+
+Servicio Nacional de Contratación Pública. (s. f.-a). *Notas metodológicas*
+[Portal de datos abiertos]. Recuperado el 11 de octubre de 2026, de
+<https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/notas-metodologicas>
+
+Servicio Nacional de Contratación Pública. (s. f.-b). *Descarga masiva de
+datos abiertos: Año 2025 (descargas anual y de enero)* [Conjunto de datos].
+Recuperado el 11 de octubre de 2026, de
+<https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/>
