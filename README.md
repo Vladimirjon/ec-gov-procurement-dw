@@ -96,10 +96,10 @@ central.
   Estado detallado en
   [reconocimiento.md](docs/sources/reconocimiento.md#estado-de-los-criterios-del-issue-9).
 - [Issue #14: integrar y entregar E0](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/14):
-  el contenido de Jorge (#10), la plantilla de Francis (#13) y los hallazgos de
-  la fuente ya están integrados en el Word de E0 (PR #31). Faltan el número de
-  equipo, exportar el PDF, guardarlo en `deliverables/fase0/` y subirlo al
-  curso; fecha interna **17 de octubre**. Ver la
+  cerrado el 17/10/2026. El contenido de Jorge (#10), la plantilla de Francis
+  (#13) y los hallazgos de la fuente están integrados en el Word de E0
+  (PR #31). Siguen **[PENDIENTE]** del líder el número de equipo, exportar el
+  PDF, guardarlo en `deliverables/fase0/` y subirlo al curso. Ver la
   [ruta del líder en fase 0](docs/PLAN.md#ruta-del-líder-en-la-fase-0).
 - El periodo definitivo de la foto pertenece al
   [issue #15, fase 1](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/15).

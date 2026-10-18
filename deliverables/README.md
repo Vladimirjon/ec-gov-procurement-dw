@@ -94,8 +94,8 @@ cinco figuran en «Nombres» y en el nombre del archivo.
 **[PENDIENTE]** Número de equipo, y si la composición de 5 se mantiene en los
 entregables o se declara de otra forma. Lo decide el líder.
 
-En `fase0/` se conserva, además del PDF final, el Word editable desde el que
-se exporta.
+En `fase0/` está el Word editable de E0, desde el que se exporta. El PDF final
+se agrega por PR cuando el líder lo integre **[PENDIENTE]**.
 
 ## Reglas
 
