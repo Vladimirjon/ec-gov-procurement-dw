@@ -56,7 +56,12 @@ apellido en el mismo orden, separados por comas y con «y» antes del último.
 La fecha del encabezado va como `dd/mm/aa`, porque la fecha de entrega puede
 cambiar.
 
-**[PENDIENTE]** Número de equipo.
+**Tamaño del equipo:** el enunciado de los entregables pide equipos de 3
+integrantes y el equipo es de 5 ([PLAN.md](../docs/PLAN.md#4-equipo)). Los
+cinco figuran en «Nombres» y en el nombre del archivo.
+
+**[PENDIENTE]** Número de equipo, y si la composición de 5 se mantiene en los
+entregables o se declara de otra forma. Lo decide el líder.
 
 En `fase0/` se conserva, además del PDF final, el Word editable desde el que
 se exporta.
