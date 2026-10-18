@@ -27,17 +27,21 @@ diseño propuesto, no funcionalidad implementada.
 La contratación pública de la planta central se publica como datos abiertos,
 pero analizarla exige integrar procesos, entidades compradoras y proveedores en
 un modelo orientado al análisis, y saber qué tan confiables son esos datos.
-El proyecto busca responder preguntas como:
+El proyecto busca responder preguntas como las del entregable E0
+([contextualización](docs/requirements/contextualizacion.md)):
 
-- ¿Cuánto contrata cada entidad, por año y por método de contratación?
-- ¿Cuántos procesos hay por método de contratación?
-- ¿Qué porcentaje de procesos no tiene proveedor o presupuesto registrado?
-- ¿Cuánto se desvía el monto contratado del presupuesto?
-- ¿Qué tan concentrados están los proveedores por entidad?
-- ¿Qué tan completos y consistentes son los datos de cada entidad?
+- ¿Cuántos procesos corresponden a cada entidad compradora incluida?
+- ¿Cómo se distribuyen según el método de contratación registrado?
+- ¿Cómo evoluciona el número de procesos entre periodos comparables?
+- ¿Cómo se distribuye el valor adjudicado entre entidades y métodos?
+- ¿En qué procesos difiere el valor adjudicado del estimado de la licitación?
+- ¿Con qué frecuencia faltan datos utilizables sobre el método, la fecha o el
+  importe?
 
 **[PENDIENTE]** Los indicadores definitivos los confirma el equipo en la
-etapa de requerimientos.
+etapa de requerimientos. Los indicadores de la sección 5 de la
+[propuesta](docs/PROPUESTA.md) (proveedores, desviación contra presupuesto,
+completitud) siguen siendo candidatos hasta verificar qué datos trae la fuente.
 
 ## Alcance
 
@@ -47,7 +51,8 @@ etapa de requerimientos.
   República**, **ministerios** e **institutos que dependen de los
   ministerios**, sobre una foto fija de uno o más años.
 - Toda la planta central, no una muestra de entidades.
-- Modelo dimensional (constelación de hechos), ETL, carga batch e
+- Modelo dimensional (un hecho y de 4 a 5 dimensiones en las entregas, según
+  el [ADR 0004](docs/adr/0004-alcance-del-modelo.md)), ETL, carga batch e
   incremental, pruebas y bitácora de cargas.
 - Indicadores de negocio y de calidad de datos.
 - Tres tableros en Power BI conectados al DW.
@@ -91,8 +96,10 @@ central.
   Estado detallado en
   [reconocimiento.md](docs/sources/reconocimiento.md#estado-de-los-criterios-del-issue-9).
 - [Issue #14: integrar y entregar E0](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/14):
-  integrar el contenido de Jorge (#10), la plantilla de Francis (#13) y los
-  hallazgos de la fuente; fecha interna **17 de octubre**. Ver la
+  el contenido de Jorge (#10), la plantilla de Francis (#13) y los hallazgos de
+  la fuente ya están integrados en el Word de E0 (PR #31). Faltan el número de
+  equipo, exportar el PDF, guardarlo en `deliverables/fase0/` y subirlo al
+  curso; fecha interna **17 de octubre**. Ver la
   [ruta del líder en fase 0](docs/PLAN.md#ruta-del-líder-en-la-fase-0).
 - El periodo definitivo de la foto pertenece al
   [issue #15, fase 1](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/15).
@@ -169,7 +176,7 @@ Entrega por etapas HEFESTO; cierre del proyecto el **22 de enero de 2027**.
 
 | Etapa | Ventana |
 |---|---|
-| Preparación | 6 a 19 oct |
+| Preparación | 10 a 19 oct |
 | 1. Requerimientos | 20 oct a 2 nov |
 | 2. Diseño conceptual y lógico | 3 a 23 nov |
 | 3. Diseño físico y ETL | 24 nov a 14 dic |

@@ -150,14 +150,15 @@ se revisan en su issue antes de darla por terminada.
 | Orden | Tarea | Qué debe completar el líder |
 |---|---|---|
 | 1 | [#9 · Reconocer la fuente](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9) | Completado: se cerró el 15/10/2026 con el [PR #24](https://github.com/Vladimirjon/ec-gov-procurement-dw/pull/24). Los cinco criterios tienen evidencia, limitada al comportamiento externo observado de la cuota; la política interna y el ámbito del contador no se presentan como confirmados por SERCOP. |
-| 2 | Coordinar las entradas para E0 | #10 (contextualización), #11/PR #21 (resumen OCDS) y #12/PR #26 (fuentes de entidades) ya están integrados. Revisar la plantilla/glosario de #13 cuando esté disponible, y usar los hallazgos comprobados de #9 para orientar las preguntas de negocio. |
+| 2 | Coordinar las entradas para E0 | #10 (contextualización), #11/PR #21 (resumen OCDS), #12/PR #26 (fuentes de entidades) y #13/PR #30 (plantilla y glosario) ya están integrados. Los hallazgos comprobados de #9 orientan el problema y las preguntas de negocio. |
 | 3 | [#14 · Integrar y entregar E0](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/14) | Armar el PDF de 1–2 páginas con los cuatro puntos, título y encabezado del curso; comprobar nombre, guardarlo en `deliverables/fase0/` por PR y subirlo al curso. Fecha interna 17 oct. |
 | Transversal | Revisión y decisiones del equipo | Revisar los PR según el plazo de 48 horas. La propuesta de entidades de Ismael ([#12](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/12)) se integró con el PR #26. Conservar las decisiones de arquitectura pendientes hasta su aprobación explícita. |
 
-**Estado consultado el 16/10/2026:** #10 y #11 están cerrados; sus cambios se
-integraron en `main` mediante los PR #23 y #21, respectivamente. #9 se cerró
-con el PR #24 y #12 con el PR #26 (16/10/2026). #13 y #14 siguen abiertos. No hay todavía un PDF E0 final
-ni evidencia de su subida al curso.
+**Estado consultado el 17/10/2026:** #9, #10, #11, #12 y #13 están cerrados;
+sus cambios se integraron en `main` mediante los PR #24, #23, #21, #26 y #30,
+respectivamente. #14 sigue abierto: el Word editable de E0 está en
+`deliverables/fase0/` por PR, pero el PDF final aún no existe (lo exporta el
+líder desde ese Word) ni hay evidencia de su subida al curso.
 Esto no sustituye la consulta del trabajo que los compañeros tengan en sus
 ramas o PR.
 
@@ -199,7 +200,8 @@ de Diseño Inicial). Las secciones se escriben en `docs/requirements/`.
   - qué dimensión cambia en el tiempo (SCD);
   - fuentes y sus limitaciones;
   - tres preguntas de negocio que el modelo debe responder.
-- Respetar el ADR 0004: 1 hecho + 4–5 dimensiones.
+- Respetar el ADR 0004: 1 hecho y la previsión de 4–5 dimensiones. El curso
+  admite de 3 a 5; el número definitivo se confirma en esta tarea.
 - *Terminado cuando:* cada sección de la plantilla está completa y es
   coherente con los KPIs de Jorge.
 

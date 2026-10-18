@@ -26,6 +26,12 @@ la bitácora de cargas.
 
 1. **Estrella principal (entregas de las fases 1 a 3):** un solo hecho y
    entre 4 y 5 dimensiones.
+   - Origen del rango: el curso admite de 3 a 5 (ver Contexto). El «4 a 5» es
+     la previsión del equipo, no una exigencia del curso: son las cuatro
+     dimensiones de la lista de abajo y una quinta, `dim_supplier`, solo si
+     es viable. El formulario de la Guía de Diseño Inicial (F1-E2) trae cuatro
+     filas de dimensiones, ampliables. El rango definitivo está pendiente (ver
+     la tabla).
    - Hecho: `fact_contract_process`. Grano previsto: un proceso de
      contratación (`ocid`) por foto. `ocid` va como dimensión degenerada.
    - Dimensiones: `dim_date`, `dim_entity` (SCD tipo 2), `dim_method`,
@@ -47,6 +53,7 @@ la bitácora de cargas.
 
 | Tema | Estado | Quién lo resuelve |
 |---|---|---|
+| Número definitivo de dimensiones (el curso admite 3 a 5; la previsión es 4 a 5) | **[PENDIENTE]** a más tardar en la Guía de Diseño Inicial (F1-E2, fecha interna 30 de octubre). No hace falta decidirlo en la fase 0 | Responsable de Modelado, con el líder |
 | Grano definitivo del hecho | **[PENDIENTE]** tras el perfilado (fase 2) | Responsable de Modelado |
 | Si `dim_supplier` entra en la estrella o se aplaza | **[PENDIENTE]** al observar `suppliers` | Responsable de Modelado, con el líder |
 | Medidas definitivas del hecho | **[PENDIENTE]** fase 1, Guía de Diseño Inicial | Responsable de Modelado |

@@ -35,8 +35,10 @@ afiliado ni respaldado por SERCOP ni por ninguna entidad.
 - Procesos de contratación de la planta central: Presidencia de la
   República, ministerios e institutos que dependen de los ministerios,
   sobre una foto fija de uno o más años.
-- Modelo dimensional (constelación de hechos), ETL, carga batch e
-  incremental, pruebas, bitácora de cargas.
+- Modelo dimensional (un hecho y de 4 a 5 dimensiones en las entregas, según
+  el [ADR 0004](adr/0004-alcance-del-modelo.md); la constelación de la
+  sección 5 es la visión ampliada), ETL, carga batch e incremental, pruebas,
+  bitácora de cargas.
 - Indicadores de negocio y de calidad de datos.
 - Tres tableros en Power BI conectados al DW.
 
@@ -259,7 +261,7 @@ documentación.
 
 | Etapa HEFESTO | Entregables del curso | Ubicación | Ventana tentativa |
 |---|---|---|---|
-| Preparación | Repo, CI, reconocimiento de la fuente, decisión de la foto | raíz, `docs/sources` | 6 a 19 oct |
+| Preparación | Repo, CI, reconocimiento de la fuente, decisión de la foto | raíz, `docs/sources` | 10 a 19 oct |
 | 1. Requerimientos | Documento de requerimientos, guía de diseño inicial | `docs/requirements` | 20 oct a 2 nov |
 | 2. Diseño conceptual y lógico | Diagrama estrella (PDF), diccionario de datos (Word) | `docs/design` | 3 a 23 nov |
 | 3. Diseño físico y ETL | DDL, ETL, diagrama del flujo | `warehouse/ddl`, `src`, `docs/etl` | 24 nov a 14 dic |
