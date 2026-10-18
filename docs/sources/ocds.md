@@ -43,17 +43,7 @@ El **OCID (Open Contracting Identifier)** es el identificador único global para
 * **Sensibilidad:** El OCID distingue estrictamente entre mayúsculas y minúsculas. ([Fuente oficial: Identificadores / OCID](https://standard.open-contracting.org/latest/es/schema/identifiers/#contracting-process-identifier-ocid))
 
 
-> **Ejemplo oficial: Ciudad de México.**
-> En la Ciudad de México, cada vez que se inicia un proceso de licitación o adjudicación directa, la oficina responsable le asigna un identificador.
-
-> Estos se generan a partir de un identificador del departamento responsable de la adquisición, un número de licitación y el año.
-
-> Por ejemplo:  `OM-DGRMSG-004-13`
-
-> Este identificador interno puede intercambiarse con y ser registrado en cualquier otro sistema que procese información sobre el proceso de contratación. Por ejemplo los sistemas que reportan o registran pagos a proveedores.
-
-> Luego, la Ciudad de México registró un prefijo con el Equipo de Soporte de Datos. Se les ha dado el prefijo 'ocds-87sd3t' que se puede agregar a sus identificadores de proceso únicos para dar un 'ocid' globalmente único. P.ej.
-> > `ocds-87sd3t-OM-DGRMSG-004-13`
+> **Ejemplo de la documentación oficial: Ciudad de México.** La oficina responsable asigna a cada proceso de licitación o adjudicación directa un identificador interno que combina el departamento que compra, el número de licitación y el año, por ejemplo `OM-DGRMSG-004-13`. Ese identificador puede circular entre los sistemas que registran el proceso, como los de pagos a proveedores. Después, la ciudad registró el prefijo `ocds-87sd3t` ante el equipo de soporte de datos; al anteponerlo al identificador interno se obtiene un `ocid` único a nivel global: `ocds-87sd3t-OM-DGRMSG-004-13`. ([Fuente oficial](https://standard.open-contracting.org/latest/es/schema/identifiers/#contracting-process-identifier-ocid))
 
 ### 2. Identificadores Locales (IDs de Entregas, Adjudicaciones, Contratos e Ítems)
 

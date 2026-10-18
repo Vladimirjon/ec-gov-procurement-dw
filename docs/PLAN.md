@@ -200,7 +200,8 @@ de Diseño Inicial). Las secciones se escriben en `docs/requirements/`.
   - qué dimensión cambia en el tiempo (SCD);
   - fuentes y sus limitaciones;
   - tres preguntas de negocio que el modelo debe responder.
-- Respetar el ADR 0004: 1 hecho + 4–5 dimensiones.
+- Respetar el ADR 0004: 1 hecho y la previsión de 4–5 dimensiones. El curso
+  admite de 3 a 5; el número definitivo se confirma en esta tarea.
 - *Terminado cuando:* cada sección de la plantilla está completa y es
   coherente con los KPIs de Jorge.
 

@@ -10,7 +10,7 @@ Este reconocimiento documenta lo que ofrece el portal y una inspección inicial 
 - **Comprobado:** accesos publicados, campos reales, descargas JSON mensual y anual, hashes y reconciliación de 190.619 procesos distintos con el contador anual.
 - **Límite observado:** la API anuncia 60; dos reinicios consecutivos observados quedaron separados por 61 segundos. El contador no se comportó como exclusivo del cliente y SERCOP no publica su ámbito, por lo que la conclusión se limita a una ventana observable cercana a un minuto.
 - **Cierre:** los cinco criterios tienen evidencia y el issue se cerró al integrarse el PR #24.
-- **Trabajo del líder adicional en fase 0:** integrar E0 en el issue #14, usando contenido de #10 y plantilla de #13; fecha interna 17 oct. La ruta está en [PLAN.md](../PLAN.md#ruta-del-líder-en-la-fase-0).
+- **Trabajo del líder adicional en fase 0:** integrar E0 en el issue #14, usando contenido de #10 y plantilla de #13; fecha interna 17 oct. El Word de E0 está en el PR #31; faltan el PDF y su subida al curso. La ruta está en [PLAN.md](../PLAN.md#ruta-del-líder-en-la-fase-0).
 - **Fases siguientes:** el periodo definitivo se decide en #15 (fase 1); la foto formal y el manifiesto se preparan al inicio de la fase 2. El docente indicó analizar cinco años o comparar por gobiernos. No se observó en SERCOP un campo de gobierno o administración, por lo que #15 evaluará una delimitación por fechas; `2021–2025` es el candidato inicial de cinco años calendario completos, no una decisión cerrada por este reconocimiento. Estas descargas no son todavía la foto definitiva.
 
 ## Inventario y conservación de la evidencia
