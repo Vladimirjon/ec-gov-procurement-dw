@@ -23,6 +23,16 @@ package = false
 # 0.13.4 is the first release with the fix for GHSA-hq85-5cpj-mr62.
 required-version = ">=0.13.4"
 
+[tool.pytest]
+minversion = "9.1"
+testpaths = ["tests"]
+# The scripts are standalone files, not a package: the tests import them from scripts/.
+pythonpath = ["scripts"]
+addopts = ["--import-mode=importlib", "-ra"]
+# Unknown markers or options, non-strict xfail and duplicated parameter ids are errors.
+strict = true
+filterwarnings = ["error"]
+
 [tool.ruff]
 # The existing scripts use lines of up to 116 characters; 120 keeps them within the limit.
 line-length = 120
