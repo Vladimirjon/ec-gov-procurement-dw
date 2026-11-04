@@ -1,70 +1,55 @@
 # ADR 0003: Pila tecnológica
 
-- **Estado:** Propuesto (borrador)
-- **Fecha:** 2026-10-06
+- **Estado:** Aceptado
+- **Fecha:** 2026-11-03 (reemplaza la versión del 2026-10-06)
 - **Decide:** líder del equipo
-- **Referencias:** [PROPUESTA.md](../PROPUESTA.md), secciones 3 (D2), 6 y 10
+- **Referencias:** guía del proyecto, sección 5 (arquitectura de referencia)
 
 ## Contexto
 
-El proyecto necesita una pila que permita ETL reproducible, pruebas
-automáticas y tableros en Power BI, sin complejidad innecesaria para un equipo
-de 5 personas y un plazo de un semestre. Los materiales del curso usan SQL
-Server como ejemplo, pero la elección de herramientas es libre (D2).
+La guía del profesor fija la pila: PostgreSQL, Python (pandas y SQLAlchemy)
+con SQL, notebooks en Jupyter o Colab, Power BI Desktop y Git. Permite agregar
+herramientas como dbt, Airflow o Metabase, pero no sustituir PostgreSQL ni
+Power BI.
 
-## Decisión propuesta
+## Decisión
 
-| Capa | Elección propuesta | Justificación | Estado |
-|---|---|---|---|
-| Lenguaje | Python 3.13 | Experiencia previa del líder y ecosistema de datos | Propuesto |
-| Gestión de entorno | `uv` | Entornos y dependencias reproducibles | Propuesto |
-| Calidad de código | `ruff`, `pytest`, tipado estático | Convenciones y pruebas automáticas | Propuesto |
-| Base de datos | PostgreSQL en Docker Compose | Compatible con Power BI | Decidido (D2) |
-| Transformación y pruebas | dbt | Pruebas de integridad, documentación y linaje | Decidido (D2) |
-| Foto cruda | Parquet o JSON con manifiesto de checksums | Reproducible y verificable | Propuesto (formato pendiente, ver ADR 0002) |
-| Orquestación | CLI primero; Airflow o Dagster después | Evitar complejidad prematura | Fase posterior |
-| CI | GitHub Actions + `pre-commit` | Revisión automática en cada PR | Fase posterior: se implementa cuando haya código y pruebas que verificar |
-| Documentación | MkDocs Material | Sitio navegable y versionado | Propuesto |
-| BI | Power BI Desktop | Lo exige el curso | Confirmado por el curso |
+| Capa | Herramienta | Nota |
+|---|---|---|
+| Base de datos | PostgreSQL, en Docker Compose | Esquemas `stg`, `dw` y `audit` |
+| ETL | Python 3.13 (pandas, SQLAlchemy) y SQL | Un solo comando reconstruye el DW |
+| Perfilado y modelo analítico | Jupyter | Notebooks reproducibles |
+| Visualización | Power BI Desktop | Archivo `.pbix` conectado al esquema `dw` |
+| Control de versiones | Git y GitHub | Historial con commits de todo el equipo |
+| Entorno | `uv` | Dependencias reproducibles |
+| Calidad de código | `ruff` y `pytest` | |
 
-**No se usan:** Kafka, Kubernetes ni microservicios. La escalabilidad se
-demuestra con diseño y con mediciones (tiempos de carga con volúmenes
-crecientes), no con la cantidad de herramientas.
+**No se usa dbt.** La guía no lo exige, es una herramienta más que aprender y
+el DDL explícito versionado en `warehouse/ddl/` cubre lo que pide el Hito 3. La
+clasificación de entidades vive en `warehouse/seeds/` como CSV cargado por el
+ETL. Tampoco se usan Airflow, MkDocs, Kafka ni Kubernetes.
 
-### DDL explícito frente a dbt puro
+Las reglas de calidad y la bitácora se escriben en Python y SQL, en el esquema
+`audit`.
 
-La semana 3 pide sentencias `CREATE TABLE` con claves, índices y nombres
-consistentes. Opciones:
+## Reglas
 
-- **A.** DDL explícito versionado en `warehouse/ddl/`, más dbt para
-  transformaciones y pruebas.
-- **B.** dbt con contratos de modelo y restricciones, exportando el DDL como
-  entregable.
-
-Recomendación inicial: **A**. **[PENDIENTE]** Confirmar con un spike corto en
-la fase 2.
+- Cada herramienta nueva necesita un ADR y la aprobación del líder.
+- El DW se debe poder reconstruir desde cero en otra máquina con un solo
+  comando (checklist final de la guía).
 
 ## Pendiente
 
-| Tema | Estado | Quién lo resuelve |
+| Tema | Quién | Cuándo |
 |---|---|---|
-| DDL explícito (A) o dbt puro (B) | **[PENDIENTE]** spike en fase 2 | Rol 2 (modelo dimensional) |
-| Herramienta de tipado estático | **[PENDIENTE]** | Líder |
-| Aprobación de cada dependencia antes de instalarla | **[PENDIENTE]** | Líder |
-| Orquestador (Airflow o Dagster), si llega a hacer falta | Fase posterior, requiere ADR propio | Líder |
-
-La pila del proyecto no está configurada todavía: no hay `pyproject.toml`,
-`compose.yaml`, `Makefile`, `.pre-commit-config.yaml` ni CI. Los auxiliares de
-reconocimiento usan Python 3.13.9 instalado en el equipo del líder y PowerShell,
-sin nuevas dependencias. Esa ejecución local no constituye un entorno
-reproducible del DW ni confirma la instalación de las demás herramientas.
+| Archivos de entorno: `pyproject.toml`, `compose.yaml`, `Makefile` | Líder | Hito 2 |
+| CI con GitHub Actions y `pre-commit`: se activa cuando haya código que verificar | Líder | Hito 4 |
 
 ## Consecuencias
 
-- Cambiar PostgreSQL o dbt más adelante exige un ADR nuevo, porque afecta al
-  DDL, a la conexión de Power BI y a las pruebas de integridad.
-- Docker Compose obliga a que cada integrante pueda ejecutar Docker en su
-  equipo.
-- Power BI Desktop solo funciona en Windows; quien trabaje en los tableros
-  necesita ese sistema operativo.
-- Cada herramienta nueva necesita justificación en un ADR.
+- Docker debe poder ejecutarse en el equipo de cada integrante.
+- Power BI Desktop solo funciona en Windows: quien trabaje en el tablero
+  necesita ese sistema.
+- Hoy no hay `pyproject.toml`, `compose.yaml` ni `Makefile`. Los auxiliares de
+  `scripts/` usan Python 3.13 y PowerShell sin dependencias nuevas, y no
+  constituyen un entorno reproducible.

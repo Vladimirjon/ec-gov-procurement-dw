@@ -1,88 +1,68 @@
-# ADR 0001: Alcance del Data Warehouse
+# ADR 0001: Alcance del proyecto
 
-- **Estado:** Propuesto (borrador)
-- **Fecha:** 2026-10-06
+- **Estado:** Aceptado
+- **Fecha:** 2026-11-03 (reemplaza la versión del 2026-10-06)
 - **Decide:** líder del equipo
-- **Referencias:** [PROPUESTA.md](../PROPUESTA.md), secciones 1, 2, 3 y 10;
-  [entidades.md](../sources/entidades.md)
+- **Referencias:** guía del proyecto y guía del Hito 1 del profesor;
+  [hito1.md](../requirements/hito1.md); [entidades.md](../sources/entidades.md)
 
 ## Contexto
 
-El profesor asignó el sector **Gobierno y Ministerio**, entendido como la
-planta central del Estado ecuatoriano. Se espera cubrir toda la planta central,
-no una muestra de entidades, y trabajar sobre una foto (snapshot) de los datos.
-La fuente prevista es el portal de datos abiertos de contratación pública de
-SERCOP (formato OCDS).
-
-No se asume que la fuente indique qué entidades pertenecen a la planta
-central, por lo que el alcance no se puede aplicar con un simple filtro de la
-fuente.
+El profesor asignó el sector **gobierno central**. La guía del Hito 1 pide
+analizar el **sector completo**, no una institución en particular, con datos
+públicos. La fuente de referencia que la guía sugiere para este sector incluye
+las compras públicas de SERCOP.
 
 ## Decisión
 
-1. **Entidades dentro del alcance:**
-   - Presidencia de la República.
-   - Ministerios.
-   - Institutos que dependen de los ministerios.
-2. **Cobertura:** toda la planta central, no una muestra.
-3. **Periodo:** una foto fija de uno o más años.
-4. **Fuera del alcance:**
-   - GAD de cualquier nivel (provincial, cantonal, parroquial) y sus
-     empresas. Por ejemplo, empresas municipales como la Empresa Eléctrica
-     Quito.
-   - Cualquier otra entidad fuera de la planta central.
-   - Ingesta continua o en tiempo real.
-   - Microservicios, Kafka, Kubernetes y autenticación de usuarios finales.
-   - Datos personales más allá de lo que la fuente ya publica.
-5. **Clasificación de entidades:** se construye una tabla de clasificación a
-   partir de una fuente oficial y se versiona en el repositorio como semilla.
-   Atributos previstos: entidad, tipo, ministerio del que depende, sector y
-   nivel. Cada entidad se resuelve en exactamente una categoría:
-   - Presidencia
-   - Ministerio
-   - Instituto dependiente de un ministerio
-   - Fuera de alcance
-6. **Casos dudosos** (por ejemplo, entidades adscritas con régimen propio): se
-   registran junto a la semilla con su justificación y los decide el líder.
-   Mientras no se resuelvan, no se incluyen en los indicadores.
-7. **Entidad compradora y regla de cruce:** la entidad compradora se identifica
-   con `buyer.id` de la fuente. En OCDS, `buyer.id` es la referencia a una
-   organización y puede incluir un sufijo de unidad; no se trata como
-   sinónimo del RUC. La clasificación se asigna en este orden:
-   1. Unión exacta por `buyer.id` completo, conservado sin modificar.
-   2. Si no hay coincidencia exacta, correspondencia por la raíz
-      `EC-RUC-{13 dígitos}`, solo si el patrón fue validado en la semilla.
-   3. Nunca por `buyer.name`.
+1. **Sector:** gobierno central completo, es decir, la Presidencia de la
+   República, los ministerios y los institutos que dependen de ellos.
+2. **Fuera de alcance:** los GAD de cualquier nivel y sus empresas, las
+   empresas públicas y las entidades de otras funciones del Estado.
+3. **Periodo:** 2021–2025, años calendario completos (cinco periodos).
+4. **Fuente principal:** datos abiertos de contratación pública de SERCOP en
+   formato OCDS.
+5. **Segunda fuente:** el directorio oficial de instituciones `gob.ec`, que
+   permite clasificar a las entidades compradoras. Si el profesor no la acepta
+   como segunda fuente integrable, se agrega otra fuente de hechos en el
+   Hito 2.
+6. **Clasificación de entidades:** cada comprador de SERCOP se asigna a una
+   categoría: Presidencia, ministerio, instituto dependiente o fuera de
+   alcance. Las entidades dudosas quedan fuera de los indicadores hasta
+   resolverse. La clasificación es una semilla versionada en
+   `warehouse/seeds/`.
+7. **Regla de cruce.** El comprador se identifica con `buyer.id` de la
+   fuente. En OCDS, `buyer.id` referencia a una organización y puede llevar un
+   sufijo de unidad; no es sinónimo del RUC. Orden de unión:
+   1. por `buyer.id` completo, sin modificarlo;
+   2. si no coincide, por la raíz `EC-RUC-{13 dígitos}` solo si el patrón se
+      validó en la semilla;
+   3. nunca por `buyer.name`.
 
-   Se aplica la clasificación vigente en la fecha del proceso (SCD tipo 2 en
-   `dim_entity`). `tender.procuringEntity.id` se conserva como unidad
-   contratante y no es llave de clasificación. La entidad sin clasificación
-   aprobada queda fuera de los indicadores (regla 6). Evidencia en la muestra
-   local de enero de 2025, que no es la foto definitiva: 372 `buyer.id`
-   distintos, solo 185 con la forma simple `EC-RUC-{13 dígitos}` y 16 raíces
-   asociadas a más de un `buyer.id`; `tender.procuringEntity.id` distinto de
-   `buyer.id` en 1.929 de 2.141 releases, con la misma raíz en todos. Detalle
-   en [entidades.md](../sources/entidades.md).
+   `tender.procuringEntity.id` se conserva como unidad contratante y no se usa
+   para clasificar. La clasificación aplicable es la vigente en la fecha del
+   proceso (SCD tipo 2 en `dim_entity`).
+8. Cualquier cambio de alcance se registra en un ADR nuevo.
+
+## Evidencia
+
+En la descarga de enero de 2025 (2.186 procesos) hay 372 `buyer.id` distintos,
+solo 185 con la forma simple `EC-RUC-{13 dígitos}` y 16 raíces asociadas a más
+de un `buyer.id`; `tender.procuringEntity.id` difiere de `buyer.id` en 1.929 de
+2.141 releases, con la misma raíz en todos. Esta es una muestra y no la foto
+definitiva. Detalle en [entidades.md](../sources/entidades.md).
 
 ## Pendiente
 
-| Tema | Estado | Quién lo resuelve |
+| Tema | Quién | Cuándo |
 |---|---|---|
-| Fuente oficial para la clasificación de entidades | Propuesta aceptada ([entidades.md](../sources/entidades.md)): `gob.ec/instituciones` como fuente base nominal para descubrir candidatos. Cada clasificación se sustenta con su norma o fuente oficial; las adscripciones hoy `No verificada` se resuelven al construir la semilla **[PENDIENTE]** | Líder |
-| Criterios de inclusión de entidades | **[PENDIENTE]** | Líder |
-| Casos dudosos concretos | **[PENDIENTE]** al construir la semilla | Líder |
-| Periodo de la foto (ver ADR 0002) | **[PENDIENTE]** tras reconocer la fuente | Líder |
-| Atributo de la fuente que identifica a la entidad compradora | Definido en la decisión 7: `buyer.id` completo, con la raíz `EC-RUC-{13}` como respaldo validado. Sigue **[PENDIENTE]** validar sobre la foto definitiva que esa raíz corresponde al RUC legal, qué sufijos son unidades del mismo comprador y la correspondencia con `parties`; ver el reconocimiento en `docs/sources/` | Rol 1 (fuente y foto) |
-
-La regla 6 (excluir casos dudosos de los indicadores hasta resolverlos) es una
-propuesta de este borrador y también requiere aprobación.
+| Fuente oficial por entidad para la clasificación y sus criterios de inclusión | Líder | Hito 2 |
+| Validar la raíz `EC-RUC-{13}` contra el RUC legal en los años 2021–2024 | Líder | Hito 2 |
+| Confirmar que la segunda fuente se acepta | Líder | Hito 2 |
 
 ## Consecuencias
 
-- La semilla de clasificación es un artefacto de primer nivel: sin ella no se
-  puede filtrar el alcance ni construir la jerarquía Presidencia > ministerio >
-  instituto dependiente.
-- Los cambios de nombre, fusiones o cambios de ministerio de una entidad se
-  modelan en `dim_entity` (SCD tipo 2, ver la sección 5 de la propuesta).
-- Cualquier ampliación o reducción del alcance requiere un ADR nuevo y la
-  aprobación del líder.
+- Sin la semilla de clasificación no se puede filtrar el sector ni construir la
+  jerarquía Presidencia > ministerio > instituto.
+- Los cambios de nombre, fusiones o cambios de ministerio se modelan en
+  `dim_entity` con SCD tipo 2.
