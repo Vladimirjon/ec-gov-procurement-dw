@@ -67,14 +67,19 @@ una carpeta que usa otra sesión.
 - Entorno: Windows con Git Bash y PowerShell. `data/` está ignorado; las
   cabeceras HTTP guardadas deben ir sin cookies.
 
-## Comandos que existen hoy
+## Comandos
 ```bash
+uv sync --locked
+uv run ruff check
+uv run ruff format --check
+uv run pytest -q
 python -I scripts/inspect_sercop_zip.py RUTA.zip --output docs/sources/NUEVO.json
 python -I scripts/profile_sercop_fields.py RUTA.zip --output docs/sources/NUEVO.json
 ```
-La salida no sobrescribe archivos (usa un nombre nuevo cada vez). No hay todavía
-pruebas, lint ni CI en `main`: llegan con el issue #43. Hasta entonces dilo
-explícitamente en lugar de dar un cambio por verificado.
+Las cuatro primeras son lo que corre el CI (`.github/workflows/ci.yml`, Linux y
+Windows). Los scripts no sobrescriben la salida: usa un nombre nuevo cada vez. Las
+pruebas usan solo datos sintéticos que ellas mismas generan; una prueba falla si un
+script cambia sin un resumen nuevo en `docs/sources/` que registre su hash.
 
 ## Hito 1 (convenciones ya decididas)
 - Equipo: **Trazabilidad Pública**. Sector: gobierno central. Fecha en formato
