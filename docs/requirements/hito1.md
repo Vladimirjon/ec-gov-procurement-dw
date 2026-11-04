@@ -103,19 +103,20 @@ Las decisiones son una hipótesis de trabajo derivada de los roles descritos;
 
 | Fuente | Dueño | Formato | Periodicidad | Años | Licencia | Enlace |
 |---|---|---|---|---|---|---|
-| Datos abiertos de contratación (OCDS) | SERCOP | JSON, CSV, XLSX por año y mes; API | Descargas actualizadas a diario | 2015 en adelante según la API; abiertos 2025 y enero 2025 | **[PENDIENTE]** registrar los términos; el campo `license` existe en cada paquete | [Descarga masiva](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/) |
-| Directorio de instituciones | MINTEL (`gob.ec`) | Páginas web por sección | **[VERIFICAR]** | Vigente 2026 | **[PENDIENTE]** | [gob.ec/instituciones](https://www.gob.ec/instituciones) |
+| Datos abiertos de contratación (OCDS) | SERCOP | JSON, CSV, XLSX por año y mes; API | Descargas actualizadas a diario | 2015 en adelante según la API; abiertos 2021, 2024, 2025 y enero 2025 | Creative Commons Atribución 3.0 Ecuador: obliga a enlazar la fuente ([política de SERCOP, p. 8](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf), consultada el 3/11/2026) | [Descarga masiva](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/) |
+| Directorio de instituciones | MINTEL (`gob.ec`) | Páginas web por sección | No declarada en el sitio (consultado el 3/11/2026) | Vigente 2026 | Sin licencia explícita; se usa solo para clasificar entidades, citando el enlace | [gob.ec/instituciones](https://www.gob.ec/instituciones) |
 
 Ejecución presupuestaria del MEF: se encontraron informes en PDF
 ([ejemplo 2019](https://www.finanzas.gob.ec/wp-content/uploads/downloads/2020/04/Inf_ejec.presupuestaria_2019.pdf)),
 pero no se ha confirmado un conjunto descargable por entidad. No se usa como
 fuente hasta abrir un archivo real.
 
-**Prueba del archivo realizada:** se descargó y abrió el ZIP anual 2025
-(190.619 procesos distintos) y el de enero 2025, con sus campos de monto y de
-comprador ([reconocimiento.md](../sources/reconocimiento.md)).
-**[PENDIENTE]** abrir al menos un archivo de 2021 a 2024 antes de entregar,
-para confirmar que los campos usados existen en esos años.
+**Prueba del archivo realizada:** se descargaron y abrieron los ZIP anuales de
+2021, 2024 y 2025 (167.058, 219.185 y 190.619 procesos) y el de enero de 2025.
+En los tres años anuales existen el importe adjudicado, el importe estimado de
+la licitación, el método de contratación y el comprador; los conteos y el
+método están en [reconocimiento.md](../sources/reconocimiento.md). Descarga de
+2021 y 2024 el 3/11/2026.
 
 ## Parte 2 · Matriz de preguntas de negocio
 
@@ -132,7 +133,10 @@ está más completa en los datos.
 **Verificación de datos en la muestra de 2025:** las adjudicaciones con importe
 numérico fueron 183.887 de 183.891 (anual), y `tender.value.amount` estuvo
 presente en 2.050 de 2.186 procesos de enero de 2025. Son conteos nacionales
-sin filtrar por planta central. Los importes adjudicado, estimado y
+sin filtrar por planta central. En 2021 y 2024 el importe estimado de la
+licitación estuvo presente en el 88,5 % y el 88,7 % de las licitaciones, y el
+importe adjudicado en prácticamente todas las adjudicaciones, igual que en
+2025. Los importes adjudicado, estimado y
 contractual son magnitudes distintas y no se sustituyen entre sí.
 
 ## Anexo A · Preguntas candidatas (lluvia de ideas)
@@ -162,6 +166,5 @@ conservan por si el profesor pide más preguntas en hitos posteriores.
 - [x] Tres tomadores de decisión, cada uno con su decisión principal.
 - [x] Las tres preguntas cumplen las cinco condiciones de la guía.
 - [x] Una descriptiva y una diagnóstica; la tercera es predictiva.
-- [ ] Cada fuente tiene enlace y fecha de consulta (faltan licencia y años
-      2021–2024).
+- [x] Cada fuente tiene enlace y fecha de consulta.
 - [ ] Todas las marcas **[VERIFICAR]** y **[PENDIENTE]** resueltas.

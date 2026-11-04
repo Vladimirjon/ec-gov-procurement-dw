@@ -240,6 +240,40 @@ Hay **cuatro** releases con más de una adjudicación: uno con dos, uno con tres
 
 La descarga y lectura local mensual resultaron posibles. Esto permite continuar evaluando la vía masiva sin consultas de búsqueda para cada proceso; aún no demuestra que el archivo anual esté completo, que represente exclusivamente la planta central o que contenga todas las medidas requeridas por el DW.
 
+## Archivos anuales 2021 y 2024 y licencia (issue #35)
+
+**Descarga:** el 3/11/2026 (19:29, hora de Ecuador) se descargaron desde el portal oficial los ZIP JSON anuales de 2021 y 2024, con `month=0` y `method=all` (el mismo patrón de enlace del filtro 2025), en `data/reconnaissance/sercop-2021-all-20261103-192908/` y `data/reconnaissance/sercop-2024-all-20261103-192908/`, ignorados por Git. Cada carpeta conserva las cabeceras HTTP de la respuesta, sin las cookies. El tamaño recibido coincidió con el `Content-Length` anunciado: 121.106.938 bytes (2021) y 160.292.192 bytes (2024). El 2025 usado para comparar es el de la sección anterior.
+
+| Archivo | SHA-256 del ZIP |
+|---|---|
+| `releases_2021.zip` | `FDBFD26FF23848BFE600021DC82C7BCE296D1E8CB130E71F520A6B8AA312976C` |
+| `releases_2024.zip` | `7DAEA57B70E1F2BA0B566E3776519C8BEEFE3FA6C64570ED108090A307F5D20C` |
+
+**Método:** `scripts/inspect_sercop_zip.py` (conteos de paquetes y adjudicaciones) y el nuevo `scripts/profile_sercop_fields.py` (presencia de los campos que usan P1 a P3). Ambos leen el ZIP sin extraerlo, solo con la biblioteca estándar, y no emiten valores de registros. Los resúmenes están en `docs/sources/sercop-2021-download-observation-*.json` y `docs/sources/sercop-AAAA-field-profile-*.json` (2021, 2024 y 2025). `inspect_sercop_zip.py` se detuvo con el 2024 (`ValueError`) porque un `release` trae `contracts` como un objeto y no como una lista, estructura que el script rechaza por diseño; no se modificó. Por eso el perfil de campos, que cuenta esa anomalía y sigue, es el que cubre los tres años. Un paquete del 2024 trae una lista `releases` vacía (219.186 paquetes, 219.185 releases).
+
+**Conteos nacionales, sin filtrar por planta central** (no son el volumen del DW):
+
+| Medida | 2021 | 2024 | 2025 |
+|---|---:|---:|---:|
+| Releases (un proceso cada uno) | 167.058 | 219.185 | 190.619 |
+| `buyer.id` y `buyer.name` presentes | 167.058 | 219.185 | 190.619 |
+| Releases con `tender` | 165.616 | 212.386 | 185.536 |
+| `tender.value.amount` numérico | 146.566 | 188.326 | 167.204 |
+| Objetos de adjudicación | 166.983 | 210.445 | 183.891 |
+| `awards[].value.amount` numérico | 166.980 | 210.439 | 183.887 |
+| Releases con al menos una adjudicación con importe | 164.263 | 208.165 | 182.273 |
+| Releases con importe de licitación y de adjudicación | 146.314 | 187.672 | 166.555 |
+| `tender.procurementMethod` presente | 165.616 | 212.386 | 185.536 |
+| Moneda de las adjudicaciones con importe | solo USD | solo USD | solo USD |
+
+Lo que esto permite afirmar: los tres campos que usan P1 y P2 (importe adjudicado, importe estimado de la licitación y comprador) existen en 2021, 2024 y 2025 con la misma estructura. El importe de la licitación falta en cerca de 1 de cada 9 licitaciones en los tres años (88,5 %, 88,7 % y 90,1 % lo tienen), así que P2 solo cubre los procesos con ambos importes: 87,6 %, 85,6 % y 87,4 % de los releases. Los métodos de contratación (`procurementMethod`) toman cuatro valores en los tres años: `selective`, `direct`, `open` y `limited`. `procurementMethodDetails` tiene entre 210 y 535 valores distintos según el año, así que habrá que decidir en el Hito 2 cuál de los dos niveles se usa.
+
+**Hallazgo sobre las fechas:** `release.date` está presente en el 100 % de los releases, pero no coincide con el año del archivo: el archivo 2021 trae 18.235 releases con fecha de 2022; el 2024 trae 20.829 de 2025 y 3 de 2026; el 2025 trae 13.954 de 2026. En cambio, `awards[].date` solo está en el 18,2 %, 16,2 % y 15,2 % de las adjudicaciones, y `tender.tenderPeriod.startDate` en el 22,2 %, 20,1 % y 17,6 % de las licitaciones. Esto respalda la regla ya fijada en el Hito 1: la fecha que asigna un proceso a un año se decide en el Hito 2 midiendo la completitud, y no se debe suponer que el año del archivo es el año del proceso.
+
+**Licencia:** los 167.058, 219.186 y 190.619 paquetes de los tres años declaran en el campo `license` el mismo valor, `https://creativecommons.org/licenses/by/3.0/ec/` (Creative Commons Atribución 3.0 Ecuador; el enlace respondió HTTP 200 el 3/11/2026). La [política de publicación de SERCOP](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf), página 8, apartado 6, confirma que el SERCOP liberó los datos OCDS con esa licencia y permite usarlos con cualquier propósito, publicar contenido basado en ellos y volver a publicarlos «siempre y cuando se incluya un enlace a la fuente original». El apartado 8 de la misma página aclara que el SERCOP no verifica la veracidad ni la completitud de los datos. Condición para el proyecto: citar la fuente con su enlace.
+
+**Directorio `gob.ec/instituciones` (consulta del 3/11/2026):** el sitio no muestra una licencia de uso del directorio; en su pie solo enlaza una política de tratamiento de datos personales. No se encontró una licencia explícita. El proyecto lo usa solo para clasificar entidades públicas, citando el enlace y la fecha de consulta.
+
 ## Límites de la API
 
 La guía oficial especifica parámetros y validaciones de entrada, pero no publica una cuota ni ventana temporal. Dos consultas manuales reales `search_ocds` respondieron HTTP 200 y devolvieron `X-RateLimit-Limit: 60`; sus valores `Remaining` fueron 33 y, después de esperar 60 segundos, 25. No registraron cabeceras de reinicio/ventana. La diferencia entre esos contadores no se atribuye solo a esas dos consultas: otros consumidores pueden compartir la cuota.
