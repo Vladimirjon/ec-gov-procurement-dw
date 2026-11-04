@@ -21,7 +21,9 @@ ADR o a un PDF del profesor, mandan ellos. No afirmes nada que no exista.
   vigentes), `sources/` (evidencia de la fuente y resúmenes JSON sin registros),
   `uso-de-ia.md` (declaración de uso de IA).
 - `scripts/`: auxiliares de reconocimiento de SERCOP (solo biblioteca estándar).
-- `src/ec_gov_procurement_dw/{extract,load,quality,snapshot}`, `tests/`,
+- `tests/unit/`: pruebas de los scripts de `scripts/`. `pyproject.toml`, `uv.lock`
+  y `.python-version` declaran el entorno (Python 3.14, `ruff` y `pytest`).
+- `src/ec_gov_procurement_dw/{extract,load,quality,snapshot}`,
   `warehouse/{ddl,seeds}`, `notebooks/`, `reports/powerbi`: esqueleto, aún sin
   código.
 - `deliverables/`: versiones finales de los entregables por hito (`h1` a `h6`).
