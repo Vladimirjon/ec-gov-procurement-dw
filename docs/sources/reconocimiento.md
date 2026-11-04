@@ -251,6 +251,8 @@ La descarga y lectura local mensual resultaron posibles. Esto permite continuar 
 
 **Método:** `scripts/inspect_sercop_zip.py` (conteos de paquetes y adjudicaciones) y el nuevo `scripts/profile_sercop_fields.py` (presencia de los campos que usan P1 a P3). Ambos leen el ZIP sin extraerlo, solo con la biblioteca estándar, y no emiten valores de registros. Los resúmenes están en `docs/sources/sercop-2021-download-observation-*.json` y `docs/sources/sercop-AAAA-field-profile-*.json` (2021, 2024 y 2025). `inspect_sercop_zip.py` se detuvo con el 2024 (`ValueError`) porque un `release` trae `contracts` como un objeto y no como una lista, estructura que el script rechaza por diseño; no se modificó. Por eso el perfil de campos, que cuenta esa anomalía y sigue, es el que cubre los tres años. Un paquete del 2024 trae una lista `releases` vacía (219.186 paquetes, 219.185 releases).
 
+**Hash de los scripts:** el SHA-256 de un script cambia con los finales de línea. El contenido versionado usa LF: `inspect_sercop_zip.py` = `9644548AA315BA3A7BB8EE3722DDA30CC210BA032069AE4FC7F8C6A739B8D8DD` (el mismo de la ejecución de 2025) y `profile_sercop_fields.py` = `06651F22C583E946EB476C908409F736F3AE25A3F290377E11CDC42649B87F26`, que es el que registran los tres resúmenes `field-profile`. El resumen `sercop-2021-download-observation-*.json` registra `6998E007F1FC419CEF35E2090F90BD449858245A2DABC3D156C9E2EAE8B4CCB0`, que es el hash del mismo contenido con finales CRLF (la copia de trabajo de Windows al ejecutarlo); no es otra versión del script. Para que esto no se repita, `.gitattributes` fija `eol=lf` en los archivos `.py`.
+
 **Conteos nacionales, sin filtrar por planta central** (no son el volumen del DW):
 
 | Medida | 2021 | 2024 | 2025 |
