@@ -243,14 +243,20 @@ def test_main_failure_hides_record_values(make_zip, tmp_path, monkeypatch, capsy
     assert not output.exists()
 
 
-@pytest.mark.xfail(
-    raises=zlib.error,
-    strict=True,
-    reason="Known defect: main() does not catch zlib.error, so a corrupt deflate stream ends with a "
-    "traceback instead of the controlled message. The script is frozen evidence; see issue #43.",
-)
-def test_main_reports_corrupt_compressed_data(sample_zip, corrupt_deflate, monkeypatch):
+def test_main_reports_corrupt_compressed_data(sample_zip, corrupt_deflate, monkeypatch, capsys):
     assert run_main(monkeypatch, corrupt_deflate(sample_zip)) == 1
+    assert "Perfilado detenido (error)" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("error", [EOFError("truncated"), NotImplementedError("compression")])
+def test_main_reports_unreadable_entries(sample_zip, monkeypatch, capsys, error):
+    def fail(*_args, **_kwargs):
+        raise error
+
+    monkeypatch.setattr(profiler, "profile", fail)
+
+    assert run_main(monkeypatch, sample_zip) == 1
+    assert f"Perfilado detenido ({type(error).__name__})" in capsys.readouterr().err
 
 
 # --- command line ------------------------------------------------------------

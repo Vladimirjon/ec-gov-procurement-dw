@@ -21,6 +21,7 @@ import platform
 import sys
 import uuid
 import zipfile
+import zlib
 
 
 def load_inspector():
@@ -163,7 +164,9 @@ def main():
             with args.output.open("x", encoding="utf-8") as destination:
                 destination.write(text)
         print(text, end="")
-    except (OSError, ValueError, zipfile.BadZipFile, RuntimeError, RecursionError) as error:
+    except (
+        OSError, ValueError, EOFError, NotImplementedError, zipfile.BadZipFile, zlib.error, RuntimeError, RecursionError
+    ) as error:
         print(f"Perfilado detenido ({type(error).__name__}); no se generó un resumen completo.", file=sys.stderr)
         return 1
     return 0

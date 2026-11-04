@@ -312,14 +312,30 @@ def test_main_reports_file_that_is_not_a_zip(tmp_path, monkeypatch, capsys):
     assert "BadZipFile" in capsys.readouterr().err
 
 
-@pytest.mark.xfail(
-    raises=zlib.error,
-    strict=True,
-    reason="Known defect: main() does not catch zlib.error, so a corrupt deflate stream ends with a "
-    "traceback instead of the controlled message. The script is frozen evidence; see issue #43.",
-)
-def test_main_reports_corrupt_compressed_data(sample_zip, corrupt_deflate, monkeypatch):
+def test_main_reports_corrupt_compressed_data(sample_zip, corrupt_deflate, monkeypatch, capsys):
     assert run_main(monkeypatch, corrupt_deflate(sample_zip)) == 1
+    assert "Inspección detenida (error)" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("error", [EOFError("truncated"), NotImplementedError("compression")])
+def test_main_reports_unreadable_entries(sample_zip, monkeypatch, capsys, error):
+    def fail(*_args, **_kwargs):
+        raise error
+
+    monkeypatch.setattr(inspector, "inspect_zip", fail)
+
+    assert run_main(monkeypatch, sample_zip) == 1
+    assert f"Inspección detenida ({type(error).__name__})" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("ocid", ["", "   "])
+def test_release_with_blank_ocid_is_not_counted_as_a_pair(make_zip, ocid):
+    release = {"ocid": ocid, "id": "r1"}
+    report = inspect(make_zip({"r.json": [{"releases": [release]}]}))
+
+    assert report["releases_without_nonempty_ocid"] == 1
+    assert report["distinct_ocids"] == 0
+    assert report["distinct_ocid_release_id_pairs"] == 0
 
 
 # --- command line ------------------------------------------------------------
