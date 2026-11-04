@@ -1,0 +1,67 @@
+{
+  "report_schema_version": 1,
+  "run_id": "a7fe1a93-3e77-44a1-a1ec-ded1fc2aea9e",
+  "started_utc": "2026-11-04T00:33:20.045782+00:00",
+  "finished_utc": "2026-11-04T00:33:55.960207+00:00",
+  "python_version": "3.14.9",
+  "profiler_sha256": "06651F22C583E946EB476C908409F736F3AE25A3F290377E11CDC42649B87F26",
+  "source_file": "releases_2021.zip",
+  "source_bytes": 121106938,
+  "source_sha256": "FDBFD26FF23848BFE600021DC82C7BCE296D1E8CB130E71F520A6B8AA312976C",
+  "source_hash_unchanged": true,
+  "json_entry": "releases_2021.json",
+  "counts": {
+    "packages": 167058,
+    "releases": 167058,
+    "release_date": 167058,
+    "buyer_id": 167058,
+    "buyer_name": 167058,
+    "tender": 165616,
+    "tender_value_amount_numeric": 146566,
+    "tender_start_date": 36762,
+    "tender_procurement_method": 165616,
+    "tender_procurement_method_details": 165616,
+    "award_objects": 166983,
+    "award_value_amount_numeric": 166980,
+    "award_date": 30470,
+    "releases_with_numeric_award": 164263,
+    "releases_with_tender_and_award_amount": 146314
+  },
+  "anomalies": {},
+  "package_license_values": {
+    "https://creativecommons.org/licenses/by/3.0/ec/": 167058
+  },
+  "package_publisher_values": {
+    "Servicio Nacional de Contrataci\u00f3n P\u00fablica (SERCOP)": 167058
+  },
+  "package_publication_policy_values": {
+    "https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf": 167058
+  },
+  "procurement_method_values": {
+    "selective": 102243,
+    "direct": 40924,
+    "open": 21765,
+    "limited": 684
+  },
+  "procurement_method_details_distinct": 210,
+  "procurement_method_details_top10": {
+    "Cat\u00e1logo electr\u00f3nico - Mejor oferta en el convenio SERCOP-SELPROV-007-2020, SUMINISTROS DE OFICINA , SELECCI\u00d3N DE PROVEEDORES PARA LA ADQUISICI\u00d3N DE SUMINISTROS DE OFICINA": 53557,
+    "Subasta Inversa Electr\u00f3nica": 19050,
+    "Cat\u00e1logo electr\u00f3nico - Mejor oferta en el convenio SERCOP-SELPROV-006-2020, Suministros de Limpieza 2020, SELECCI\u00d3N DE PROVEEDORES PARA LA ADQUISICI\u00d3N DE SUMINISTROS DE LIMPIEZA": 19014,
+    "Cat\u00e1logo electr\u00f3nico - Mejor oferta en el convenio SERCOP-SELPROV-026-2017, SUMINISTROS DE OFICINA , SELECCI\u00d3N DE PROVEEDORES DE CONVENIO MARCO PARA LA ADQUISICI\u00d3N DE SUMINISTROS DE OFICINA": 11846,
+    "Cat\u00e1logo electr\u00f3nico - Compra directa en el convenio CDI-SERCOP-001-2016, PROVISI\u00d3N DE PRODUCTOS DE CONFECCI\u00d3N TEXTIL, PROVISI\u00d3N DE PRODUCTOS DE CONFECCI\u00d3N TEXTIL": 9555,
+    "Cat\u00e1logo electr\u00f3nico - Mejor oferta en el convenio SERCOP-SELPROV-027-2017, SUMINISTROS DE LIMPIEZA, SELECCI\u00d3N DE PROVEEDORES DE CONVENIO MARCO PARA LA ADQUISICI\u00d3N DE SUMINISTROS DE LIMPIEZA": 6646,
+    "Menor Cuant\u00eda": 6037,
+    "Cat\u00e1logo electr\u00f3nico - Mejor oferta en el convenio SERCOP-SELPROV-004-2019, Neum\u00e1ticos 2019., SELECCI\u00d3N DE PROVEEDORES PARA LA ADQUISICI\u00d3N DE NEUM\u00c1TICOS": 3007,
+    "Contratacion directa": 2490,
+    "Cat\u00e1logo electr\u00f3nico - Compra directa en el convenio CDI-SERCOP-001-2015, SERVICIO DE LIMPIEZA DE OFICINAS, SERVICIO DE LIMPIEZA EN EL PRODUCTO LIMPIEZA DE OFICINAS": 2096
+  },
+  "award_currency_values": {
+    "USD": 166980
+  },
+  "release_date_year_counts": {
+    "2021": 148823,
+    "2022": 18235
+  },
+  "ocds_schema_validated": false
+}
