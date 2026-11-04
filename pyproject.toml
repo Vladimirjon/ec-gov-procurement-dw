@@ -1,0 +1,24 @@
+[project]
+name = "ec-gov-procurement-dw"
+version = "0.0.0"
+description = "Academic data warehouse on public procurement of Ecuador's central government."
+readme = "README.md"
+# Python line fixed by the team lead (ADR 0003). Keep it in sync with .python-version.
+requires-python = "==3.14.*"
+# No runtime dependencies yet: the scripts in scripts/ use only the standard library.
+dependencies = []
+# Not a distributable package: prevents accidental uploads to an index.
+classifiers = ["Private :: Do Not Upload"]
+
+[dependency-groups]
+# Exact versions; uv.lock pins the transitive dependencies and their hashes.
+dev = [
+    "pytest==9.1.1",
+    "ruff==0.17.1",
+]
+
+[tool.uv]
+# Install only the environment, not the project itself: there is no package to build yet.
+package = false
+# 0.13.4 is the first release with the fix for GHSA-hq85-5cpj-mr62.
+required-version = ">=0.13.4"
