@@ -2,7 +2,6 @@
 
 import json
 import sys
-import zlib
 
 import profile_sercop_fields as profiler
 import pytest

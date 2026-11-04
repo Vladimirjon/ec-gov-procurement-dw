@@ -2,7 +2,6 @@
 
 import json
 import sys
-import zlib
 
 import inspect_sercop_zip as inspector
 import pytest
