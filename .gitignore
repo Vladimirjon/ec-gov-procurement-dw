@@ -5,6 +5,12 @@
 /data/*
 !/data/README.md
 
+# --- Estado local del asistente --------------------------------------------
+# STATE.md es el estado de trabajo del líder; .claude/ guarda sesiones y
+# carpetas de trabajo temporales de Claude Code.
+/STATE.md
+/.claude/
+
 # --- Material del curso ----------------------------------------------------
 # Material entregado por el profesor; no se redistribuye.
 Instrucciones_Curso/
