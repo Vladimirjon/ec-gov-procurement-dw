@@ -4,7 +4,7 @@ Carpeta local para la foto (snapshot) de datos y sus derivados. **Su contenido
 está ignorado por git**; solo se versiona este archivo.
 
 - La foto es evidencia inmutable: no se modifica ni se sobrescribe
-  (ver [ADR 0002](../docs/adr/0002-foto-inmutable.md)).
+  (ver [ADR 0002](../docs/adr/0002-datos-crudos-versionados.md)).
 - Los datasets y archivos originales se guardan aquí **localmente**; nunca se
   suben a Git, ni se copian completos a documentación, logs o prompts.
 - `reconnaissance/` contiene las descargas utilizadas para conocer la fuente.

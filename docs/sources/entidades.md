@@ -86,7 +86,7 @@ Por tanto, `buyer.name` no puede utilizarse como llave de cruce y debe separarse
 
 ### 5.2. Regla de cruce y construcción de la semilla propuesta (`[PENDIENTE]` de aprobación del líder)
 
-Para construir y aplicar `warehouse/dbt/seeds/entity_classification.csv` en la fase 1 de manera determinista, se propone el siguiente flujo:
+Para construir y aplicar `warehouse/seeds/entity_classification.csv` en el Hito 2 de manera determinista, se propone el siguiente flujo:
 
 1. **Descubrimiento y sustento normativo de la semilla:** usar `gob.ec/instituciones` únicamente como fuente base nominal para descubrir candidatos de la planta central, contrastar los ministerios con la cabecera ejecutiva vigente (`economicoproductivo.gob.ec` / `presidencia.gob.ec`) y exigir para cada entidad incluida la norma o fuente oficial que acredite su categoría, el ministerio del que depende y su intervalo de vigencia temporal (para soportar SCD tipo 2 en `dim_entity` sobre el periodo de la foto).
 2. **Regla concreta de unión con los registros de SERCOP (propuesta para aprobación del líder):**

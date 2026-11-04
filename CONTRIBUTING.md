@@ -1,7 +1,7 @@
 # Cómo contribuir
 
-Guía de trabajo del equipo (5 personas). Se basa en la sección 8 de la
-[propuesta de arquitectura](docs/PROPUESTA.md).
+Guía de trabajo del equipo (5 personas). Se basa en el
+[plan por hitos](docs/PLAN.md).
 
 > **Estado:** `main` está protegida y hay plantillas de PR e issues. El CI se
 > implementará cuando el repositorio tenga código y pruebas que verificar.

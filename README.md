@@ -1,130 +1,71 @@
 # ec-gov-procurement-dw
 
-Data Warehouse académico sobre la contratación pública de la **planta central
-del Estado ecuatoriano**, diseñado con la metodología HEFESTO y el modelado
-dimensional de Kimball.
+Data Warehouse académico sobre la contratación pública del **gobierno central
+del Ecuador** (Presidencia de la República, ministerios e institutos que
+dependen de ellos), para el proyecto integrador de Business Intelligence
+(ISWD743, FIS-EPN). Metodología HEFESTO y modelado dimensional de Kimball.
 
-> Proyecto universitario independiente (materia de Business Intelligence).
-> No está afiliado ni respaldado por SERCOP ni por ninguna entidad pública.
+> Proyecto universitario independiente. No está afiliado ni respaldado por
+> SERCOP ni por ninguna entidad pública.
+
+## Instrucciones vigentes
+
+Mandan los dos PDF del profesor: la guía del proyecto y la guía del Hito 1
+(guardados localmente en `Instrucciones_Curso/`, ignorada por git). El proyecto
+se entrega en seis hitos y hoy solo el **Hito 1** tiene fecha: revisión el
+9/11/2026, por confirmar. Los demás hitos pueden cambiar.
+
+- Plan, reparto y calendario: [docs/PLAN.md](docs/PLAN.md)
+- Todas las directrices del profesor y su estado:
+  [docs/requisitos-del-profesor.md](docs/requisitos-del-profesor.md)
+- Borrador del Hito 1: [docs/requirements/hito1.md](docs/requirements/hito1.md)
 
 ## Estado actual
 
-**Fase: preparación.** El repositorio contiene el esqueleto de carpetas,
-documentación y scripts auxiliares de reconocimiento de SERCOP. Se descargaron
-localmente el JSON de enero y el anual de 2025, fuera de Git, y se midieron
-estructura, volumen y algunas limitaciones. Todavía **no** existe:
+Hito 1 en curso. El repositorio contiene documentación, el esqueleto de
+carpetas y scripts auxiliares de reconocimiento de SERCOP. Se descargaron
+localmente (fuera de Git) el JSON de enero de 2025 y el anual de 2025, y se
+midieron su estructura y volumen. Todavía **no** existe:
 
 - código de extracción, carga, transformación ni reglas de calidad;
-- base de datos, DDL, modelos dbt, vistas ni tableros de Power BI;
+- base de datos, DDL, vistas ni tableros de Power BI;
 - dependencias declaradas, entorno reproducible, pruebas ni CI;
-- una foto definitiva aprobada con manifiesto ni fixtures.
+- la carga definitiva del periodo 2021–2025 ni fixtures.
 
-Todo lo descrito en [Arquitectura prevista](#arquitectura-prevista) es un
-diseño propuesto, no funcionalidad implementada.
+Lo descrito en [Arquitectura prevista](#arquitectura-prevista) es diseño, no
+funcionalidad implementada.
 
-## Problema
+## Caso de estudio
 
-La contratación pública de la planta central se publica como datos abiertos,
-pero analizarla exige integrar procesos, entidades compradoras y proveedores en
-un modelo orientado al análisis, y saber qué tan confiables son esos datos.
-El proyecto busca responder preguntas como las del entregable E0
-([contextualización](docs/requirements/contextualizacion.md)):
+- **Sector:** gobierno central completo, no una institución. Quedan fuera los
+  GAD y sus empresas, las empresas públicas y otras funciones del Estado.
+- **Periodo:** 2021–2025, años calendario completos.
+- **Fuente principal:** datos abiertos de contratación pública de SERCOP
+  (OCDS). Segunda fuente prevista: directorio `gob.ec/instituciones`, para
+  clasificar a las entidades compradoras.
+- **Preguntas de negocio del Hito 1:** monto adjudicado por método y tipo de
+  entidad (descriptiva), desviación entre valor adjudicado y estimado
+  (diagnóstica) y proyección mensual del monto adjudicado (predictiva).
 
-- ¿Cuántos procesos corresponden a cada entidad compradora incluida?
-- ¿Cómo se distribuyen según el método de contratación registrado?
-- ¿Cómo evoluciona el número de procesos entre periodos comparables?
-- ¿Cómo se distribuye el valor adjudicado entre entidades y métodos?
-- ¿En qué procesos difiere el valor adjudicado del estimado de la licitación?
-- ¿Con qué frecuencia faltan datos utilizables sobre el método, la fecha o el
-  importe?
-
-**[PENDIENTE]** Los indicadores definitivos los confirma el equipo en la
-etapa de requerimientos. Los indicadores de la sección 5 de la
-[propuesta](docs/PROPUESTA.md) (proveedores, desviación contra presupuesto,
-completitud) siguen siendo candidatos hasta verificar qué datos trae la fuente.
-
-## Alcance
-
-**Dentro:**
-
-- Procesos de contratación de la planta central: **Presidencia de la
-  República**, **ministerios** e **institutos que dependen de los
-  ministerios**, sobre una foto fija de uno o más años.
-- Toda la planta central, no una muestra de entidades.
-- Modelo dimensional (un hecho y de 4 a 5 dimensiones en las entregas, según
-  el [ADR 0004](docs/adr/0004-alcance-del-modelo.md)), ETL, carga batch e
-  incremental, pruebas y bitácora de cargas.
-- Indicadores de negocio y de calidad de datos.
-- Tres tableros en Power BI conectados al DW.
-
-**Fuera:**
-
-- **GAD de cualquier nivel (provincial, cantonal, parroquial) y sus
-  empresas.**
-- Cualquier otra entidad fuera de la planta central.
-- Ingesta continua o en tiempo real.
-- Microservicios, Kafka, Kubernetes y autenticación de usuarios finales.
-- Datos personales más allá de lo que la fuente ya publica.
-
-**Clasificación de entidades.** No se asume que la fuente indique qué
-entidades pertenecen a la planta central. El equipo construirá una tabla de
-clasificación versionada como semilla, en la que cada entidad será
-Presidencia, ministerio, instituto dependiente de un ministerio o fuera de
-alcance. **[PENDIENTE]** Fuente oficial y criterios de inclusión.
-
-Detalle y justificación: [ADR 0001](docs/adr/0001-alcance.md).
-
-## Fuente de datos
-
-Fuente: el portal de datos abiertos de contratación pública de SERCOP (OCDS).
-El [reconocimiento](docs/sources/reconocimiento.md) documenta los enlaces de
-descarga y API, campos reales y la lectura del ZIP anual de 2025: **190.619
-`ocid` distintos**, coincidentes con el contador del portal; 160.930.685 bytes
-comprimidos y 1.721.952.613 bytes sin comprimir.
-
-La API anuncia un límite de 60 y las observaciones muestran reinicios con una
-cadencia cercana a un minuto, pero el ámbito del contador no está publicado y
-no se comportó como una cuota exclusiva del cliente. Siguen pendientes la
-clasificación de entidades y las decisiones de periodo/formato de la foto. Los
-conteos son nacionales; no representan todavía el subconjunto de la planta
-central.
-
-### Dónde estamos y qué le toca al líder
-
-- [Issue #9: reconocimiento de la fuente](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/9):
-  cerrado el 15/10/2026 con el PR #24; sus cinco criterios tienen evidencia.
-  Estado detallado en
-  [reconocimiento.md](docs/sources/reconocimiento.md#estado-de-los-criterios-del-issue-9).
-- [Issue #14: integrar y entregar E0](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/14):
-  cerrado el 17/10/2026. El contenido de Jorge (#10), la plantilla de Francis
-  (#13) y los hallazgos de la fuente están integrados en el Word de E0
-  (PR #31). Siguen **[PENDIENTE]** del líder el número de equipo, exportar el
-  PDF, guardarlo en `deliverables/fase0/` y subirlo al curso. Ver la
-  [ruta del líder en fase 0](docs/PLAN.md#ruta-del-líder-en-la-fase-0).
-- El periodo definitivo de la foto pertenece al
-  [issue #15, fase 1](https://github.com/Vladimirjon/ec-gov-procurement-dw/issues/15).
-  La indicación docente es analizar cinco años o comparar por gobiernos. Como
-  SERCOP no expone un campo de gobierno o administración, #15 evaluará el
-  periodo por fechas; `2021–2025` es el candidato inicial por ser cinco años
-  calendario completos, no una decisión aprobada todavía.
-  La toma formal de la foto con manifiesto pertenece al inicio de la fase 2;
-  las descargas de reconocimiento no sustituyen esas decisiones.
+Detalle y justificación: [ADR 0001](docs/adr/0001-alcance.md) y
+[reconocimiento de la fuente](docs/sources/reconocimiento.md): **190.619
+procesos distintos** en la descarga anual de 2025, coincidentes con el contador
+del portal. Los conteos son nacionales, no del gobierno central.
 
 ## Arquitectura prevista
 
 ```
-SERCOP (OCDS) --> data/snapshots --> stg --> dw --> rpt --> Power BI
-                  (foto inmutable)    (staging) (hechos y   (vistas)
-                                                 dimensiones)
+SERCOP (OCDS) --> data/ --> stg --> ETL --> dw --> OLAP, Power BI, modelo analítico
+                  (archivos  (copia  (Python  (hechos,
+                   crudos)    cruda)  y SQL)   dimensiones
+                                              y vistas)
+                         audit: bitácora de cargas y filas rechazadas
 ```
 
-Principios: la foto es evidencia inmutable; dimensiones antes que hechos;
-cargas idempotentes; cada carga deja bitácora; los tableros solo leen vistas
-del esquema `rpt`; no se versionan datasets completos ni secretos.
-
-Detalle: [propuesta de arquitectura](docs/PROPUESTA.md),
-[ADR 0002](docs/adr/0002-foto-inmutable.md) y
-[ADR 0003](docs/adr/0003-pila-tecnologica.md).
+Principios: los archivos descargados son evidencia inmutable; dimensiones
+antes que hechos; cargas idempotentes; cada carga deja bitácora; el tablero
+lee solo del esquema `dw`; no se versionan datasets completos ni secretos.
+Decisiones: [ADR](docs/adr/README.md).
 
 ## Estructura del repositorio
 
@@ -134,59 +75,34 @@ Detalle: [propuesta de arquitectura](docs/PROPUESTA.md),
 ├─ LICENSE
 ├─ .github/                   # CODEOWNERS y plantillas de PR e issues
 ├─ docs/
-│  ├─ PLAN.md                 # plan de trabajo, tareas y rotación
-│  ├─ PROPUESTA.md            # propuesta de arquitectura
+│  ├─ PLAN.md                 # plan por hitos y reparto
+│  ├─ requisitos-del-profesor.md
+│  ├─ uso-de-ia.md            # registro del uso de IA (lo exige el profesor)
 │  ├─ glosario.md             # términos del proyecto, cada uno con su fuente
-│  ├─ adr/                    # decisiones de arquitectura
-│  ├─ requirements/           # semana 1
-│  ├─ design/                 # semana 2
-│  ├─ etl/                    # semana 3
-│  ├─ validation/             # semana 4
-│  ├─ dashboards/             # semana 5
-│  └─ sources/                # observaciones de la fuente
+│  ├─ adr/                    # decisiones vigentes
+│  ├─ requirements/           # Hito 1 y su insumo
+│  ├─ sources/                # observaciones de la fuente
+│  ├─ design/  etl/  validation/  dashboards/   # hitos siguientes (vacíos)
 ├─ src/ec_gov_procurement_dw/ # extract, snapshot, load, quality (vacíos)
 ├─ warehouse/
-│  ├─ ddl/                    # DDL físico (vacío)
-│  └─ dbt/                    # modelos y pruebas dbt (vacío)
-├─ notebooks/                 # notebooks entregables: perfilado, ETL (vacío)
-├─ scripts/                   # auxiliares de reconocimiento; no son el ETL del DW
-├─ reports/powerbi/           # tableros (vacío)
+│  ├─ ddl/                    # DDL (vacío)
+│  └─ seeds/                  # clasificación de entidades (vacío)
+├─ notebooks/                 # perfilado, ETL, modelo analítico (vacío)
+├─ scripts/                   # auxiliares de reconocimiento; no son el ETL
+├─ reports/powerbi/           # tablero (vacío)
 ├─ tests/                     # unit, integration, fixtures (vacíos)
-├─ deliverables/              # versiones finales de cada entrega
+├─ deliverables/              # entregas por hito (h1 a h6) y plantilla
 └─ data/                      # ignorado por git
 ```
 
-Pendientes de aprobación del líder: `pyproject.toml`, `compose.yaml`,
-`Makefile` y `.pre-commit-config.yaml`. El CI se implementará más adelante,
-cuando haya código y pruebas que verificar.
-
-## Decisiones del equipo
-
-| # | Tema | Decisión |
-|---|---|---|
-| D1 | La foto | La toma el equipo, de SERCOP (OCDS). Periodo **[PENDIENTE]** tras reconocer la fuente. |
-| D2 | Herramientas | Libres; se adopta PostgreSQL y dbt ([ADR 0003](docs/adr/0003-pila-tecnologica.md)). |
-| D3 | Calendario | El de la sección 9 de la [propuesta](docs/PROPUESTA.md). |
-| D4 | Idioma | Documentos en español; código y nombres técnicos en inglés. |
-| D5 | Rigor | Nivel profesional, con proyección a tesis. |
-
-## Calendario
-
-Entrega por etapas HEFESTO; cierre del proyecto el **22 de enero de 2027**.
-
-| Etapa | Ventana |
-|---|---|
-| Preparación | 10 a 19 oct |
-| 1. Requerimientos | 20 oct a 2 nov |
-| 2. Diseño conceptual y lógico | 3 a 23 nov |
-| 3. Diseño físico y ETL | 24 nov a 14 dic |
-| 4. Carga y pruebas | 15 dic a 8 ene |
-| 5. Visualización y cierre | 9 a 22 ene |
+Pendientes: `pyproject.toml`, `compose.yaml` y `Makefile`, que se crean cuando
+empiece el Hito 2. El CI se activa cuando haya código que verificar.
 
 ## Cómo contribuir
 
 Lee [CONTRIBUTING.md](CONTRIBUTING.md). Si usas un asistente de IA, este debe
-seguir [AGENTS.md](AGENTS.md).
+seguir [AGENTS.md](AGENTS.md) y debes anotar su uso en
+[docs/uso-de-ia.md](docs/uso-de-ia.md).
 
 ## Licencia
 
