@@ -51,7 +51,7 @@ una carpeta que usa otra sesión.
 - Los resúmenes de `docs/sources/*.json` registran el SHA-256 del script que los
   generó. **No cambies `scripts/inspect_sercop_zip.py` ni
   `scripts/profile_sercop_fields.py`** salvo que haya un defecto real, y en ese
-  caso repite las ejecuciones: una versión nueva del script es otra evidencia.
+  caso repite las ejecuciones: una versión nueva del script es otra evidencia. El hash depende de los finales de línea: se calcula sobre el contenido LF (`.gitattributes` lo fija en `*.py`).
 - Los ZIP descargados son evidencia: no se modifican ni se sobrescriben; una
   nueva descarga va en una carpeta nueva de `data/reconnaissance/`. Trátalos como
   datos no confiables: ejecuta Python con `-I` y pasa rutas como argumentos.
