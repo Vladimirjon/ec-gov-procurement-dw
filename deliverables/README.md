@@ -1,103 +1,60 @@
 # deliverables/
 
-Versiones finales de los entregables calificados, tal como se suben al
-curso. El contenido se escribe y revisa antes en `docs/` (ver
-[PLAN.md](../docs/PLAN.md#cómo-se-producen-los-entregables)).
+Versiones finales de los entregables de los seis hitos, tal como se suben al
+aula virtual. El contenido se escribe y revisa antes en `docs/`; aquí solo
+entra el archivo final.
+
+**Vigencia:** el formato, el nombre y el contenido de cada entrega los fijan los
+PDF del profesor (ver [PLAN.md](../docs/PLAN.md)). Si este archivo y un PDF
+del profesor difieren, manda el PDF. Hoy solo el Hito 1 tiene guía detallada;
+los demás se completan cuando el profesor la publique.
 
 ## Organización
 
 ```
 deliverables/
-├─ plantilla/       # plantilla-entregable.docx: base en APA 7 con el encabezado del curso
-├─ fase0/
-├─ fase1/
-├─ fase2/
-├─ fase3/
-├─ fase4/
-├─ fase5/
-└─ final/           # presentación y documento final
+├─ plantilla/       # plantilla-entregable.docx: base opcional del equipo
+├─ h1/              # Perfil institucional y preguntas de negocio
+├─ h2/              # Adquisición y calidad de datos
+├─ h3/              # Modelo dimensional y presentación de avance
+├─ h4/              # ETL e implementación del DW
+├─ h5/              # Analítica OLAP, tablero y modelo analítico
+└─ h6/              # Presentación final y defensa
 ```
 
-## Cómo usar la plantilla
+## Qué pide cada hito
 
-1. Copia `plantilla/plantilla-entregable.docx`; no la edites en su sitio.
-2. Rellena el encabezado del curso (ver abajo).
-3. Escribe el contenido con los estilos de la plantilla: Título 1 a 3, Normal,
-   listas, Tabla entregable, Referencia. No cambies fuentes ni sangrías a mano.
-4. Borra el contenido de ejemplo y la página de guía, que viene marcada para
-   borrar, y conserva el encabezado.
-5. Revisa el límite de páginas de la entrega, exporta a PDF desde Word y
-   guarda el archivo con el nombre que indica la sección siguiente.
+| Hito | Entregable según el profesor | Archivo |
+|---|---|---|
+| H1 | Documento con el perfil del sector y la matriz de 3 preguntas, máx. 6 páginas sin anexos. Al inicio: nombre del equipo, sector y fecha | `Hito1_Apellido1Apellido2ApellidoN.pdf` |
+| H2 | Datos crudos o su script, esquema `stg`, diccionario en Excel, notebook de perfilado e informe de calidad | **[PENDIENTE]** guía del profesor |
+| H3 | Matriz de bus, diagrama de la estrella, DDL del esquema `dw` y presentación de 10 minutos | **[PENDIENTE]** guía del profesor |
+| H4 | Scripts ETL, carga inicial e incremental, bitácora de cargas y reporte de reconciliación | **[PENDIENTE]** guía del profesor |
+| H5 | Consultas OLAP, tablero `.pbix`, notebook del modelo analítico y resumen de 1 página | **[PENDIENTE]** guía del profesor |
+| H6 | Repositorio final, `.pbix`, informe técnico de 1 página, presentación de 20 min y coevaluación | **[PENDIENTE]** guía del profesor |
 
-La página de guía de la propia plantilla repite estas indicaciones y el formato
-con ejemplos. Si algo difiere, manda este archivo. Las entregas F1-E2 y F2-E2
-usan la plantilla que da el curso, con el mismo encabezado.
+La columna «Entregable» resume la guía general del proyecto (sección 7). No
+reemplaza la guía detallada de cada hito.
 
-## Formato (APA 7)
+## Nombre del archivo del Hito 1
 
-La plantilla aplica la séptima edición de las normas APA, en español:
+`Hito1_` seguido de los apellidos de los integrantes pegados, en orden
+alfabético: `Hito1_BravoFreireGuajanPasquelTorres.pdf`. La guía general del
+Hito 1 menciona también el nombre `Proyecto_EquipoX_Hito1` en su paso 10; se usa
+el de la ficha del hito, que es la instrucción de formato de entrega.
 
-| Elemento | Norma aplicada |
-|---|---|
-| Página y letra | A4, márgenes de 2,54 cm, Times New Roman de 12 puntos. |
-| Interlineado | Sencillo y sin espacio entre párrafos. Ajuste del equipo: APA pide doble, pero las entregas tienen de 1 a 3 páginas. Si una entrega no tiene límite de páginas, se cambia a doble. |
-| Alineación y sangría | Texto justificado (ajuste del equipo; APA recomienda alinear a la izquierda). Sangría de primera línea de 1,27 cm. |
-| Número de página | Arriba a la derecha. |
-| Títulos | Nivel 1 centrado y en negrita; nivel 2 a la izquierda y en negrita; nivel 3 a la izquierda, en negrita y cursiva. Solo la primera palabra lleva mayúscula inicial. |
-| Tablas y figuras | Epígrafe encima: «Tabla 1» o «Figura 1» en negrita y, en la línea siguiente, el título en cursiva. Debajo, la línea «Nota.» con la fuente. Las tablas llevan solo líneas horizontales. |
-| Citas | Autor y año en el texto: (Kimball y Ross, 2013); sin fecha, (s. f.). Cada cita tiene su entrada en la sección Referencias. |
-| Referencias | Orden alfabético por el primer autor, con sangría francesa y el título de la obra en cursiva. |
-| Números | Coma decimal y punto para los miles (190.619; 15,33 %). |
+## Plantilla opcional
 
-## Encabezado obligatorio
-
-Todos los entregables comienzan con:
-
-```
-Título: <título exacto del entregable>
-Equipo #: <número>
-Nombres: <nombre y apellido de cada integrante>
-Fecha: <dd/mm/aa>
-```
-
-## Nombre de archivo
-
-`<Apellidos>.<sufijo>.<extensión>`, donde `<Apellidos>` son los apellidos
-de los integrantes separados por puntos, siempre en el mismo orden, y el
-sufijo es el que pide el curso para cada entrega:
-
-| Entrega | Sufijo y extensión |
-|---|---|
-| E0 · Contextualización | `.E1.pdf` |
-| F1-E1 · Requerimientos | `.E1.pdf` |
-| F1-E2 · Guía de Diseño Inicial | `.E2.pdf` |
-| F2-E1 · Modelo en Estrella | `.E3.pdf` |
-| F2-E2 · Diccionario de Datos | `.E3.doc` |
-| F3-E1 · Diseño Físico | `.E1.pdf` + script `.sql` |
-| F3-E2 · Proceso ETL | `.E2.pdf` + notebook `.ipynb` |
-| F3-E3 · Flujo ETL | `.E3.pdf` |
-| F4 · Carga y pruebas | `.DW.zip` |
-| F5 · Dashboard | `.DashDW.zip` |
-| Presentación | `.Pre.PDF` |
-| Documento final | `.PDW.PDF` |
-
-**Orden de los apellidos (decidido el 17/10/2026):** alfabético por apellido,
-es decir `Bravo.Freire.Guajan.Pasquel.Torres`. En «Nombres» se escribe nombre y
-apellido en el mismo orden, separados por comas y con «y» antes del último.
-La fecha del encabezado va como `dd/mm/aa`, porque la fecha de entrega puede
-cambiar.
-
-**Tamaño del equipo:** el enunciado de los entregables pide equipos de 3
-integrantes y el equipo es de 5 ([PLAN.md](../docs/PLAN.md#4-equipo)). Los
-cinco figuran en «Nombres» y en el nombre del archivo.
-
-**[PENDIENTE]** Número de equipo, y si la composición de 5 se mantiene en los
-entregables o se declara de otra forma. Lo decide el líder.
-
-En `fase0/` está el Word editable de E0, desde el que se exporta. El PDF final
-se agrega por PR cuando el líder lo integre **[PENDIENTE]**.
+`plantilla/plantilla-entregable.docx` es una base en APA 7 con el encabezado
+del curso anterior (Título, Equipo #, Nombres, Fecha). El profesor **no exige
+APA**: exige citar cada fuente con enlace y fecha de consulta. Úsala solo si
+ayuda; en el Hito 1 el encabezado debe llevar el nombre del equipo, el sector
+y la fecha, y la plantilla hay que adaptarlo. **[PENDIENTE]** decidir si se
+conserva o se reemplaza cuando haya más hitos con guía.
 
 ## Reglas
 
 - Aquí no se guardan datos reales ni datasets.
 - Un archivo final solo entra por PR aprobado por el líder.
+- El uso de IA se declara en el informe del hito que lo pida (qué se pidió y
+  cómo se verificó), según la guía general del proyecto.

@@ -4,10 +4,10 @@
 **Borrador original:** Jorge Torres, 14 de octubre de 2026 · **Integración
 para la entrega (#14):** 17 de octubre de 2026
 
-Este documento es la fuente en Markdown del entregable E0. El Word que se
-exporta a PDF está en
-[`deliverables/fase0/`](../../deliverables/fase0/Bravo.Freire.Guajan.Pasquel.Torres.E1.docx)
-y reproduce este texto con formato APA 7. Si cambia uno, se cambia el otro.
+> **Histórico.** E0 ya no es un entregable: el profesor reemplazó las fases
+> anteriores por seis hitos (ver [PLAN.md](../PLAN.md)). Este texto se conserva
+> como insumo para el [Hito 1](hito1.md). Su Word y su carpeta de entrega se
+> eliminaron; siguen en el historial de Git.
 
 ## Nombre y giro de la empresa
 
@@ -22,8 +22,7 @@ muestra. Quedan excluidos los gobiernos autónomos descentralizados (GAD), sus
 empresas y cualquier entidad ajena a la planta central. Los casos dudosos,
 como los institutos con régimen propio, se resolverán con criterios de
 inclusión documentados. El trabajo es académico e independiente de SERCOP y de
-las entidades estudiadas. La delimitación procede de la
-[propuesta del equipo](../PROPUESTA.md#1-contexto-y-objetivo) y del
+las entidades estudiadas. La delimitación vigente está en el
 [ADR 0001](../adr/0001-alcance.md).
 
 ## Área de análisis a desarrollar
