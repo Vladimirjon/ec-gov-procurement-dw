@@ -8,10 +8,13 @@ relación con SERCOP ni con ninguna entidad.
 
 ## Estado actual
 Hito 1 en curso. El repositorio tiene documentación, esqueleto de carpetas y
-scripts auxiliares de reconocimiento en `scripts/`. No hay ETL del DW,
-dependencias declaradas, base de datos, suite de pruebas ni CI. Las descargas
-locales de reconocimiento no constituyen todavía la carga definitiva del
-periodo.
+scripts auxiliares de reconocimiento en `scripts/`. El entorno se declara en
+`pyproject.toml` y `uv.lock` (Python 3.14, sin dependencias de ejecución;
+`ruff` y `pytest` como dependencias de desarrollo). Las pruebas de `tests/unit/`
+cubren los dos scripts de Python de `scripts/` con datos sintéticos, y el CI de
+GitHub Actions (`.github/workflows/ci.yml`) corre lint y pruebas en Linux y
+Windows en cada PR. No hay ETL del DW ni base de datos. Las descargas locales
+de reconocimiento no constituyen todavía la carga definitiva del periodo.
 No afirmes ni documentes funcionalidad que no exista.
 
 ## Instrucciones vigentes
@@ -46,9 +49,23 @@ Nuevas dependencias, nueva infraestructura o servicios, cambios de alcance o
 de arquitectura, y cualquier decisión marcada como [CONFIRMAR] o [PENDIENTE].
 
 ## Verificación
-Ejecuta las pruebas y el linter relevantes después de cada cambio y reporta el
-resultado real, incluidos los fallos. Mientras no estén configurados, dilo
-explícitamente en lugar de dar el cambio por verificado.
+Ejecuta después de cada cambio, desde la raíz del repositorio, los mismos
+pasos que el CI, y reporta el resultado real, incluidos los fallos:
+
+```bash
+uv sync --locked
+uv run ruff check
+uv run ruff format --check
+uv run pytest
+```
+
+`scripts/inspect_sercop_zip.py` y `scripts/profile_sercop_fields.py` son
+evidencia: su SHA-256 está registrado en `docs/sources/`. No los reformatees
+(ruff los excluye del formateador). Cambiar su contenido crea una versión
+nueva que necesita aprobación del líder y un resumen nuevo en `docs/sources/`;
+una prueba falla mientras el script no coincida con un hash registrado. Lo
+que no cubran las pruebas, como el PowerShell de `scripts/`, se verifica a
+mano y se dice así.
 
 ## Convenciones
 Código y nombres técnicos en inglés. Documentos de entrega en español.

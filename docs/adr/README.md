@@ -12,4 +12,6 @@ instrucciones del profesor (los dos PDF) mandan sobre cualquier ADR.
 | [0004](0004-modelo-dimensional.md) | Modelo dimensional | Aceptado |
 
 El 3/11/2026 se reescribieron los cuatro para ajustarlos a las guías del
-profesor. Las versiones anteriores están en el historial de Git.
+profesor. Las versiones anteriores están en el historial de Git. Ese mismo
+día el ADR 0003 recibió una actualización fechada (Python 3.14 y CI adelantado
+al Hito 1, issue #43), registrada en su sección "Actualizaciones".
