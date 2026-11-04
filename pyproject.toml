@@ -22,3 +22,38 @@ dev = [
 package = false
 # 0.13.4 is the first release with the fix for GHSA-hq85-5cpj-mr62.
 required-version = ">=0.13.4"
+
+[tool.ruff]
+# The existing scripts use lines of up to 116 characters; 120 keeps them within the limit.
+line-length = 120
+# Apply the exclusions below even when a file is passed explicitly (editors, ad hoc commands).
+force-exclude = true
+
+[tool.ruff.format]
+# scripts/inspect_sercop_zip.py and scripts/profile_sercop_fields.py are evidence: their SHA-256
+# is recorded in docs/sources/*.json and docs/sources/reconocimiento.md, so the formatter must not
+# rewrite them. A new version of a script is a new piece of evidence, not a reformat.
+exclude = [
+    "scripts/inspect_sercop_zip.py",
+    "scripts/profile_sercop_fields.py",
+]
+
+[tool.ruff.lint]
+# E, W: pycodestyle; F: pyflakes; I: import order; B: bugbear; UP: pyupgrade;
+# SIM: simplifications; S: bandit security checks; RUF: ruff-specific rules.
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "S", "RUF"]
+
+[tool.ruff.lint.isort]
+# Match the existing scripts: `import x` and `from x import y` sorted together by module
+# name, and two blank lines after the import block.
+force-sort-within-sections = true
+lines-after-imports = 2
+
+[tool.ruff.lint.per-file-ignores]
+# Evidence scripts with a recorded hash (see [tool.ruff.format]); they cannot be edited.
+# UP017: `timezone.utc` instead of `datetime.UTC` is a style modernization, not a defect.
+"scripts/inspect_sercop_zip.py" = ["UP017"]
+"scripts/profile_sercop_fields.py" = ["UP017"]
+# S101: pytest relies on plain `assert` statements.
+# S603: the tests run the scripts with sys.executable and a fixed argument list, without a shell.
+"tests/**/*.py" = ["S101", "S603"]
