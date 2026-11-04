@@ -25,12 +25,15 @@ se entrega en seis hitos y hoy solo el **Hito 1** tiene fecha: revisión el
 Hito 1 en curso. El repositorio contiene documentación, el esqueleto de
 carpetas y scripts auxiliares de reconocimiento de SERCOP. Se descargaron
 localmente (fuera de Git) el JSON de enero de 2025 y el anual de 2025, y se
-midieron su estructura y volumen. Todavía **no** existe:
+midieron su estructura y volumen. Hay entorno de desarrollo con `uv`
+(`pyproject.toml`, `uv.lock`, Python 3.14), pruebas con datos sintéticos de los
+scripts de Python de `scripts/` y CI que corre lint y pruebas en cada PR (ver
+[CONTRIBUTING.md](CONTRIBUTING.md#verificación-local)). Todavía **no** existe:
 
 - código de extracción, carga, transformación ni reglas de calidad;
 - base de datos, DDL, vistas ni tableros de Power BI;
-- dependencias declaradas, entorno reproducible, pruebas ni CI;
-- la carga definitiva del periodo 2021–2025 ni fixtures.
+- dependencias de ejecución (pandas, SQLAlchemy) ni `compose.yaml`;
+- la carga definitiva del periodo 2021–2025 ni fixtures versionados.
 
 Lo descrito en [Arquitectura prevista](#arquitectura-prevista) es diseño, no
 funcionalidad implementada.
@@ -73,7 +76,8 @@ Decisiones: [ADR](docs/adr/README.md).
 ├─ AGENTS.md                  # reglas para asistentes de IA
 ├─ CONTRIBUTING.md            # flujo de trabajo del equipo
 ├─ LICENSE
-├─ .github/                   # CODEOWNERS y plantillas de PR e issues
+├─ pyproject.toml, uv.lock    # entorno con uv: Python 3.14, ruff y pytest
+├─ .github/                   # CODEOWNERS, plantillas, CI y Dependabot
 ├─ docs/
 │  ├─ PLAN.md                 # plan por hitos y reparto
 │  ├─ requisitos-del-profesor.md
@@ -90,13 +94,12 @@ Decisiones: [ADR](docs/adr/README.md).
 ├─ notebooks/                 # perfilado, ETL, modelo analítico (vacío)
 ├─ scripts/                   # auxiliares de reconocimiento; no son el ETL
 ├─ reports/powerbi/           # tablero (vacío)
-├─ tests/                     # unit, integration, fixtures (vacíos)
+├─ tests/                     # unit (scripts); integration y fixtures vacíos
 ├─ deliverables/              # entregas por hito (h1 a h6) y plantilla
 └─ data/                      # ignorado por git
 ```
 
-Pendientes: `pyproject.toml`, `compose.yaml` y `Makefile`, que se crean cuando
-empiece el Hito 2. El CI se activa cuando haya código que verificar.
+Pendientes: `compose.yaml` y `Makefile`, que se crean cuando empiece el Hito 2.
 
 ## Cómo contribuir
 

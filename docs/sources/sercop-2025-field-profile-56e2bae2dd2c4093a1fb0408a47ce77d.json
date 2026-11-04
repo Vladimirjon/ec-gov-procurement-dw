@@ -1,0 +1,67 @@
+{
+  "report_schema_version": 1,
+  "run_id": "03abaad2-c51d-4a6b-b742-314a8e4a46f8",
+  "started_utc": "2026-11-04T02:21:05.447031+00:00",
+  "finished_utc": "2026-11-04T02:21:49.767073+00:00",
+  "python_version": "3.14.9",
+  "profiler_sha256": "D1C4C3A0AE15E6D5EFA4E3A721CF3A2AACD533A873723B08C375B33AE20863DB",
+  "source_file": "releases_2025.zip",
+  "source_bytes": 160930685,
+  "source_sha256": "80201404465D6C212E4AD53C60E6A928CEEBF0EADFB57A0E200805B49A1894A3",
+  "source_hash_unchanged": true,
+  "json_entry": "releases_2025.json",
+  "counts": {
+    "packages": 190619,
+    "releases": 190619,
+    "release_date": 190619,
+    "buyer_id": 190619,
+    "buyer_name": 190619,
+    "tender": 185536,
+    "tender_value_amount_numeric": 167204,
+    "tender_start_date": 32738,
+    "tender_procurement_method": 185536,
+    "tender_procurement_method_details": 185535,
+    "award_objects": 183891,
+    "award_value_amount_numeric": 183887,
+    "award_date": 28010,
+    "releases_with_numeric_award": 182273,
+    "releases_with_tender_and_award_amount": 166555
+  },
+  "anomalies": {},
+  "package_license_values": {
+    "https://creativecommons.org/licenses/by/3.0/ec/": 190619
+  },
+  "package_publisher_values": {
+    "Servicio Nacional de Contrataci\u00f3n P\u00fablica (SERCOP)": 190619
+  },
+  "package_publication_policy_values": {
+    "https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf": 190619
+  },
+  "procurement_method_values": {
+    "selective": 115416,
+    "direct": 45721,
+    "open": 24090,
+    "limited": 309
+  },
+  "procurement_method_details_distinct": 442,
+  "procurement_method_details_top10": {
+    "Cat\u00e1logo electr\u00f3nico - Mejor oferta en el convenio SERCOP-SELPROV-002-2024, SUMINISTROS DE OFICINA 2024, SUMINISTROS DE OFICINA Y ACCESORIOS TECNOL\u00d3GICOS": 67235,
+    "Subasta Inversa Electr\u00f3nica": 18332,
+    "Cat\u00e1logo electr\u00f3nico - Mejor oferta en el convenio SERCOP-SELPROV-004-2024, Insumos de limpieza, INSUMOS DE LIMPIEZA POR PARTE DE LAS ENTIDADES CONTRATANTES A TRAV\u00c9S DE CAT\u00c1LOGO ELECTR\u00d3NICO": 16104,
+    "Cat\u00e1logo electr\u00f3nico - Compra directa en el convenio CDI-SERCOP-001-2016, PROVISI\u00d3N DE PRODUCTOS DE CONFECCI\u00d3N TEXTIL, PROVISI\u00d3N DE PRODUCTOS DE CONFECCI\u00d3N TEXTIL": 15769,
+    "Cat\u00e1logo electr\u00f3nico - Mejor oferta en el convenio SERCOP-SELPROV-002-2021, SUMINISTROS DE IMPRESI\u00d3N, SELECCI\u00d3N DE PROVEEDORES PARA LA ADQUISICI\u00d3N DE SUMINISTROS DE IMPRESI\u00d3N": 7568,
+    "Cat\u00e1logo electr\u00f3nico - Mejor oferta en el convenio SERCOP-SELPROV-005-2024, Productos qu\u00edmicos para limpieza , PROCEDIMIENTO DE SELECCI\u00d3N DE PROVEEDORES PARA LA CELEBRACI\u00d3N DECONVENIOS MARCO PARA LA ADQUISICI\u00d3N DE PRODUCTOS QU\u00cdMICOS PAR A LIMPIEZAPOR PARTE DE LAS ENTIDADES CONTRATANTES A TRAV\u00c9S DE CAT\u00c1LOGO ELECTR\u00d3NICO": 7076,
+    "Cat\u00e1logo electr\u00f3nico - Mejor oferta en el convenio SERCOP-SELPROV-006-2020, Suministros de Limpieza 2020, SELECCI\u00d3N DE PROVEEDORES PARA LA ADQUISICI\u00d3N DE SUMINISTROS DE LIMPIEZA": 5328,
+    "Licitaci\u00f3n": 3213,
+    "Cat\u00e1logo electr\u00f3nico - Compra directa en el convenio CDI-SERCOP-005-2015, MOBILIARIO ESCOLAR (EN MADERA Y METAL)  , CATALOGACION DEL SERVICIO DE METALMECANICA EN EL PRODUCTO FABRICACION DE MOBILIARIO ESCOLAR EN MADERA Y METAL": 3024,
+    "Menor Cuant\u00eda": 2836
+  },
+  "award_currency_values": {
+    "USD": 183887
+  },
+  "release_date_year_counts": {
+    "2025": 176665,
+    "2026": 13954
+  },
+  "ocds_schema_validated": false
+}

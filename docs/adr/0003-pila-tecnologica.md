@@ -1,7 +1,8 @@
 # ADR 0003: Pila tecnológica
 
 - **Estado:** Aceptado
-- **Fecha:** 2026-11-03 (reemplaza la versión del 2026-10-06)
+- **Fecha:** 2026-11-03 (reemplaza la versión del 2026-10-06; actualizado el
+  mismo día, ver [Actualizaciones](#actualizaciones))
 - **Decide:** líder del equipo
 - **Referencias:** guía del proyecto, sección 5 (arquitectura de referencia)
 
@@ -17,7 +18,7 @@ Power BI.
 | Capa | Herramienta | Nota |
 |---|---|---|
 | Base de datos | PostgreSQL, en Docker Compose | Esquemas `stg`, `dw` y `audit` |
-| ETL | Python 3.13 (pandas, SQLAlchemy) y SQL | Un solo comando reconstruye el DW |
+| ETL | Python 3.14 (pandas, SQLAlchemy) y SQL | Un solo comando reconstruye el DW. Antes 3.13; ver [Actualizaciones](#actualizaciones) |
 | Perfilado y modelo analítico | Jupyter | Notebooks reproducibles |
 | Visualización | Power BI Desktop | Archivo `.pbix` conectado al esquema `dw` |
 | Control de versiones | Git y GitHub | Historial con commits de todo el equipo |
@@ -42,14 +43,33 @@ Las reglas de calidad y la bitácora se escriben en Python y SQL, en el esquema
 
 | Tema | Quién | Cuándo |
 |---|---|---|
-| Archivos de entorno: `pyproject.toml`, `compose.yaml`, `Makefile` | Líder | Hito 2 |
-| CI con GitHub Actions y `pre-commit`: se activa cuando haya código que verificar | Líder | Hito 4 |
+| Archivos de entorno: `compose.yaml`, `Makefile` | Líder | Hito 2 |
+| `pre-commit` | Líder | Hito 4 |
+| Marcar el CI como verificación obligatoria en la protección de `main` | Líder | Al fusionar el issue #43 |
+
+Hecho en el Hito 1 (issue #43): `pyproject.toml`, `uv.lock` y `.python-version`;
+CI con GitHub Actions y Dependabot.
 
 ## Consecuencias
 
 - Docker debe poder ejecutarse en el equipo de cada integrante.
 - Power BI Desktop solo funciona en Windows: quien trabaje en el tablero
   necesita ese sistema.
-- Hoy no hay `pyproject.toml`, `compose.yaml` ni `Makefile`. Los auxiliares de
-  `scripts/` usan Python 3.13 y PowerShell sin dependencias nuevas, y no
-  constituyen un entorno reproducible.
+- `pyproject.toml` y `uv.lock` fijan Python 3.14 y las versiones exactas de
+  `ruff` y `pytest`, que son las únicas dependencias (de desarrollo). Aún no
+  hay `compose.yaml` ni `Makefile`. Los auxiliares de `scripts/` siguen usando
+  solo la biblioteca estándar y PowerShell.
+- El CI corre `uv sync --locked`, `ruff check`, `ruff format --check` y
+  `pytest` en Linux y Windows en cada PR y en cada push a `main`.
+
+## Actualizaciones
+
+- **2026-11-03 (issue #43, decide el líder).** Python pasa de 3.13 a 3.14.
+  Motivo: desde el 1/10/2026 la 3.13 solo recibe parches de seguridad,
+  mientras que la 3.14 sigue recibiendo correcciones de errores hasta octubre
+  de 2027; además, la máquina del líder ya usa 3.14. Se fija la línea
+  (`.python-version` = `3.14`, `requires-python = "==3.14.*"`) y no el parche:
+  uv usa el 3.14 más reciente que tenga disponible (en el CI, 3.14.10). El CI,
+  que este ADR dejaba para el Hito 4, se adelanta al Hito 1 por decisión del
+  líder; `pre-commit` sigue en el Hito 4. Las herramientas no cambian: `uv`,
+  `ruff` y `pytest`.
