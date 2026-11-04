@@ -3,10 +3,12 @@
 Guía de trabajo del equipo (5 personas). Se basa en el
 [plan por hitos](docs/PLAN.md).
 
-> **Estado:** `main` está protegida y hay plantillas de PR e issues. El CI se
-> implementará cuando el repositorio tenga código y pruebas que verificar.
-> Hasta entonces, la regla "el CI debe pasar" se sustituye por una
-> verificación manual descrita en el PR.
+> **Estado:** `main` está protegida y hay plantillas de PR e issues. El CI
+> (`.github/workflows/ci.yml`) corre lint y pruebas en Linux y Windows en cada
+> PR y en cada push a `main`. Todavía no está marcado como verificación
+> obligatoria en la protección de `main`: hasta que el líder lo active, revisa
+> que el CI esté en verde antes de pedir la fusión. Lo que el CI no cubre se
+> verifica a mano y se describe en el PR.
 
 ## Roles y rotación
 
@@ -24,7 +26,7 @@ Aplican a todo el código y la documentación, con o sin asistentes de IA.
 
 - `main` está protegida: solo cambia mediante PR aprobado por el líder (ver
   [Protección de `main`](#protección-de-main)).
-- El CI debe pasar antes de fusionar (cuando exista).
+- El CI debe pasar antes de fusionar.
 - Commits pequeños y descriptivos con
   [Conventional Commits](https://www.conventionalcommits.org/).
 - Toda decisión de arquitectura se registra en un ADR (`docs/adr/`).
@@ -82,6 +84,25 @@ Aplican a todo el código y la documentación, con o sin asistentes de IA.
    git branch -d docs/12-documento-requerimientos
    ```
 
+## Verificación local
+
+El entorno se gestiona con [`uv`](https://docs.astral.sh/uv/) (versión 0.13.4
+o posterior; `pyproject.toml` lo exige). Desde la raíz del repositorio, en
+PowerShell o Git Bash, ejecuta los mismos pasos que el CI:
+
+```bash
+uv sync --locked          # crea .venv con Python 3.14 y las versiones de uv.lock
+uv run ruff check         # lint
+uv run ruff format --check
+uv run pytest             # pruebas de tests/
+```
+
+Si falta Python 3.14, `uv sync` lo descarga. `--locked` falla si `uv.lock` no
+corresponde a `pyproject.toml`: no lo regeneres para que pase. Una dependencia
+nueva (`uv add`) cambia los dos archivos y necesita la aprobación del líder.
+Para corregir el formato de tus archivos usa `uv run ruff format`; los dos
+scripts de evidencia de `scripts/` quedan excluidos a propósito.
+
 ## Protección de `main`
 
 Configurada en GitHub; no depende de la buena voluntad de nadie.
@@ -103,7 +124,8 @@ saltarse estas reglas. Lo usa solo para fusionar sus propios PR (GitHub no
 permite aprobar un PR propio) y nunca para hacer push directo a `main`. En
 sus PR pide igual la revisión de un integrante.
 
-Cuando exista CI, se añadirá como verificación obligatoria antes de fusionar.
+El CI todavía no figura como verificación obligatoria; el líder lo añadirá a
+estas reglas.
 
 ## Definición de hecho
 

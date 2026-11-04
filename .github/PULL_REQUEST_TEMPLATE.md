@@ -21,8 +21,9 @@ Relacionado con #<!-- número del issue; usar Closes solo si se completa el issu
 ## Cómo se verificó
 
 <!--
-Mientras no exista CI, describe la verificación manual: qué ejecutaste,
-qué revisaste y el resultado real, incluidos los fallos.
+Indica el resultado del CI y de los comandos locales (CONTRIBUTING.md,
+"Verificación local"). Describe la verificación manual de lo que el CI no
+cubre: qué ejecutaste, qué revisaste y el resultado real, incluidos los fallos.
 -->
 
 ## Lista de control

@@ -18,6 +18,7 @@ import sys
 import time
 import uuid
 import zipfile
+import zlib
 
 
 CHUNK_CHARS = 1024 * 1024
@@ -152,7 +153,7 @@ def inspect_zip(zip_path, expected_processes):
                     else:
                         counts["releases_without_nonempty_ocid"] += 1
                     release_id = release.get("id")
-                    if isinstance(ocid, str) and isinstance(release_id, str) and release_id.strip():
+                    if isinstance(ocid, str) and ocid.strip() and isinstance(release_id, str) and release_id.strip():
                         release_keys.add((ocid, release_id))
                     awards = child_array(release, "awards")
                     contracts = child_array(release, "contracts")
@@ -225,7 +226,9 @@ def main():
             with args.output.open("x", encoding="utf-8") as destination:
                 destination.write(text)
         print(text, end="")
-    except (OSError, ValueError, zipfile.BadZipFile, RuntimeError, RecursionError) as error:
+    except (
+        OSError, ValueError, EOFError, NotImplementedError, zipfile.BadZipFile, zlib.error, RuntimeError, RecursionError
+    ) as error:
         # Do not print exception messages that might contain source record values.
         print(f"Inspección detenida ({type(error).__name__}); no se generó un resumen completo.", file=sys.stderr)
         return 1
