@@ -23,13 +23,14 @@ institución en particular.
 oficial [gob.ec/instituciones](https://www.gob.ec/instituciones) (MINTEL) y
 los ministerios se contrastaron con la cabecera ejecutiva que publica el
 [catálogo de instituciones del MEF/MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/).
-Ambas fuentes se consultaron el 15/10/2026; el detalle entidad por entidad
-está en [entidades.md](../sources/entidades.md).
+Ambas fuentes se consultaron el 15/10/2026 y se volvieron a abrir el
+6/11/2026, con las mismas cifras de ministerios e institutos; el detalle
+entidad por entidad está en [entidades.md](../sources/entidades.md).
 
-| Categoría | Cifra aproximada | Fuente (consultada el 15/10/2026) | Observación |
+| Categoría | Cifra aproximada | Fuente (consultada el 15/10 y el 6/11/2026) | Observación |
 |---|---|---|---|
 | Presidencia de la República | 1 | [gob.ec/instituciones](https://www.gob.ec/instituciones), sección `P`: `Presidencia de la República (PR)` | La `Vicepresidencia de la República (VPR)` figura aparte, en la sección `V`. El ADR 0001 no la nombra entre las categorías del sector, así que no se cuenta aquí y queda fuera de los indicadores mientras no se clasifique (regla 6 del ADR). |
-| Ministerios | 10 carteras vigentes en 2026 | [Catálogo MEF/MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) y [gob.ec/instituciones/M](https://www.gob.ec/instituciones/M) | La cabecera ejecutiva muestra 10 carteras de Estado. El directorio `gob.ec` lista 18 entradas ministeriales porque en él coexisten los ministerios fusionados en 2026 con carteras previas a la fusión que mantienen fichas de trámites activas. |
+| Ministerios | 10 carteras vigentes en 2026 | [Catálogo MEF/MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) y [gob.ec/instituciones/M](https://www.gob.ec/instituciones/M) | La cabecera ejecutiva muestra 10 carteras de Estado (la décima es «Trabajo y Desarrollo Humano»; en el directorio constan por separado `MT` y `MDH`). El directorio `gob.ec` lista 18 entradas ministeriales porque en él coexisten los ministerios fusionados en 2026 con carteras previas a la fusión que mantienen fichas de trámites activas. |
 | Institutos | 16 candidatos | [gob.ec/instituciones/I](https://www.gob.ec/instituciones/I) | De 20 entradas: 16 candidatos a institutos públicos sectoriales o de investigación, 3 institutos de seguridad social (`IESS`, `ISSPOL`, `ISSFA`, excluidos más abajo) y 1 registro técnico de prueba (`IP2026`). El `INEN` consta en la sección `S` como «Servicio» y su inclusión en esta categoría aún no está decidida. |
 
 Las cifras son aproximadas. `gob.ec` es una fuente base nominal: muestra
@@ -38,25 +39,37 @@ completa ni indica de qué ministerio depende cada instituto. Esa dependencia,
 y su vigencia en 2021–2025, se verifica entidad por entidad con su norma de
 creación o adscripción antes de incluirla en la clasificación.
 
-**Qué queda fuera y por qué** (ADR 0001; cifras de `gob.ec` al 15/10/2026):
+**Qué queda fuera y por qué.** El ADR 0001 deja fuera los GAD, las empresas
+públicas y las otras funciones del Estado. Las demás exclusiones son criterio
+del equipo, inferido de la Constitución y de las directrices del MEF; el ADR no
+las nombra. Las cifras son del directorio `gob.ec`, consultado el 6/11/2026:
 
-- **GAD** provinciales, cantonales y parroquiales (68, sección `G`), con
-  autonomía propia (Constitución, art. 238).
-- **Empresas públicas** nacionales y municipales (27, sección `E`), con
-  personalidad jurídica y autonomía de gestión (art. 315).
-- **Registros de la Propiedad** (39, sección `R`) y **Cuerpos de Bomberos**
-  (sección `C`), de ámbito municipal o concurrente (arts. 264 y 265).
-- **Seguridad social** (`IESS`, `ISSFA`, `ISSPOL`): sus presupuestos están
-  fuera del Presupuesto General del Estado (art. 292) y el MEF los trata como
-  entidades fuera del PGE
-  ([Directrices Proforma 2027](https://www.finanzas.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf),
-  sección 3.2.2, p. 77; consultadas el 15/10/2026 y el 5/11/2026).
+- **GAD** de todos los niveles (más de 200 entradas en la
+  [sección `G`](https://www.gob.ec/instituciones/G)), con autonomía propia
+  (Constitución, art. 238). ADR 0001.
+- **Empresas públicas** nacionales y municipales (30 entradas en la
+  [sección `E`](https://www.gob.ec/instituciones/E), en su mayoría empresas
+  públicas), con personalidad jurídica y autonomía de gestión (art. 315).
+  ADR 0001.
 - **Otras funciones del Estado:** Legislativa, Judicial, Electoral y de
-  Transparencia y Control Social (arts. 118, 178, 217 y 204).
+  Transparencia y Control Social (arts. 118, 178, 217 y 204). ADR 0001.
+- **Registros de la Propiedad** (39 entradas en la
+  [sección `R`](https://www.gob.ec/instituciones/R)) y **Cuerpos de Bomberos**
+  ([sección `C`](https://www.gob.ec/instituciones/C)): se gestionan en el
+  ámbito municipal o de forma concurrente con el Ejecutivo (arts. 264, num. 13,
+  y 265). Criterio del equipo.
+- **Seguridad social** (`IESS`, `ISSFA`, `ISSPOL`): el art. 292 excluye del
+  Presupuesto General del Estado (PGE) los ingresos y egresos de la seguridad
+  social, y las
+  [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf)
+  del MEF (secciones 3.1 y 3.2, p. 69–70, y 3.2.2, p. 77; consultadas el
+  6/11/2026) las tratan como entidades que no forman parte del PGE. Criterio
+  del equipo; por la regla 6 del ADR 0001, toda entidad sin clasificación
+  aprobada queda fuera de los indicadores.
 
 Los artículos citados en esta sección y en la siguiente son de la
 [Constitución de la República del Ecuador](https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf)
-(edición publicada por la Asamblea Nacional, consultada el 5/11/2026).
+(edición publicada por la Asamblea Nacional, consultada el 6/11/2026).
 
 ### 2. Misión y servicios
 
@@ -74,7 +87,7 @@ población los bienes y servicios públicos que de ellas se derivan. Cada
 ministerio es rector de un área (por ejemplo, salud pública, educación,
 seguridad interna, defensa nacional, infraestructura, ambiente y energía, o
 desarrollo económico y productivo), y los institutos aportan servicios
-técnicos, estadísticos o de investigación en esas áreas.
+técnicos o de investigación en esas áreas.
 
 Para cumplir esa misión, estas entidades compran bienes, obras y servicios.
 Esa función de **compradora pública** es la que analiza este proyecto.
