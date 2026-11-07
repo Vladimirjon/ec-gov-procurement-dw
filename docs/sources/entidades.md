@@ -4,6 +4,12 @@
 
 Este documento presenta únicamente lo observado en las fuentes oficiales consultadas y en la muestra local de reconocimiento de enero de 2025 (`data/reconnaissance`, 2.186 releases, que no constituye la foto definitiva aprobada). Los criterios definitivos de inclusión, la regla de cruce y la resolución de casos dudosos permanecen como **[PENDIENTE]** de aprobación del líder, conforme al [ADR 0001](../adr/0001-alcance.md).
 
+> **Actualización del 7/11/2026.** Lo observado el 15/10/2026 se conserva tal cual; esta nota solo lo fecha y lo matiza.
+>
+> - **Catálogo institucional descargable.** En la revisión del 7/11/2026 se descargó y abrió el [catálogo público en Excel](https://www.economicoproductivo.gob.ec/wp-content/plugins/download-monitor/download.php?id=18691) del MDEP, con columnas de sector, entidad, EOD, nombre y RUC. Lo que las secciones 1 y 3 dicen de que el detalle solo reside en eSIGEF describe la consulta del 15/10/2026 y debe leerse con esta nota. Haber abierto el archivo no demuestra que resuelva la clasificación histórica 2021–2025: queda por evaluar en el Hito 2 si sirve para cruzar con `buyer.id` o el RUC y si recoge fusiones y vigencia por fecha.
+> - **Conteos del directorio.** Las 68 entradas de la sección `G` y las 27 de la sección `E` del 15/10/2026 no se reprodujeron el 6/11/2026: `G` mostró más de 200 y `E` entre 29 y 30 según el método de lectura, entre ellas una escuela militar. Las secciones alfabéticas mezclan clases de entidades, así que esos conteos no delimitan el sector y el Hito 1 no los usa. Las 18 entradas de `M` y las 20 de `I` sí se reprodujeron.
+> - **Casos históricos que pasan al Hito 2.** Los de la sección 5.3 (ministerios fusionados frente a históricos, seguridad social, `INEN` y entidades de tipo «Servicio», unidades con sufijo en `buyer.id`) y la evaluación del catálogo en Excel.
+
 ## 1. Fuentes oficiales evaluadas
 
 Se propone usar `gob.ec/instituciones` como **fuente base nominal para descubrir candidatos**, que por sí sola no acredita completitud, vigencia ni dependencia y debe complementarse con normativa y evidencia institucional para aprobar la clasificación de cada entidad:

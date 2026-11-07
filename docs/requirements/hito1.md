@@ -20,18 +20,17 @@ de la República, los ministerios y los institutos que dependen de ellos
 institución en particular.
 
 **Tamaño aproximado.** Los candidatos se identificaron en el directorio
-oficial [gob.ec/instituciones](https://www.gob.ec/instituciones) (MINTEL) y
-los ministerios se contrastaron con la cabecera ejecutiva que publica el
-[catálogo de instituciones del MEF/MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/).
-Ambas fuentes se consultaron el 15/10/2026 y se volvieron a abrir el
-6/11/2026, con las mismas cifras de ministerios e institutos; el detalle
-entidad por entidad está en [entidades.md](../sources/entidades.md).
+oficial [gob.ec/instituciones](https://www.gob.ec/instituciones) (MINTEL). Para
+los ministerios se contrastó además el menú de navegación del
+[portal del MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/). Ambos se consultaron el 15/10/2026 y se volvieron a
+abrir el 6/11/2026; el detalle entidad por entidad está en
+[entidades.md](../sources/entidades.md).
 
 | Categoría | Cifra aproximada | Fuente (consultada el 15/10 y el 6/11/2026) | Observación |
 |---|---|---|---|
-| Presidencia de la República | 1 | [gob.ec/instituciones](https://www.gob.ec/instituciones), sección `P`: `Presidencia de la República (PR)` | La `Vicepresidencia de la República (VPR)` figura aparte, en la sección `V`. El ADR 0001 no la nombra entre las categorías del sector, así que no se cuenta aquí y queda fuera de los indicadores mientras no se clasifique (regla 6 del ADR). |
-| Ministerios | 10 carteras vigentes en 2026 | [Catálogo MEF/MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) y [gob.ec/instituciones/M](https://www.gob.ec/instituciones/M) | La cabecera ejecutiva muestra 10 carteras de Estado (la décima es «Trabajo y Desarrollo Humano»; en el directorio constan por separado `MT` y `MDH`). El directorio `gob.ec` lista 18 entradas ministeriales porque en él coexisten los ministerios fusionados en 2026 con carteras previas a la fusión que mantienen fichas de trámites activas. |
-| Institutos | 16 candidatos | [gob.ec/instituciones/I](https://www.gob.ec/instituciones/I) | De 20 entradas: 16 candidatos a institutos públicos sectoriales o de investigación, 3 institutos de seguridad social (`IESS`, `ISSPOL`, `ISSFA`, excluidos más abajo) y 1 registro técnico de prueba (`IP2026`). El `INEN` consta en la sección `S` como «Servicio» y su inclusión en esta categoría aún no está decidida. |
+| Presidencia de la República | 1 | [gob.ec/instituciones](https://www.gob.ec/instituciones), sección `P`: `Presidencia de la República (PR)` | La `Vicepresidencia de la República (VPR)` consta aparte, en la sección `V`. El ADR 0001 no la nombra, así que no se cuenta y, por su regla 6, queda fuera de los indicadores hasta clasificarla. |
+| Ministerios | 10 carteras en el menú de navegación del portal | [Portal del MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) y [gob.ec/instituciones/M](https://www.gob.ec/instituciones/M) | El menú muestra 10 carteras (la décima, «Trabajo y Desarrollo Humano»); no es un inventario normativo. `gob.ec` lista 18 entradas ministeriales porque junto a los ministerios fusionados en 2026 mantiene carteras previas. La vigencia de cada una se verifica con su norma en el Hito 2. |
+| Institutos | 16 candidatos | [gob.ec/instituciones/I](https://www.gob.ec/instituciones/I) | De 20 entradas: 16 candidatos, 3 de seguridad social (`IESS`, `ISSPOL`, `ISSFA`) y 1 registro de prueba (`IP2026`). La inclusión del `INEN` (consta como «Servicio», sección `S`) no está decidida. |
 
 Las cifras son aproximadas. `gob.ec` es una fuente base nominal: muestra
 nombre, sigla y enlace de cada entidad, pero no acredita que la lista esté
@@ -39,33 +38,31 @@ completa ni indica de qué ministerio depende cada instituto. Esa dependencia,
 y su vigencia en 2021–2025, se verifica entidad por entidad con su norma de
 creación o adscripción antes de incluirla en la clasificación.
 
-**Qué queda fuera y por qué.** El ADR 0001 deja fuera los GAD, las empresas
-públicas y las otras funciones del Estado. Las demás exclusiones son criterio
-del equipo, inferido de la Constitución y de las directrices del MEF; el ADR no
-las nombra. Las cifras son del directorio `gob.ec`, consultado el 6/11/2026:
+**Qué queda fuera y por qué.** Por decisión del ADR 0001 (aceptado) quedan
+fuera:
 
-- **GAD** de todos los niveles (más de 200 entradas en la
-  [sección `G`](https://www.gob.ec/instituciones/G)), con autonomía propia
-  (Constitución, art. 238). ADR 0001.
-- **Empresas públicas** nacionales y municipales (30 entradas en la
-  [sección `E`](https://www.gob.ec/instituciones/E), en su mayoría empresas
-  públicas), con personalidad jurídica y autonomía de gestión (art. 315).
-  ADR 0001.
+- **GAD**, con autonomía política, administrativa y financiera (Constitución,
+  art. 238).
+- **Empresas públicas**, con personalidad jurídica y autonomía de gestión
+  (art. 315).
 - **Otras funciones del Estado:** Legislativa, Judicial, Electoral y de
-  Transparencia y Control Social (arts. 118, 178, 217 y 204). ADR 0001.
-- **Registros de la Propiedad** (39 entradas en la
-  [sección `R`](https://www.gob.ec/instituciones/R)) y **Cuerpos de Bomberos**
-  ([sección `C`](https://www.gob.ec/instituciones/C)): se gestionan en el
-  ámbito municipal o de forma concurrente con el Ejecutivo (arts. 264, num. 13,
-  y 265). Criterio del equipo.
-- **Seguridad social** (`IESS`, `ISSFA`, `ISSPOL`): el art. 292 excluye del
-  Presupuesto General del Estado (PGE) los ingresos y egresos de la seguridad
-  social, y las
-  [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf)
-  del MEF (secciones 3.1 y 3.2, p. 69–70, y 3.2.2, p. 77; consultadas el
-  6/11/2026) las tratan como entidades que no forman parte del PGE. Criterio
-  del equipo; por la regla 6 del ADR 0001, toda entidad sin clasificación
-  aprobada queda fuera de los indicadores.
+  Transparencia y Control Social (arts. 118, 178, 217 y 204).
+
+**Exclusión provisional.** Los Registros de la Propiedad, los Cuerpos de
+Bomberos y las entidades de seguridad social (`IESS`, `ISSFA`, `ISSPOL`) no
+están nombrados en el ADR 0001. Quedan fuera de los indicadores solo de forma
+provisional, por la regla 6 del ADR (las entidades dudosas quedan fuera hasta
+resolverse). Su clasificación definitiva se decide en el Hito 2
+([entidades.md](../sources/entidades.md), sección 5.3). Lo que sustenta la duda:
+
+- **Registros y Bomberos:** se gestionan en el ámbito municipal o de forma
+  concurrente con el Ejecutivo (arts. 264, num. 13, y 265).
+- **Seguridad social:** el art. 292 excluye del Presupuesto General del Estado
+  (PGE) sus ingresos y egresos, y las
+  [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf) del MEF (secciones 3.1 y 3.2, p. 69–70;
+  consultadas el 6/11/2026) la tratan como entidades que no forman parte del
+  PGE. Eso la deja fuera del PGE, pero no resuelve por sí solo su clasificación
+  en este proyecto.
 
 Los artículos citados en esta sección y en la siguiente son de la
 [Constitución de la República del Ecuador](https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf)
