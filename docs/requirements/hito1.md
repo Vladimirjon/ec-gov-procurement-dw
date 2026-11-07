@@ -15,28 +15,79 @@
 ### 1. Identificación y alcance
 
 El sector es el **gobierno central** del Ecuador, entendido como la Presidencia
-de la República, los ministerios y los institutos que dependen de ellos. Quedan
-fuera los gobiernos autónomos descentralizados (GAD) y sus empresas, las
-empresas públicas y las entidades de otras funciones del Estado.
+de la República, los ministerios y los institutos que dependen de ellos
+([ADR 0001](../adr/0001-alcance.md)). Se analiza el sector completo, no una
+institución en particular.
 
-Tamaño aproximado según el directorio oficial
-[gob.ec/instituciones](https://www.gob.ec/instituciones) (consultado el
-15/10/2026): una Presidencia, 18 entradas ministeriales y 20 entradas de
-institutos (16 institutos públicos sectoriales o de investigación, 3 de
-seguridad social y 1 registro de prueba). Las cifras son aproximadas: el
-directorio mezcla ministerios vigentes con denominaciones previas a las
-fusiones recientes, y la clasificación definitiva de cada entidad sigue en
-elaboración ([entidades.md](../sources/entidades.md)).
+**Tamaño aproximado.** Los candidatos se identificaron en el directorio
+oficial [gob.ec/instituciones](https://www.gob.ec/instituciones) (MINTEL). Para
+los ministerios se contrastó además el menú de navegación del
+[portal del MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/). Ambos se consultaron el 15/10/2026 y se volvieron a
+abrir el 6/11/2026; el detalle entidad por entidad está en
+[entidades.md](../sources/entidades.md).
+
+| Categoría | Cifra aproximada | Fuente (consultada el 15/10 y el 6/11/2026) | Observación |
+|---|---|---|---|
+| Presidencia de la República | 1 | [gob.ec/instituciones](https://www.gob.ec/instituciones), sección `P`: `Presidencia de la República (PR)` | La `Vicepresidencia de la República (VPR)` consta aparte, en la sección `V`. El ADR 0001 no la nombra, así que no se cuenta y, por su regla 6, queda fuera de los indicadores hasta clasificarla. |
+| Ministerios | 10 carteras en el menú de navegación del portal | [Portal del MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) y [gob.ec/instituciones/M](https://www.gob.ec/instituciones/M) | El menú muestra 10 carteras (la décima, «Trabajo y Desarrollo Humano»); no es un inventario normativo. `gob.ec` lista 18 entradas ministeriales porque junto a los ministerios fusionados en 2026 mantiene carteras previas. La vigencia de cada una se verifica con su norma en el Hito 2. |
+| Institutos | 16 candidatos | [gob.ec/instituciones/I](https://www.gob.ec/instituciones/I) | De 20 entradas: 16 candidatos, 3 de seguridad social (`IESS`, `ISSPOL`, `ISSFA`) y 1 registro de prueba (`IP2026`). La inclusión del `INEN` (consta como «Servicio», sección `S`) no está decidida. |
+
+Las cifras son aproximadas. `gob.ec` es una fuente base nominal: muestra
+nombre, sigla y enlace de cada entidad, pero no acredita que la lista esté
+completa ni indica de qué ministerio depende cada instituto. Esa dependencia,
+y su vigencia en 2021–2025, se verifica entidad por entidad con su norma de
+creación o adscripción antes de incluirla en la clasificación.
+
+**Qué queda fuera y por qué.** Por decisión del ADR 0001 (aceptado) quedan
+fuera:
+
+- **GAD**, con autonomía política, administrativa y financiera (Constitución,
+  art. 238).
+- **Empresas públicas**, con personalidad jurídica y autonomía de gestión
+  (art. 315).
+- **Otras funciones del Estado:** Legislativa, Judicial, Electoral y de
+  Transparencia y Control Social (arts. 118, 178, 217 y 204).
+
+**Exclusión provisional.** Los Registros de la Propiedad, los Cuerpos de
+Bomberos y las entidades de seguridad social (`IESS`, `ISSFA`, `ISSPOL`) no
+están nombrados en el ADR 0001. Quedan fuera de los indicadores solo de forma
+provisional, por la regla 6 del ADR (las entidades dudosas quedan fuera hasta
+resolverse). Su clasificación definitiva se decide en el Hito 2
+([entidades.md](../sources/entidades.md), sección 5.3). Lo que sustenta la duda:
+
+- **Registros y Bomberos:** se gestionan en el ámbito municipal o de forma
+  concurrente con el Ejecutivo (arts. 264, num. 13, y 265).
+- **Seguridad social:** el art. 292 excluye del Presupuesto General del Estado
+  (PGE) sus ingresos y egresos, y las
+  [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf) del MEF (secciones 3.1 y 3.2, p. 69–70;
+  consultadas el 6/11/2026) la tratan como entidades que no forman parte del
+  PGE. Eso la deja fuera del PGE, pero no resuelve por sí solo su clasificación
+  en este proyecto.
+
+Los artículos citados en esta sección y en la siguiente son de la
+[Constitución de la República del Ecuador](https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf)
+(edición publicada por la Asamblea Nacional, consultada el 6/11/2026).
 
 ### 2. Misión y servicios
 
-Estas entidades ejercen la rectoría y ejecutan las políticas del Poder
-Ejecutivo y prestan servicios públicos (salud, educación, seguridad,
-infraestructura, entre otros). Para ello compran bienes, obras y servicios, y
-esa función de **compradora pública** es la que analiza este proyecto.
-**[VERIFICAR]** respaldo constitucional (Constitución de la República del
-Ecuador, art. 141 sobre la Función Ejecutiva y art. 288 sobre compras
-públicas).
+El art. 141 de la Constitución establece que la Presidenta o Presidente de la
+República ejerce la Función Ejecutiva y es responsable de la administración
+pública. La integran la Presidencia y la Vicepresidencia, los Ministerios de
+Estado y los demás organismos e instituciones necesarios para ejercer, en su
+ámbito, la rectoría, la planificación, la ejecución y la evaluación de las
+políticas públicas nacionales y de los planes que se crean para ejecutarlas.
+
+**Misión del sector, en palabras del equipo:** conducir la administración
+pública nacional, es decir, definir hacia dónde van las políticas del país,
+planificarlas, ponerlas en marcha y evaluar sus resultados, y entregar a la
+población los bienes y servicios públicos que de ellas se derivan. Cada
+ministerio es rector de un área (por ejemplo, salud pública, educación,
+seguridad interna, defensa nacional, infraestructura, ambiente y energía, o
+desarrollo económico y productivo), y los institutos aportan servicios
+técnicos o de investigación en esas áreas.
+
+Para cumplir esa misión, estas entidades compran bienes, obras y servicios.
+Esa función de **compradora pública** es la que analiza este proyecto.
 
 ### 3. Actores y partes interesadas
 
