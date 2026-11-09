@@ -97,7 +97,7 @@ Esa función de **compradora pública** es la que analiza este proyecto.
 | **Proveedores y contratistas** | Ofertan y ejecutan los contratos; deben inscribirse y habilitarse en el Registro Único de Proveedores (RUP), salvo las excepciones que fije el Reglamento. En OCDS: `tenderer` y `supplier`. | LOSNCP, arts. 7 y 19 |
 | **SERCOP** | Rector del Sistema Nacional de Contratación Pública (SNCP): administra el RUP y el Portal de Contratación (datos abiertos), publica estadísticas, sanciona a proveedores y controla la fase precontractual. | LOSNCP, arts. 9 y 13 |
 | **Ente rector de las finanzas públicas** (MEF) | Fija los techos presupuestarios del Presupuesto General del Estado (PGE). Su máxima autoridad integra el Directorio del SNCP, que dicta la política de contratación. | LOSNCP, arts. 9 (núm. 1) y 10; Directrices Proforma 2027, p. 4 |
-| **Organismo de control** | Fiscaliza la contratación; cuál es y su base legal, en la sección 4. | Sección 4 |
+| **Organismo de control** (Contraloría General del Estado) | Controla el uso de los recursos estatales y, junto con SERCOP, integra el Subsistema Nacional de Control; su base legal se detalla en la sección 4. | Constitución, arts. 211 y 212; LOSNCP, arts. 13 y 14 |
 | **Ciudadanía y veedurías** | Usan la información abierta; SERCOP facilita la veeduría ciudadana. | LOSNCP, art. 9 (núm. 3 y 9) |
 
 **Fuentes (consultadas el 8/11/2026).**
@@ -161,13 +161,12 @@ USD 10.000 (art. 48). Qué publica SERCOP en cada etapa se comprueba en
 | Decisor | Decisión principal | Respaldo en la norma o en las funciones oficiales |
 |---|---|---|
 | **SERCOP** (ente rector) | Qué procedimientos reforzar o controlar y qué alertas priorizar | LOSNCP, art. 9: rectoría del SNCP, estadísticas y parámetros de resultados (núm. 4) y sanciones a proveedores (núm. 10); art. 13: control de la fase precontractual. La reforma crea alertas tempranas ([boletín 19 de SERCOP](https://portal.compraspublicas.gob.ec/sercop/reformas-a-la-losncp-mas-transparencia-y-eficiencia-en-las-compras-publicas/), 28/10/2025). |
-| **Áreas de compras de los ministerios** | Con qué procedimiento contratar y cuánto planificar contratar | LOSNCP, art. 22: el órgano requirente identifica la necesidad y con ella se forma el PAC (publicado hasta el 15 de enero); arts. 44 a 52: procedimientos (el 48 fija cuándo corresponde la licitación); art. 30: adjudica la máxima autoridad o su delegado. |
+| **Entidades contratantes** (órgano requirente y máxima autoridad) | Con qué procedimiento contratar y cuánto planificar contratar | LOSNCP, art. 22: el órgano requirente identifica la necesidad y con ella se forma el PAC (publicado hasta el 15 de enero); arts. 44 a 52: procedimientos (el 48 fija cuándo corresponde la licitación); art. 30: adjudica la máxima autoridad o su delegado. |
 | **MEF** (ente rector de las finanzas públicas) | Cuánto presupuesto asignar y cómo programar el gasto en contratación | Directrices Proforma 2027, p. 4, citando el COPLAFIP: art. 74, incisos 8 y 9 (techos presupuestarios globales, institucionales y de gasto; proforma del PGE) y art. 97. Integra el Directorio del SNCP (LOSNCP, art. 10). |
 
-Consulta del 8/11/2026; fuentes en la sección 3. Son inferencia del equipo dos
-pasos que la norma no dice: que el área de compras ejecute lo que la ley asigna
-al órgano requirente y a la máxima autoridad o su delegado, y que los techos de
-gasto del MEF alcancen al gasto en contratación.
+Consulta del 8/11/2026; fuentes en la sección 3. Es inferencia del
+equipo, porque la norma no lo dice, que los techos de gasto del MEF alcancen al
+gasto en contratación.
 
 ### 7. Indicadores habituales
 
@@ -206,9 +205,9 @@ está más completa en los datos.
 
 | Pregunta de negocio | Decisor y decisión | Indicador (fórmula) | Dimensiones | Fuente candidata |
 |---|---|---|---|---|
-| **P1 (descriptiva).** ¿Cómo evolucionó el monto adjudicado por método de contratación entre 2021 y 2025, por año y tipo de entidad (Presidencia, ministerio, instituto)? | Áreas de compras de los ministerios y SERCOP: qué procedimientos priorizar al planificar | Monto adjudicado (USD) = suma de `awards[].value.amount` de los procesos del sector, agrupada por año, método y tipo de entidad | Año, método de contratación, tipo de entidad, entidad | SERCOP, descarga masiva JSON anual; clasificación de entidades con `gob.ec` |
-| **P2 (diagnóstica).** ¿Qué métodos de contratación se asocian a mayor desviación entre el valor adjudicado y el valor estimado de la licitación, según el tipo de entidad? | SERCOP y organismos de control: dónde reforzar los controles | Desviación % = (valor adjudicado − valor estimado de la licitación) ÷ valor estimado × 100, por proceso con ambos valores; se resume por método y tipo de entidad | Método, tipo de entidad, año | SERCOP, descarga masiva JSON anual (`tender.value.amount` y `awards[].value.amount`) |
-| **P3 (predictiva).** ¿Cuál es el monto adjudicado esperado por mes en el primer semestre de 2026 para cada tipo de entidad? | MEF y entidades: programar el presupuesto de contratación | Monto mensual proyectado (serie de tiempo), validado con una métrica de error sobre un periodo retenido de 2025 | Mes, tipo de entidad | SERCOP, serie mensual 2021–2025 construida desde la descarga masiva |
+| **P1 (descriptiva).** ¿Cómo evolucionó el monto adjudicado por método de contratación entre 2021 y 2025, por año y tipo de entidad (Presidencia, ministerio, instituto)? | Entidades contratantes (órgano requirente) y SERCOP: qué procedimientos priorizar al planificar | Monto adjudicado (USD) = suma de `awards[].value.amount` de los procesos del sector, agrupada por año, método y tipo de entidad | Año, método de contratación, tipo de entidad, entidad | SERCOP, descarga masiva JSON anual; clasificación de entidades con `gob.ec` |
+| **P2 (diagnóstica).** ¿Qué métodos de contratación se asocian a mayor desviación entre el valor adjudicado y el valor estimado de la licitación, según el tipo de entidad? | SERCOP: dónde reforzar los controles | Desviación % = (valor adjudicado − valor estimado de la licitación) ÷ valor estimado × 100, por proceso con ambos valores; se resume por método y tipo de entidad | Método, tipo de entidad, año | SERCOP, descarga masiva JSON anual (`tender.value.amount` y `awards[].value.amount`) |
+| **P3 (predictiva).** ¿Cuál es el monto adjudicado esperado por mes en el primer semestre de 2026 para cada tipo de entidad? | MEF y entidades contratantes: programar el presupuesto de contratación | Monto mensual proyectado (serie de tiempo), validado con una métrica de error sobre un periodo retenido de 2025 | Mes, tipo de entidad | SERCOP, serie mensual 2021–2025 construida desde la descarga masiva |
 
 **Verificación de datos en la muestra de 2025:** las adjudicaciones con importe
 numérico fueron 183.887 de 183.891 (anual), y `tender.value.amount` estuvo
