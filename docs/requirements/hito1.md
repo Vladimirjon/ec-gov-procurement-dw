@@ -1,15 +1,19 @@
-# Hito 1 · Perfil institucional y preguntas de negocio
+# Hito 1: Perfil institucional y preguntas de negocio
 
-**Equipo:** Trazabilidad Pública (Bravo, Freire, Guajan, Pasquel, Torres) ·
-**Sector:** Sector público – gobierno central · **Fecha:** 08/11/26
+**Equipo:** Trazabilidad Pública
 
-Fuentes consultadas el 27/10/2026 salvo que se indique otra fecha. Cada fuente
-lleva su enlace.
+**Integrantes:** Francis Bravo, Ismael Freire, Harry Guajan, Johann Pasquel y Jorge Torres
 
-<!-- Fuente del PDF: scripts/build_hito1_pdf.ps1 lo arma desde este archivo.
-     La sección "Criterios de aceptación del hito" no entra en el PDF. -->
+**Sector:** Gobierno central del Ecuador
 
-## Parte 1 · Perfil institucional del sector
+**Fecha:** 8 de noviembre de 2026
+
+Cada fuente lleva su enlace y su fecha de consulta (lista completa en el Anexo C).
+
+<!-- Fuente del Word: scripts/build_hito1_docx.py lo arma desde este archivo.
+     La sección "Criterios de aceptación del hito" no entra en el Word. -->
+
+## Parte 1. Perfil institucional del sector
 
 ### 1. Identificación y alcance
 
@@ -25,147 +29,78 @@ los ministerios se contrastó además el menú de navegación del
 abrir el 6/11/2026; el detalle entidad por entidad está en
 [entidades.md](../sources/entidades.md).
 
-| Categoría | Cifra aproximada | Fuente (consultada el 15/10 y el 6/11/2026) | Observación |
+Tabla: Entidades del sector según su categoría
+
+| Categoría | Cifra aproximada | Fuente | Observación |
 |---|---|---|---|
-| Presidencia de la República | 1 | [gob.ec/instituciones](https://www.gob.ec/instituciones), sección `P`: `Presidencia de la República (PR)` | La Vicepresidencia (`VPR`, sección `V`) consta aparte; el ADR 0001 no la nombra, así que no se cuenta y, por su regla 6, queda fuera de los indicadores hasta clasificarla. |
-| Ministerios | 10 carteras en el menú de navegación del portal | [Portal del MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) y [gob.ec/instituciones/M](https://www.gob.ec/instituciones/M) | La décima cartera del menú es «Trabajo y Desarrollo Humano»; no es un inventario normativo. `gob.ec` lista 18 entradas porque, junto a los ministerios fusionados en 2026, mantiene carteras previas. Su vigencia se verifica con la norma en el Hito 2. |
-| Institutos | 16 candidatos | [gob.ec/instituciones/I](https://www.gob.ec/instituciones/I) | De 20 entradas: 16 candidatos, 3 de seguridad social (`IESS`, `ISSPOL`, `ISSFA`) y 1 registro de prueba (`IP2026`). La inclusión del `INEN` (consta como «Servicio», sección `S`) no está decidida. |
+| Presidencia de la República | 1 | [gob.ec/instituciones](https://www.gob.ec/instituciones), sección `P`: `Presidencia de la República (PR)` | La Vicepresidencia (`VPR`) consta aparte; el ADR 0001 no la nombra, así que no se cuenta y, por su regla 6, queda fuera de los indicadores hasta clasificarla. |
+| Ministerios | 10 carteras en el menú de navegación del portal | [Portal del MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) y [gob.ec/instituciones/M](https://www.gob.ec/instituciones/M) | No es un inventario normativo. `gob.ec` lista 18 entradas porque, junto a los ministerios fusionados en 2026, mantiene carteras previas; su vigencia se verifica en el Hito 2. |
+| Institutos | 16 candidatos | [gob.ec/instituciones/I](https://www.gob.ec/instituciones/I) | De 20 entradas: 16 candidatos, 3 de seguridad social y 1 registro de prueba. La inclusión del `INEN` (consta como «Servicio») no está decidida. |
 
-Las cifras son aproximadas: `gob.ec` es una fuente nominal (nombre, sigla y
-enlace de cada entidad) y no acredita que la lista esté completa ni de qué
-ministerio depende cada instituto. Esa dependencia y su vigencia en 2021–2025
-se verifican con la norma de creación o adscripción antes de clasificar la
-entidad.
+Nota: Cifras aproximadas: `gob.ec` es una fuente nominal y no acredita que la lista esté completa ni de qué ministerio depende cada instituto (se verifica con la norma de creación). Consultadas el 15/10 y el 6/11/2026; detalle en [entidades.md](../sources/entidades.md).
 
-**Qué queda fuera y por qué.** Por decisión del ADR 0001 (aceptado) quedan
-fuera:
+**Qué queda fuera.** Las dos últimas filas no figuran en el ADR 0001: quedan fuera solo de forma provisional (su regla 6) hasta que el Hito 2 las clasifique ([entidades.md](../sources/entidades.md), sección 5.3).
 
-- **GAD**, con autonomía política, administrativa y financiera (Constitución,
-  art. 238).
-- **Empresas públicas**, con personalidad jurídica y autonomía de gestión
-  (art. 315).
-- **Otras funciones del Estado:** Legislativa, Judicial, Electoral y de
-  Transparencia y Control Social (arts. 118, 178, 217 y 204).
+Tabla: Entidades excluidas del sector y su respaldo
 
-**Exclusión provisional.** Los Registros de la Propiedad, los Cuerpos de
-Bomberos y las entidades de seguridad social (`IESS`, `ISSFA`, `ISSPOL`) no
-están nombrados en el ADR 0001. Quedan fuera de los indicadores solo de forma
-provisional, por la regla 6 del ADR (las entidades dudosas quedan fuera hasta
-resolverse). Su clasificación definitiva se decide en el Hito 2
-([entidades.md](../sources/entidades.md), sección 5.3). Lo que sustenta la duda:
+| Excluidas | Condición | Respaldo (Constitución) |
+|---|---|---|
+| **GAD** | Decisión del ADR 0001 | Autonomía política, administrativa y financiera (art. 238) |
+| **Empresas públicas** | Decisión del ADR 0001 | Personalidad jurídica y autonomía de gestión (art. 315) |
+| **Otras funciones del Estado:** Legislativa, Judicial, Electoral y de Transparencia y Control Social | Decisión del ADR 0001 | Arts. 118, 178, 217 y 204 |
+| **Registros de la Propiedad y Cuerpos de Bomberos** | Exclusión provisional (regla 6 del ADR) | Se gestionan en el ámbito municipal o de forma concurrente con el Ejecutivo (arts. 264, num. 13, y 265) |
+| **Seguridad social** (`IESS`, `ISSFA`, `ISSPOL`) | Exclusión provisional (regla 6 del ADR) | Art. 292: sus ingresos y egresos quedan fuera del Presupuesto General del Estado (PGE); las [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf) del MEF (pp. 69–70) la tratan como ajena al PGE |
 
-- **Registros y Bomberos:** se gestionan en el ámbito municipal o de forma
-  concurrente con el Ejecutivo (arts. 264, num. 13, y 265).
-- **Seguridad social:** el art. 292 excluye del Presupuesto General del Estado
-  (PGE) sus ingresos y egresos, y las
-  [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf) del MEF (secciones 3.1 y 3.2, p. 69–70;
-  consultadas el 6/11/2026) la tratan como entidades que no forman parte del
-  PGE.
-
-Los artículos citados en esta sección y en la siguiente son de la
-[Constitución de la República del Ecuador](https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf)
-(edición publicada por la Asamblea Nacional, consultada el 6/11/2026).
+Nota: Los artículos citados en esta sección y en la siguiente son de la [Constitución de la República del Ecuador](https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf), edición publicada por la Asamblea Nacional; consultada el 6/11/2026, igual que las Directrices.
 
 ### 2. Misión y servicios
 
-El art. 141 de la Constitución establece que la Presidenta o Presidente de la
-República ejerce la Función Ejecutiva y es responsable de la administración
-pública. La integran la Presidencia, la Vicepresidencia, los Ministerios de
-Estado y los demás organismos necesarios para ejercer la rectoría, la
-planificación, la ejecución y la evaluación de las políticas públicas
-nacionales y de los planes que las desarrollan.
+Según el art. 141 de la Constitución, la Presidenta o Presidente de la República
+ejerce la Función Ejecutiva y es responsable de la administración pública, que
+integran la Presidencia, la Vicepresidencia, los Ministerios de Estado y los
+demás organismos necesarios para la rectoría, planificación, ejecución y
+evaluación de las políticas públicas nacionales.
 
 **Misión del sector, en palabras del equipo:** conducir la administración
 pública nacional, es decir, definir hacia dónde van las políticas del país,
 planificarlas, ponerlas en marcha y evaluar sus resultados, y entregar a la
 población los bienes y servicios públicos que de ellas se derivan. Cada
-ministerio es rector de un área (por ejemplo, salud pública, educación,
-seguridad interna, defensa nacional, infraestructura, ambiente y energía, o
-desarrollo económico y productivo), y los institutos aportan servicios
-técnicos o de investigación en esas áreas.
+ministerio es rector de un área (salud, educación, seguridad, defensa,
+infraestructura…) y los institutos aportan servicios técnicos o de investigación.
 
-Para cumplir esa misión, estas entidades compran bienes, obras y servicios.
-Esa función de **compradora pública** es la que analiza este proyecto.
+Para cumplir esa misión estas entidades compran bienes, obras y servicios; esa función de **compradora pública** es la que analiza este proyecto.
 
 ### 3. Actores y partes interesadas
 
+Tabla: Actores y partes interesadas de la contratación pública
+
 | Actor | Rol en la contratación | Fuente |
 |---|---|---|
-| **Entidades contratantes** (Presidencia, ministerios, institutos) | Identifican la necesidad, la incluyen en el Plan Anual de Contratación (PAC) y adjudican (la máxima autoridad o su delegado). En los datos son el `buyer`. | LOSNCP, arts. 7, 22 y 30 |
-| **Proveedores y contratistas** | Ofertan y ejecutan los contratos; deben inscribirse y habilitarse en el Registro Único de Proveedores (RUP), salvo las excepciones que fije el Reglamento. En OCDS: `tenderer` y `supplier`. | LOSNCP, arts. 7 y 19 |
-| **SERCOP** | Rector del Sistema Nacional de Contratación Pública (SNCP): administra el RUP y el Portal de Contratación (datos abiertos), publica estadísticas, sanciona a proveedores y controla la fase precontractual. | LOSNCP, arts. 9 y 13 |
+| **Entidades contratantes** (Presidencia, ministerios, institutos) | Identifican la necesidad, la incluyen en el Plan Anual de Contratación (PAC) y adjudican (máxima autoridad o su delegado). En los datos son el `buyer`. | LOSNCP, arts. 7, 22 y 30 |
+| **Proveedores y contratistas** | Ofertan y ejecutan los contratos; deben estar en el Registro Único de Proveedores (RUP), salvo excepciones. En OCDS: `tenderer` y `supplier`. | LOSNCP, arts. 7 y 19 |
+| **SERCOP** | Rector del Sistema Nacional de Contratación Pública (SNCP): administra el RUP y el Portal de Contratación, publica estadísticas, sanciona a proveedores y controla la fase precontractual. | LOSNCP, arts. 9 y 13 |
 | **Ente rector de las finanzas públicas** (MEF) | Fija los techos presupuestarios del Presupuesto General del Estado (PGE). Su máxima autoridad integra el Directorio del SNCP, que dicta la política de contratación. | LOSNCP, arts. 9 (núm. 1) y 10; Directrices Proforma 2027, p. 4 |
-| **Organismo de control** (Contraloría General del Estado) | Controla el uso de los recursos estatales y, junto con SERCOP, integra el Subsistema Nacional de Control; su base legal se detalla en la sección 4. | Constitución, arts. 211 y 212; LOSNCP, arts. 13 y 14 |
+| **Organismo de control** (Contraloría General del Estado) | Controla el uso de los recursos estatales y, con SERCOP, integra el Subsistema Nacional de Control (sección 4). | Constitución, arts. 211 y 212; LOSNCP, arts. 13 y 14 |
 | **Ciudadanía y veedurías** | Usan la información abierta; SERCOP facilita la veeduría ciudadana. | LOSNCP, art. 9 (núm. 3 y 9) |
 
-**Fuentes (consultadas el 8/11/2026).**
-[LOSNCP, texto consolidado publicado por SERCOP](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf),
-que incorpora la reforma del Registro Oficial, Cuarto Suplemento Nº 140,
-7/10/2025 (su numeración puede diferir de la del texto anterior).
-[Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf),
-p. 4 (citan los arts. 74 y 97 del COPLAFIP). [finanzas.gob.ec](https://www.finanzas.gob.ec/) redirige
-al portal del «Ministerio de Desarrollo Económico y Productivo – MDEP»; por eso
-se usa el término de la ley, «ente rector de las finanzas públicas».
+Nota: Fuentes consultadas el 8/11/2026: [LOSNCP, texto consolidado de SERCOP](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf) y [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf), p. 4 (arts. 74 y 97 del COPLAFIP). Se usa «ente rector de las finanzas públicas» porque [finanzas.gob.ec](https://www.finanzas.gob.ec/) redirige al portal del MDEP.
 
 ### 4. Marco normativo y entes de control
 
-**Fecha de consulta de todos los enlaces y corte de vigencia: 8/11/2026.**
-Se distingue el marco vigente a esa fecha del aplicable a los procesos de
-2021–2025.
+Tabla: Marco normativo y entes de control de la contratación pública
 
-- **Constitución de la República, vigente.** El art. 288 exige que las compras
-  públicas atiendan la eficiencia, transparencia, calidad y responsabilidad
-  ambiental y social; da prioridad a la producción nacional, especialmente a
-  la economía popular y solidaria y a las micro, pequeñas y medianas unidades
-  productivas ([Asamblea Nacional, art. 288](https://www.asambleanacional.gob.ec/documentos/Constitucion-2008.pdf)).
-- **LOSNCP, vigente con reformas.** La Ley Orgánica Reformatoria a la LOSNCP
-  se publicó en el **Cuarto Suplemento del Registro Oficial 140, de 7/10/2025**
-  ([Registro Oficial](https://www.registroficial.gob.ec/cuarto-suplemento-al-registro-oficial-no-140/)).
-  El [texto consolidado publicado por SERCOP](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf)
-  recoge esa reforma y dispone que la información del Portal de Contratación
-  Pública se maneje como datos abiertos (art. 21).
-- **Reglamento General de la LOSNCP, vigente con reformas.** Se expidió por
-  **Decreto Ejecutivo 193**, publicado en el **Noveno Suplemento del Registro
-  Oficial 153, de 28/10/2025** ([Registro Oficial](https://www.registroficial.gob.ec/noveno-suplemento-no-153/)).
-  Entre sus reformas posteriores están el
-  [Decreto 295, publicado el 30/1/2026](https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-215-7/)
-  y el [Decreto 461, publicado el 30/7/2026](https://www.registroficial.gob.ec/tercer-suplemento-no-337/).
-  SERCOP confirma la aplicación del Decreto 193 reformado por el 461 en su
-  [resolución de 5/11/2026, p. 5](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/11/SERCOP-SERCOP-2026-0546-R.pdf).
-- **LOTAIP, vigente.** La Ley Orgánica de Transparencia y Acceso a la
-  Información Pública se publicó en el Segundo Suplemento del Registro
-  Oficial 245, de 7/2/2023 ([Registro Oficial](https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-245/)).
-  Su art. 19 exige información mensual de transparencia activa, incluidos los
-  procesos de contratación (numeral 8), en formato de datos abiertos
-  ([texto oficial, pp. 18–20](https://www.asambleanacional.gob.ec/sites/default/files/private/asambleanacional/filesasambleanacionalnameuid-29/Leyes%202013-2017/736-jvelin/ro-245-2do-supl-07-02-2023.pdf)).
-- **Ley Orgánica de Integridad Pública (LOIP), sin vigencia general al corte.**
-  Se publicó el 26/6/2025 en el Tercer Suplemento del Registro Oficial 68
-  ([Registro Oficial](https://www.registroficial.gob.ec/tercer-suplemento-no-68/)).
-  La sentencia **52-25-IN/25**, de 26/9/2025, declaró su inconstitucionalidad
-  por la forma, junto con su Reglamento y normas conexas. Publicada el
-  3/10/2025 en la Edición Constitucional 96, tiene efectos generales hacia
-  futuro; las excepciones retroactivas no incluyen contratación pública
-  ([sentencia, párr. 343, y auto de aclaración, párrs. 32–33](https://esacc.corteconstitucional.gob.ec/storage/api/v1/10_DWL_FL/eyJjYXJwZXRhIjoicm8iLCJ1dWlkIjoiNjk4MGI1YmMtMjM3MS00YmNlLThhZGUtZDEwZTllMzUxMzI0LnBkZiJ9)).
-- **Rectoría y control, competencias vigentes.** SERCOP ejerce la rectoría
-  del sistema (LOSNCP, art. 9) y controla el cumplimiento normativo en la fase
-  precontractual (art. 13). La **Contraloría General del Estado (CGE)**
-  controla el uso de recursos estatales y dirige el sistema de auditoría
-  interna, externa y control interno (Constitución, arts. 211–212). Ambos
-  integran el Subsistema Nacional de Control, cada uno dentro de sus
-  competencias ([LOSNCP, arts. 13–14](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf);
-  [Constitución, arts. 211–212](https://www.asambleanacional.gob.ec/documentos/Constitucion-2008.pdf)).
+| Norma | Situación | Qué establece | Fuente |
+|---|---|---|---|
+| **Constitución** | Vigente | Art. 288: las compras públicas atienden eficiencia, transparencia, calidad y responsabilidad ambiental y social, y priorizan la producción nacional, en especial la economía popular y solidaria y las micro, pequeñas y medianas empresas. | [Constitución, art. 288](https://www.asambleanacional.gob.ec/documentos/Constitucion-2008.pdf) |
+| **LOSNCP** | Vigente con reformas | Reformada en el Cuarto Suplemento del Registro Oficial 140 (7/10/2025). Art. 21: la información del Portal de Contratación Pública se maneja como datos abiertos. | [RO 140](https://www.registroficial.gob.ec/cuarto-suplemento-al-registro-oficial-no-140/); [texto consolidado](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf) |
+| **Reglamento General de la LOSNCP** | Vigente con reformas | Decreto 193 (RO 153, 28/10/2025), reformado por los decretos 295 (30/1/2026) y 461 (30/7/2026); SERCOP confirma su aplicación (resolución de 5/11/2026, p. 5). | [RO 153](https://www.registroficial.gob.ec/noveno-suplemento-no-153/); [Decreto 295](https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-215-7/); [Decreto 461](https://www.registroficial.gob.ec/tercer-suplemento-no-337/); [resolución](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/11/SERCOP-SERCOP-2026-0546-R.pdf) |
+| **LOTAIP** | Vigente | RO 245 (7/2/2023). Art. 19: información mensual de transparencia activa, incluidos los procesos de contratación (numeral 8), en datos abiertos. | [RO 245](https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-245/); [texto oficial, pp. 18–20](https://www.asambleanacional.gob.ec/sites/default/files/private/asambleanacional/filesasambleanacionalnameuid-29/Leyes%202013-2017/736-jvelin/ro-245-2do-supl-07-02-2023.pdf) |
+| **LOIP** (Integridad Pública) | Sin vigencia general al corte | Publicada el 26/6/2025 (Tercer Suplemento del RO 68). La sentencia 52-25-IN/25 (26/9/2025) la declaró inconstitucional por la forma, con efectos hacia futuro (3/10/2025) y sin excepciones retroactivas para la contratación pública. | [RO 68](https://www.registroficial.gob.ec/tercer-suplemento-no-68/); [sentencia, párr. 343, y auto de aclaración, párrs. 32–33](https://esacc.corteconstitucional.gob.ec/storage/api/v1/10_DWL_FL/eyJjYXJwZXRhIjoicm8iLCJ1dWlkIjoiNjk4MGI1YmMtMjM3MS00YmNlLThhZGUtZDEwZTllMzUxMzI0LnBkZiJ9) |
+| **Rectoría y control** | Vigentes | SERCOP ejerce la rectoría (LOSNCP, art. 9) y controla la fase precontractual (art. 13). La Contraloría General del Estado (CGE) controla el uso de recursos estatales y dirige la auditoría y el control interno (Constitución, arts. 211–212). Ambos integran el Subsistema Nacional de Control. | [LOSNCP, arts. 13–14](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf); [Constitución, arts. 211–212](https://www.asambleanacional.gob.ec/documentos/Constitucion-2008.pdf) |
 
-**Implicación para 2021–2025.** La disposición transitoria primera de la
-reforma de octubre de 2025 mantiene la normativa de inicio, presentación o
-suscripción para los procedimientos, reclamos y contratos anteriores
-([LOSNCP, pp. 73–74](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf)).
-El auto de aclaración preserva los procesos precontractuales iniciados bajo la
-LOIP antes de la sentencia, sin autorizar nuevos desde su publicación. Por eso
-no corresponde tratar todo 2025 como un único régimen ni aplicar las reglas de
-2026 a toda la serie. **Recomendación analítica para hitos posteriores**
-(inferencia metodológica del equipo, no una función implementada del DW):
-conservar el procedimiento original de la fuente y documentar por separado
-cualquier clasificación homogénea derivada.
+Nota: Fecha de consulta de todos los enlaces y corte de vigencia: 8/11/2026. Se distingue el marco vigente a esa fecha del aplicable a los procesos de 2021–2025.
+
+**Implicación para 2021–2025.** La disposición transitoria primera de la reforma de octubre de 2025 mantiene la normativa de inicio, presentación o suscripción para los procedimientos, reclamos y contratos anteriores ([LOSNCP, pp. 73–74](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf)), y el auto de aclaración preserva los procesos iniciados bajo la LOIP antes de la sentencia. Por eso no se trata todo 2025 como un único régimen ni se aplican las reglas de 2026 a toda la serie.
 
 ### 5. Procesos clave
 
@@ -174,76 +109,68 @@ La cadena de contratación se publica en el estándar OCDS en cuatro etapas:
 ([ocds.md](../sources/ocds.md)). Cada proceso se identifica con un `ocid`.
 Un proceso puede tener varias adjudicaciones y contratos.
 
-| Etapa OCDS | Qué ocurre | Quién actúa | Qué toman P1 a P3 |
-|---|---|---|---|
-| **Planificación** (`planning`) | La entidad justifica la compra y reserva presupuesto; la necesidad alimenta el PAC (LOSNCP, art. 22). | Entidad | Nada |
-| **Licitación** (`tender`) | Define cómo buscar proveedores: método (`procurementMethod`), plazo de ofertas, ítems y valor estimado (`tender.value`). | Entidad y oferentes | Método (P1, P2) y valor estimado (P2) |
-| **Adjudicación** (`awards`) | Decide a quién se adjudica; la adopta la máxima autoridad o su delegado (art. 30). Puede haber varias por proceso. | Entidad y proveedor adjudicado | Valor adjudicado (`awards[].value.amount`): P1 a P3 |
-| **Contrato** (`contracts`) | Formaliza el acuerdo y referencia la adjudicación (`awardID`); puede incluir la ejecución (`implementation`). | Entidad y proveedor | Nada: es otra magnitud |
+Tabla: Etapas de la cadena de contratación según OCDS
 
-Los arts. 44 a 52 de la LOSNCP regulan los procedimientos (catálogo
-electrónico, subasta inversa electrónica, licitación, ínfima cuantía y otros);
-por ejemplo, la licitación procede cuando no corresponde subasta inversa ni
-catálogo y el presupuesto referencial supera USD 10.000 (art. 48). Qué publica
-SERCOP en cada etapa se comprueba en
-[ocds.md](../sources/ocds.md#estándar-vs-fuente-real-sercop):
-`implementation` no figura como inspeccionada.
+| Etapa OCDS | Qué ocurre y quién actúa | Qué toman P1 a P3 |
+|---|---|---|
+| **Planificación** (`planning`) | La entidad justifica la compra y reserva presupuesto; la necesidad alimenta el PAC (LOSNCP, art. 22). | Nada |
+| **Licitación** (`tender`) | La entidad y los oferentes definen cómo buscar proveedores: método (`procurementMethod`), plazo de ofertas, ítems y valor estimado (`tender.value`). | Método (P1, P2) y valor estimado (P2) |
+| **Adjudicación** (`awards`) | La máxima autoridad o su delegado decide a quién se adjudica (art. 30); puede haber varias adjudicaciones por proceso. | Valor adjudicado (`awards[].value.amount`): P1 a P3 |
+| **Contrato** (`contracts`) | La entidad y el proveedor formalizan el acuerdo, que referencia la adjudicación (`awardID`) y puede incluir la ejecución (`implementation`). | Nada: es otra magnitud |
+
+Los arts. 44 a 52 de la LOSNCP regulan los procedimientos (por ejemplo, la
+licitación procede cuando no corresponde subasta inversa ni catálogo y el
+presupuesto referencial supera USD 10.000, art. 48). Qué publica SERCOP en cada
+etapa: [ocds.md](../sources/ocds.md#estándar-vs-fuente-real-sercop).
 
 ### 6. Tomadores de decisión
 
+Tabla: Tomadores de decisión y su decisión principal
+
 | Decisor | Decisión principal | Respaldo en la norma o en las funciones oficiales |
 |---|---|---|
-| **SERCOP** (ente rector) | Qué procedimientos reforzar o controlar y qué alertas priorizar | LOSNCP, art. 9: rectoría del SNCP, estadísticas y parámetros de resultados (núm. 4) y sanciones a proveedores (núm. 10); art. 13: control de la fase precontractual. La reforma crea alertas tempranas ([boletín 19 de SERCOP](https://portal.compraspublicas.gob.ec/sercop/reformas-a-la-losncp-mas-transparencia-y-eficiencia-en-las-compras-publicas/), 28/10/2025). |
-| **Entidades contratantes** (órgano requirente y máxima autoridad) | Con qué procedimiento contratar y cuánto planificar contratar | LOSNCP, art. 22: el órgano requirente identifica la necesidad y con ella se forma el PAC (publicado hasta el 15 de enero); arts. 44 a 52: procedimientos (el 48 fija cuándo corresponde la licitación); art. 30: adjudica la máxima autoridad o su delegado. |
-| **MEF** (ente rector de las finanzas públicas) | Cuánto presupuesto asignar y cómo programar el gasto en contratación | Directrices Proforma 2027, p. 4, citando el COPLAFIP: art. 74, incisos 8 y 9 (techos presupuestarios globales, institucionales y de gasto; proforma del PGE) y art. 97. Integra el Directorio del SNCP (LOSNCP, art. 10). |
+| **SERCOP** (ente rector) | Qué procedimientos reforzar o controlar y qué alertas priorizar | LOSNCP, art. 9 (rectoría, estadísticas, sanciones: núms. 4 y 10) y art. 13 (control precontractual). La reforma crea alertas tempranas ([boletín 19](https://portal.compraspublicas.gob.ec/sercop/reformas-a-la-losncp-mas-transparencia-y-eficiencia-en-las-compras-publicas/), 28/10/2025). |
+| **Entidades contratantes** (órgano requirente y máxima autoridad) | Con qué procedimiento contratar y cuánto planificar contratar | LOSNCP, art. 22: el órgano requirente identifica la necesidad y con ella se forma el PAC; arts. 44 a 52: procedimientos (el 48, la licitación); art. 30: adjudica la máxima autoridad o su delegado. |
+| **MEF** (ente rector de las finanzas públicas) | Cuánto presupuesto asignar y cómo programar el gasto en contratación | Directrices Proforma 2027, p. 4, citando el COPLAFIP: art. 74, incisos 8 y 9 (techos presupuestarios y proforma del PGE) y art. 97. Integra el Directorio del SNCP (LOSNCP, art. 10). |
 
-Consulta del 8/11/2026; fuentes en la sección 3. Es inferencia del
-equipo, porque la norma no lo dice, que los techos de gasto del MEF alcancen al
-gasto en contratación.
+Nota: Consulta del 8/11/2026. Es inferencia del equipo, porque la norma no lo dice, que los techos de gasto del MEF alcancen al gasto en contratación.
 
 ### 7. Indicadores habituales
 
-SERCOP publica cada año su rendición de cuentas. Se abrió el
+SERCOP rinde cuentas cada año. Se abrió el
 [informe preliminar 2025](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/04/Informe_Preliminar_RDC2025_vf.pdf)
-(95 páginas, consultado el 8/11/2026; cifras provisionales; las páginas son las
-del visor de PDF). Son cifras de la contratación pública **nacional**, que
-incluye GAD y empresas públicas: ilustran cómo se mide el sector, pero no son
-cifras del gobierno central.
+(95 páginas, consultado el 8/11/2026; cifras provisionales). Son cifras **nacionales**, con GAD y empresas públicas: ilustran cómo se
+mide el sector, no son cifras del gobierno central.
+
+Tabla: Indicadores de la rendición de cuentas 2025 de SERCOP
 
 | Indicador | Cómo lo calcula SERCOP | Dato 2025 (nacional) | Pág. |
 |---|---|---|---|
 | Monto adjudicado y su peso | Total adjudicado y su porcentaje del PGE y del PIB | USD 7.318,7 millones; 20,3 % del PGE; 5,5 % del PIB | 12 |
 | Monto por procedimiento | Suma de lo adjudicado por tipo de procedimiento | Régimen común: USD 5.181,3 millones en 218.246 procesos; el mayor monto fue de la subasta inversa electrónica (USD 1.549,5 millones) | 16 |
-| Monto por tipo de compra | Participación de cada tipo en el total adjudicado | Servicios 36,6 %; bienes 30,6 %; obras 27,2 % | 19 |
 | Ahorro | Presupuesto menos adjudicado en los procesos del régimen común, sin ferias inclusivas | USD 461,4 millones (USD 502,5 millones en 2024) | 13 y 14 |
 | Concentración | Participación de las diez principales actividades económicas (CIIU) en el monto | 67,6 % | 14 |
 
-La guía del Hito 1 (sección 6) menciona también la ejecución presupuestaria del
-MEF; se publica en informes en PDF (sección 8) y no se usa mientras no exista un
-conjunto descargable. P1 retoma el monto por procedimiento, P2 es el
-equivalente del ahorro con campos de la descarga y P3 proyecta el monto
-adjudicado.
+Nota: Páginas del visor de PDF. P1 retoma el monto por procedimiento, P2 es el equivalente del ahorro con campos de la descarga y P3 proyecta el monto adjudicado.
 
 ### 8. Fuentes de datos
 
+Tabla: Fuentes de datos públicas del sector
+
 | Fuente y dueño | Formato y periodicidad | Años y licencia | Enlace |
 |---|---|---|---|
-| Datos abiertos de contratación (OCDS), SERCOP | JSON, CSV y XLSX por año y mes, y API; descargas actualizadas a diario | 2015 en adelante según la API; abiertos 2021, 2024, 2025 y enero 2025. Creative Commons Atribución 3.0 Ecuador: obliga a enlazar la fuente ([política de SERCOP, p. 8](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf), consultada el 3/11/2026) | [Descarga masiva](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/) |
-| Directorio de instituciones, MINTEL (`gob.ec`) | Páginas web por sección; periodicidad no declarada en el sitio (consultado el 3/11/2026) | Vigente 2026. Sin licencia explícita: se usa solo para clasificar entidades, citando el enlace | [gob.ec/instituciones](https://www.gob.ec/instituciones) |
+| Datos abiertos de contratación (OCDS), SERCOP | JSON, CSV y XLSX por año y mes, y API; descargas actualizadas a diario | 2015 en adelante según la API; abiertos 2021, 2024, 2025 y enero 2025. Licencia CC BY 3.0 Ecuador: obliga a enlazar la fuente ([política de SERCOP, p. 8](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf), 3/11/2026) | [Descarga masiva](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/) |
+| Directorio de instituciones, MINTEL (`gob.ec`) | Páginas web por sección; periodicidad no declarada (3/11/2026) | Vigente 2026. Sin licencia explícita: solo para clasificar entidades, citando el enlace | [gob.ec/instituciones](https://www.gob.ec/instituciones) |
 
-Ejecución presupuestaria del MEF: hay informes en PDF
-([ejemplo 2019](https://www.finanzas.gob.ec/wp-content/uploads/downloads/2020/04/Inf_ejec.presupuestaria_2019.pdf)),
-pero no se confirmó un conjunto descargable por entidad; no se usa como fuente.
+Nota: El MEF publica la ejecución presupuestaria en PDF ([ejemplo 2019](https://www.finanzas.gob.ec/wp-content/uploads/downloads/2020/04/Inf_ejec.presupuestaria_2019.pdf)), sin conjunto descargable confirmado. Prueba del archivo: Parte 2.
 
-**Prueba del archivo:** se abrieron los ZIP anuales de 2021, 2024 y 2025
-(conteos en la Parte 2 y en [reconocimiento.md](../sources/reconocimiento.md));
-descarga de 2021 y 2024 el 3/11/2026.
-
-## Parte 2 · Matriz de preguntas de negocio
+## Parte 2. Matriz de preguntas de negocio
 
 Ventana de análisis: **2021–2025, años calendario completos** (5 periodos). La
 fecha que asigna un proceso a un año se fija en el Hito 2 tras medir qué fecha
 está más completa en los datos.
+
+Tabla: Matriz de preguntas de negocio
 
 | Pregunta de negocio | Decisor y decisión | Indicador (fórmula) | Dimensiones | Fuente candidata |
 |---|---|---|---|---|
@@ -274,12 +201,14 @@ conteos son nacionales, sin filtrar por planta central:
   fecha elegida). Los importes adjudicado, estimado y contractual son
   magnitudes distintas y no se sustituyen entre sí.
 
-## Anexo A · Preguntas candidatas (lluvia de ideas)
+## Anexo A. Preguntas candidatas y comprobación de las cinco condiciones
 
 La guía pide partir de al menos ocho preguntas y filtrarlas con las cinco
 condiciones (decisión concreta, medible, con alcance, respondible con datos
 públicos, analítica). Las tres primeras son las elegidas; las demás se
 conservan por si el profesor pide más preguntas en hitos posteriores.
+
+Tabla: Preguntas candidatas y veredicto
 
 | # | Candidata | Tipo | Veredicto |
 |---|---|---|---|
@@ -300,6 +229,8 @@ central» en las tres preguntas y, en P2, el periodo 2021–2025 y el adjetivo
 «porcentual» (sin ellos faltaba el alcance y no se sabía si «desviación» era
 absoluta o relativa).
 
+Tabla: Las cinco condiciones aplicadas a P1, P2 y P3
+
 | Condición | P1 | P2 | P3 |
 |---|---|---|---|
 | Apoya una decisión concreta de un actor identificado | Cumple: las entidades contratantes y SERCOP deciden qué procedimientos priorizar (sección 6) | Cumple: SERCOP decide dónde reforzar controles (LOSNCP, arts. 9 y 13) | Cumple con salvedad: que los techos de gasto del MEF alcancen al gasto en contratación es inferencia del equipo (sección 6) |
@@ -308,7 +239,9 @@ absoluta o relativa).
 | Es respondible con datos públicos descargables | Cumple: campos presentes en los tres archivos anuales abiertos; el tipo de entidad depende de la clasificación del Hito 2 | Cumple para el 85,6–87,6 % de los releases (los que traen ambos importes) | Condicionada: depende de la fecha que se elija en el Hito 2 (`awards[].date` solo consta en el 15–18 %) |
 | Es analítica | Cumple: tendencia en el tiempo cruzada con dos dimensiones | Cumple: compara métodos y tipos de entidad | Cumple: proyecta una serie en el tiempo |
 
-## Anexo B · Declaración de uso de inteligencia artificial
+**Recomendación analítica para hitos posteriores** (inferencia del equipo, no una función del DW): conservar el procedimiento original de la fuente y documentar aparte cualquier clasificación homogénea derivada de los cambios normativos de 2021–2025.
+
+## Anexo B. Declaración de uso de inteligencia artificial
 
 El equipo usó asistentes de IA para leer y resumir fuentes, redactar borradores,
 recalcular conteos y revisar enlaces. La guía del proyecto pide declarar qué se
@@ -316,6 +249,25 @@ pidió y cómo se verificó: cada uso consta, por persona y fecha, en el
 [registro de uso de IA](../uso-de-ia.md). Las cifras, los artículos y las
 páginas citadas se contrastaron con la fuente oficial antes de incluirse, y el
 equipo responde por el contenido.
+
+## Anexo C. Referencias
+
+- Asamblea Nacional del Ecuador. (2008). *Constitución de la República del Ecuador* (edición de bolsillo). [https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf](https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf) Consultado el 6/11/2026.
+- Asamblea Nacional del Ecuador. (2008). *Constitución de la República del Ecuador* (arts. 211, 212 y 288). [https://www.asambleanacional.gob.ec/documentos/Constitucion-2008.pdf](https://www.asambleanacional.gob.ec/documentos/Constitucion-2008.pdf) Consultado el 8/11/2026.
+- Asamblea Nacional del Ecuador. (2023). *Ley Orgánica de Transparencia y Acceso a la Información Pública* (Segundo Suplemento del Registro Oficial 245, 7 de febrero de 2023). [https://www.asambleanacional.gob.ec/sites/default/files/private/asambleanacional/filesasambleanacionalnameuid-29/Leyes%202013-2017/736-jvelin/ro-245-2do-supl-07-02-2023.pdf](https://www.asambleanacional.gob.ec/sites/default/files/private/asambleanacional/filesasambleanacionalnameuid-29/Leyes%202013-2017/736-jvelin/ro-245-2do-supl-07-02-2023.pdf) Consultado el 8/11/2026.
+- Corte Constitucional del Ecuador. (2025). *Sentencia 52-25-IN/25* y auto de aclaración. [https://esacc.corteconstitucional.gob.ec/storage/api/v1/10_DWL_FL/eyJjYXJwZXRhIjoicm8iLCJ1dWlkIjoiNjk4MGI1YmMtMjM3MS00YmNlLThhZGUtZDEwZTllMzUxMzI0LnBkZiJ9](https://esacc.corteconstitucional.gob.ec/storage/api/v1/10_DWL_FL/eyJjYXJwZXRhIjoicm8iLCJ1dWlkIjoiNjk4MGI1YmMtMjM3MS00YmNlLThhZGUtZDEwZTllMzUxMzI0LnBkZiJ9) Consultado el 8/11/2026.
+- Ministerio de Desarrollo Económico y Productivo. (2026). *Directrices Proforma 2027*. [https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf) Consultado el 6/11/2026 (pp. 69–70) y el 8/11/2026 (p. 4).
+- Ministerio de Desarrollo Económico y Productivo. (s. f.). *Catálogo de instituciones y entidades operativas desconcentradas del sector público*. [https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) Consultado el 15/10/2026 y el 6/11/2026.
+- Ministerio de Economía y Finanzas. (s. f.). Portal institucional, que redirige al del Ministerio de Desarrollo Económico y Productivo. [https://www.finanzas.gob.ec/](https://www.finanzas.gob.ec/) Consultado el 8/11/2026. Informe de ejecución presupuestaria 2019 (ejemplo del formato): [https://www.finanzas.gob.ec/wp-content/uploads/downloads/2020/04/Inf_ejec.presupuestaria_2019.pdf](https://www.finanzas.gob.ec/wp-content/uploads/downloads/2020/04/Inf_ejec.presupuestaria_2019.pdf) Consultado el 8/11/2026.
+- Ministerio de Telecomunicaciones y de la Sociedad de la Información. (s. f.). *Instituciones que publican en el Portal* (gob.ec). [https://www.gob.ec/instituciones](https://www.gob.ec/instituciones) Consultado el 15/10/2026, el 3/11/2026 y el 6/11/2026 (secciones [M](https://www.gob.ec/instituciones/M) e [I](https://www.gob.ec/instituciones/I)).
+- Registro Oficial. (2025–2026). Cuarto Suplemento del Registro Oficial 140 (LOSNCP), [https://www.registroficial.gob.ec/cuarto-suplemento-al-registro-oficial-no-140/](https://www.registroficial.gob.ec/cuarto-suplemento-al-registro-oficial-no-140/); Noveno Suplemento del Registro Oficial 153 (Decreto 193), [https://www.registroficial.gob.ec/noveno-suplemento-no-153/](https://www.registroficial.gob.ec/noveno-suplemento-no-153/); Decreto 295, [https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-215-7/](https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-215-7/); Tercer Suplemento del Registro Oficial 337 (Decreto 461), [https://www.registroficial.gob.ec/tercer-suplemento-no-337/](https://www.registroficial.gob.ec/tercer-suplemento-no-337/); Segundo Suplemento del Registro Oficial 245 (LOTAIP), [https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-245/](https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-245/); Tercer Suplemento del Registro Oficial 68 (LOIP), [https://www.registroficial.gob.ec/tercer-suplemento-no-68/](https://www.registroficial.gob.ec/tercer-suplemento-no-68/). Consultados el 8/11/2026.
+- Servicio Nacional de Contratación Pública. (2025). *Ley Orgánica del Sistema Nacional de Contratación Pública: texto consolidado*. [https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf) Consultado el 8/11/2026.
+- Servicio Nacional de Contratación Pública. (2025, 28 de octubre). *Reformas a la LOSNCP: más transparencia y eficiencia en las compras públicas* (boletín 19). [https://portal.compraspublicas.gob.ec/sercop/reformas-a-la-losncp-mas-transparencia-y-eficiencia-en-las-compras-publicas/](https://portal.compraspublicas.gob.ec/sercop/reformas-a-la-losncp-mas-transparencia-y-eficiencia-en-las-compras-publicas/) Consultado el 8/11/2026.
+- Servicio Nacional de Contratación Pública. (2026, 5 de noviembre). *Resolución SERCOP-2026-0546-R*. [https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/11/SERCOP-SERCOP-2026-0546-R.pdf](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/11/SERCOP-SERCOP-2026-0546-R.pdf) Consultado el 8/11/2026.
+- Servicio Nacional de Contratación Pública. (2026). *Informe preliminar de rendición de cuentas 2025*. [https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/04/Informe_Preliminar_RDC2025_vf.pdf](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/04/Informe_Preliminar_RDC2025_vf.pdf) Consultado el 8/11/2026.
+- Servicio Nacional de Contratación Pública. (s. f.). *Datos abiertos de contratación pública: descarga masiva* (OCDS). [https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/) Consultado el 3/11/2026 (archivos de 2021 y 2024) y el 8/11/2026.
+- Servicio Nacional de Contratación Pública. (s. f.). *Política de publicación de datos abiertos OCDS*. [https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf) Consultado el 3/11/2026.
+- Trazabilidad Pública. (2026). Documentos del equipo: [ADR 0001](https://github.com/Vladimirjon/ec-gov-procurement-dw/blob/main/docs/adr/0001-alcance.md), [entidades.md](https://github.com/Vladimirjon/ec-gov-procurement-dw/blob/main/docs/sources/entidades.md), [ocds.md](https://github.com/Vladimirjon/ec-gov-procurement-dw/blob/main/docs/sources/ocds.md), [reconocimiento.md](https://github.com/Vladimirjon/ec-gov-procurement-dw/blob/main/docs/sources/reconocimiento.md) y [registro de uso de IA](https://github.com/Vladimirjon/ec-gov-procurement-dw/blob/main/docs/uso-de-ia.md). Repositorio del proyecto, versión del 8/11/2026.
 
 ## Criterios de aceptación del hito (autocomprobación)
 

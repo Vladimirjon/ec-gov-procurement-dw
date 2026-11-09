@@ -43,18 +43,18 @@ alfabético: `Hito1_BravoFreireGuajanPasquelTorres.pdf`. La guía general del
 Hito 1 menciona también el nombre `Proyecto_EquipoX_Hito1` en su paso 10; se usa
 el de la ficha del hito, que es la instrucción de formato de entrega.
 
-## PDF del Hito 1
+## Word del Hito 1
 
-`h1/Hito1_BravoFreireGuajanPasquelTorres.pdf` se genera desde
-`docs/requirements/hito1.md` con `scripts/build_hito1_pdf.ps1` (PowerShell 7,
-`pandoc` 3.x y Edge o Chrome instalados en el equipo; no son dependencias del
-proyecto y el script no instala nada). El script excluye la autocomprobación del
-Markdown, vuelve absolutos los enlaces a archivos del repositorio, falla si
-queda una marca [VERIFICAR] o [PENDIENTE], y comprueba los límites de la guía:
-perfil de hasta 3 páginas y cuerpo de hasta 6 antes de los anexos. Para
-regenerarlo, desde la raíz del repositorio: `pwsh -File scripts/build_hito1_pdf.ps1`.
-La fecha del encabezado y el nombre del equipo se editan en el Markdown. El
-script no está cubierto por las pruebas automáticas: se verifica a mano.
+`h1/Hito1_BravoFreireGuajanPasquelTorres.docx` se genera desde
+`docs/requirements/hito1.md` con `python -I scripts/build_hito1_docx.py` (solo
+biblioteca estándar de Python; no necesita Word ni otras herramientas). El
+equipo entrega en Word y el líder lo convierte a PDF si está de acuerdo. El
+formato (Times New Roman, tablas de tres líneas, «Tabla N» con título y nota,
+número de página arriba a la derecha) lo fija el script. El script falla si queda
+una marca [VERIFICAR] o [PENDIENTE] y no mide las páginas: el perfil debe ocupar
+hasta 3 y el cuerpo hasta 6 antes de los anexos, y se comprueba abriendo el
+Word. Tras entregarlo, los retoques pueden hacerse a mano en el Word, pero
+entonces el Markdown deja de ser la fuente.
 
 ## Plantilla opcional
 
