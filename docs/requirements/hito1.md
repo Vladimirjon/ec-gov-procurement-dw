@@ -91,14 +91,25 @@ Esa función de **compradora pública** es la que analiza este proyecto.
 
 ### 3. Actores y partes interesadas
 
-- **Entidades contratantes:** Presidencia, ministerios e institutos.
-- **Proveedores** de bienes, obras y servicios.
-- **SERCOP**, ente rector del Sistema Nacional de Contratación Pública.
-- **Ministerio de Economía y Finanzas (MEF)**, que gestiona el presupuesto del
-  que sale el gasto de contratación.
-- **Organismos de control** y ciudadanía que usa la información abierta.
-  **[VERIFICAR]** cuál organismo de control fiscaliza la contratación y su
-  base legal.
+| Actor | Rol en la contratación | Fuente |
+|---|---|---|
+| **Entidades contratantes** (Presidencia, ministerios, institutos) | Identifican la necesidad, la incluyen en el Plan Anual de Contratación (PAC) y adjudican (la máxima autoridad o su delegado). En los datos son el `buyer`. | LOSNCP, arts. 7, 22 y 30 |
+| **Proveedores y contratistas** | Ofertan y ejecutan los contratos; deben estar habilitados en el Registro Único de Proveedores (RUP). En OCDS: `tenderer` y `supplier`. | LOSNCP, arts. 7 y 19 |
+| **SERCOP** | Rector del Sistema Nacional de Contratación Pública (SNCP): administra el RUP y el Portal de Contratación (datos abiertos), publica estadísticas, sanciona a proveedores y controla la fase precontractual. | LOSNCP, arts. 9 y 13 |
+| **Ente rector de las finanzas públicas** (MEF) | Fija los techos presupuestarios del Presupuesto General del Estado (PGE). Su máxima autoridad integra el Directorio del SNCP, que dicta la política de contratación. | LOSNCP, arts. 9 (núm. 1) y 10; Directrices Proforma 2027, p. 4 |
+| **Organismo de control** | Fiscaliza la contratación; cuál es y su base legal, en la sección 4. | Sección 4 |
+| **Ciudadanía y veedurías** | Usan la información abierta; SERCOP facilita la veeduría ciudadana. | LOSNCP, art. 9 (núm. 3 y 9) |
+
+**Fuentes (consultadas el 9/11/2026).**
+[LOSNCP](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/10/LOSNCP-RO-140-07-X-2025-1.pdf),
+Registro Oficial, Cuarto Suplemento Nº 140, 7/10/2025 (numeración del texto
+vigente tras la reforma; el anterior puede numerar distinto).
+[Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf),
+p. 4 (citan los arts. 74 y 97 del COPLAFIP). Las Directrices nombran a este
+actor Ministerio de Economía y Finanzas, pero la página de
+[finanzas.gob.ec](https://www.finanzas.gob.ec/) se presentaba ese día como
+«Ministerio de Desarrollo Económico y Productivo – MDEP»; por eso se usa el
+término de la ley, «ente rector de las finanzas públicas».
 
 ### 4. Marco normativo y entes de control
 
@@ -129,16 +140,33 @@ La cadena de contratación se publica en el estándar OCDS en cuatro etapas:
 ([ocds.md](../sources/ocds.md)). Cada proceso se identifica con un `ocid`.
 Un proceso puede tener varias adjudicaciones y contratos.
 
+| Etapa OCDS | Qué ocurre | Quién actúa | Qué toman P1 a P3 |
+|---|---|---|---|
+| **Planificación** (`planning`) | La entidad justifica la compra y reserva presupuesto; la necesidad alimenta el PAC (LOSNCP, art. 22). | Entidad | Nada |
+| **Licitación** (`tender`) | Define cómo buscar proveedores: método (`procurementMethod`), plazo de ofertas, ítems y valor estimado (`tender.value`). | Entidad y oferentes | Método (P1, P2) y valor estimado (P2) |
+| **Adjudicación** (`awards`) | Decide a quién se adjudica; la adopta la máxima autoridad o su delegado (art. 30). Puede haber varias por proceso. | Entidad y proveedor adjudicado | Valor adjudicado (`awards[].value.amount`): P1 a P3 |
+| **Contrato** (`contracts`) | Formaliza el acuerdo y referencia la adjudicación (`awardID`); puede incluir la ejecución (`implementation`). | Entidad y proveedor | Nada: es otra magnitud |
+
+Los procedimientos que llevan a la adjudicación (catálogo electrónico, subasta
+inversa electrónica, licitación, ínfima cuantía y otros) los regulan los arts.
+44 a 52 de la LOSNCP; por ejemplo, la licitación procede cuando no
+corresponde subasta inversa ni catálogo y el presupuesto referencial supera
+USD 10.000 (art. 48). Qué publica SERCOP en cada etapa se comprueba en
+[ocds.md](../sources/ocds.md#estándar-vs-fuente-real-sercop):
+`implementation` no figura como inspeccionada.
+
 ### 6. Tomadores de decisión
 
-| Decisor | Decisión principal |
-|---|---|
-| **SERCOP** (ente rector) | Qué procedimientos reforzar o controlar y qué alertas priorizar |
-| **Áreas de compras de los ministerios** | Con qué procedimiento contratar y cuánto planificar contratar |
-| **MEF** | Cuánto presupuesto asignar y cómo programar el gasto en contratación |
+| Decisor | Decisión principal | Respaldo en la norma o en las funciones oficiales |
+|---|---|---|
+| **SERCOP** (ente rector) | Qué procedimientos reforzar o controlar y qué alertas priorizar | LOSNCP, art. 9: rectoría del SNCP, estadísticas y parámetros de resultados (núm. 4) y sanciones a proveedores (núm. 10); art. 13: control de la fase precontractual. La reforma crea alertas tempranas ([boletín 19 de SERCOP](https://portal.compraspublicas.gob.ec/sercop/reformas-a-la-losncp-mas-transparencia-y-eficiencia-en-las-compras-publicas/), 28/10/2025). |
+| **Áreas de compras de los ministerios** | Con qué procedimiento contratar y cuánto planificar contratar | LOSNCP, art. 22: el órgano requirente identifica la necesidad y con ella se forma el PAC (publicado hasta el 15 de enero); arts. 44 a 52: procedimientos (el 48 fija cuándo corresponde la licitación); art. 30: adjudica la máxima autoridad o su delegado. |
+| **MEF** (ente rector de las finanzas públicas) | Cuánto presupuesto asignar y cómo programar el gasto en contratación | Directrices Proforma 2027, p. 4, citando el COPLAFIP: art. 74, incisos 8 y 9 (techos presupuestarios globales, institucionales y de gasto; proforma del PGE) y art. 97. Integra el Directorio del SNCP (LOSNCP, art. 10). |
 
-Las decisiones son una hipótesis de trabajo derivada de los roles descritos;
-**[VERIFICAR]** contra la normativa de cada uno.
+Consulta del 9/11/2026; fuentes en la sección 3. Son inferencia del equipo dos
+pasos que la norma no dice: que el área de compras ejecute lo que la ley asigna
+al órgano requirente y a la máxima autoridad o su delegado, y que los techos de
+gasto del MEF alcancen al gasto en contratación.
 
 ### 7. Indicadores habituales
 
