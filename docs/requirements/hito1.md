@@ -1,16 +1,15 @@
 # Hito 1 · Perfil institucional y preguntas de negocio
 
-**Equipo:** Bravo, Freire, Guajan, Pasquel, Torres (orden por confirmar) ·
-**Sector:** Sector público – gobierno central · **Fecha:** por definir
+**Equipo:** Trazabilidad Pública (Bravo, Freire, Guajan, Pasquel, Torres) ·
+**Sector:** Sector público – gobierno central · **Fecha:** 08/11/26
 
-> **Estado: borrador de trabajo.** Las marcas **[VERIFICAR]** señalan datos que
-> aún no se abrieron en su fuente oficial; ninguna debe llegar al PDF final
-> sin su enlace y fecha de consulta. Este archivo es la fuente en Markdown del
-> entregable; el PDF (máximo 6 páginas, nombre
-> `Hito1_Apellido1Apellido2ApellidoN.pdf`) se arma desde aquí.
-> Las fuentes se consultaron el 27/10/2026 salvo que se indique otra fecha.
+Fuentes consultadas el 27/10/2026 salvo que se indique otra fecha. Cada fuente
+lleva su enlace.
 
-## Parte 1 · Perfil institucional del sector (máx. 3 páginas)
+<!-- Fuente del PDF: scripts/build_hito1_pdf.ps1 lo arma desde este archivo.
+     La sección "Criterios de aceptación del hito" no entra en el PDF. -->
+
+## Parte 1 · Perfil institucional del sector
 
 ### 1. Identificación y alcance
 
@@ -28,15 +27,15 @@ abrir el 6/11/2026; el detalle entidad por entidad está en
 
 | Categoría | Cifra aproximada | Fuente (consultada el 15/10 y el 6/11/2026) | Observación |
 |---|---|---|---|
-| Presidencia de la República | 1 | [gob.ec/instituciones](https://www.gob.ec/instituciones), sección `P`: `Presidencia de la República (PR)` | La `Vicepresidencia de la República (VPR)` consta aparte, en la sección `V`. El ADR 0001 no la nombra, así que no se cuenta y, por su regla 6, queda fuera de los indicadores hasta clasificarla. |
-| Ministerios | 10 carteras en el menú de navegación del portal | [Portal del MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) y [gob.ec/instituciones/M](https://www.gob.ec/instituciones/M) | El menú muestra 10 carteras (la décima, «Trabajo y Desarrollo Humano»); no es un inventario normativo. `gob.ec` lista 18 entradas ministeriales porque junto a los ministerios fusionados en 2026 mantiene carteras previas. La vigencia de cada una se verifica con su norma en el Hito 2. |
+| Presidencia de la República | 1 | [gob.ec/instituciones](https://www.gob.ec/instituciones), sección `P`: `Presidencia de la República (PR)` | La Vicepresidencia (`VPR`, sección `V`) consta aparte; el ADR 0001 no la nombra, así que no se cuenta y, por su regla 6, queda fuera de los indicadores hasta clasificarla. |
+| Ministerios | 10 carteras en el menú de navegación del portal | [Portal del MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) y [gob.ec/instituciones/M](https://www.gob.ec/instituciones/M) | La décima cartera del menú es «Trabajo y Desarrollo Humano»; no es un inventario normativo. `gob.ec` lista 18 entradas porque, junto a los ministerios fusionados en 2026, mantiene carteras previas. Su vigencia se verifica con la norma en el Hito 2. |
 | Institutos | 16 candidatos | [gob.ec/instituciones/I](https://www.gob.ec/instituciones/I) | De 20 entradas: 16 candidatos, 3 de seguridad social (`IESS`, `ISSPOL`, `ISSFA`) y 1 registro de prueba (`IP2026`). La inclusión del `INEN` (consta como «Servicio», sección `S`) no está decidida. |
 
-Las cifras son aproximadas. `gob.ec` es una fuente base nominal: muestra
-nombre, sigla y enlace de cada entidad, pero no acredita que la lista esté
-completa ni indica de qué ministerio depende cada instituto. Esa dependencia,
-y su vigencia en 2021–2025, se verifica entidad por entidad con su norma de
-creación o adscripción antes de incluirla en la clasificación.
+Las cifras son aproximadas: `gob.ec` es una fuente nominal (nombre, sigla y
+enlace de cada entidad) y no acredita que la lista esté completa ni de qué
+ministerio depende cada instituto. Esa dependencia y su vigencia en 2021–2025
+se verifican con la norma de creación o adscripción antes de clasificar la
+entidad.
 
 **Qué queda fuera y por qué.** Por decisión del ADR 0001 (aceptado) quedan
 fuera:
@@ -61,8 +60,7 @@ resolverse). Su clasificación definitiva se decide en el Hito 2
   (PGE) sus ingresos y egresos, y las
   [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf) del MEF (secciones 3.1 y 3.2, p. 69–70;
   consultadas el 6/11/2026) la tratan como entidades que no forman parte del
-  PGE. Eso la deja fuera del PGE, pero no resuelve por sí solo su clasificación
-  en este proyecto.
+  PGE.
 
 Los artículos citados en esta sección y en la siguiente son de la
 [Constitución de la República del Ecuador](https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf)
@@ -72,10 +70,10 @@ Los artículos citados en esta sección y en la siguiente son de la
 
 El art. 141 de la Constitución establece que la Presidenta o Presidente de la
 República ejerce la Función Ejecutiva y es responsable de la administración
-pública. La integran la Presidencia y la Vicepresidencia, los Ministerios de
-Estado y los demás organismos e instituciones necesarios para ejercer, en su
-ámbito, la rectoría, la planificación, la ejecución y la evaluación de las
-políticas públicas nacionales y de los planes que se crean para ejecutarlas.
+pública. La integran la Presidencia, la Vicepresidencia, los Ministerios de
+Estado y los demás organismos necesarios para ejercer la rectoría, la
+planificación, la ejecución y la evaluación de las políticas públicas
+nacionales y de los planes que las desarrollan.
 
 **Misión del sector, en palabras del equipo:** conducir la administración
 pública nacional, es decir, definir hacia dónde van las políticas del país,
@@ -103,14 +101,11 @@ Esa función de **compradora pública** es la que analiza este proyecto.
 **Fuentes (consultadas el 8/11/2026).**
 [LOSNCP, texto consolidado publicado por SERCOP](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf),
 que incorpora la reforma del Registro Oficial, Cuarto Suplemento Nº 140,
-7/10/2025 (numeración vigente; el texto anterior puede numerar distinto).
+7/10/2025 (su numeración puede diferir de la del texto anterior).
 [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf),
-p. 4 (citan los arts. 74 y 97 del COPLAFIP). Las Directrices nombran a este
-actor Ministerio de Economía y Finanzas, pero
-[finanzas.gob.ec](https://www.finanzas.gob.ec/) redirige al portal del
-«Ministerio de Desarrollo Económico y Productivo – MDEP»
-([economicoproductivo.gob.ec](https://www.economicoproductivo.gob.ec/));
-por eso se usa el término de la ley, «ente rector de las finanzas públicas».
+p. 4 (citan los arts. 74 y 97 del COPLAFIP). [finanzas.gob.ec](https://www.finanzas.gob.ec/) redirige
+al portal del «Ministerio de Desarrollo Económico y Productivo – MDEP»; por eso
+se usa el término de la ley, «ente rector de las finanzas públicas».
 
 ### 4. Marco normativo y entes de control
 
@@ -135,9 +130,6 @@ Se distingue el marco vigente a esa fecha del aplicable a los procesos de
   Entre sus reformas posteriores están el
   [Decreto 295, publicado el 30/1/2026](https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-215-7/)
   y el [Decreto 461, publicado el 30/7/2026](https://www.registroficial.gob.ec/tercer-suplemento-no-337/).
-  Este último sustituye, por ejemplo, las reglas para elegir entre subasta
-  inversa electrónica y licitación (art. 14 del decreto, que sustituye el
-  art. 74 del Reglamento; [texto oficial, pp. 28–29](https://esacc.corteconstitucional.gob.ec/storage/api/v1/10_DWL_FL/eyJjYXJwZXRhIjoicm8iLCJ1dWlkIjoiNTRiYTBmM2UtODUzYy00NTczLWE3YmItZjBkOWM3NjMzYjBkLnBkZiJ9)).
   SERCOP confirma la aplicación del Decreto 193 reformado por el 461 en su
   [resolución de 5/11/2026, p. 5](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/11/SERCOP-SERCOP-2026-0546-R.pdf).
 - **LOTAIP, vigente.** La Ley Orgánica de Transparencia y Acceso a la
@@ -165,16 +157,15 @@ Se distingue el marco vigente a esa fecha del aplicable a los procesos de
 
 **Implicación para 2021–2025.** La disposición transitoria primera de la
 reforma de octubre de 2025 mantiene la normativa de inicio, presentación o
-suscripción, según corresponda, para procedimientos, reclamos y contratos
-anteriores ([LOSNCP, pp. 73–74](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf)).
-El auto de aclaración citado preserva la continuidad de los procesos
-precontractuales iniciados bajo la LOIP antes de publicarse la sentencia, sin
-autorizar nuevos procesos bajo esa ley desde esa publicación. Por ello no
-corresponde tratar todo 2025 como un único régimen ni trasladar las reglas de
-2026 a toda la serie histórica. Como **recomendación analítica para hitos
-posteriores**, se propone conservar el procedimiento original de la fuente y
-documentar por separado cualquier clasificación homogénea derivada; es una
-inferencia metodológica, no una función ya implementada del DW.
+suscripción para los procedimientos, reclamos y contratos anteriores
+([LOSNCP, pp. 73–74](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf)).
+El auto de aclaración preserva los procesos precontractuales iniciados bajo la
+LOIP antes de la sentencia, sin autorizar nuevos desde su publicación. Por eso
+no corresponde tratar todo 2025 como un único régimen ni aplicar las reglas de
+2026 a toda la serie. **Recomendación analítica para hitos posteriores**
+(inferencia metodológica del equipo, no una función implementada del DW):
+conservar el procedimiento original de la fuente y documentar por separado
+cualquier clasificación homogénea derivada.
 
 ### 5. Procesos clave
 
@@ -190,11 +181,11 @@ Un proceso puede tener varias adjudicaciones y contratos.
 | **Adjudicación** (`awards`) | Decide a quién se adjudica; la adopta la máxima autoridad o su delegado (art. 30). Puede haber varias por proceso. | Entidad y proveedor adjudicado | Valor adjudicado (`awards[].value.amount`): P1 a P3 |
 | **Contrato** (`contracts`) | Formaliza el acuerdo y referencia la adjudicación (`awardID`); puede incluir la ejecución (`implementation`). | Entidad y proveedor | Nada: es otra magnitud |
 
-Los procedimientos que llevan a la adjudicación (catálogo electrónico, subasta
-inversa electrónica, licitación, ínfima cuantía y otros) los regulan los arts.
-44 a 52 de la LOSNCP; por ejemplo, la licitación procede cuando no
-corresponde subasta inversa ni catálogo y el presupuesto referencial supera
-USD 10.000 (art. 48). Qué publica SERCOP en cada etapa se comprueba en
+Los arts. 44 a 52 de la LOSNCP regulan los procedimientos (catálogo
+electrónico, subasta inversa electrónica, licitación, ínfima cuantía y otros);
+por ejemplo, la licitación procede cuando no corresponde subasta inversa ni
+catálogo y el presupuesto referencial supera USD 10.000 (art. 48). Qué publica
+SERCOP en cada etapa se comprueba en
 [ocds.md](../sources/ocds.md#estándar-vs-fuente-real-sercop):
 `implementation` no figura como inspeccionada.
 
@@ -214,10 +205,10 @@ gasto en contratación.
 
 SERCOP publica cada año su rendición de cuentas. Se abrió el
 [informe preliminar 2025](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/04/Informe_Preliminar_RDC2025_vf.pdf)
-(95 páginas, consultado el 8/11/2026; cifras provisionales según el propio
-informe; las páginas citadas son las del visor de PDF). Sus cifras son de la
-contratación pública **nacional**, que incluye GAD y empresas públicas: ilustran
-cómo se mide el sector, pero no son cifras del gobierno central.
+(95 páginas, consultado el 8/11/2026; cifras provisionales; las páginas son las
+del visor de PDF). Son cifras de la contratación pública **nacional**, que
+incluye GAD y empresas públicas: ilustran cómo se mide el sector, pero no son
+cifras del gobierno central.
 
 | Indicador | Cómo lo calcula SERCOP | Dato 2025 (nacional) | Pág. |
 |---|---|---|---|
@@ -227,30 +218,26 @@ cómo se mide el sector, pero no son cifras del gobierno central.
 | Ahorro | Presupuesto menos adjudicado en los procesos del régimen común, sin ferias inclusivas | USD 461,4 millones (USD 502,5 millones en 2024) | 13 y 14 |
 | Concentración | Participación de las diez principales actividades económicas (CIIU) en el monto | 67,6 % | 14 |
 
-La guía del Hito 1 (sección 6) también menciona la ejecución presupuestaria del
-MEF como indicador típico de este sector. El MEF la publica en informes en PDF
-(sección 8) y no se usa mientras no exista un conjunto descargable. De esta
-lista, P1 retoma el monto por procedimiento, P2 es el equivalente del ahorro
-calculado con campos de la descarga y P3 proyecta el monto adjudicado.
+La guía del Hito 1 (sección 6) menciona también la ejecución presupuestaria del
+MEF; se publica en informes en PDF (sección 8) y no se usa mientras no exista un
+conjunto descargable. P1 retoma el monto por procedimiento, P2 es el
+equivalente del ahorro con campos de la descarga y P3 proyecta el monto
+adjudicado.
 
 ### 8. Fuentes de datos
 
-| Fuente | Dueño | Formato | Periodicidad | Años | Licencia | Enlace |
-|---|---|---|---|---|---|---|
-| Datos abiertos de contratación (OCDS) | SERCOP | JSON, CSV, XLSX por año y mes; API | Descargas actualizadas a diario | 2015 en adelante según la API; abiertos 2021, 2024, 2025 y enero 2025 | Creative Commons Atribución 3.0 Ecuador: obliga a enlazar la fuente ([política de SERCOP, p. 8](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf), consultada el 3/11/2026) | [Descarga masiva](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/) |
-| Directorio de instituciones | MINTEL (`gob.ec`) | Páginas web por sección | No declarada en el sitio (consultado el 3/11/2026) | Vigente 2026 | Sin licencia explícita; se usa solo para clasificar entidades, citando el enlace | [gob.ec/instituciones](https://www.gob.ec/instituciones) |
+| Fuente y dueño | Formato y periodicidad | Años y licencia | Enlace |
+|---|---|---|---|
+| Datos abiertos de contratación (OCDS), SERCOP | JSON, CSV y XLSX por año y mes, y API; descargas actualizadas a diario | 2015 en adelante según la API; abiertos 2021, 2024, 2025 y enero 2025. Creative Commons Atribución 3.0 Ecuador: obliga a enlazar la fuente ([política de SERCOP, p. 8](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf), consultada el 3/11/2026) | [Descarga masiva](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/) |
+| Directorio de instituciones, MINTEL (`gob.ec`) | Páginas web por sección; periodicidad no declarada en el sitio (consultado el 3/11/2026) | Vigente 2026. Sin licencia explícita: se usa solo para clasificar entidades, citando el enlace | [gob.ec/instituciones](https://www.gob.ec/instituciones) |
 
-Ejecución presupuestaria del MEF: se encontraron informes en PDF
+Ejecución presupuestaria del MEF: hay informes en PDF
 ([ejemplo 2019](https://www.finanzas.gob.ec/wp-content/uploads/downloads/2020/04/Inf_ejec.presupuestaria_2019.pdf)),
-pero no se ha confirmado un conjunto descargable por entidad. No se usa como
-fuente hasta abrir un archivo real.
+pero no se confirmó un conjunto descargable por entidad; no se usa como fuente.
 
-**Prueba del archivo realizada:** se descargaron y abrieron los ZIP anuales de
-2021, 2024 y 2025 (167.058, 219.185 y 190.619 procesos) y el de enero de 2025.
-En los tres años anuales existen el importe adjudicado, el importe estimado de
-la licitación, el método de contratación y el comprador; los conteos y el
-método están en [reconocimiento.md](../sources/reconocimiento.md). Descarga de
-2021 y 2024 el 3/11/2026.
+**Prueba del archivo:** se abrieron los ZIP anuales de 2021, 2024 y 2025
+(conteos en la Parte 2 y en [reconocimiento.md](../sources/reconocimiento.md));
+descarga de 2021 y 2024 el 3/11/2026.
 
 ## Parte 2 · Matriz de preguntas de negocio
 
@@ -321,9 +308,18 @@ absoluta o relativa).
 | Es respondible con datos públicos descargables | Cumple: campos presentes en los tres archivos anuales abiertos; el tipo de entidad depende de la clasificación del Hito 2 | Cumple para el 85,6–87,6 % de los releases (los que traen ambos importes) | Condicionada: depende de la fecha que se elija en el Hito 2 (`awards[].date` solo consta en el 15–18 %) |
 | Es analítica | Cumple: tendencia en el tiempo cruzada con dos dimensiones | Cumple: compara métodos y tipos de entidad | Cumple: proyecta una serie en el tiempo |
 
+## Anexo B · Declaración de uso de inteligencia artificial
+
+El equipo usó asistentes de IA para leer y resumir fuentes, redactar borradores,
+recalcular conteos y revisar enlaces. La guía del proyecto pide declarar qué se
+pidió y cómo se verificó: cada uso consta, por persona y fecha, en el
+[registro de uso de IA](../uso-de-ia.md). Las cifras, los artículos y las
+páginas citadas se contrastaron con la fuente oficial antes de incluirse, y el
+equipo responde por el contenido.
+
 ## Criterios de aceptación del hito (autocomprobación)
 
-- [ ] El perfil cubre los ocho componentes con datos vigentes y citados.
+- [x] El perfil cubre los ocho componentes con datos vigentes y citados.
 - [x] El análisis es del sector completo.
 - [x] Marco normativo y entes de control verificados al 8/11/2026 (sección 4),
       con distinción del régimen aplicable a 2021–2025.
@@ -331,4 +327,4 @@ absoluta o relativa).
 - [x] Las tres preguntas cumplen las cinco condiciones de la guía.
 - [x] Una descriptiva y una diagnóstica; la tercera es predictiva.
 - [x] Cada fuente tiene enlace y fecha de consulta.
-- [ ] Todas las marcas **[VERIFICAR]** y **[PENDIENTE]** resueltas.
+- [x] Todas las marcas **[VERIFICAR]** y **[PENDIENTE]** resueltas.
