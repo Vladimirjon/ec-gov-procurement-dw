@@ -22,7 +22,8 @@
     compared with pdfinfo when the script was written.
 
 .PARAMETER Output
-    PDF to write. Default: deliverables/h1/Hito1_BravoFreireGuajanPasquelTorres.pdf.
+    PDF to write, relative to the repository root or absolute. Default:
+    deliverables/h1/Hito1_BravoFreireGuajanPasquelTorres.pdf.
 
 .PARAMETER Pandoc
     pandoc executable (3.x). Default: the one found in PATH.
@@ -108,7 +109,8 @@ try {
     if ($profilePages -gt $maxProfilePages) { throw "Part 1 has $profilePages pages; the guide allows $maxProfilePages." }
     if ($bodyPages -gt $maxBodyPages) { throw "The body has $bodyPages pages; the guide allows $maxBodyPages." }
 
-    $target = Join-Path $repo $Output
+    # Relative paths are relative to the repository root; absolute paths are kept.
+    $target = if ([IO.Path]::IsPathRooted($Output)) { $Output } else { Join-Path $repo $Output }
     New-Item -ItemType Directory -Force (Split-Path $target) | Out-Null
     Copy-Item $full $target -Force
     Write-Host "Written: $target"
