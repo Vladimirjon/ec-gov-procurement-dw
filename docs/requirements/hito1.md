@@ -212,13 +212,26 @@ gasto en contratación.
 
 ### 7. Indicadores habituales
 
-- Monto contratado o adjudicado por procedimiento.
-- Concentración de la contratación por proveedor.
-- Ejecución presupuestaria (MEF).
-- Ahorro respecto del presupuesto referencial, que SERCOP reporta en su
-  rendición de cuentas. **[VERIFICAR]** abrir el
-  [informe preliminar 2025](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/04/Informe_Preliminar_RDC2025_vf.pdf)
-  (no se pudo abrir en esta consulta) y citar cifras con su página.
+SERCOP publica cada año su rendición de cuentas. Se abrió el
+[informe preliminar 2025](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/04/Informe_Preliminar_RDC2025_vf.pdf)
+(95 páginas, consultado el 8/11/2026; cifras provisionales según el propio
+informe; las páginas citadas son las del visor de PDF). Sus cifras son de la
+contratación pública **nacional**, que incluye GAD y empresas públicas: ilustran
+cómo se mide el sector, pero no son cifras del gobierno central.
+
+| Indicador | Cómo lo calcula SERCOP | Dato 2025 (nacional) | Pág. |
+|---|---|---|---|
+| Monto adjudicado y su peso | Total adjudicado y su porcentaje del PGE y del PIB | USD 7.318,7 millones; 20,3 % del PGE; 5,5 % del PIB | 12 |
+| Monto por procedimiento | Suma de lo adjudicado por tipo de procedimiento | Régimen común: USD 5.181,3 millones en 218.246 procesos; el mayor monto fue de la subasta inversa electrónica (USD 1.549,5 millones) | 16 |
+| Monto por tipo de compra | Participación de cada tipo en el total adjudicado | Servicios 36,6 %; bienes 30,6 %; obras 27,2 % | 19 |
+| Ahorro | Presupuesto menos adjudicado en los procesos del régimen común, sin ferias inclusivas | USD 461,4 millones (USD 502,5 millones en 2024) | 13 y 14 |
+| Concentración | Participación de las diez principales actividades económicas (CIIU) en el monto | 67,6 % | 14 |
+
+La guía del Hito 1 (sección 6) también menciona la ejecución presupuestaria del
+MEF como indicador típico de este sector. El MEF la publica en informes en PDF
+(sección 8) y no se usa mientras no exista un conjunto descargable. De esta
+lista, P1 retoma el monto por procedimiento, P2 es el equivalente del ahorro
+calculado con campos de la descarga y P3 proyecta el monto adjudicado.
 
 ### 8. Fuentes de datos
 
@@ -247,18 +260,32 @@ está más completa en los datos.
 
 | Pregunta de negocio | Decisor y decisión | Indicador (fórmula) | Dimensiones | Fuente candidata |
 |---|---|---|---|---|
-| **P1 (descriptiva).** ¿Cómo evolucionó el monto adjudicado por método de contratación entre 2021 y 2025, por año y tipo de entidad (Presidencia, ministerio, instituto)? | Entidades contratantes (órgano requirente) y SERCOP: qué procedimientos priorizar al planificar | Monto adjudicado (USD) = suma de `awards[].value.amount` de los procesos del sector, agrupada por año, método y tipo de entidad | Año, método de contratación, tipo de entidad, entidad | SERCOP, descarga masiva JSON anual; clasificación de entidades con `gob.ec` |
-| **P2 (diagnóstica).** ¿Qué métodos de contratación se asocian a mayor desviación entre el valor adjudicado y el valor estimado de la licitación, según el tipo de entidad? | SERCOP: dónde reforzar los controles | Desviación % = (valor adjudicado − valor estimado de la licitación) ÷ valor estimado × 100, por proceso con ambos valores; se resume por método y tipo de entidad | Método, tipo de entidad, año | SERCOP, descarga masiva JSON anual (`tender.value.amount` y `awards[].value.amount`) |
-| **P3 (predictiva).** ¿Cuál es el monto adjudicado esperado por mes en el primer semestre de 2026 para cada tipo de entidad? | MEF y entidades contratantes: programar el presupuesto de contratación | Monto mensual proyectado (serie de tiempo), validado con una métrica de error sobre un periodo retenido de 2025 | Mes, tipo de entidad | SERCOP, serie mensual 2021–2025 construida desde la descarga masiva |
+| **P1 (descriptiva).** ¿Cómo evolucionó el monto adjudicado por método de contratación entre 2021 y 2025 en el gobierno central, por año y tipo de entidad (Presidencia, ministerio, instituto)? | Entidades contratantes (órgano requirente) y SERCOP: qué procedimientos priorizar al planificar | **Monto adjudicado** = Σ `awards[].value.amount` de los procesos del sector. Numerador: suma de importes adjudicados; sin denominador (es una suma); unidad: USD | Año, método de contratación, tipo de entidad, entidad | SERCOP, [descarga masiva JSON anual](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/); tipo de entidad con el directorio [gob.ec](https://www.gob.ec/instituciones) |
+| **P2 (diagnóstica).** ¿Qué métodos de contratación se asocian a mayor desviación porcentual entre el valor adjudicado y el valor estimado de la licitación, según el tipo de entidad, entre 2021 y 2025 en el gobierno central? | SERCOP: dónde reforzar los controles | **Desviación %** = (A − E) ÷ E × 100, con A = Σ `awards[].value.amount` del proceso y E = `tender.value.amount`. Numerador: A − E (USD); denominador: E (USD); unidad: %. Solo procesos con A y E. Por grupo (método × tipo de entidad): (ΣA − ΣE) ÷ ΣE × 100 | Método, tipo de entidad, año | SERCOP, [descarga masiva JSON anual](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/) (`tender.value.amount` y `awards[].value.amount`) |
+| **P3 (predictiva).** ¿Cuál es el monto adjudicado esperado por mes en el primer semestre de 2026 en el gobierno central, para cada tipo de entidad? | MEF y entidades contratantes: programar el presupuesto de contratación | **Monto mensual proyectado** (USD) = pronóstico de la serie mensual del monto adjudicado de P1, con datos de 2021–2025. Error de validación (**MAPE**, propuesta del equipo) = media de \|real − proyectado\| ÷ real × 100 sobre los 12 meses retenidos de 2025; numerador y denominador en USD; unidad: % | Mes, tipo de entidad | SERCOP, serie mensual 2021–2025 construida desde la [descarga masiva](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/) |
 
-**Verificación de datos en la muestra de 2025:** las adjudicaciones con importe
-numérico fueron 183.887 de 183.891 (anual), y `tender.value.amount` estuvo
-presente en 2.050 de 2.186 procesos de enero de 2025. Son conteos nacionales
-sin filtrar por planta central. En 2021 y 2024 el importe estimado de la
-licitación estuvo presente en el 88,5 % y el 88,7 % de las licitaciones, y el
-importe adjudicado en prácticamente todas las adjudicaciones, igual que en
-2025. Los importes adjudicado, estimado y
-contractual son magnitudes distintas y no se sustituyen entre sí.
+**Campos y cobertura (prueba del archivo).** Se abrieron los ZIP anuales de
+2021, 2024 y 2025 ([reconocimiento.md](../sources/reconocimiento.md)). Los
+conteos son nacionales, sin filtrar por planta central:
+
+- **P1.** `awards[].value.amount` es numérico en 166.980 de 166.983
+  adjudicaciones (2021), 210.439 de 210.445 (2024) y 183.887 de 183.891 (2025),
+  siempre en USD. `tender.procurementMethod` toma cuatro valores (`open`,
+  `selective`, `limited` y `direct`) y `buyer.id` y `buyer.name` constan en
+  todos los releases.
+- **P2.** `tender.value.amount` y `awards[].value.amount` coinciden en 146.314,
+  187.672 y 166.555 releases: el 87,6 %, el 85,6 % y el 87,4 % de los
+  releases de cada año. En 2025, 300 releases tienen más de una adjudicación,
+  y A suma todas las de su proceso. Que E equivalga al presupuesto con el que
+  SERCOP calcula su ahorro (sección 7) no está verificado.
+- **P3.** `release.date` consta en todos los releases, pero el archivo de un
+  año trae fechas de otro (el de 2021 trae 18.235 releases con fecha de 2022)
+  y `awards[].date` solo consta en el 15–18 % de las adjudicaciones. La fecha
+  que asigna el mes se decide en el Hito 2.
+- **No son campos de la fuente:** el tipo de entidad (sale de clasificar el
+  `buyer` con el directorio `gob.ec`, Hito 2) ni el año y el mes (derivan de la
+  fecha elegida). Los importes adjudicado, estimado y contractual son
+  magnitudes distintas y no se sustituyen entre sí.
 
 ## Anexo A · Preguntas candidatas (lluvia de ideas)
 
@@ -277,6 +304,22 @@ conservan por si el profesor pide más preguntas en hitos posteriores.
 | 6 | ¿Cómo evoluciona el número de procesos por método entre años? | Descriptiva | Reserva: se puede responder con el mismo modelo que P1 |
 | 7 | ¿Con qué frecuencia faltan datos de importe, método o fecha, por entidad? | Diagnóstica | Se mueve al informe de calidad del Hito 2: es calidad de datos, no una decisión de negocio |
 | 8 | ¿Qué proporción del monto se adjudica por procedimientos de menor control? | Descriptiva | Descartada por ahora: "menor control" no está definido en las fuentes y exigiría una clasificación propia |
+
+### Comprobación de las cinco condiciones en P1 a P3
+
+Se contrastó cada pregunta con las cinco condiciones de la guía (sección 3.2).
+Los ajustes que resultaron de esta comprobación ya están en la matriz: «gobierno
+central» en las tres preguntas y, en P2, el periodo 2021–2025 y el adjetivo
+«porcentual» (sin ellos faltaba el alcance y no se sabía si «desviación» era
+absoluta o relativa).
+
+| Condición | P1 | P2 | P3 |
+|---|---|---|---|
+| Apoya una decisión concreta de un actor identificado | Cumple: las entidades contratantes y SERCOP deciden qué procedimientos priorizar (sección 6) | Cumple: SERCOP decide dónde reforzar controles (LOSNCP, arts. 9 y 13) | Cumple con salvedad: que los techos de gasto del MEF alcancen al gasto en contratación es inferencia del equipo (sección 6) |
+| Es medible | Cumple: suma en USD | Cumple: razón de dos importes en USD, en % | Cumple: pronóstico en USD con error en % (MAPE) |
+| Tiene alcance | Cumple: 2021–2025, gobierno central de Ecuador, año × método × tipo de entidad | Cumple tras el ajuste: 2021–2025, gobierno central, método × tipo de entidad | Cumple: primer semestre de 2026, gobierno central, mes × tipo de entidad |
+| Es respondible con datos públicos descargables | Cumple: campos presentes en los tres archivos anuales abiertos; el tipo de entidad depende de la clasificación del Hito 2 | Cumple para el 85,6–87,6 % de los releases (los que traen ambos importes) | Condicionada: depende de la fecha que se elija en el Hito 2 (`awards[].date` solo consta en el 15–18 %) |
+| Es analítica | Cumple: tendencia en el tiempo cruzada con dos dimensiones | Cumple: compara métodos y tipos de entidad | Cumple: proyecta una serie en el tiempo |
 
 ## Criterios de aceptación del hito (autocomprobación)
 
