@@ -5,7 +5,7 @@
   en `Instrucciones_Curso/` (local, ignorada por git). Los PDF mandan; esta
   lista es un resumen propio para trabajar. Se actualiza cuando el profesor
   publique o cambie un hito.
-- **Revisada:** 2026-11-03.
+- **Revisada:** 2026-11-03; sección B actualizada el 2026-11-08.
 - **Estado:** ✅ cubierto · ⚠ parcial o pendiente de verificar · ❌ falta ·
   ❓ el profesor se contradice (ver al final).
 
@@ -43,24 +43,24 @@
 | # | Directriz | Estado | Dónde o qué falta |
 |---|---|---|---|
 | H1-1 | El objeto de estudio es el **sector completo**, no una institución | ✅ | `hito1.md` |
-| H1-2 | PDF de máximo 6 páginas sin contar anexos; perfil de 1 a 3 páginas | ⚠ | Se mide al armar el PDF |
-| H1-3 | Al inicio: nombre del equipo, sector y fecha | ⚠ | Falta el nombre del equipo (el profesor pide nombre, no número) |
-| H1-4 | Los 8 componentes: identificación y alcance, misión y servicios, actores, marco normativo y entes de control, procesos clave, tomadores de decisión, indicadores habituales, fuentes | ⚠ | Hay borrador; marcas [VERIFICAR] |
-| H1-5 | Cuántas instituciones tiene el sector, aproximado y con fuente | ⚠ | `gob.ec`, cifras aproximadas |
-| H1-6 | Marco normativo y entes **vigentes** | ⚠ | LOSNCP y reglamento verificados; faltan LOTAIP, Ley de Integridad Pública, base constitucional y organismo de control |
-| H1-7 | De 2 a 3 tomadores de decisión con su decisión principal | ⚠ | Hay propuesta; falta respaldarla con funciones oficiales |
-| H1-8 | Indicadores que el sector ya usa y fuentes públicas encontradas | ⚠ | Falta abrir el informe de rendición de cuentas de SERCOP |
+| H1-2 | PDF de máximo 6 páginas sin contar anexos; perfil de 1 a 3 páginas | ✅ | Parte 1 = 3 páginas, cuerpo = 4 y 5 con el Anexo A y B, medido por `scripts/build_hito1_pdf.ps1` (8/11/2026) |
+| H1-3 | Al inicio: nombre del equipo, sector y fecha | ✅ | Equipo Trazabilidad Pública, sector gobierno central y fecha 08/11/26 |
+| H1-4 | Los 8 componentes: identificación y alcance, misión y servicios, actores, marco normativo y entes de control, procesos clave, tomadores de decisión, indicadores habituales, fuentes | ✅ | Los ocho componentes sin marcas [VERIFICAR] ni [PENDIENTE] (el script falla si aparece alguna) |
+| H1-5 | Cuántas instituciones tiene el sector, aproximado y con fuente | ✅ | `gob.ec` y menú del portal del MDEP, cifras aproximadas con fuente y fecha |
+| H1-6 | Marco normativo y entes **vigentes** | ✅ | Sección 4 verificada el 8/11/2026 (#36) |
+| H1-7 | De 2 a 3 tomadores de decisión con su decisión principal | ✅ | Sección 6, con respaldo normativo (#39) |
+| H1-8 | Indicadores que el sector ya usa y fuentes públicas encontradas | ✅ | Informe de rendición de cuentas 2025 de SERCOP abierto; cifras con página (sección 7, #37) |
 | H1-9 | Cada dato relevante con fuente citada (sitio oficial, ley, informe), con enlace y fecha de consulta | ⚠ | Se completa en las tareas #35 a #39 |
 | H1-10 | Redactar con palabras propias, citando; no copiar de un sitio | ⚠ | Revisar al integrar |
 | H1-11 | Matriz de **3** preguntas con: pregunta (indicador, periodo, alcance), decisor y decisión, tipo, indicador con fórmula, dimensiones, fuente candidata con enlace | ✅ | `hito1.md` |
 | H1-12 | Al menos una descriptiva y una diagnóstica; la tercera puede ser predictiva | ✅ | P1, P2, P3 |
-| H1-13 | Cada pregunta cumple las 5 condiciones: apoya una decisión, es medible, tiene alcance, es respondible con datos públicos, es analítica | ⚠ | Lo comprueba Harry (#37) |
+| H1-13 | Cada pregunta cumple las 5 condiciones: apoya una decisión, es medible, tiene alcance, es respondible con datos públicos, es analítica | ✅ | Anexo A, «Comprobación de las cinco condiciones» (#37); P3 queda condicionada a la fecha del Hito 2 |
 | H1-14 | Cada pregunta se expresa como "medida por dimensiones" (la estrella empieza aquí) | ✅ | Indicadores y dimensiones separados |
-| H1-15 | Hacer una lluvia de ideas de al menos 8 preguntas candidatas y filtrar a 3 | ❌ | Anexo propuesto en `hito1.md` |
-| H1-16 | **Prueba del archivo:** descargar y abrir un archivo de cada fuente candidata y anotar los años disponibles | ⚠ | SERCOP 2025 y enero 2025 abiertos; faltan 2021 a 2024 |
+| H1-15 | Hacer una lluvia de ideas de al menos 8 preguntas candidatas y filtrar a 3 | ✅ | Anexo A: ocho candidatas y las tres elegidas |
+| H1-16 | **Prueba del archivo:** descargar y abrir un archivo de cada fuente candidata y anotar los años disponibles | ✅ | ZIP anuales de SERCOP 2021, 2024 y 2025 y el mensual de enero de 2025 abiertos; el directorio `gob.ec` se consultó en la web |
 | H1-17 | Preferir fuentes descargables (CSV o Excel) a tablas dentro de un PDF; buscar series de varios años | ⚠ | SERCOP sí; MEF solo en PDF por ahora |
 | H1-18 | Repositorio Git con la estructura de carpetas del proyecto | ✅ | Existe |
-| H1-19 | Entrega al aula virtual con el nombre `Hito1_Apellido1Apellido2ApellidoN.pdf` | ❓ | El paso 10 menciona otro nombre |
+| H1-19 | Entrega al aula virtual con el nombre `Hito1_Apellido1Apellido2ApellidoN.pdf` | ❓ | Se usa el nombre de la ficha del hito (`Hito1_BravoFreireGuajanPasquelTorres.pdf`); el paso 10 de la guía menciona otro |
 | H1-20 | Rúbrica sobre 20: cumplimiento 4, perfil 5, calidad de preguntas 6, viabilidad con datos 5 | — | Se usa de lista de control |
 
 ## C. Roles con 5 personas
