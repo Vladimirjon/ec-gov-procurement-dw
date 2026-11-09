@@ -102,25 +102,67 @@ Esa función de **compradora pública** es la que analiza este proyecto.
 
 ### 4. Marco normativo y entes de control
 
-- **Ley Orgánica del Sistema Nacional de Contratación Pública (LOSNCP).** La
-  Asamblea Nacional aprobó reformas el 7/10/2025 y el **Reglamento General**
-  se publicó en el Registro Oficial 193 el 28/10/2025
-  ([SERCOP, reformas a la LOSNCP](https://portal.compraspublicas.gob.ec/sercop/reformas-a-la-losncp-mas-transparencia-y-eficiencia-en-las-compras-publicas/)).
-  Las reformas buscan simplificar procedimientos, reforzar el control, crear una
-  unidad de antilavado y anticorrupción en SERCOP y hacer obligatoria la
-  actualización anual del Registro Único de Proveedores.
-- **Ley Orgánica de Integridad Pública** (junio de 2025), parte de cuyas
-  disposiciones recoge la reforma anterior. **[VERIFICAR]** fecha y texto en el
-  Registro Oficial.
-- **Transparencia y acceso a la información (LOTAIP).** **[VERIFICAR]** norma
-  vigente y su alcance sobre datos abiertos.
-- **Política de publicación OCDS de SERCOP**
-  ([PDF oficial](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf)),
-  que rige cómo se publican los datos de contratación.
+**Fecha de consulta de todos los enlaces y corte de vigencia: 8/11/2026.**
+Se distingue el marco vigente a esa fecha del aplicable a los procesos de
+2021–2025.
 
-**Implicación para los datos:** el periodo 2021–2025 cruza la reforma de
-octubre de 2025. Los nombres o reglas de los procedimientos pueden cambiar
-dentro de 2025; se comprobará al perfilar los datos (Hito 2).
+- **Constitución de la República, vigente.** El art. 288 exige que las compras
+  públicas atiendan la eficiencia, transparencia, calidad y responsabilidad
+  ambiental y social; da prioridad a la producción nacional, especialmente a
+  la economía popular y solidaria y a las micro, pequeñas y medianas unidades
+  productivas ([Asamblea Nacional, art. 288](https://www.asambleanacional.gob.ec/documentos/Constitucion-2008.pdf)).
+- **LOSNCP, vigente con reformas.** La Ley Orgánica Reformatoria a la LOSNCP
+  se publicó en el **Cuarto Suplemento del Registro Oficial 140, de 7/10/2025**
+  ([Registro Oficial](https://www.registroficial.gob.ec/cuarto-suplemento-al-registro-oficial-no-140/)).
+  El [texto consolidado publicado por SERCOP](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf)
+  recoge esa reforma y dispone que la información del Portal de Contratación
+  Pública se maneje como datos abiertos (art. 21).
+- **Reglamento General de la LOSNCP, vigente con reformas.** Se expidió por
+  **Decreto Ejecutivo 193**, publicado en el **Noveno Suplemento del Registro
+  Oficial 153, de 28/10/2025** ([Registro Oficial](https://www.registroficial.gob.ec/noveno-suplemento-no-153/)).
+  Entre sus reformas posteriores están el
+  [Decreto 295, publicado el 30/1/2026](https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-215-7/)
+  y el [Decreto 461, publicado el 30/7/2026](https://www.registroficial.gob.ec/tercer-suplemento-no-337/).
+  Este último sustituye, por ejemplo, las reglas para elegir entre subasta
+  inversa electrónica y licitación (art. 14 del decreto, que sustituye el
+  art. 74 del Reglamento; [texto oficial, pp. 28–29](https://esacc.corteconstitucional.gob.ec/storage/api/v1/10_DWL_FL/eyJjYXJwZXRhIjoicm8iLCJ1dWlkIjoiNTRiYTBmM2UtODUzYy00NTczLWE3YmItZjBkOWM3NjMzYjBkLnBkZiJ9)).
+  SERCOP confirma la aplicación del Decreto 193 reformado por el 461 en su
+  [resolución de 5/11/2026, p. 5](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2026/11/SERCOP-SERCOP-2026-0546-R.pdf).
+- **LOTAIP, vigente.** La Ley Orgánica de Transparencia y Acceso a la
+  Información Pública se publicó en el Segundo Suplemento del Registro
+  Oficial 245, de 7/2/2023 ([Registro Oficial](https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-245/)).
+  Su art. 19 exige información mensual de transparencia activa, incluidos los
+  procesos de contratación (numeral 8), en formato de datos abiertos
+  ([texto oficial, pp. 18–20](https://www.asambleanacional.gob.ec/sites/default/files/private/asambleanacional/filesasambleanacionalnameuid-29/Leyes%202013-2017/736-jvelin/ro-245-2do-supl-07-02-2023.pdf)).
+- **Ley Orgánica de Integridad Pública (LOIP), sin vigencia general al corte.**
+  Se publicó el 26/6/2025 en el Tercer Suplemento del Registro Oficial 68
+  ([Registro Oficial](https://www.registroficial.gob.ec/tercer-suplemento-no-68/)).
+  La sentencia **52-25-IN/25**, de 26/9/2025, declaró su inconstitucionalidad
+  por la forma, junto con su Reglamento y normas conexas. Publicada el
+  3/10/2025 en la Edición Constitucional 96, tiene efectos generales hacia
+  futuro; las excepciones retroactivas no incluyen contratación pública
+  ([sentencia, párr. 343, y auto de aclaración, párrs. 32–33](https://esacc.corteconstitucional.gob.ec/storage/api/v1/10_DWL_FL/eyJjYXJwZXRhIjoicm8iLCJ1dWlkIjoiNjk4MGI1YmMtMjM3MS00YmNlLThhZGUtZDEwZTllMzUxMzI0LnBkZiJ9)).
+- **Rectoría y control, competencias vigentes.** SERCOP ejerce la rectoría
+  del sistema (LOSNCP, art. 9) y controla el cumplimiento normativo en la fase
+  precontractual (art. 13). La **Contraloría General del Estado (CGE)**
+  controla el uso de recursos estatales y dirige el sistema de auditoría
+  interna, externa y control interno (Constitución, arts. 211–212). Ambos
+  integran el Subsistema Nacional de Control, cada uno dentro de sus
+  competencias ([LOSNCP, arts. 13–14](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf);
+  [Constitución, arts. 211–212](https://www.asambleanacional.gob.ec/documentos/Constitucion-2008.pdf)).
+
+**Implicación para 2021–2025.** La disposición transitoria primera de la
+reforma de octubre de 2025 mantiene la normativa de inicio, presentación o
+suscripción, según corresponda, para procedimientos, reclamos y contratos
+anteriores ([LOSNCP, pp. 73–74](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf)).
+El auto de aclaración citado preserva la continuidad de los procesos
+precontractuales iniciados bajo la LOIP antes de publicarse la sentencia, sin
+autorizar nuevos procesos bajo esa ley desde esa publicación. Por ello no
+corresponde tratar todo 2025 como un único régimen ni trasladar las reglas de
+2026 a toda la serie histórica. Como **recomendación analítica para hitos
+posteriores**, se propone conservar el procedimiento original de la fuente y
+documentar por separado cualquier clasificación homogénea derivada; es una
+inferencia metodológica, no una función ya implementada del DW.
 
 ### 5. Procesos clave
 
@@ -212,8 +254,8 @@ conservan por si el profesor pide más preguntas en hitos posteriores.
 
 - [ ] El perfil cubre los ocho componentes con datos vigentes y citados.
 - [x] El análisis es del sector completo.
-- [ ] Marco normativo vigente verificado (faltan LOTAIP, Ley de Integridad
-      Pública y base constitucional).
+- [x] Marco normativo y entes de control verificados al 8/11/2026 (sección 4),
+      con distinción del régimen aplicable a 2021–2025.
 - [x] Tres tomadores de decisión, cada uno con su decisión principal.
 - [x] Las tres preguntas cumplen las cinco condiciones de la guía.
 - [x] Una descriptiva y una diagnóstica; la tercera es predictiva.
