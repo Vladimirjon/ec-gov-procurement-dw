@@ -43,18 +43,17 @@ alfabético: `Hito1_BravoFreireGuajanPasquelTorres.pdf`. La guía general del
 Hito 1 menciona también el nombre `Proyecto_EquipoX_Hito1` en su paso 10; se usa
 el de la ficha del hito, que es la instrucción de formato de entrega.
 
-## Word del Hito 1
+## Word y PDF del Hito 1
 
-`h1/Hito1_BravoFreireGuajanPasquelTorres.docx` se genera desde
-`docs/requirements/hito1.md` con `python -I scripts/build_hito1_docx.py` (solo
-biblioteca estándar de Python; no necesita Word ni otras herramientas). El
-equipo entrega en Word y el líder lo convierte a PDF si está de acuerdo. El
-formato (Times New Roman, tablas de tres líneas, «Tabla N» con título y nota,
-número de página arriba a la derecha) lo fija el script. El script falla si queda
-una marca [VERIFICAR] o [PENDIENTE] y no mide las páginas: el perfil debe ocupar
-hasta 3 y el cuerpo hasta 6 antes de los anexos, y se comprueba abriendo el
-Word. Tras entregarlo, los retoques pueden hacerse a mano en el Word, pero
-entonces el Markdown deja de ser la fuente.
+`h1/Hito1_BravoFreireGuajanPasquelTorres.docx` es el documento que revisó y
+retocó el líder en Word, y `h1/Hito1_BravoFreireGuajanPasquelTorres.pdf` es su
+conversión, 6 páginas (perfil 3, cuerpo 4 con la Parte 2, anexos A, B y C). El
+Word se generó primero desde `docs/requirements/hito1.md` con
+`python -I scripts/build_hito1_docx.py` (solo biblioteca estándar, sin Word); el
+Markdown quedó alineado con el texto final. Regenerar sobrescribe los retoques
+hechos a mano en el Word, así que se hace solo si el Markdown cambia y se vuelve
+a revisar el resultado. El script falla si queda una marca [VERIFICAR] o
+[PENDIENTE] y no mide las páginas: se cuentan abriendo el Word.
 
 ## Plantilla opcional
 

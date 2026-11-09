@@ -43,7 +43,7 @@
 | # | Directriz | Estado | Dónde o qué falta |
 |---|---|---|---|
 | H1-1 | El objeto de estudio es el **sector completo**, no una institución | ✅ | `hito1.md` |
-| H1-2 | PDF de máximo 6 páginas sin contar anexos; perfil de 1 a 3 páginas | ✅ | Medido en Word el 8/11/2026: perfil 3 páginas, cuerpo 4 y 7 con los anexos A, B y C. El equipo entrega el Word y el líder lo convierte a PDF; conviene volver a contar tras convertir |
+| H1-2 | PDF de máximo 6 páginas sin contar anexos; perfil de 1 a 3 páginas | ✅ | PDF entregable de 6 páginas: perfil 3, Parte 2 en la 4 y anexos en la 5 y 6 (8/11/2026) |
 | H1-3 | Al inicio: nombre del equipo, sector y fecha | ✅ | Equipo Trazabilidad Pública, sector gobierno central y fecha 08/11/26 |
 | H1-4 | Los 8 componentes: identificación y alcance, misión y servicios, actores, marco normativo y entes de control, procesos clave, tomadores de decisión, indicadores habituales, fuentes | ✅ | Los ocho componentes sin marcas [VERIFICAR] ni [PENDIENTE] (el script falla si aparece alguna) |
 | H1-5 | Cuántas instituciones tiene el sector, aproximado y con fuente | ✅ | `gob.ec` y menú del portal del MDEP, cifras aproximadas con fuente y fecha |

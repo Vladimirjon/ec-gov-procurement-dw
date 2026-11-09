@@ -8,8 +8,6 @@
 
 **Fecha:** 8 de noviembre de 2026
 
-Cada fuente lleva su enlace y su fecha de consulta (lista completa en el Anexo C).
-
 <!-- Fuente del Word: scripts/build_hito1_docx.py lo arma desde este archivo.
      La sección "Criterios de aceptación del hito" no entra en el Word. -->
 
@@ -37,10 +35,6 @@ Tabla: Entidades del sector según su categoría
 | Ministerios | 10 carteras en el menú de navegación del portal | [Portal del MDEP](https://www.economicoproductivo.gob.ec/catalogo-de-instituciones-y-entidades-operativas-desconcnetradas-del-sector-publico/) y [gob.ec/instituciones/M](https://www.gob.ec/instituciones/M) | No es un inventario normativo. `gob.ec` lista 18 entradas porque, junto a los ministerios fusionados en 2026, mantiene carteras previas; su vigencia se verifica en el Hito 2. |
 | Institutos | 16 candidatos | [gob.ec/instituciones/I](https://www.gob.ec/instituciones/I) | De 20 entradas: 16 candidatos, 3 de seguridad social y 1 registro de prueba. La inclusión del `INEN` (consta como «Servicio») no está decidida. |
 
-Nota: Cifras aproximadas: `gob.ec` es una fuente nominal y no acredita que la lista esté completa ni de qué ministerio depende cada instituto (se verifica con la norma de creación). Consultadas el 15/10 y el 6/11/2026; detalle en [entidades.md](../sources/entidades.md).
-
-**Qué queda fuera.** Las dos últimas filas no figuran en el ADR 0001: quedan fuera solo de forma provisional (su regla 6) hasta que el Hito 2 las clasifique ([entidades.md](../sources/entidades.md), sección 5.3).
-
 Tabla: Entidades excluidas del sector y su respaldo
 
 | Excluidas | Condición | Respaldo (Constitución) |
@@ -50,8 +44,6 @@ Tabla: Entidades excluidas del sector y su respaldo
 | **Otras funciones del Estado:** Legislativa, Judicial, Electoral y de Transparencia y Control Social | Decisión del ADR 0001 | Arts. 118, 178, 217 y 204 |
 | **Registros de la Propiedad y Cuerpos de Bomberos** | Exclusión provisional (regla 6 del ADR) | Se gestionan en el ámbito municipal o de forma concurrente con el Ejecutivo (arts. 264, num. 13, y 265) |
 | **Seguridad social** (`IESS`, `ISSFA`, `ISSPOL`) | Exclusión provisional (regla 6 del ADR) | Art. 292: sus ingresos y egresos quedan fuera del Presupuesto General del Estado (PGE); las [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf) del MEF (pp. 69–70) la tratan como ajena al PGE |
-
-Nota: Los artículos citados en esta sección y en la siguiente son de la [Constitución de la República del Ecuador](https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf), edición publicada por la Asamblea Nacional; consultada el 6/11/2026, igual que las Directrices.
 
 ### 2. Misión y servicios
 
@@ -83,8 +75,6 @@ Tabla: Actores y partes interesadas de la contratación pública
 | **Organismo de control** (Contraloría General del Estado) | Controla el uso de los recursos estatales y, con SERCOP, integra el Subsistema Nacional de Control (sección 4). | Constitución, arts. 211 y 212; LOSNCP, arts. 13 y 14 |
 | **Ciudadanía y veedurías** | Usan la información abierta; SERCOP facilita la veeduría ciudadana. | LOSNCP, art. 9 (núm. 3 y 9) |
 
-Nota: Fuentes consultadas el 8/11/2026: [LOSNCP, texto consolidado de SERCOP](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf) y [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf), p. 4 (arts. 74 y 97 del COPLAFIP). Se usa «ente rector de las finanzas públicas» porque [finanzas.gob.ec](https://www.finanzas.gob.ec/) redirige al portal del MDEP.
-
 ### 4. Marco normativo y entes de control
 
 Tabla: Marco normativo y entes de control de la contratación pública
@@ -97,8 +87,6 @@ Tabla: Marco normativo y entes de control de la contratación pública
 | **LOTAIP** | Vigente | RO 245 (7/2/2023). Art. 19: información mensual de transparencia activa, incluidos los procesos de contratación (numeral 8), en datos abiertos. | [RO 245](https://www.registroficial.gob.ec/segundo-suplemento-al-registro-oficial-no-245/); [texto oficial, pp. 18–20](https://www.asambleanacional.gob.ec/sites/default/files/private/asambleanacional/filesasambleanacionalnameuid-29/Leyes%202013-2017/736-jvelin/ro-245-2do-supl-07-02-2023.pdf) |
 | **LOIP** (Integridad Pública) | Sin vigencia general al corte | Publicada el 26/6/2025 (Tercer Suplemento del RO 68). La sentencia 52-25-IN/25 (26/9/2025) la declaró inconstitucional por la forma, con efectos hacia futuro (3/10/2025) y sin excepciones retroactivas para la contratación pública. | [RO 68](https://www.registroficial.gob.ec/tercer-suplemento-no-68/); [sentencia, párr. 343, y auto de aclaración, párrs. 32–33](https://esacc.corteconstitucional.gob.ec/storage/api/v1/10_DWL_FL/eyJjYXJwZXRhIjoicm8iLCJ1dWlkIjoiNjk4MGI1YmMtMjM3MS00YmNlLThhZGUtZDEwZTllMzUxMzI0LnBkZiJ9) |
 | **Rectoría y control** | Vigentes | SERCOP ejerce la rectoría (LOSNCP, art. 9) y controla la fase precontractual (art. 13). La Contraloría General del Estado (CGE) controla el uso de recursos estatales y dirige la auditoría y el control interno (Constitución, arts. 211–212). Ambos integran el Subsistema Nacional de Control. | [LOSNCP, arts. 13–14](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf); [Constitución, arts. 211–212](https://www.asambleanacional.gob.ec/documentos/Constitucion-2008.pdf) |
-
-Nota: Fecha de consulta de todos los enlaces y corte de vigencia: 8/11/2026. Se distingue el marco vigente a esa fecha del aplicable a los procesos de 2021–2025.
 
 **Implicación para 2021–2025.** La disposición transitoria primera de la reforma de octubre de 2025 mantiene la normativa de inicio, presentación o suscripción para los procedimientos, reclamos y contratos anteriores ([LOSNCP, pp. 73–74](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf)), y el auto de aclaración preserva los procesos iniciados bajo la LOIP antes de la sentencia. Por eso no se trata todo 2025 como un único régimen ni se aplican las reglas de 2026 a toda la serie.
 
@@ -133,8 +121,6 @@ Tabla: Tomadores de decisión y su decisión principal
 | **Entidades contratantes** (órgano requirente y máxima autoridad) | Con qué procedimiento contratar y cuánto planificar contratar | LOSNCP, art. 22: el órgano requirente identifica la necesidad y con ella se forma el PAC; arts. 44 a 52: procedimientos (el 48, la licitación); art. 30: adjudica la máxima autoridad o su delegado. |
 | **MEF** (ente rector de las finanzas públicas) | Cuánto presupuesto asignar y cómo programar el gasto en contratación | Directrices Proforma 2027, p. 4, citando el COPLAFIP: art. 74, incisos 8 y 9 (techos presupuestarios y proforma del PGE) y art. 97. Integra el Directorio del SNCP (LOSNCP, art. 10). |
 
-Nota: Consulta del 8/11/2026. Es inferencia del equipo, porque la norma no lo dice, que los techos de gasto del MEF alcancen al gasto en contratación.
-
 ### 7. Indicadores habituales
 
 SERCOP rinde cuentas cada año. Se abrió el
@@ -151,8 +137,6 @@ Tabla: Indicadores de la rendición de cuentas 2025 de SERCOP
 | Ahorro | Presupuesto menos adjudicado en los procesos del régimen común, sin ferias inclusivas | USD 461,4 millones (USD 502,5 millones en 2024) | 13 y 14 |
 | Concentración | Participación de las diez principales actividades económicas (CIIU) en el monto | 67,6 % | 14 |
 
-Nota: Páginas del visor de PDF. P1 retoma el monto por procedimiento, P2 es el equivalente del ahorro con campos de la descarga y P3 proyecta el monto adjudicado.
-
 ### 8. Fuentes de datos
 
 Tabla: Fuentes de datos públicas del sector
@@ -161,8 +145,6 @@ Tabla: Fuentes de datos públicas del sector
 |---|---|---|---|
 | Datos abiertos de contratación (OCDS), SERCOP | JSON, CSV y XLSX por año y mes, y API; descargas actualizadas a diario | 2015 en adelante según la API; abiertos 2021, 2024, 2025 y enero 2025. Licencia CC BY 3.0 Ecuador: obliga a enlazar la fuente ([política de SERCOP, p. 8](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/documentos/politica-publicacion-SERCOP-OCDS.pdf), 3/11/2026) | [Descarga masiva](https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos/) |
 | Directorio de instituciones, MINTEL (`gob.ec`) | Páginas web por sección; periodicidad no declarada (3/11/2026) | Vigente 2026. Sin licencia explícita: solo para clasificar entidades, citando el enlace | [gob.ec/instituciones](https://www.gob.ec/instituciones) |
-
-Nota: El MEF publica la ejecución presupuestaria en PDF ([ejemplo 2019](https://www.finanzas.gob.ec/wp-content/uploads/downloads/2020/04/Inf_ejec.presupuestaria_2019.pdf)), sin conjunto descargable confirmado. Prueba del archivo: Parte 2.
 
 ## Parte 2. Matriz de preguntas de negocio
 
@@ -201,12 +183,7 @@ conteos son nacionales, sin filtrar por planta central:
   fecha elegida). Los importes adjudicado, estimado y contractual son
   magnitudes distintas y no se sustituyen entre sí.
 
-## Anexo A. Preguntas candidatas y comprobación de las cinco condiciones
-
-La guía pide partir de al menos ocho preguntas y filtrarlas con las cinco
-condiciones (decisión concreta, medible, con alcance, respondible con datos
-públicos, analítica). Las tres primeras son las elegidas; las demás se
-conservan por si el profesor pide más preguntas en hitos posteriores.
+## Anexo A. Preguntas candidatas
 
 Tabla: Preguntas candidatas y veredicto
 
@@ -215,19 +192,10 @@ Tabla: Preguntas candidatas y veredicto
 | 1 | Evolución del monto adjudicado por método y tipo de entidad, 2021–2025 | Descriptiva | **P1** |
 | 2 | Métodos asociados a mayor desviación entre adjudicado y estimado | Diagnóstica | **P2** |
 | 3 | Monto adjudicado esperado por mes en 2026 por tipo de entidad | Predictiva | **P3** |
-| 4 | ¿Cómo se concentra la contratación por proveedor en cada tipo de entidad? | Descriptiva | Reserva: depende de que el campo de proveedores se pueda usar sin romper el grano |
-| 5 | ¿Qué entidades concentran más procesos con un único oferente? | Diagnóstica | Reserva: requiere confirmar el campo en los datos |
-| 6 | ¿Cómo evoluciona el número de procesos por método entre años? | Descriptiva | Reserva: se puede responder con el mismo modelo que P1 |
-| 7 | ¿Con qué frecuencia faltan datos de importe, método o fecha, por entidad? | Diagnóstica | Se mueve al informe de calidad del Hito 2: es calidad de datos, no una decisión de negocio |
-| 8 | ¿Qué proporción del monto se adjudica por procedimientos de menor control? | Descriptiva | Descartada por ahora: "menor control" no está definido en las fuentes y exigiría una clasificación propia |
 
 ### Comprobación de las cinco condiciones en P1 a P3
 
 Se contrastó cada pregunta con las cinco condiciones de la guía (sección 3.2).
-Los ajustes que resultaron de esta comprobación ya están en la matriz: «gobierno
-central» en las tres preguntas y, en P2, el periodo 2021–2025 y el adjetivo
-«porcentual» (sin ellos faltaba el alcance y no se sabía si «desviación» era
-absoluta o relativa).
 
 Tabla: Las cinco condiciones aplicadas a P1, P2 y P3
 
@@ -236,19 +204,15 @@ Tabla: Las cinco condiciones aplicadas a P1, P2 y P3
 | Apoya una decisión concreta de un actor identificado | Cumple: las entidades contratantes y SERCOP deciden qué procedimientos priorizar (sección 6) | Cumple: SERCOP decide dónde reforzar controles (LOSNCP, arts. 9 y 13) | Cumple con salvedad: que los techos de gasto del MEF alcancen al gasto en contratación es inferencia del equipo (sección 6) |
 | Es medible | Cumple: suma en USD | Cumple: razón de dos importes en USD, en % | Cumple: pronóstico en USD con error en % (WAPE) |
 | Tiene alcance | Cumple: 2021–2025, gobierno central de Ecuador, año × método × tipo de entidad | Cumple tras el ajuste: 2021–2025, gobierno central, método × tipo de entidad | Cumple: primer semestre de 2026, gobierno central, mes × tipo de entidad |
-| Es respondible con datos públicos descargables | Cumple: campos presentes en los tres archivos anuales abiertos; el tipo de entidad depende de la clasificación del Hito 2 | Cumple para el 85,6–87,6 % de los releases (los que traen ambos importes) | Condicionada: depende de la fecha que se elija en el Hito 2 (`awards[].date` solo consta en el 15–18 %) |
+| Responde a datos públicos descargables | Cumple: campos presentes en los tres archivos anuales abiertos; el tipo de entidad depende de la clasificación del Hito 2 | Cumple para el 85,6–87,6 % de los releases (los que traen ambos importes) | Condicionada: depende de la fecha que se elija en el Hito 2 (`awards[].date` solo consta en el 15–18 %) |
 | Es analítica | Cumple: tendencia en el tiempo cruzada con dos dimensiones | Cumple: compara métodos y tipos de entidad | Cumple: proyecta una serie en el tiempo |
-
-**Recomendación analítica para hitos posteriores** (inferencia del equipo, no una función del DW): conservar el procedimiento original de la fuente y documentar aparte cualquier clasificación homogénea derivada de los cambios normativos de 2021–2025.
 
 ## Anexo B. Declaración de uso de inteligencia artificial
 
 El equipo usó asistentes de IA para leer y resumir fuentes, redactar borradores,
 recalcular conteos y revisar enlaces. La guía del proyecto pide declarar qué se
 pidió y cómo se verificó: cada uso consta, por persona y fecha, en el
-[registro de uso de IA](../uso-de-ia.md). Las cifras, los artículos y las
-páginas citadas se contrastaron con la fuente oficial antes de incluirse, y el
-equipo responde por el contenido.
+[registro de uso de IA](../uso-de-ia.md).
 
 ## Anexo C. Referencias
 
