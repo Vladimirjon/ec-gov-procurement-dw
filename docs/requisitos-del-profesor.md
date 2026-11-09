@@ -43,7 +43,7 @@
 | # | Directriz | Estado | Dónde o qué falta |
 |---|---|---|---|
 | H1-1 | El objeto de estudio es el **sector completo**, no una institución | ✅ | `hito1.md` |
-| H1-2 | PDF de máximo 6 páginas sin contar anexos; perfil de 1 a 3 páginas | ✅ | Parte 1 = 3 páginas, cuerpo = 4 y 5 con el Anexo A y B, medido por `scripts/build_hito1_pdf.ps1` (8/11/2026) |
+| H1-2 | PDF de máximo 6 páginas sin contar anexos; perfil de 1 a 3 páginas | ✅ | PDF entregable de 6 páginas: perfil 3, Parte 2 en la 4 y anexos en la 5 y 6 (8/11/2026) |
 | H1-3 | Al inicio: nombre del equipo, sector y fecha | ✅ | Equipo Trazabilidad Pública, sector gobierno central y fecha 08/11/26 |
 | H1-4 | Los 8 componentes: identificación y alcance, misión y servicios, actores, marco normativo y entes de control, procesos clave, tomadores de decisión, indicadores habituales, fuentes | ✅ | Los ocho componentes sin marcas [VERIFICAR] ni [PENDIENTE] (el script falla si aparece alguna) |
 | H1-5 | Cuántas instituciones tiene el sector, aproximado y con fuente | ✅ | `gob.ec` y menú del portal del MDEP, cifras aproximadas con fuente y fecha |
@@ -60,7 +60,7 @@
 | H1-16 | **Prueba del archivo:** descargar y abrir un archivo de cada fuente candidata y anotar los años disponibles | ✅ | ZIP anuales de SERCOP 2021, 2024 y 2025 y el mensual de enero de 2025 abiertos; el directorio `gob.ec` se consultó en la web |
 | H1-17 | Preferir fuentes descargables (CSV o Excel) a tablas dentro de un PDF; buscar series de varios años | ⚠ | SERCOP sí; MEF solo en PDF por ahora |
 | H1-18 | Repositorio Git con la estructura de carpetas del proyecto | ✅ | Existe |
-| H1-19 | Entrega al aula virtual con el nombre `Hito1_Apellido1Apellido2ApellidoN.pdf` | ❓ | Se usa el nombre de la ficha del hito (`Hito1_BravoFreireGuajanPasquelTorres.pdf`); el paso 10 de la guía menciona otro |
+| H1-19 | Entrega al aula virtual con el nombre `Hito1_Apellido1Apellido2ApellidoN.pdf` | ❓ | Se usa el nombre de la ficha del hito (`Hito1_BravoFreireGuajanPasquelTorres`, en `.docx` y luego en `.pdf`); el paso 10 de la guía menciona otro |
 | H1-20 | Rúbrica sobre 20: cumplimiento 4, perfil 5, calidad de preguntas 6, viabilidad con datos 5 | — | Se usa de lista de control |
 
 ## C. Roles con 5 personas

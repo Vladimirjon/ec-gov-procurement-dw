@@ -43,18 +43,17 @@ alfabético: `Hito1_BravoFreireGuajanPasquelTorres.pdf`. La guía general del
 Hito 1 menciona también el nombre `Proyecto_EquipoX_Hito1` en su paso 10; se usa
 el de la ficha del hito, que es la instrucción de formato de entrega.
 
-## PDF del Hito 1
+## Word y PDF del Hito 1
 
-`h1/Hito1_BravoFreireGuajanPasquelTorres.pdf` se genera desde
-`docs/requirements/hito1.md` con `scripts/build_hito1_pdf.ps1` (PowerShell 7,
-`pandoc` 3.x y Edge o Chrome instalados en el equipo; no son dependencias del
-proyecto y el script no instala nada). El script excluye la autocomprobación del
-Markdown, vuelve absolutos los enlaces a archivos del repositorio, falla si
-queda una marca [VERIFICAR] o [PENDIENTE], y comprueba los límites de la guía:
-perfil de hasta 3 páginas y cuerpo de hasta 6 antes de los anexos. Para
-regenerarlo, desde la raíz del repositorio: `pwsh -File scripts/build_hito1_pdf.ps1`.
-La fecha del encabezado y el nombre del equipo se editan en el Markdown. El
-script no está cubierto por las pruebas automáticas: se verifica a mano.
+`h1/Hito1_BravoFreireGuajanPasquelTorres.docx` es el documento que revisó y
+retocó el líder en Word, y `h1/Hito1_BravoFreireGuajanPasquelTorres.pdf` es su
+conversión, 6 páginas (perfil 3, cuerpo 4 con la Parte 2, anexos A, B y C). El
+Word se generó primero desde `docs/requirements/hito1.md` con
+`python -I scripts/build_hito1_docx.py` (solo biblioteca estándar, sin Word); el
+Markdown quedó alineado con el texto final. Regenerar sobrescribe los retoques
+hechos a mano en el Word, así que se hace solo si el Markdown cambia y se vuelve
+a revisar el resultado. El script falla si queda una marca [VERIFICAR] o
+[PENDIENTE] y no mide las páginas: se cuentan abriendo el Word.
 
 ## Plantilla opcional
 
