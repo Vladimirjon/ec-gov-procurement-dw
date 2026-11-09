@@ -94,22 +94,23 @@ Esa función de **compradora pública** es la que analiza este proyecto.
 | Actor | Rol en la contratación | Fuente |
 |---|---|---|
 | **Entidades contratantes** (Presidencia, ministerios, institutos) | Identifican la necesidad, la incluyen en el Plan Anual de Contratación (PAC) y adjudican (la máxima autoridad o su delegado). En los datos son el `buyer`. | LOSNCP, arts. 7, 22 y 30 |
-| **Proveedores y contratistas** | Ofertan y ejecutan los contratos; deben estar habilitados en el Registro Único de Proveedores (RUP). En OCDS: `tenderer` y `supplier`. | LOSNCP, arts. 7 y 19 |
+| **Proveedores y contratistas** | Ofertan y ejecutan los contratos; deben inscribirse y habilitarse en el Registro Único de Proveedores (RUP), salvo las excepciones que fije el Reglamento. En OCDS: `tenderer` y `supplier`. | LOSNCP, arts. 7 y 19 |
 | **SERCOP** | Rector del Sistema Nacional de Contratación Pública (SNCP): administra el RUP y el Portal de Contratación (datos abiertos), publica estadísticas, sanciona a proveedores y controla la fase precontractual. | LOSNCP, arts. 9 y 13 |
 | **Ente rector de las finanzas públicas** (MEF) | Fija los techos presupuestarios del Presupuesto General del Estado (PGE). Su máxima autoridad integra el Directorio del SNCP, que dicta la política de contratación. | LOSNCP, arts. 9 (núm. 1) y 10; Directrices Proforma 2027, p. 4 |
 | **Organismo de control** | Fiscaliza la contratación; cuál es y su base legal, en la sección 4. | Sección 4 |
 | **Ciudadanía y veedurías** | Usan la información abierta; SERCOP facilita la veeduría ciudadana. | LOSNCP, art. 9 (núm. 3 y 9) |
 
-**Fuentes (consultadas el 9/11/2026).**
-[LOSNCP](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/10/LOSNCP-RO-140-07-X-2025-1.pdf),
-Registro Oficial, Cuarto Suplemento Nº 140, 7/10/2025 (numeración del texto
-vigente tras la reforma; el anterior puede numerar distinto).
+**Fuentes (consultadas el 8/11/2026).**
+[LOSNCP, texto consolidado publicado por SERCOP](https://portal.compraspublicas.gob.ec/sercop/wp-content/uploads/2025/12/LOSNCP.pdf),
+que incorpora la reforma del Registro Oficial, Cuarto Suplemento Nº 140,
+7/10/2025 (numeración vigente; el texto anterior puede numerar distinto).
 [Directrices Proforma 2027](https://www.economicoproductivo.gob.ec/wp-content/uploads/2026/05/directrices_proforma_2027_vf.pdf),
 p. 4 (citan los arts. 74 y 97 del COPLAFIP). Las Directrices nombran a este
-actor Ministerio de Economía y Finanzas, pero la página de
-[finanzas.gob.ec](https://www.finanzas.gob.ec/) se presentaba ese día como
-«Ministerio de Desarrollo Económico y Productivo – MDEP»; por eso se usa el
-término de la ley, «ente rector de las finanzas públicas».
+actor Ministerio de Economía y Finanzas, pero
+[finanzas.gob.ec](https://www.finanzas.gob.ec/) redirige al portal del
+«Ministerio de Desarrollo Económico y Productivo – MDEP»
+([economicoproductivo.gob.ec](https://www.economicoproductivo.gob.ec/));
+por eso se usa el término de la ley, «ente rector de las finanzas públicas».
 
 ### 4. Marco normativo y entes de control
 
@@ -163,7 +164,7 @@ USD 10.000 (art. 48). Qué publica SERCOP en cada etapa se comprueba en
 | **Áreas de compras de los ministerios** | Con qué procedimiento contratar y cuánto planificar contratar | LOSNCP, art. 22: el órgano requirente identifica la necesidad y con ella se forma el PAC (publicado hasta el 15 de enero); arts. 44 a 52: procedimientos (el 48 fija cuándo corresponde la licitación); art. 30: adjudica la máxima autoridad o su delegado. |
 | **MEF** (ente rector de las finanzas públicas) | Cuánto presupuesto asignar y cómo programar el gasto en contratación | Directrices Proforma 2027, p. 4, citando el COPLAFIP: art. 74, incisos 8 y 9 (techos presupuestarios globales, institucionales y de gasto; proforma del PGE) y art. 97. Integra el Directorio del SNCP (LOSNCP, art. 10). |
 
-Consulta del 9/11/2026; fuentes en la sección 3. Son inferencia del equipo dos
+Consulta del 8/11/2026; fuentes en la sección 3. Son inferencia del equipo dos
 pasos que la norma no dice: que el área de compras ejecute lo que la ley asigna
 al órgano requirente y a la máxima autoridad o su delegado, y que los techos de
 gasto del MEF alcancen al gasto en contratación.
