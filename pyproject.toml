@@ -13,7 +13,7 @@ classifiers = ["Private :: Do Not Upload"]
 [dependency-groups]
 # Exact versions; uv.lock pins the transitive dependencies and their hashes.
 dev = [
-    "pytest==9.1.1",
+    "pytest==9.2.0",
     "ruff==0.17.1",
 ]
 
