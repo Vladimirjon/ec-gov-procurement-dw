@@ -7,8 +7,12 @@ sus empresas están fuera de alcance. Es académico e independiente; no tiene
 relación con SERCOP ni con ninguna entidad.
 
 ## Estado actual
-Hito 1 en curso. El repositorio tiene documentación, esqueleto de carpetas y
-scripts auxiliares de reconocimiento en `scripts/`. El entorno se declara en
+Hito 1 entregado (8/11/2026). **Hitos 2 y 3 en curso**: H2 vence el sábado
+21/11/2026 y H3 el domingo 22/11/2026; sus tareas son los issues de los
+milestones H2 y H3 de GitHub (el de coordinación tiene el mapa y las decisiones;
+ver [ADR 0005](docs/adr/0005-hitos-2-y-3-power-bi.md)). El repositorio tiene
+documentación, esqueleto de carpetas y scripts auxiliares de reconocimiento en
+`scripts/`. El entorno se declara en
 `pyproject.toml` y `uv.lock` (Python 3.14, sin dependencias de ejecución;
 `ruff` y `pytest` como dependencias de desarrollo). Las pruebas de `tests/unit/`
 cubren los dos scripts de Python de `scripts/` con datos sintéticos, y el CI de
@@ -18,9 +22,15 @@ de reconocimiento no constituyen todavía la carga definitiva del periodo.
 No afirmes ni documentes funcionalidad que no exista.
 
 ## Instrucciones vigentes
-Mandan los dos PDF del profesor (guía del proyecto y guía del Hito 1), en
-`Instrucciones_Curso/` (local). El plan por fases anterior y sus entregables
-(E0, F1 a F5) ya no rigen. Resumen y estado en docs/requisitos-del-profesor.md
+Mandan los PDF del profesor (guía del proyecto y guías de los hitos 1, 2 y 3),
+en `Instrucciones_Curso/` (local, con su texto en `_md/`). Para cada hito manda
+su guía específica sobre la guía general. **Hitos 2 y 3:** se hacen en Power BI
+Desktop con Power Query; PostgreSQL, `stg`, el DDL y Docker pasan al Hito 4. El
+H2 se entrega como `.pbix` más un libro de Excel (Fuentes, Diccionario, Calidad,
+Cobertura) y **solo diagnostica, no corrige**; el H3 aplica las correcciones y
+construye el modelo (`Fact…`/`Dim…`), con documento de diseño PDF y
+diapositivas. El plan por fases anterior y sus entregables (E0, F1 a F5) ya no
+rigen. Resumen y estado en docs/requisitos-del-profesor.md
 y docs/PLAN.md. Si algo de este repositorio contradice un PDF, manda el PDF.
 
 ## Orden de lectura

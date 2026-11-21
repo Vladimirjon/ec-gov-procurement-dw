@@ -83,9 +83,57 @@ Windows). Los scripts no sobrescriben la salida: usa un nombre nuevo cada vez. L
 pruebas usan solo datos sintéticos que ellas mismas generan; una prueba falla si un
 script cambia sin un resumen nuevo en `docs/sources/` que registre su hash.
 
-## Hito 1 (convenciones ya decididas)
+## Hito 1 (entregado el 8/11/2026)
 - Equipo: **Trazabilidad Pública**. Sector: gobierno central. Fecha en formato
   `dd/mm/yy`, la de la entrega.
-- Archivo: `Hito1_BravoFreireGuajanPasquelTorres.pdf` (apellidos en orden
-  alfabético), máximo 6 páginas sin contar anexos.
-- La revisión es el lunes 9/11/2026 en el aula; el equipo cierra el domingo 8/11.
+- Archivo: `Hito1_BravoFreireGuajanPasquelTorres.pdf` y `.docx` en
+  `deliverables/h1/` (6 páginas); el líder retocó el Word a mano, así que
+  regenerarlo con `scripts/build_hito1_docx.py` sobrescribe esos retoques.
+
+## Hitos 2 y 3 (en curso: vencen el 21/11 y el 22/11/2026)
+- **Tareas:** issues de los milestones H2 y H3 de GitHub; el issue de
+  coordinación tiene el mapa, las decisiones D1 a D8 y el plan de recorte. Cada
+  issue es el encargo completo para un agente. Decisiones en
+  [ADR 0005](docs/adr/0005-hitos-2-y-3-power-bi.md) (propuesto).
+- **Guías:** `Instrucciones_Curso/_md/Hito2.md` y `Hito3.md` (locales; no
+  existen en los worktrees: el encargo da la ruta absoluta de la carpeta
+  principal). Requisitos H2-n y H3-n con su issue en
+  `docs/requisitos-del-profesor.md`, secciones F y G.
+- **Quién hace qué:** los agentes escriben scripts, consultas M (`.pq`) y
+  runbooks; **Power BI Desktop lo opera el líder** (un agente no puede abrirlo ni
+  probar un `.pq`: no afirmes que corre hasta que el líder lo confirme). El
+  `.pbix` **sí se versiona** (decisión del líder, 20/11) en `deliverables/h2|h3/`
+  por PR; GitHub rechaza archivos de más de 100 MB, así que se mide su tamaño
+  antes de commitear y, si pasa de unos 50 MB, se consulta al líder (Git LFS
+  sería infraestructura nueva). Lleva datos embebidos: solo columnas necesarias y
+  nunca datos de personas.
+- **Dónde va cada cosa:** crudos en `data/datos_crudos/` y derivados en
+  `data/derivados/` (rutas absolutas de la carpeta principal, ignoradas);
+  evidencia agregada en `docs/h2/evidencia/` y `docs/h3/evidencia/`;
+  consultas M en `reports/powerbi/h2|h3/queries/`; semilla de entidades en
+  `warehouse/seeds/`; entregables finales en `deliverables/h2|h3/`. Scripts
+  nuevos en `scripts/`, solo biblioteca estándar, con pruebas en `tests/unit/`;
+  nada de `openpyxl` ni otra dependencia sin aprobación.
+- **Reglas de las guías que se olvidan:** H2 diagnostica y **no corrige**
+  (aunque el dato esté mal), perfila **todo el conjunto** y los crudos no se
+  tocan; H3 aplica las acciones del diagnóstico con total de control antes y
+  después, relaciones 1 a varios con filtro único, `Fact…`/`Dim…`, claves
+  ocultas, y **la tabla de hechos no guarda tasas** (la desviación % y el WAPE
+  son medidas DAX del bimestre 2). Vacío no es cero.
+- **Equipo y plazos:** el equipo se llama **Grupo 5** (nombre asignado por el
+  profesor; «Trazabilidad Pública» fue el nombre del Hito 1 y ya no se usa). Las
+  entregas vencen a las **23:59** del sábado 21/11 (H2) y del domingo 22/11 (H3).
+- **Nombres de archivo** (`EquipoX` = `Grupo5`): `Proyecto_Grupo5_Hito2.pbix` y
+  `.xlsx`; `Proyecto_Grupo5_Hito3.pbix`, `..._Hito3_Diseno.pdf`,
+  `..._Hito3_Presentacion.pdf` y `..._Hito3_Bitacora.xlsx`. Fecha en portada:
+  21/11/26 (H2) y 22/11/26 (H3). H3: documento de máximo 8 páginas sin anexos;
+  presentación de 10 min + 5, todos exponen.
+- **Datos ya medidos (H1, nacionales, sin filtrar por sector):** 190.619
+  procesos en 2025, importe estimado y adjudicado presentes en 85,6–87,6 % de
+  los releases, 300 procesos de 2025 con más de una adjudicación. La descarga de
+  H2 puede dar cifras algo distintas (el portal actualiza a diario): se
+  reconcilia con H1, no se corrige.
+- **Clasificación de entidades:** sin la semilla de `warehouse/seeds/` no hay
+  «tipo de entidad» (dimensión de P1, P2 y P3). Regla del ADR 0001: unión por
+  `buyer.id` o raíz `EC-RUC-{13}`, nunca por nombre; lo dudoso queda fuera de
+  los indicadores. Los casos dudosos los aprueba el líder en el chat.
