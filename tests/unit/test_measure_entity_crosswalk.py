@@ -16,8 +16,10 @@ from measure_entity_crosswalk import (
     compute_combined_root_validation,
     discover_year_data,
     load_awards_amounts,
+    load_buyer_summary_csv,
     load_catalog,
     measure_year_data,
+    measure_year_from_summary,
 )
 import pytest
 
@@ -406,3 +408,128 @@ def test_measure_entity_crosswalk_cli(synthetic_crosswalk_data, tmp_path: Path):
     assert data["combined_5_years"]["universe"]["total_processes"] == 30  # 6 * 5 years
     assert "root_validation" in data["combined_5_years"]
     assert "top_20_roots_with_most_buyer_ids" in data["combined_5_years"]
+
+
+def test_load_buyer_summary_csv_validation(tmp_path: Path):
+    """Test validation of required columns in buyer summary CSV."""
+    bad_csv = tmp_path / "bad_summary.csv"
+    with bad_csv.open("w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["anio", "buyer_id", "procesos"])  # missing other required columns
+        w.writerow(["2025", "EC-RUC-1768000010001", "10"])
+
+    with pytest.raises(ValueError, match="Missing required columns in buyer summary CSV"):
+        load_buyer_summary_csv(bad_csv)
+
+    non_existent = tmp_path / "non_existent.csv"
+    with pytest.raises(FileNotFoundError):
+        load_buyer_summary_csv(non_existent)
+
+
+def test_measure_year_from_summary_matches_raw(synthetic_crosswalk_data, tmp_path: Path):
+    """Verify that measuring from buyer summary produces identical results to raw CSVs."""
+    cat_path, rel_path, awd_path = synthetic_crosswalk_data
+    catalog = load_catalog(cat_path)
+
+    raw_result = measure_year_data(2025, rel_path, awd_path, catalog)
+
+    # Build synthetic buyer summary matching the synthetic releases and awards:
+    # 6 processes across 5 buyers:
+    # - EC-RUC-1760000150001: 1 proc, amount 1000.0, no_amt 0
+    # - EC-RUC-0160016780001-100: 1 proc, amount 2500.50, no_amt 0
+    # - EC-RUC-0160016780001: 1 proc, amount 500.0, no_amt 0
+    # - EC-RUC-0160000270001-99: 1 proc, amount 4000.0, no_amt 0
+    # - EC-RUC-9999999999001: 2 procs, amount 750.0, no_amt 1
+    summary_csv = tmp_path / "synthetic_buyer_summary.csv"
+    with summary_csv.open("w", encoding="utf-8", newline="") as f:
+        fieldnames = [
+            "anio",
+            "buyer_id",
+            "buyer_name_mas_frecuente",
+            "procesos",
+            "adjudicaciones",
+            "suma_adjudicado",
+            "suma_estimado",
+            "procesos_con_ambos_importes",
+            "procesos_sin_monto_adjudicado",
+        ]
+        w = csv.DictWriter(f, fieldnames=fieldnames)
+        w.writeheader()
+        w.writerow(
+            {
+                "anio": "2025",
+                "buyer_id": "EC-RUC-1760000150001",
+                "buyer_name_mas_frecuente": "Presidencia",
+                "procesos": "1",
+                "adjudicaciones": "1",
+                "suma_adjudicado": "1000.0",
+                "suma_estimado": "1000.0",
+                "procesos_con_ambos_importes": "1",
+                "procesos_sin_monto_adjudicado": "0",
+            }
+        )
+        w.writerow(
+            {
+                "anio": "2025",
+                "buyer_id": "EC-RUC-0160016780001-100",
+                "buyer_name_mas_frecuente": "Hospital Cuenca",
+                "procesos": "1",
+                "adjudicaciones": "1",
+                "suma_adjudicado": "2500.5",
+                "suma_estimado": "2500.5",
+                "procesos_con_ambos_importes": "1",
+                "procesos_sin_monto_adjudicado": "0",
+            }
+        )
+        w.writerow(
+            {
+                "anio": "2025",
+                "buyer_id": "EC-RUC-0160016780001",
+                "buyer_name_mas_frecuente": "MSP Base",
+                "procesos": "1",
+                "adjudicaciones": "1",
+                "suma_adjudicado": "500.0",
+                "suma_estimado": "500.0",
+                "procesos_con_ambos_importes": "1",
+                "procesos_sin_monto_adjudicado": "0",
+            }
+        )
+        w.writerow(
+            {
+                "anio": "2025",
+                "buyer_id": "EC-RUC-0160000270001-99",
+                "buyer_name_mas_frecuente": "GAD Cuenca",
+                "procesos": "1",
+                "adjudicaciones": "1",
+                "suma_adjudicado": "4000.0",
+                "suma_estimado": "4000.0",
+                "procesos_con_ambos_importes": "1",
+                "procesos_sin_monto_adjudicado": "0",
+            }
+        )
+        w.writerow(
+            {
+                "anio": "2025",
+                "buyer_id": "EC-RUC-9999999999001",
+                "buyer_name_mas_frecuente": "Cuerpo de Bomberos X",
+                "procesos": "2",
+                "adjudicaciones": "1",
+                "suma_adjudicado": "750.0",
+                "suma_estimado": "750.0",
+                "procesos_con_ambos_importes": "1",
+                "procesos_sin_monto_adjudicado": "1",
+            }
+        )
+
+    summary_by_year = load_buyer_summary_csv(summary_csv)
+    summary_result = measure_year_from_summary(2025, summary_by_year[2025], catalog)
+
+    assert raw_result["universe"] == summary_result["universe"]
+    assert raw_result["coverage"] == summary_result["coverage"]
+    assert raw_result["root_validation"] == summary_result["root_validation"]
+    assert len(raw_result["top_30_uncrossed_buyers"]) == len(summary_result["top_30_uncrossed_buyers"])
+    for r_b, s_b in zip(raw_result["top_30_uncrossed_buyers"], summary_result["top_30_uncrossed_buyers"], strict=True):
+        assert r_b["buyer_id"] == s_b["buyer_id"]
+        assert r_b["process_count"] == s_b["process_count"]
+        assert r_b["awarded_amount"] == s_b["awarded_amount"]
+        assert r_b["processes_without_amount"] == s_b["processes_without_amount"]
