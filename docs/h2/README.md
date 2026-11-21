@@ -9,7 +9,7 @@ porque son evidencia local y pesan cientos de MB.
 
 | Ruta | Qué contiene |
 |---|---|
-| `evidencia/descargas-sercop.csv` | Una fila por ZIP anual descargado: año, URL exacta, estado HTTP, fecha y hora de la descarga en hora de Ecuador, bytes recibidos, `Content-Length` de la misma respuesta, SHA-256, nombre del archivo, carpeta y licencia. Lo escribe `scripts/download_sercop_ocds.ps1`; no lleva valores de registros. |
+| `evidencia/descargas-sercop.csv` | Una fila por ZIP anual descargado: año, URL exacta, estado HTTP, fecha y hora de la descarga en hora de Ecuador, bytes recibidos, `Content-Length` de la misma respuesta, SHA-256, nombre del archivo, carpeta y licencia. Lo escribe `scripts/download_sercop_ocds.ps1` (salvo 2025, registrado a mano tras descarga con curl); no lleva valores de registros. |
 | `adquisicion.md` | Qué se descargó, cómo se verificó la integridad de cada ZIP, el número de releases por año y su comparación con el contador del portal. |
 
 ## De dónde sale

@@ -31,7 +31,7 @@ URL de la licencia declarada en los paquetes OCDS.
 Nombre corto de la licencia declarada en los paquetes OCDS.
 
 .EXAMPLE
-.\scripts\download_sercop_ocds.ps1 -Year 2022 -OutputRoot 'C:\ruta\ec-gov-procurement-dw\data\datos_crudos'
+.\scripts\download_sercop_ocds.ps1 -Year 2022 -OutputRoot 'data/datos_crudos'
 #>
 [CmdletBinding()]
 param(
@@ -233,6 +233,29 @@ finally {
 
 $finishedUtc = [System.DateTimeOffset]::UtcNow
 
+# Folder path recorded in CSV: relative to repo root with forward slashes (e.g. data/datos_crudos/sercop-ocds-json-...)
+$recordedFolder = $downloadFolder
+if ($downloadFolder -match '(?i)(?:^|[\\/])(data[\\/]datos_crudos[\\/][^\\/]+)$') {
+    $recordedFolder = $Matches[1] -replace '\\', '/'
+}
+else {
+    $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..')).TrimEnd('\', '/')
+    if ($downloadFolder.StartsWith($repoRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
+        $rel = $downloadFolder.Substring($repoRoot.Length).TrimStart('\', '/')
+        $recordedFolder = $rel -replace '\\', '/'
+    }
+    else {
+        $outRootFull = $outputRootFullPath.TrimEnd('\', '/')
+        if ($downloadFolder.StartsWith($outRootFull, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $rel = $downloadFolder.Substring($outRootFull.Length).TrimStart('\', '/')
+            $recordedFolder = $rel -replace '\\', '/'
+        }
+        else {
+            $recordedFolder = $folderName
+        }
+    }
+}
+
 Add-EvidenceRow @(
     $Year,
     $requestUri,
@@ -245,7 +268,7 @@ Add-EvidenceRow @(
     $contentLength,
     $sha256,
     $fileName,
-    $downloadFolder,
+    $recordedFolder,
     $LicenseUrl,
     $LicenseValue
 )
