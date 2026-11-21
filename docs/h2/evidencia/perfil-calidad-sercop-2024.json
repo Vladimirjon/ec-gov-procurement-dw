@@ -1,9 +1,9 @@
 {
   "metadata": {
     "script_name": "profile_h2_quality.py",
-    "script_sha256": "19F8F2FA96AAAC657335B261D8FE29451787470CCCE400BF83119D8DDAD75608",
-    "execution_command": "python -I scripts/profile_h2_quality.py --derived-dir data/derivados --output-dir docs/h2/evidencia --years 2021 2022 2023 2024 2025 --reference-awarded-2025 7318700000.0 --output-suffix -v2 --buyer-summary-csv docs/h2/evidencia/perfil-calidad-sercop-por-comprador-v2.csv",
-    "executed_at_utc": "2026-11-21T23:14:22.022386+00:00",
+    "script_sha256": "F4F0DE2857DE6B143A0DB27CE62E6C67BA2177556444D20451F2ABECB312EB8B",
+    "execution_command": "python -I scripts/profile_h2_quality.py --derived-dir data/derivados --output-dir docs/h2/evidencia --years 2021 2022 2023 2024 2025 --reference-awarded-2025 7318.7 --buyer-summary-csv docs/h2/evidencia/perfil-calidad-sercop-por-comprador.csv",
+    "executed_at_utc": "2026-11-21T23:38:39.135435+00:00",
     "year": 2024
   },
   "year": 2024,
@@ -69,9 +69,9 @@
     "sum_awards_amount": 6895826062.72,
     "sum_tender_value_amount": 5518333500.28,
     "sum_contracts_amount": 126347765798.05,
-    "processes_with_both_amounts": 187671,
+    "processes_with_both_amounts": 187672,
     "pct_processes_with_both_amounts": 85.62,
-    "processes_with_award_no_estimate": 20494,
+    "processes_with_award_no_estimate": 20493,
     "pct_processes_with_award_no_estimate": 9.35,
     "processes_with_estimate_no_award": 654,
     "pct_processes_with_estimate_no_award": 0.3,
@@ -278,10 +278,10 @@
       "max_ids_for_single_buyer_name": 4
     },
     "buyer_id_vs_procuring_entity_id": {
-      "exact_match": 42767,
+      "exact_match": 42768,
       "same_13digit_root_different_suffix": 169501,
       "different_root": 0,
-      "missing_either": 118
+      "missing_either": 117
     },
     "amount_vs_corrected_and_entered_value": {
       "amount_vs_corrected_both_present": 0,

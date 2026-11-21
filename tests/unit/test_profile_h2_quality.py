@@ -7,8 +7,10 @@ from pathlib import Path
 import subprocess
 import sys
 
+import profile_h2_quality
 from profile_h2_quality import (
     compute_cross_year_metrics,
+    detect_encoding,
     generate_summary_csv_rows,
     parse_iso_datetime,
     profile_candidate_date,
@@ -128,6 +130,19 @@ def create_synthetic_year_csvs(
     paths["contracts"] = con_path
 
     return paths
+
+
+def test_detect_encoding_multibyte_split_across_chunks(tmp_path: Path, monkeypatch):
+    """A UTF-8 character straddling a chunk boundary is still UTF-8."""
+    monkeypatch.setattr(profile_h2_quality, "CHUNK_SIZE", 5)
+    text = "a,b\n\u00f3\u00f3\u00f3\u00f3,\u00f1\n"
+    utf8_file = tmp_path / "utf8.csv"
+    utf8_file.write_bytes(text.encode("utf-8"))
+    assert detect_encoding(utf8_file) == "utf-8"
+
+    cp1252_file = tmp_path / "cp1252.csv"
+    cp1252_file.write_bytes(text.encode("cp1252"))
+    assert detect_encoding(cp1252_file) == "windows-1252"
 
 
 def test_parse_iso_datetime():

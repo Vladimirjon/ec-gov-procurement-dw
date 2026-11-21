@@ -1,9 +1,9 @@
 {
   "metadata": {
     "script_name": "profile_h2_quality.py",
-    "script_sha256": "19F8F2FA96AAAC657335B261D8FE29451787470CCCE400BF83119D8DDAD75608",
-    "execution_command": "python -I scripts/profile_h2_quality.py --derived-dir data/derivados --output-dir docs/h2/evidencia --years 2021 2022 2023 2024 2025 --reference-awarded-2025 7318700000.0 --output-suffix -v2 --buyer-summary-csv docs/h2/evidencia/perfil-calidad-sercop-por-comprador-v2.csv",
-    "executed_at_utc": "2026-11-21T23:14:22.022386+00:00",
+    "script_sha256": "F4F0DE2857DE6B143A0DB27CE62E6C67BA2177556444D20451F2ABECB312EB8B",
+    "execution_command": "python -I scripts/profile_h2_quality.py --derived-dir data/derivados --output-dir docs/h2/evidencia --years 2021 2022 2023 2024 2025 --reference-awarded-2025 7318.7 --buyer-summary-csv docs/h2/evidencia/perfil-calidad-sercop-por-comprador.csv",
+    "executed_at_utc": "2026-11-21T23:38:39.135435+00:00",
     "year": 2025
   },
   "year": 2025,
@@ -291,16 +291,16 @@
   },
   "accuracy": {
     "reference_source": "Informe de Rendicion de Cuentas SERCOP 2025, p. 12 (cifra nacional provisional)",
-    "reference_amount_usd": 7318700000000000.0,
+    "reference_amount_usd": 7318700000.0,
     "measured_awards_amount_usd": 6223591171.73,
-    "difference_absolute_usd": 7318693776408828.0,
-    "difference_relative_pct": -100.0,
+    "difference_absolute_usd": 1095108828.27,
+    "difference_relative_pct": -14.96,
     "potential_explanatory_factors": {
       "awards_without_amount_count": 5,
       "amount_vs_corrected_value_difference_count": 0,
       "awards_dates_outside_2025_count": 4376,
       "non_active_awards_count": 32244,
-      "unexplained_difference_usd": 7318693776408828.0
+      "unexplained_difference_usd": 1095108828.27
     }
   },
   "timeliness": {

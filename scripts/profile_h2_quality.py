@@ -15,6 +15,7 @@ Does NOT report individual records, ocids, personal names, or contact data.
 from __future__ import annotations
 
 import argparse
+import codecs
 from collections import Counter, defaultdict
 import contextlib
 import csv
@@ -85,9 +86,13 @@ def detect_encoding(path: Path) -> str:
         if leading_bytes.startswith(b"\xef\xbb\xbf"):
             return "utf-8-sig"
         stream.seek(0)
+        # Incremental decoder: a multibyte character split across two chunks
+        # must not be reported as invalid UTF-8.
+        decoder = codecs.getincrementaldecoder("utf-8")()
         try:
             for chunk in iter(lambda: stream.read(CHUNK_SIZE), b""):
-                chunk.decode("utf-8")
+                decoder.decode(chunk)
+            decoder.decode(b"", final=True)
             return "utf-8"
         except UnicodeDecodeError:
             return "windows-1252"
