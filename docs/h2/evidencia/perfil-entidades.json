@@ -1,0 +1,242 @@
+{
+  "metadata": {
+    "source_file": "catalogo_instituciones_mdep.xlsx",
+    "file_size_bytes": 202353,
+    "sha256": "6A7AD388D0B1B4D4C71C7BD82BDB78C4A43B24E84EF8C1E6584DE0662E88AEAA",
+    "profiled_at_utc": "2026-11-21T20:37:50.571334+00:00"
+  },
+  "workbook_structure": {
+    "sheets": [
+      {
+        "name": "CATÁLOGO",
+        "sheetId": "1",
+        "rId": "rId1"
+      }
+    ],
+    "profiled_sheet": "CATÁLOGO",
+    "sheet_dimensions": "A1:I3154",
+    "total_rows_in_sheet": 3154,
+    "title_rows": {
+      "row_1": "SUBSECRETARÍA DE PRESUPUESTO",
+      "row_2": "DIRECCION NACIONAL DE CONSISTENCIA PRESUPUESTARIA",
+      "row_3": "CATÁLOGO DE INSTITUCIONES Y ENTIDADES OPERATIVAS DESCONCENTRADAS DEL SECTOR PÚBLICO ACTIVAS",
+      "row_4": "(Actualizado al 31 de Agosto de 2026)"
+    },
+    "header_row_index": 6,
+    "columns": {
+      "A": "SECTOR",
+      "B": "DESCRIPCION SECTOR",
+      "C": "ENTIDAD",
+      "D": "EOD",
+      "E": "NOMBRE",
+      "F": "RUC",
+      "G": "PROVINCIA",
+      "H": "CANTÓN",
+      "I": "OBSERVACIONES"
+    },
+    "data_rows_range": {
+      "first_row": 7,
+      "last_row": 3146,
+      "total_records": 3140
+    },
+    "footnote_rows_range": {
+      "first_row": 3147,
+      "last_row": 3154,
+      "total_footnotes": 8,
+      "notes": [
+        {
+          "row": 3147,
+          "text": "FUENTE: Ministerio de Finanzas e-SIGEF"
+        },
+        {
+          "row": 3148,
+          "text": "1. Hasta la presente fecha existen 3.140 entidades habilitadas dentro del catálogo"
+        },
+        {
+          "row": 3149,
+          "text": "2. Excluye entidades que maneja el Tesoro Nacional y la CFDD"
+        },
+        {
+          "row": 3150,
+          "text": "3. Para identificar la Unidades de Administración Financiera (UDAFs) en el presente catálogo del Presupuesto General del Estado, se ha considerado que en el campo"
+        },
+        {
+          "row": 3151,
+          "text": "    \"UDAF\" se disponga de un código del 1 al 9999, y en el campo \"EOD\" sea igual a cero \"0\"."
+        },
+        {
+          "row": 3152,
+          "text": "4. Para identificar las Entidades Operativas Desconcentradas (EODs) en el presente catálogo del Presupuesto General del Estado, se ha considerado que tanto en los"
+        },
+        {
+          "row": 3153,
+          "text": "    campos \"UDAF\" como \"EOD\" dispongan de un código mayor a cero \"0\"."
+        },
+        {
+          "row": 3154,
+          "text": "5. Excluye entidades que tienen RUC pasivo y constan como activas en el catálogo de entidades."
+        }
+      ]
+    }
+  },
+  "column_completeness": {
+    "SECTOR": {
+      "column_letter": "A",
+      "populated_count": 3140,
+      "empty_count": 0,
+      "pct_empty": 0.0
+    },
+    "DESCRIPCION SECTOR": {
+      "column_letter": "B",
+      "populated_count": 3140,
+      "empty_count": 0,
+      "pct_empty": 0.0
+    },
+    "ENTIDAD": {
+      "column_letter": "C",
+      "populated_count": 3140,
+      "empty_count": 0,
+      "pct_empty": 0.0
+    },
+    "EOD": {
+      "column_letter": "D",
+      "populated_count": 3140,
+      "empty_count": 0,
+      "pct_empty": 0.0
+    },
+    "NOMBRE": {
+      "column_letter": "E",
+      "populated_count": 3140,
+      "empty_count": 0,
+      "pct_empty": 0.0
+    },
+    "RUC": {
+      "column_letter": "F",
+      "populated_count": 3140,
+      "empty_count": 0,
+      "pct_empty": 0.0
+    },
+    "PROVINCIA": {
+      "column_letter": "G",
+      "populated_count": 3140,
+      "empty_count": 0,
+      "pct_empty": 0.0
+    },
+    "CANTÓN": {
+      "column_letter": "H",
+      "populated_count": 3140,
+      "empty_count": 0,
+      "pct_empty": 0.0
+    },
+    "OBSERVACIONES": {
+      "column_letter": "I",
+      "populated_count": 541,
+      "empty_count": 2599,
+      "pct_empty": 82.77
+    }
+  },
+  "ruc_analysis": {
+    "total_data_records": 3140,
+    "non_empty_rucs": 3140,
+    "empty_rucs": 0,
+    "distinct_raw_rucs": 3080,
+    "all_numeric": true,
+    "raw_lengths": {
+      "13": 1874,
+      "12": 1266
+    },
+    "raw_12_digits_missing_leading_zero": 1266,
+    "raw_13_digits": 1874,
+    "normalized_13_digits_count": 3140,
+    "distinct_normalized_rucs": 3080,
+    "duplicate_normalized_ruc_values": 60,
+    "records_with_shared_ruc": 120,
+    "ending_with_001_count": 3140,
+    "pct_ending_with_001": 100.0
+  },
+  "entity_and_eod_analysis": {
+    "distinct_entidad_codes": 603,
+    "entities_with_single_row": 332,
+    "entities_with_multiple_eod_rows": 271,
+    "max_eods_for_entity": {
+      "entidad_code": "998",
+      "row_count": 825
+    }
+  },
+  "sector_distribution": [
+    {
+      "sector_code": "111",
+      "sector_description": "ADMINISTRACION DEL ESTADO",
+      "record_count": 990,
+      "pct_of_total": 31.53
+    },
+    {
+      "sector_code": "123",
+      "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PARROQUIALES",
+      "record_count": 866,
+      "pct_of_total": 27.58
+    },
+    {
+      "sector_code": "122",
+      "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS MUNICIPALES",
+      "record_count": 700,
+      "pct_of_total": 22.29
+    },
+    {
+      "sector_code": "212",
+      "sector_description": "EMPRESAS PUBLICAS DE LOS GOBIERNOS AUTONOMOS DESCENTRALIZADOS",
+      "record_count": 276,
+      "pct_of_total": 8.79
+    },
+    {
+      "sector_code": "113",
+      "sector_description": "ENTIDADES DE SEGURIDAD SOCIAL",
+      "record_count": 106,
+      "pct_of_total": 3.38
+    },
+    {
+      "sector_code": "112",
+      "sector_description": "ENTIDADES DE EDUCACION SUPERIOR",
+      "record_count": 67,
+      "pct_of_total": 2.13
+    },
+    {
+      "sector_code": "211",
+      "sector_description": "EMPRESAS PUBLICAS DE LA FUNCION EJECUTIVA",
+      "record_count": 55,
+      "pct_of_total": 1.75
+    },
+    {
+      "sector_code": "121",
+      "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PROVINCIALES",
+      "record_count": 45,
+      "pct_of_total": 1.43
+    },
+    {
+      "sector_code": "311",
+      "sector_description": "SOCIEDADES ANONIMAS CON PARTICIPACION PUBLICA",
+      "record_count": 22,
+      "pct_of_total": 0.7
+    },
+    {
+      "sector_code": "221",
+      "sector_description": "ENTIDADES FINANCIERAS PUBLICAS",
+      "record_count": 13,
+      "pct_of_total": 0.41
+    }
+  ],
+  "central_government_sector_111": {
+    "sector_code": "111",
+    "sector_description": "ADMINISTRACION DEL ESTADO",
+    "total_records": 990,
+    "pct_of_catalog_records": 31.53,
+    "distinct_entidades": 114,
+    "distinct_rucs": 930
+  },
+  "temporal_validity": {
+    "declared_cut_date": "(Actualizado al 31 de Agosto de 2026)",
+    "has_date_columns": false,
+    "has_scd2_intervals": false,
+    "observation": "El catalogo es una fotografia estatica del sector publico activa al 31 de agosto de 2026. No contiene columnas de fecha, periodos de vigencia ni registro historico de fusiones o escisiones de 2021-2025."
+  }
+}

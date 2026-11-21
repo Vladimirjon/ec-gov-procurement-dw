@@ -1,0 +1,2118 @@
+{
+  "metadata": {
+    "measured_at_utc": "2026-11-21T20:46:42.297680+00:00",
+    "catalog_file": "catalogo_instituciones_mdep.xlsx",
+    "period": "2021-2025",
+    "rule": "ADR 0001 (1. coincidencia simple EC-RUC-13; 2. raiz EC-RUC-13 con sufijo; nunca por nombre)"
+  },
+  "combined_5_years": {
+    "period": "2021-2025",
+    "universe": {
+      "total_processes": 1007920,
+      "processes_with_awarded_amount": 964450,
+      "processes_without_awarded_amount": 43470,
+      "total_awarded_amount": 30952880306.92
+    },
+    "coverage": {
+      "processes": {
+        "matched_simple_count": 745440,
+        "pct_matched_simple": 73.96,
+        "matched_root_count": 220704,
+        "pct_matched_root": 21.9,
+        "total_matched_count": 966144,
+        "pct_total_matched": 95.86,
+        "unmatched_count": 41776,
+        "pct_unmatched": 4.14
+      },
+      "awarded_amount": {
+        "matched_simple_amount": 5166284779.07,
+        "pct_matched_simple": 16.69,
+        "matched_root_amount": 25020933206.33,
+        "pct_matched_root": 80.84,
+        "total_matched_amount": 30187217985.4,
+        "pct_total_matched": 97.53,
+        "unmatched_amount": 765662321.52,
+        "pct_unmatched": 2.47
+      }
+    }
+  },
+  "years": [
+    {
+      "year": 2021,
+      "releases_file": "releases_2021.csv",
+      "awards_file": "awards_2021.csv",
+      "universe": {
+        "distinct_buyers": 4745,
+        "total_processes": 167058,
+        "processes_with_awarded_amount": 164263,
+        "processes_without_awarded_amount": 2795,
+        "total_awarded_amount": 4676997257.82
+      },
+      "coverage": {
+        "buyers": {
+          "matched_simple_count": 2171,
+          "pct_matched_simple": 45.75,
+          "matched_root_count": 2211,
+          "pct_matched_root": 46.6,
+          "total_matched_count": 4382,
+          "pct_total_matched": 92.35,
+          "unmatched_count": 363,
+          "pct_unmatched": 7.65
+        },
+        "processes": {
+          "matched_simple_count": 122798,
+          "pct_matched_simple": 73.51,
+          "matched_root_count": 36976,
+          "pct_matched_root": 22.13,
+          "total_matched_count": 159774,
+          "pct_total_matched": 95.64,
+          "unmatched_count": 7284,
+          "pct_unmatched": 4.36
+        },
+        "awarded_amount": {
+          "matched_simple_amount": 476564302.86,
+          "pct_matched_simple": 10.19,
+          "matched_root_amount": 4072267703.54,
+          "pct_matched_root": 87.07,
+          "total_matched_amount": 4548832006.4,
+          "pct_total_matched": 97.26,
+          "unmatched_amount": 128165251.42,
+          "pct_unmatched": 2.74
+        }
+      },
+      "root_validation": {
+        "total_distinct_roots": 2799,
+        "roots_with_13_digits": 2799,
+        "roots_in_catalog": 2548,
+        "pct_roots_in_catalog": 91.03,
+        "roots_with_multiple_buyer_ids": 1946,
+        "regex_failed_buyer_ids_count": 0
+      },
+      "catalog_sectors": [
+        {
+          "sector_description": "ADMINISTRACION DEL ESTADO",
+          "process_count": 62679,
+          "pct_of_matched_procs": 39.23,
+          "awarded_amount": 853376197.48,
+          "pct_of_matched_amount": 18.76,
+          "distinct_buyers": 1604
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS MUNICIPALES",
+          "process_count": 41012,
+          "pct_of_matched_procs": 25.67,
+          "awarded_amount": 1455467897.36,
+          "pct_of_matched_amount": 32.0,
+          "distinct_buyers": 835
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PARROQUIALES",
+          "process_count": 14939,
+          "pct_of_matched_procs": 9.35,
+          "awarded_amount": 63128361.43,
+          "pct_of_matched_amount": 1.39,
+          "distinct_buyers": 1104
+        },
+        {
+          "sector_description": "ENTIDADES DE SEGURIDAD SOCIAL",
+          "process_count": 11370,
+          "pct_of_matched_procs": 7.12,
+          "awarded_amount": 402691784.48,
+          "pct_of_matched_amount": 8.85,
+          "distinct_buyers": 203
+        },
+        {
+          "sector_description": "EMPRESAS PUBLICAS DE LOS GOBIERNOS AUTONOMOS DESCENTRALIZADOS",
+          "process_count": 10520,
+          "pct_of_matched_procs": 6.58,
+          "awarded_amount": 382228420.47,
+          "pct_of_matched_amount": 8.4,
+          "distinct_buyers": 335
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PROVINCIALES",
+          "process_count": 7053,
+          "pct_of_matched_procs": 4.41,
+          "awarded_amount": 503214081.19,
+          "pct_of_matched_amount": 11.06,
+          "distinct_buyers": 70
+        },
+        {
+          "sector_description": "EMPRESAS PUBLICAS DE LA FUNCION EJECUTIVA",
+          "process_count": 4450,
+          "pct_of_matched_procs": 2.79,
+          "awarded_amount": 555177650.42,
+          "pct_of_matched_amount": 12.2,
+          "distinct_buyers": 71
+        },
+        {
+          "sector_description": "ENTIDADES DE EDUCACION SUPERIOR",
+          "process_count": 4307,
+          "pct_of_matched_procs": 2.7,
+          "awarded_amount": 95433208.65,
+          "pct_of_matched_amount": 2.1,
+          "distinct_buyers": 104
+        },
+        {
+          "sector_description": "SOCIEDADES ANONIMAS CON PARTICIPACION PUBLICA",
+          "process_count": 2395,
+          "pct_of_matched_procs": 1.5,
+          "awarded_amount": 210578494.15,
+          "pct_of_matched_amount": 4.63,
+          "distinct_buyers": 33
+        },
+        {
+          "sector_description": "ENTIDADES FINANCIERAS PUBLICAS",
+          "process_count": 1049,
+          "pct_of_matched_procs": 0.66,
+          "awarded_amount": 27535910.77,
+          "pct_of_matched_amount": 0.61,
+          "distinct_buyers": 23
+        }
+      ],
+      "sector111_breakdown": [
+        {
+          "class_type": "Otras entidades de administración central (Agencias/Servicios/Secretarías)",
+          "process_count": 57773,
+          "pct_of_sector111_procs": 92.17
+        },
+        {
+          "class_type": "Otras funciones del Estado (fuera de alcance)",
+          "process_count": 3156,
+          "pct_of_sector111_procs": 5.04
+        },
+        {
+          "class_type": "Institutos dependientes",
+          "process_count": 821,
+          "pct_of_sector111_procs": 1.31
+        },
+        {
+          "class_type": "Ministerios",
+          "process_count": 814,
+          "pct_of_sector111_procs": 1.3
+        },
+        {
+          "class_type": "Presidencia / Vicepresidencia",
+          "process_count": 115,
+          "pct_of_sector111_procs": 0.18
+        }
+      ],
+      "top_30_uncrossed_buyers": [
+        {
+          "buyer_id": "EC-RUC-1768007040001",
+          "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+          "process_count": 351,
+          "awarded_amount": 917294.28,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1060014130001",
+          "buyer_name": "DIRECCION DISTRITAL 10 D03-COTACACHI-SALUD",
+          "process_count": 224,
+          "awarded_amount": 105909.55,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190408485001",
+          "buyer_name": "FUNDACION MUNICIPAL DE LA MUJER Y EL NIÑO DE CUENCA",
+          "process_count": 180,
+          "awarded_amount": 98549.46,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1060040130001",
+          "buyer_name": "DIRECCION DISTRITAL 10D02 ANTONIO ANTE-OTAVALO-SALUD",
+          "process_count": 179,
+          "awarded_amount": 170109.31,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1460016370001",
+          "buyer_name": "GOBIERNO AUTONOMO DESCENTRALIZADO PARROQUIAL RURAL DE SEVILLA DON BOSCO",
+          "process_count": 178,
+          "awarded_amount": 3235.5,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768146750001",
+          "buyer_name": "SECRETARÍA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO",
+          "process_count": 140,
+          "awarded_amount": 4870295.81,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1091708988001",
+          "buyer_name": "FEDERACION DEPORTIVA DE IMBABURA",
+          "process_count": 136,
+          "awarded_amount": 52357.19,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1792042704001",
+          "buyer_name": "FUNDACION MUSEOS DE LA CIUDAD",
+          "process_count": 134,
+          "awarded_amount": 286233.56,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768184250001",
+          "buyer_name": "COMANDO DE INTELIGENCIA MILITAR CONJUNTO DE LAS FUERZAS ARMADAS",
+          "process_count": 129,
+          "awarded_amount": 74059.84,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0968604550001",
+          "buyer_name": "DIRECCIÓN ZONAL ZONA 8 - SECRETARIA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO",
+          "process_count": 127,
+          "awarded_amount": 2582082.3,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1790932966001",
+          "buyer_name": "FAME S.A.",
+          "process_count": 125,
+          "awarded_amount": 15992.64,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992183721001",
+          "buyer_name": "GUAYAQUIL SIGLO XXI, FUNDACIÓN MUNICIPAL PARA LA REGENERACIÓN URBANA",
+          "process_count": 124,
+          "awarded_amount": 75659.15,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992183721001-71669",
+          "buyer_name": "Guayaquil Siglo XXI, Fundación Municipal para la Regeneración Urbana",
+          "process_count": 97,
+          "awarded_amount": 36392477.93,
+          "processes_without_amount": 2
+        },
+        {
+          "buyer_id": "EC-RUC-0190160890001",
+          "buyer_name": "HOGAR MIGUEL LEON DE LA CIUDAD DE CUENCA",
+          "process_count": 97,
+          "awarded_amount": 83218.09,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992457597001",
+          "buyer_name": "CORPORACION PARA LA SEGURIDAD CIUDADANA DE GUAYAQUIL",
+          "process_count": 93,
+          "awarded_amount": 77391.81,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1160062350001",
+          "buyer_name": "COORDINACION ZONAL 7 SENESCYT",
+          "process_count": 83,
+          "awarded_amount": 17443.55,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0968529080001",
+          "buyer_name": "CUERPO DE BOMBEROS DE SAMBORONDON",
+          "process_count": 82,
+          "awarded_amount": 15200.92,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0860050770001",
+          "buyer_name": "DIRECCION ZONAL 2 ESMERALDAS DEL MINISTERIO DEL AMBIENTE, AGUA Y TRANSICION ECOLOGICA",
+          "process_count": 76,
+          "awarded_amount": 24339.63,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1391719868001",
+          "buyer_name": "FEDERACION DEPORTIVA DE MANABI",
+          "process_count": 76,
+          "awarded_amount": 7788.88,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791984714001",
+          "buyer_name": "FUNDACION TEATRO NACIONAL SUCRE",
+          "process_count": 74,
+          "awarded_amount": 24629.02,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190401766001",
+          "buyer_name": "FUNDACION ASIRI",
+          "process_count": 73,
+          "awarded_amount": 6290.61,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791905911001",
+          "buyer_name": "CORPORACION DE PROMOCION ECONOMICA CONQUITO",
+          "process_count": 70,
+          "awarded_amount": 8963.47,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1160003930001",
+          "buyer_name": "OFICINA TECNICA MIDUVI LOJA",
+          "process_count": 69,
+          "awarded_amount": 4384.15,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791760611001",
+          "buyer_name": "HOLDINGDINE S.A. CORPORACION INDUSTRIAL Y COMERCIAL",
+          "process_count": 67,
+          "awarded_amount": 3251.44,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791818881001",
+          "buyer_name": "NUCLEO DE SOLCA MACH",
+          "process_count": 66,
+          "awarded_amount": 24146.46,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791984714001-251830",
+          "buyer_name": "FUNDACION TEATRO NACIONAL SUCRE",
+          "process_count": 66,
+          "awarded_amount": 469935.96,
+          "processes_without_amount": 1
+        },
+        {
+          "buyer_id": "EC-RUC-1291727812001",
+          "buyer_name": "ASOCIACION DE PRODUCTORES AGROPECUARIOS BUENOS AIRES",
+          "process_count": 64,
+          "awarded_amount": 1364.88,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768007040001-2504",
+          "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+          "process_count": 63,
+          "awarded_amount": 11263321.92,
+          "processes_without_amount": 3
+        },
+        {
+          "buyer_id": "EC-RUC-0968603900001-589754",
+          "buyer_name": "EMPRESA PUBLICA MUNICIPAL DE TURISMO, PROMOCION CIVICA Y RELACIONES INTERNACIONALES DE GUAYAQUIL,EP",
+          "process_count": 63,
+          "awarded_amount": 2367425.41,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992179619001-27611",
+          "buyer_name": "AUTORIDAD AEROPORTUARIA DE GUAYAQUIL FUNDACION DE LA M.I MUNICIPALIDAD DE GUAYAQUIL",
+          "process_count": 63,
+          "awarded_amount": 8904866.15,
+          "processes_without_amount": 2
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "releases_file": "releases_2022.csv",
+      "awards_file": "awards_2022.csv",
+      "universe": {
+        "distinct_buyers": 5033,
+        "total_processes": 212324,
+        "processes_with_awarded_amount": 197720,
+        "processes_without_awarded_amount": 14604,
+        "total_awarded_amount": 7118687591.72
+      },
+      "coverage": {
+        "buyers": {
+          "matched_simple_count": 2265,
+          "pct_matched_simple": 45.0,
+          "matched_root_count": 2364,
+          "pct_matched_root": 46.97,
+          "total_matched_count": 4629,
+          "pct_total_matched": 91.97,
+          "unmatched_count": 404,
+          "pct_unmatched": 8.03
+        },
+        "processes": {
+          "matched_simple_count": 145907,
+          "pct_matched_simple": 68.72,
+          "matched_root_count": 57063,
+          "pct_matched_root": 26.88,
+          "total_matched_count": 202970,
+          "pct_total_matched": 95.59,
+          "unmatched_count": 9354,
+          "pct_unmatched": 4.41
+        },
+        "awarded_amount": {
+          "matched_simple_amount": 877241123.28,
+          "pct_matched_simple": 12.32,
+          "matched_root_amount": 6033755109.46,
+          "pct_matched_root": 84.76,
+          "total_matched_amount": 6910996232.74,
+          "pct_total_matched": 97.08,
+          "unmatched_amount": 207691358.98,
+          "pct_unmatched": 2.92
+        }
+      },
+      "root_validation": {
+        "total_distinct_roots": 2941,
+        "roots_with_13_digits": 2941,
+        "roots_in_catalog": 2647,
+        "pct_roots_in_catalog": 90.0,
+        "roots_with_multiple_buyer_ids": 2089,
+        "regex_failed_buyer_ids_count": 3
+      },
+      "catalog_sectors": [
+        {
+          "sector_description": "ADMINISTRACION DEL ESTADO",
+          "process_count": 73037,
+          "pct_of_matched_procs": 35.98,
+          "awarded_amount": 1665143234.4,
+          "pct_of_matched_amount": 24.09,
+          "distinct_buyers": 1619
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS MUNICIPALES",
+          "process_count": 52214,
+          "pct_of_matched_procs": 25.72,
+          "awarded_amount": 1853163256.84,
+          "pct_of_matched_amount": 26.81,
+          "distinct_buyers": 888
+        },
+        {
+          "sector_description": "ENTIDADES DE SEGURIDAD SOCIAL",
+          "process_count": 19781,
+          "pct_of_matched_procs": 9.75,
+          "awarded_amount": 404096450.74,
+          "pct_of_matched_amount": 5.85,
+          "distinct_buyers": 193
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PARROQUIALES",
+          "process_count": 18376,
+          "pct_of_matched_procs": 9.05,
+          "awarded_amount": 119897737.02,
+          "pct_of_matched_amount": 1.73,
+          "distinct_buyers": 1248
+        },
+        {
+          "sector_description": "EMPRESAS PUBLICAS DE LOS GOBIERNOS AUTONOMOS DESCENTRALIZADOS",
+          "process_count": 12943,
+          "pct_of_matched_procs": 6.38,
+          "awarded_amount": 715424731.95,
+          "pct_of_matched_amount": 10.35,
+          "distinct_buyers": 364
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PROVINCIALES",
+          "process_count": 8837,
+          "pct_of_matched_procs": 4.35,
+          "awarded_amount": 808353905.5,
+          "pct_of_matched_amount": 11.7,
+          "distinct_buyers": 72
+        },
+        {
+          "sector_description": "EMPRESAS PUBLICAS DE LA FUNCION EJECUTIVA",
+          "process_count": 7054,
+          "pct_of_matched_procs": 3.48,
+          "awarded_amount": 832043266.77,
+          "pct_of_matched_amount": 12.04,
+          "distinct_buyers": 73
+        },
+        {
+          "sector_description": "ENTIDADES DE EDUCACION SUPERIOR",
+          "process_count": 6740,
+          "pct_of_matched_procs": 3.32,
+          "awarded_amount": 132445306.33,
+          "pct_of_matched_amount": 1.92,
+          "distinct_buyers": 115
+        },
+        {
+          "sector_description": "SOCIEDADES ANONIMAS CON PARTICIPACION PUBLICA",
+          "process_count": 2818,
+          "pct_of_matched_procs": 1.39,
+          "awarded_amount": 350227252.15,
+          "pct_of_matched_amount": 5.07,
+          "distinct_buyers": 33
+        },
+        {
+          "sector_description": "ENTIDADES FINANCIERAS PUBLICAS",
+          "process_count": 1170,
+          "pct_of_matched_procs": 0.58,
+          "awarded_amount": 30201091.04,
+          "pct_of_matched_amount": 0.44,
+          "distinct_buyers": 24
+        }
+      ],
+      "sector111_breakdown": [
+        {
+          "class_type": "Otras entidades de administración central (Agencias/Servicios/Secretarías)",
+          "process_count": 66322,
+          "pct_of_sector111_procs": 90.81
+        },
+        {
+          "class_type": "Otras funciones del Estado (fuera de alcance)",
+          "process_count": 3639,
+          "pct_of_sector111_procs": 4.98
+        },
+        {
+          "class_type": "Ministerios",
+          "process_count": 1731,
+          "pct_of_sector111_procs": 2.37
+        },
+        {
+          "class_type": "Institutos dependientes",
+          "process_count": 1077,
+          "pct_of_sector111_procs": 1.47
+        },
+        {
+          "class_type": "Presidencia / Vicepresidencia",
+          "process_count": 268,
+          "pct_of_sector111_procs": 0.37
+        }
+      ],
+      "top_30_uncrossed_buyers": [
+        {
+          "buyer_id": "EC-RUC-1768007040001",
+          "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+          "process_count": 365,
+          "awarded_amount": 1345235.94,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768192860001",
+          "buyer_name": "MINISTERIO DEL AMBIENTE, AGUA Y TRANSICION ECOLOGICA",
+          "process_count": 235,
+          "awarded_amount": 311660.02,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791905911001",
+          "buyer_name": "CORPORACION DE PROMOCION ECONOMICA CONQUITO",
+          "process_count": 230,
+          "awarded_amount": 64547.2,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190408485001",
+          "buyer_name": "FUNDACION MUNICIPAL DE LA MUJER Y EL NIÑO DE CUENCA",
+          "process_count": 185,
+          "awarded_amount": 85994.76,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1060014130001",
+          "buyer_name": "DIRECCION DISTRITAL 10 D03-COTACACHI-SALUD",
+          "process_count": 153,
+          "awarded_amount": 74633.53,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768184250001",
+          "buyer_name": "COMANDO DE INTELIGENCIA MILITAR CONJUNTO DE LAS FUERZAS ARMADAS",
+          "process_count": 148,
+          "awarded_amount": 228267.98,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992183721001",
+          "buyer_name": "GUAYAQUIL SIGLO XXI, FUNDACIÓN MUNICIPAL PARA LA REGENERACIÓN URBANA",
+          "process_count": 133,
+          "awarded_amount": 983453.15,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1460024040001",
+          "buyer_name": "CEFAS-PATRONATO DEL GAPMS",
+          "process_count": 131,
+          "awarded_amount": 10971.69,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1792170826001",
+          "buyer_name": "FUNDACION NIÑOS CON DESTINO EN LAS MANOS DE DIOS",
+          "process_count": 122,
+          "awarded_amount": 58591.79,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768007040001-2504",
+          "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+          "process_count": 116,
+          "awarded_amount": 12637170.38,
+          "processes_without_amount": 30
+        },
+        {
+          "buyer_id": "EC-RUC-0992179619001-27611",
+          "buyer_name": "AUTORIDAD AEROPORTUARIA DE GUAYAQUIL FUNDACION DE LA M.I MUNICIPALIDAD DE GUAYAQUIL",
+          "process_count": 107,
+          "awarded_amount": 32971150.8,
+          "processes_without_amount": 13
+        },
+        {
+          "buyer_id": "EC-RUC-0360032780001",
+          "buyer_name": "COORDINACION ZONAL 6 - SENESCYT",
+          "process_count": 105,
+          "awarded_amount": 38718.77,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190160890001",
+          "buyer_name": "HOGAR MIGUEL LEON DE LA CIUDAD DE CUENCA",
+          "process_count": 99,
+          "awarded_amount": 81585.29,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768193160001",
+          "buyer_name": "COORDINACIÓN ZONAL 9 - SENESCYT",
+          "process_count": 96,
+          "awarded_amount": 117074.77,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791827929001",
+          "buyer_name": "CONCENTRACIÓN DEPORTIVA DE PICHINCHA",
+          "process_count": 94,
+          "awarded_amount": 296466.64,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992236574001",
+          "buyer_name": "FUNDACION TERMINAL TERRESTRE DE GUAYAQUIL",
+          "process_count": 93,
+          "awarded_amount": 2016825.64,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0891743572001",
+          "buyer_name": "FUNDACION EDUCATIVA GERMINAR",
+          "process_count": 93,
+          "awarded_amount": 19996.03,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1391719868001",
+          "buyer_name": "FEDERACION DEPORTIVA DE MANABI",
+          "process_count": 92,
+          "awarded_amount": 9085.79,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992457597001",
+          "buyer_name": "CORPORACION PARA LA SEGURIDAD CIUDADANA DE GUAYAQUIL",
+          "process_count": 88,
+          "awarded_amount": 68616.26,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0968603900001-589754",
+          "buyer_name": "EMPRESA PUBLICA MUNICIPAL DE TURISMO, PROMOCION CIVICA Y RELACIONES INTERNACIONALES DE GUAYAQUIL,EP",
+          "process_count": 84,
+          "awarded_amount": 3499668.01,
+          "processes_without_amount": 8
+        },
+        {
+          "buyer_id": "EC-RUC-0990001340001",
+          "buyer_name": "ACERIAS NACIONALES DEL ECUADOR SOCIEDAD ANONIMA (A.N.D.E.C.)",
+          "process_count": 83,
+          "awarded_amount": 129781.8,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0990001340001-467908",
+          "buyer_name": "ACERIAS NACIONALES DEL ECUADOR SOCIEDAD ANONIMA (A.N.D.E.C.)",
+          "process_count": 83,
+          "awarded_amount": 4530899.88,
+          "processes_without_amount": 19
+        },
+        {
+          "buyer_id": "EC-RUC-1790819442001",
+          "buyer_name": "JUNTA DE POLITICA Y REGULACION FINANCIERA",
+          "process_count": 80,
+          "awarded_amount": 34469.67,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0968591390001",
+          "buyer_name": "EMPRESA PUBLICA CUERPO DE BOMBEROS DE MILAGRO EP-CBM",
+          "process_count": 79,
+          "awarded_amount": 50887.47,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768157600001",
+          "buyer_name": "SECRETARIA DE EDUCACION SUPERIOR, CIENCIA, TECNOLOGIA E INNOVACION",
+          "process_count": 77,
+          "awarded_amount": 3177416.19,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1060040130001",
+          "buyer_name": "DIRECCION DISTRITAL 10D02 ANTONIO ANTE-OTAVALO-SALUD",
+          "process_count": 77,
+          "awarded_amount": 187380.18,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768146750001",
+          "buyer_name": "SECRETARÍA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO",
+          "process_count": 76,
+          "awarded_amount": 5693420.21,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768014330001",
+          "buyer_name": "DIAF",
+          "process_count": 76,
+          "awarded_amount": 2075.24,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992183721001-71669",
+          "buyer_name": "Guayaquil Siglo XXI, Fundación Municipal para la Regeneración Urbana",
+          "process_count": 75,
+          "awarded_amount": 29745078.4,
+          "processes_without_amount": 17
+        },
+        {
+          "buyer_id": "EC-RUC-0968529080001",
+          "buyer_name": "CUERPO DE BOMBEROS DE SAMBORONDON",
+          "process_count": 74,
+          "awarded_amount": 79430.08,
+          "processes_without_amount": 0
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "releases_file": "releases_2023.csv",
+      "awards_file": "awards_2023.csv",
+      "universe": {
+        "distinct_buyers": 4999,
+        "total_processes": 217913,
+        "processes_with_awarded_amount": 211209,
+        "processes_without_awarded_amount": 6704,
+        "total_awarded_amount": 6037778222.93
+      },
+      "coverage": {
+        "buyers": {
+          "matched_simple_count": 2331,
+          "pct_matched_simple": 46.63,
+          "matched_root_count": 2267,
+          "pct_matched_root": 45.35,
+          "total_matched_count": 4598,
+          "pct_total_matched": 91.98,
+          "unmatched_count": 401,
+          "pct_unmatched": 8.02
+        },
+        "processes": {
+          "matched_simple_count": 166034,
+          "pct_matched_simple": 76.19,
+          "matched_root_count": 41775,
+          "pct_matched_root": 19.17,
+          "total_matched_count": 207809,
+          "pct_total_matched": 95.36,
+          "unmatched_count": 10104,
+          "pct_unmatched": 4.64
+        },
+        "awarded_amount": {
+          "matched_simple_amount": 1184328860.83,
+          "pct_matched_simple": 19.62,
+          "matched_root_amount": 4691636117.94,
+          "pct_matched_root": 77.7,
+          "total_matched_amount": 5875964978.77,
+          "pct_total_matched": 97.32,
+          "unmatched_amount": 161813244.16,
+          "pct_unmatched": 2.68
+        }
+      },
+      "root_validation": {
+        "total_distinct_roots": 2947,
+        "roots_with_13_digits": 2947,
+        "roots_in_catalog": 2643,
+        "pct_roots_in_catalog": 89.68,
+        "roots_with_multiple_buyer_ids": 2049,
+        "regex_failed_buyer_ids_count": 3
+      },
+      "catalog_sectors": [
+        {
+          "sector_description": "ADMINISTRACION DEL ESTADO",
+          "process_count": 82440,
+          "pct_of_matched_procs": 39.67,
+          "awarded_amount": 1826662617.59,
+          "pct_of_matched_amount": 31.09,
+          "distinct_buyers": 1583
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS MUNICIPALES",
+          "process_count": 44006,
+          "pct_of_matched_procs": 21.18,
+          "awarded_amount": 1040252280.15,
+          "pct_of_matched_amount": 17.7,
+          "distinct_buyers": 881
+        },
+        {
+          "sector_description": "ENTIDADES DE SEGURIDAD SOCIAL",
+          "process_count": 22152,
+          "pct_of_matched_procs": 10.66,
+          "awarded_amount": 496066880.38,
+          "pct_of_matched_amount": 8.44,
+          "distinct_buyers": 189
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PARROQUIALES",
+          "process_count": 20532,
+          "pct_of_matched_procs": 9.88,
+          "awarded_amount": 86643002.17,
+          "pct_of_matched_amount": 1.47,
+          "distinct_buyers": 1264
+        },
+        {
+          "sector_description": "EMPRESAS PUBLICAS DE LOS GOBIERNOS AUTONOMOS DESCENTRALIZADOS",
+          "process_count": 11880,
+          "pct_of_matched_procs": 5.72,
+          "awarded_amount": 389228373.76,
+          "pct_of_matched_amount": 6.62,
+          "distinct_buyers": 360
+        },
+        {
+          "sector_description": "ENTIDADES DE EDUCACION SUPERIOR",
+          "process_count": 8293,
+          "pct_of_matched_procs": 3.99,
+          "awarded_amount": 210477589.64,
+          "pct_of_matched_amount": 3.58,
+          "distinct_buyers": 113
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PROVINCIALES",
+          "process_count": 7669,
+          "pct_of_matched_procs": 3.69,
+          "awarded_amount": 394775181.36,
+          "pct_of_matched_amount": 6.72,
+          "distinct_buyers": 72
+        },
+        {
+          "sector_description": "EMPRESAS PUBLICAS DE LA FUNCION EJECUTIVA",
+          "process_count": 7180,
+          "pct_of_matched_procs": 3.46,
+          "awarded_amount": 1118279847.55,
+          "pct_of_matched_amount": 19.03,
+          "distinct_buyers": 79
+        },
+        {
+          "sector_description": "SOCIEDADES ANONIMAS CON PARTICIPACION PUBLICA",
+          "process_count": 2463,
+          "pct_of_matched_procs": 1.19,
+          "awarded_amount": 249073960.44,
+          "pct_of_matched_amount": 4.24,
+          "distinct_buyers": 33
+        },
+        {
+          "sector_description": "ENTIDADES FINANCIERAS PUBLICAS",
+          "process_count": 1194,
+          "pct_of_matched_procs": 0.57,
+          "awarded_amount": 64505245.73,
+          "pct_of_matched_amount": 1.1,
+          "distinct_buyers": 24
+        }
+      ],
+      "sector111_breakdown": [
+        {
+          "class_type": "Otras entidades de administración central (Agencias/Servicios/Secretarías)",
+          "process_count": 75338,
+          "pct_of_sector111_procs": 91.39
+        },
+        {
+          "class_type": "Otras funciones del Estado (fuera de alcance)",
+          "process_count": 4311,
+          "pct_of_sector111_procs": 5.23
+        },
+        {
+          "class_type": "Ministerios",
+          "process_count": 1470,
+          "pct_of_sector111_procs": 1.78
+        },
+        {
+          "class_type": "Institutos dependientes",
+          "process_count": 1015,
+          "pct_of_sector111_procs": 1.23
+        },
+        {
+          "class_type": "Presidencia / Vicepresidencia",
+          "process_count": 306,
+          "pct_of_sector111_procs": 0.37
+        }
+      ],
+      "top_30_uncrossed_buyers": [
+        {
+          "buyer_id": "EC-RUC-1768007040001",
+          "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+          "process_count": 583,
+          "awarded_amount": 4977518.39,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1790174417001",
+          "buyer_name": "ALDEAS INFANTILES SOS ECUADOR",
+          "process_count": 227,
+          "awarded_amount": 175685.46,
+          "processes_without_amount": 1
+        },
+        {
+          "buyer_id": "EC-RUC-1792042704001",
+          "buyer_name": "FUNDACION MUSEOS DE LA CIUDAD",
+          "process_count": 213,
+          "awarded_amount": 943087.9,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791905911001",
+          "buyer_name": "CORPORACION DE PROMOCION ECONOMICA CONQUITO",
+          "process_count": 195,
+          "awarded_amount": 249842.37,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1460024040001",
+          "buyer_name": "CEFAS-PATRONATO DEL GAPMS",
+          "process_count": 172,
+          "awarded_amount": 42091.5,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768192860001",
+          "buyer_name": "MINISTERIO DEL AMBIENTE, AGUA Y TRANSICION ECOLOGICA",
+          "process_count": 166,
+          "awarded_amount": 361191.23,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190408485001",
+          "buyer_name": "FUNDACION MUNICIPAL DE LA MUJER Y EL NIÑO DE CUENCA",
+          "process_count": 156,
+          "awarded_amount": 87082.4,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1060040130001",
+          "buyer_name": "DIRECCION DISTRITAL 10D02 ANTONIO ANTE-OTAVALO-SALUD",
+          "process_count": 154,
+          "awarded_amount": 1721928.84,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768007040001-2504",
+          "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+          "process_count": 141,
+          "awarded_amount": 27324496.99,
+          "processes_without_amount": 17
+        },
+        {
+          "buyer_id": "EC-RUC-1768184250001",
+          "buyer_name": "COMANDO DE INTELIGENCIA MILITAR CONJUNTO DE LAS FUERZAS ARMADAS",
+          "process_count": 132,
+          "awarded_amount": 123071.4,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1790932966001",
+          "buyer_name": "FAME S.A.",
+          "process_count": 116,
+          "awarded_amount": 105690.78,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1060014130001",
+          "buyer_name": "DIRECCION DISTRITAL 10 D03-COTACACHI-SALUD",
+          "process_count": 115,
+          "awarded_amount": 221869.23,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0360032780001",
+          "buyer_name": "COORDINACION ZONAL 6 - SENESCYT",
+          "process_count": 110,
+          "awarded_amount": 141006.68,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768193080001",
+          "buyer_name": "AGENCIA DE REGULACIÓN Y CONTROL DE ENERGÍA Y RECURSOS NATURALES NO RENOVABLES",
+          "process_count": 104,
+          "awarded_amount": 783611.32,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768146750001",
+          "buyer_name": "SECRETARÍA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO",
+          "process_count": 102,
+          "awarded_amount": 7332016.48,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1790819442001",
+          "buyer_name": "JUNTA DE POLITICA Y REGULACION FINANCIERA",
+          "process_count": 99,
+          "awarded_amount": 98216.46,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0491503114001",
+          "buyer_name": "FEDERACIÓN DEPORTIVA DEL CARCHI",
+          "process_count": 98,
+          "awarded_amount": 17596.9,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992457597001",
+          "buyer_name": "CORPORACION PARA LA SEGURIDAD CIUDADANA DE GUAYAQUIL",
+          "process_count": 96,
+          "awarded_amount": 32322.63,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190401766001",
+          "buyer_name": "FUNDACION ASIRI",
+          "process_count": 95,
+          "awarded_amount": 9117.96,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768193160001",
+          "buyer_name": "COORDINACIÓN ZONAL 9 - SENESCYT",
+          "process_count": 93,
+          "awarded_amount": 258393.55,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190160890001",
+          "buyer_name": "HOGAR MIGUEL LEON DE LA CIUDAD DE CUENCA",
+          "process_count": 92,
+          "awarded_amount": 86477.29,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791825314001",
+          "buyer_name": "FUNDACION CALASANZ",
+          "process_count": 91,
+          "awarded_amount": 67245.62,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0990001340001",
+          "buyer_name": "ACERIAS NACIONALES DEL ECUADOR SOCIEDAD ANONIMA (A.N.D.E.C.)",
+          "process_count": 90,
+          "awarded_amount": 1160254.13,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0691709051001",
+          "buyer_name": "FEDERACIÒN DEPORTIVA DE CHIMBORAZO",
+          "process_count": 88,
+          "awarded_amount": 35098.96,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992183721001",
+          "buyer_name": "GUAYAQUIL SIGLO XXI, FUNDACIÓN MUNICIPAL PARA LA REGENERACIÓN URBANA",
+          "process_count": 86,
+          "awarded_amount": 911430.32,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0968529080001",
+          "buyer_name": "CUERPO DE BOMBEROS DE SAMBORONDON",
+          "process_count": 84,
+          "awarded_amount": 75239.64,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0968591120001",
+          "buyer_name": "EMPRESA PUBLICA DE CONSTRUCCIONES DEL GOBIERNO AUTONOMO DESCENTRALIZADO PROVINCIAL DEL GUAYAS, CONSTRUGUAYAS E.P.",
+          "process_count": 80,
+          "awarded_amount": 32994.95,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1792513626001",
+          "buyer_name": "FEDERACION ECUATORIANA DE DEPORTE PARA PERSONAS SORDAS - DISCAPACIDAD AUDITIVA.",
+          "process_count": 80,
+          "awarded_amount": 729.88,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1792543657001",
+          "buyer_name": "FUNDACION SOLIDARIDAD Y EMPRENDIMIENTO FUNSEM",
+          "process_count": 78,
+          "awarded_amount": 188.91,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768137410001",
+          "buyer_name": "MINISTERIO DE LA MUJER Y DERECHOS HUMANOS",
+          "process_count": 76,
+          "awarded_amount": 250029.7,
+          "processes_without_amount": 0
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "releases_file": "releases_2024.csv",
+      "awards_file": "awards_2024.csv",
+      "universe": {
+        "distinct_buyers": 5066,
+        "total_processes": 219185,
+        "processes_with_awarded_amount": 208165,
+        "processes_without_awarded_amount": 11020,
+        "total_awarded_amount": 6895826062.72
+      },
+      "coverage": {
+        "buyers": {
+          "matched_simple_count": 2341,
+          "pct_matched_simple": 46.21,
+          "matched_root_count": 2360,
+          "pct_matched_root": 46.59,
+          "total_matched_count": 4701,
+          "pct_total_matched": 92.8,
+          "unmatched_count": 365,
+          "pct_unmatched": 7.2
+        },
+        "processes": {
+          "matched_simple_count": 162747,
+          "pct_matched_simple": 74.25,
+          "matched_root_count": 48057,
+          "pct_matched_root": 21.93,
+          "total_matched_count": 210804,
+          "pct_total_matched": 96.18,
+          "unmatched_count": 8381,
+          "pct_unmatched": 3.82
+        },
+        "awarded_amount": {
+          "matched_simple_amount": 1344679640.09,
+          "pct_matched_simple": 19.5,
+          "matched_root_amount": 5395710311.66,
+          "pct_matched_root": 78.25,
+          "total_matched_amount": 6740389951.75,
+          "pct_total_matched": 97.75,
+          "unmatched_amount": 155436110.97,
+          "pct_unmatched": 2.25
+        }
+      },
+      "root_validation": {
+        "total_distinct_roots": 2982,
+        "roots_with_13_digits": 2982,
+        "roots_in_catalog": 2711,
+        "pct_roots_in_catalog": 90.91,
+        "roots_with_multiple_buyer_ids": 2083,
+        "regex_failed_buyer_ids_count": 1
+      },
+      "catalog_sectors": [
+        {
+          "sector_description": "ADMINISTRACION DEL ESTADO",
+          "process_count": 81550,
+          "pct_of_matched_procs": 38.69,
+          "awarded_amount": 1797609388.06,
+          "pct_of_matched_amount": 26.67,
+          "distinct_buyers": 1602
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS MUNICIPALES",
+          "process_count": 51056,
+          "pct_of_matched_procs": 24.22,
+          "awarded_amount": 1586226260.8,
+          "pct_of_matched_amount": 23.53,
+          "distinct_buyers": 902
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PARROQUIALES",
+          "process_count": 20094,
+          "pct_of_matched_procs": 9.53,
+          "awarded_amount": 102220479.24,
+          "pct_of_matched_amount": 1.52,
+          "distinct_buyers": 1312
+        },
+        {
+          "sector_description": "ENTIDADES DE SEGURIDAD SOCIAL",
+          "process_count": 19561,
+          "pct_of_matched_procs": 9.28,
+          "awarded_amount": 509915469.77,
+          "pct_of_matched_amount": 7.57,
+          "distinct_buyers": 199
+        },
+        {
+          "sector_description": "EMPRESAS PUBLICAS DE LOS GOBIERNOS AUTONOMOS DESCENTRALIZADOS",
+          "process_count": 13076,
+          "pct_of_matched_procs": 6.2,
+          "awarded_amount": 612473951.07,
+          "pct_of_matched_amount": 9.09,
+          "distinct_buyers": 372
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PROVINCIALES",
+          "process_count": 8564,
+          "pct_of_matched_procs": 4.06,
+          "awarded_amount": 668492963.72,
+          "pct_of_matched_amount": 9.92,
+          "distinct_buyers": 74
+        },
+        {
+          "sector_description": "ENTIDADES DE EDUCACION SUPERIOR",
+          "process_count": 7135,
+          "pct_of_matched_procs": 3.38,
+          "awarded_amount": 189199250.18,
+          "pct_of_matched_amount": 2.81,
+          "distinct_buyers": 104
+        },
+        {
+          "sector_description": "EMPRESAS PUBLICAS DE LA FUNCION EJECUTIVA",
+          "process_count": 6291,
+          "pct_of_matched_procs": 2.98,
+          "awarded_amount": 995702127.48,
+          "pct_of_matched_amount": 14.77,
+          "distinct_buyers": 81
+        },
+        {
+          "sector_description": "SOCIEDADES ANONIMAS CON PARTICIPACION PUBLICA",
+          "process_count": 2486,
+          "pct_of_matched_procs": 1.18,
+          "awarded_amount": 242750133.51,
+          "pct_of_matched_amount": 3.6,
+          "distinct_buyers": 32
+        },
+        {
+          "sector_description": "ENTIDADES FINANCIERAS PUBLICAS",
+          "process_count": 991,
+          "pct_of_matched_procs": 0.47,
+          "awarded_amount": 35799927.92,
+          "pct_of_matched_amount": 0.53,
+          "distinct_buyers": 23
+        }
+      ],
+      "sector111_breakdown": [
+        {
+          "class_type": "Otras entidades de administración central (Agencias/Servicios/Secretarías)",
+          "process_count": 73918,
+          "pct_of_sector111_procs": 90.64
+        },
+        {
+          "class_type": "Otras funciones del Estado (fuera de alcance)",
+          "process_count": 4906,
+          "pct_of_sector111_procs": 6.02
+        },
+        {
+          "class_type": "Ministerios",
+          "process_count": 1298,
+          "pct_of_sector111_procs": 1.59
+        },
+        {
+          "class_type": "Institutos dependientes",
+          "process_count": 1243,
+          "pct_of_sector111_procs": 1.52
+        },
+        {
+          "class_type": "Presidencia / Vicepresidencia",
+          "process_count": 185,
+          "pct_of_sector111_procs": 0.23
+        }
+      ],
+      "top_30_uncrossed_buyers": [
+        {
+          "buyer_id": "EC-RUC-1768007040001",
+          "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+          "process_count": 631,
+          "awarded_amount": 1839990.08,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190408485001",
+          "buyer_name": "FUNDACION MUNICIPAL DE LA MUJER Y EL NIÑO DE CUENCA",
+          "process_count": 201,
+          "awarded_amount": 110115.45,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1790174417001",
+          "buyer_name": "ALDEAS INFANTILES SOS ECUADOR",
+          "process_count": 177,
+          "awarded_amount": 350141.79,
+          "processes_without_amount": 2
+        },
+        {
+          "buyer_id": "EC-RUC-1768184250001",
+          "buyer_name": "COMANDO DE INTELIGENCIA MILITAR CONJUNTO DE LAS FUERZAS ARMADAS",
+          "process_count": 162,
+          "awarded_amount": 1304846.72,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992236574001",
+          "buyer_name": "FUNDACION TERMINAL TERRESTRE DE GUAYAQUIL",
+          "process_count": 146,
+          "awarded_amount": 3675913.04,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768007040001-2504",
+          "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+          "process_count": 141,
+          "awarded_amount": 23165565.74,
+          "processes_without_amount": 29
+        },
+        {
+          "buyer_id": "EC-RUC-1791905911001",
+          "buyer_name": "CORPORACION DE PROMOCION ECONOMICA CONQUITO",
+          "process_count": 141,
+          "awarded_amount": 193313.39,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768193160001",
+          "buyer_name": "COORDINACIÓN ZONAL 9 - SENESCYT",
+          "process_count": 127,
+          "awarded_amount": 343328.36,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1060040130001",
+          "buyer_name": "DIRECCION DISTRITAL 10D02 ANTONIO ANTE-OTAVALO-SALUD",
+          "process_count": 123,
+          "awarded_amount": 1322183.38,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1060014130001",
+          "buyer_name": "DIRECCION DISTRITAL 10 D03-COTACACHI-SALUD",
+          "process_count": 114,
+          "awarded_amount": 153421.55,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1060039630001",
+          "buyer_name": "COORDINACION ZONAL 1 - SENESCYT",
+          "process_count": 112,
+          "awarded_amount": 171183.15,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190160890001",
+          "buyer_name": "HOGAR MIGUEL LEON DE LA CIUDAD DE CUENCA",
+          "process_count": 103,
+          "awarded_amount": 111672.31,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768192860001",
+          "buyer_name": "MINISTERIO DEL AMBIENTE, AGUA Y TRANSICION ECOLOGICA",
+          "process_count": 102,
+          "awarded_amount": 358647.44,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0968591120001",
+          "buyer_name": "EMPRESA PUBLICA DE CONSTRUCCIONES DEL GOBIERNO AUTONOMO DESCENTRALIZADO PROVINCIAL DEL GUAYAS, CONSTRUGUAYAS E.P.",
+          "process_count": 97,
+          "awarded_amount": 42919.46,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768137410001",
+          "buyer_name": "MINISTERIO DE LA MUJER Y DERECHOS HUMANOS",
+          "process_count": 94,
+          "awarded_amount": 195116.24,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768146750001",
+          "buyer_name": "SECRETARÍA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO",
+          "process_count": 94,
+          "awarded_amount": 7023641.88,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791818881001",
+          "buyer_name": "NUCLEO DE SOLCA MACH",
+          "process_count": 90,
+          "awarded_amount": 197214.45,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768014330001",
+          "buyer_name": "DIAF",
+          "process_count": 87,
+          "awarded_amount": 2072.07,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0990001340001",
+          "buyer_name": "ACERIAS NACIONALES DEL ECUADOR SOCIEDAD ANONIMA (A.N.D.E.C.)",
+          "process_count": 85,
+          "awarded_amount": 698068.06,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0968604550001",
+          "buyer_name": "DIRECCIÓN ZONAL ZONA 8 - SECRETARIA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO",
+          "process_count": 84,
+          "awarded_amount": 2848816.71,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0990057907001",
+          "buyer_name": "FEDERACION DEPORTIVA DEL GUAYAS",
+          "process_count": 83,
+          "awarded_amount": 835394.15,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1360086090001",
+          "buyer_name": "DIRECCION ZONAL - ZONA 4 - SECRETARIA TECNICA DE GESTION INMOBILIARIA DEL SECTOR PUBLICO",
+          "process_count": 80,
+          "awarded_amount": 820675.92,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1792042704001",
+          "buyer_name": "FUNDACION MUSEOS DE LA CIUDAD",
+          "process_count": 76,
+          "awarded_amount": 933484.02,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-2390031885001",
+          "buyer_name": "FUNDACIO VIVIAN LUZURIAGA VASQUEZ  FUNVILUZ",
+          "process_count": 72,
+          "awarded_amount": 7888.4,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992236574001-25399",
+          "buyer_name": "Fundacion Terminal Terrestre de Guayaquil",
+          "process_count": 68,
+          "awarded_amount": 15195667.46,
+          "processes_without_amount": 22
+        },
+        {
+          "buyer_id": "EC-RUC-1791722205001-227909",
+          "buyer_name": "FIDEICOMISO MERCANTIL FONDO AMBIENTAL PARA LA PROTECCION DE LAS CUENCAS  Y AGUA - FONAG",
+          "process_count": 67,
+          "awarded_amount": 652948.64,
+          "processes_without_amount": 11
+        },
+        {
+          "buyer_id": "EC-RUC-1791825314001",
+          "buyer_name": "FUNDACION CALASANZ",
+          "process_count": 67,
+          "awarded_amount": 40808.63,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0968529080001",
+          "buyer_name": "CUERPO DE BOMBEROS DE SAMBORONDON",
+          "process_count": 66,
+          "awarded_amount": 155375.94,
+          "processes_without_amount": 1
+        },
+        {
+          "buyer_id": "EC-RUC-1760009020001",
+          "buyer_name": "MINISTERIO DE TURISMO",
+          "process_count": 64,
+          "awarded_amount": 353906.83,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768193080001",
+          "buyer_name": "AGENCIA DE REGULACIÓN Y CONTROL DE ENERGÍA Y RECURSOS NATURALES NO RENOVABLES",
+          "process_count": 61,
+          "awarded_amount": 310985.35,
+          "processes_without_amount": 0
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "releases_file": "releases_2025.csv",
+      "awards_file": "awards_2025.csv",
+      "universe": {
+        "distinct_buyers": 4973,
+        "total_processes": 191440,
+        "processes_with_awarded_amount": 183093,
+        "processes_without_awarded_amount": 8347,
+        "total_awarded_amount": 6223591171.73
+      },
+      "coverage": {
+        "buyers": {
+          "matched_simple_count": 2404,
+          "pct_matched_simple": 48.34,
+          "matched_root_count": 2219,
+          "pct_matched_root": 44.62,
+          "total_matched_count": 4623,
+          "pct_total_matched": 92.96,
+          "unmatched_count": 350,
+          "pct_unmatched": 7.04
+        },
+        "processes": {
+          "matched_simple_count": 147954,
+          "pct_matched_simple": 77.28,
+          "matched_root_count": 36833,
+          "pct_matched_root": 19.24,
+          "total_matched_count": 184787,
+          "pct_total_matched": 96.52,
+          "unmatched_count": 6653,
+          "pct_unmatched": 3.48
+        },
+        "awarded_amount": {
+          "matched_simple_amount": 1283470852.01,
+          "pct_matched_simple": 20.62,
+          "matched_root_amount": 4827563963.73,
+          "pct_matched_root": 77.57,
+          "total_matched_amount": 6111034815.74,
+          "pct_total_matched": 98.19,
+          "unmatched_amount": 112556355.99,
+          "pct_unmatched": 1.81
+        }
+      },
+      "root_validation": {
+        "total_distinct_roots": 2931,
+        "roots_with_13_digits": 2931,
+        "roots_in_catalog": 2667,
+        "pct_roots_in_catalog": 90.99,
+        "roots_with_multiple_buyer_ids": 2040,
+        "regex_failed_buyer_ids_count": 2
+      },
+      "catalog_sectors": [
+        {
+          "sector_description": "ADMINISTRACION DEL ESTADO",
+          "process_count": 58274,
+          "pct_of_matched_procs": 31.54,
+          "awarded_amount": 1284937332.04,
+          "pct_of_matched_amount": 21.03,
+          "distinct_buyers": 1632
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS MUNICIPALES",
+          "process_count": 51300,
+          "pct_of_matched_procs": 27.76,
+          "awarded_amount": 1502789741.05,
+          "pct_of_matched_amount": 24.59,
+          "distinct_buyers": 911
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PARROQUIALES",
+          "process_count": 20716,
+          "pct_of_matched_procs": 11.21,
+          "awarded_amount": 146300082.73,
+          "pct_of_matched_amount": 2.39,
+          "distinct_buyers": 1186
+        },
+        {
+          "sector_description": "ENTIDADES DE SEGURIDAD SOCIAL",
+          "process_count": 17180,
+          "pct_of_matched_procs": 9.3,
+          "awarded_amount": 509974084.61,
+          "pct_of_matched_amount": 8.35,
+          "distinct_buyers": 205
+        },
+        {
+          "sector_description": "EMPRESAS PUBLICAS DE LOS GOBIERNOS AUTONOMOS DESCENTRALIZADOS",
+          "process_count": 11739,
+          "pct_of_matched_procs": 6.35,
+          "awarded_amount": 647469225.21,
+          "pct_of_matched_amount": 10.6,
+          "distinct_buyers": 380
+        },
+        {
+          "sector_description": "GOBIERNOS AUTONOMOS DESCENTRALIZADOS PROVINCIALES",
+          "process_count": 8433,
+          "pct_of_matched_procs": 4.56,
+          "awarded_amount": 650470834.56,
+          "pct_of_matched_amount": 10.64,
+          "distinct_buyers": 74
+        },
+        {
+          "sector_description": "ENTIDADES DE EDUCACION SUPERIOR",
+          "process_count": 7968,
+          "pct_of_matched_procs": 4.31,
+          "awarded_amount": 240889054.23,
+          "pct_of_matched_amount": 3.94,
+          "distinct_buyers": 108
+        },
+        {
+          "sector_description": "EMPRESAS PUBLICAS DE LA FUNCION EJECUTIVA",
+          "process_count": 6165,
+          "pct_of_matched_procs": 3.34,
+          "awarded_amount": 848783674.41,
+          "pct_of_matched_amount": 13.89,
+          "distinct_buyers": 72
+        },
+        {
+          "sector_description": "SOCIEDADES ANONIMAS CON PARTICIPACION PUBLICA",
+          "process_count": 1915,
+          "pct_of_matched_procs": 1.04,
+          "awarded_amount": 233189466.54,
+          "pct_of_matched_amount": 3.82,
+          "distinct_buyers": 31
+        },
+        {
+          "sector_description": "ENTIDADES FINANCIERAS PUBLICAS",
+          "process_count": 1097,
+          "pct_of_matched_procs": 0.59,
+          "awarded_amount": 46231320.36,
+          "pct_of_matched_amount": 0.76,
+          "distinct_buyers": 24
+        }
+      ],
+      "sector111_breakdown": [
+        {
+          "class_type": "Otras entidades de administración central (Agencias/Servicios/Secretarías)",
+          "process_count": 51412,
+          "pct_of_sector111_procs": 88.22
+        },
+        {
+          "class_type": "Otras funciones del Estado (fuera de alcance)",
+          "process_count": 4244,
+          "pct_of_sector111_procs": 7.28
+        },
+        {
+          "class_type": "Ministerios",
+          "process_count": 1535,
+          "pct_of_sector111_procs": 2.63
+        },
+        {
+          "class_type": "Institutos dependientes",
+          "process_count": 1006,
+          "pct_of_sector111_procs": 1.73
+        },
+        {
+          "class_type": "Presidencia / Vicepresidencia",
+          "process_count": 77,
+          "pct_of_sector111_procs": 0.13
+        }
+      ],
+      "top_30_uncrossed_buyers": [
+        {
+          "buyer_id": "EC-RUC-1768007040001",
+          "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+          "process_count": 166,
+          "awarded_amount": 1504657.47,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190408485001",
+          "buyer_name": "FUNDACION MUNICIPAL DE LA MUJER Y EL NIÑO DE CUENCA",
+          "process_count": 160,
+          "awarded_amount": 75585.2,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0992236574001",
+          "buyer_name": "FUNDACION TERMINAL TERRESTRE DE GUAYAQUIL",
+          "process_count": 143,
+          "awarded_amount": 8190946.38,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791827929001",
+          "buyer_name": "CONCENTRACIÓN DEPORTIVA DE PICHINCHA",
+          "process_count": 135,
+          "awarded_amount": 237842.25,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768193160001",
+          "buyer_name": "COORDINACIÓN ZONAL 9 - SENESCYT",
+          "process_count": 126,
+          "awarded_amount": 250736.75,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791984714001",
+          "buyer_name": "FUNDACION TEATRO NACIONAL SUCRE",
+          "process_count": 115,
+          "awarded_amount": 218633.56,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1790174417001",
+          "buyer_name": "ALDEAS INFANTILES SOS ECUADOR",
+          "process_count": 114,
+          "awarded_amount": 205801.6,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791825314001",
+          "buyer_name": "FUNDACION CALASANZ",
+          "process_count": 106,
+          "awarded_amount": 40689.7,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768157600001",
+          "buyer_name": "SECRETARIA DE EDUCACION SUPERIOR, CIENCIA, TECNOLOGIA E INNOVACION",
+          "process_count": 102,
+          "awarded_amount": 4418548.31,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768007040001-2504",
+          "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+          "process_count": 98,
+          "awarded_amount": 12312758.04,
+          "processes_without_amount": 12
+        },
+        {
+          "buyer_id": "EC-RUC-1791905911001",
+          "buyer_name": "CORPORACION DE PROMOCION ECONOMICA CONQUITO",
+          "process_count": 98,
+          "awarded_amount": 157875.21,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1360086090001",
+          "buyer_name": "DIRECCION ZONAL - ZONA 4 - SECRETARIA TECNICA DE GESTION INMOBILIARIA DEL SECTOR PUBLICO",
+          "process_count": 94,
+          "awarded_amount": 612566.85,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1060040130001",
+          "buyer_name": "DIRECCION DISTRITAL 10D02 ANTONIO ANTE-OTAVALO-SALUD",
+          "process_count": 94,
+          "awarded_amount": 93177.1,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791818881001",
+          "buyer_name": "NUCLEO DE SOLCA MACH",
+          "process_count": 93,
+          "awarded_amount": 179724.54,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768146750001",
+          "buyer_name": "SECRETARÍA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO",
+          "process_count": 92,
+          "awarded_amount": 6925676.27,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1792042704001",
+          "buyer_name": "FUNDACION MUSEOS DE LA CIUDAD",
+          "process_count": 88,
+          "awarded_amount": 100048.99,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0990057907001",
+          "buyer_name": "FEDERACION DEPORTIVA DEL GUAYAS",
+          "process_count": 85,
+          "awarded_amount": 222976.85,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0360032780001",
+          "buyer_name": "COORDINACION ZONAL 6 - SENESCYT",
+          "process_count": 84,
+          "awarded_amount": 89205.45,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190160890001",
+          "buyer_name": "HOGAR MIGUEL LEON DE LA CIUDAD DE CUENCA",
+          "process_count": 82,
+          "awarded_amount": 102796.52,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0591709674001",
+          "buyer_name": "FUNDACIÓN CONSTRUYAMOS UN SUEÑO",
+          "process_count": 77,
+          "awarded_amount": 23378.23,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1391719868001",
+          "buyer_name": "FEDERACION DEPORTIVA DE MANABI",
+          "process_count": 64,
+          "awarded_amount": 5022.8,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0990001340001",
+          "buyer_name": "ACERIAS NACIONALES DEL ECUADOR SOCIEDAD ANONIMA (A.N.D.E.C.)",
+          "process_count": 62,
+          "awarded_amount": 849520.99,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0791706955001",
+          "buyer_name": "FEDERACION DEPORTIVA PROVINCIAL DE EL ORO",
+          "process_count": 62,
+          "awarded_amount": 28703.93,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1792170826001",
+          "buyer_name": "FUNDACION NIÑOS CON DESTINO EN LAS MANOS DE DIOS",
+          "process_count": 62,
+          "awarded_amount": 41694.44,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0968529080001",
+          "buyer_name": "CUERPO DE BOMBEROS DE SAMBORONDON",
+          "process_count": 58,
+          "awarded_amount": 38899.03,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0190314081001",
+          "buyer_name": "FEDERACION DEPORTIVA DEL AZUAY",
+          "process_count": 57,
+          "awarded_amount": 4154.93,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1768137410001",
+          "buyer_name": "MINISTERIO DE LA MUJER Y DERECHOS HUMANOS",
+          "process_count": 56,
+          "awarded_amount": 16755.47,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0591704850001",
+          "buyer_name": "FEDERACION DEPORTIVA DE COTOPAXI",
+          "process_count": 56,
+          "awarded_amount": 14299.05,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-1791722205001-227909",
+          "buyer_name": "FIDEICOMISO MERCANTIL FONDO AMBIENTAL PARA LA PROTECCION DE LAS CUENCAS  Y AGUA - FONAG",
+          "process_count": 55,
+          "awarded_amount": 682037.21,
+          "processes_without_amount": 14
+        },
+        {
+          "buyer_id": "EC-RUC-1790932966001",
+          "buyer_name": "FAME S.A.",
+          "process_count": 55,
+          "awarded_amount": 8740.15,
+          "processes_without_amount": 0
+        }
+      ]
+    }
+  ],
+  "global_top_30_uncrossed_buyers": [
+    {
+      "buyer_id": "EC-RUC-1768007040001",
+      "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+      "process_count": 2096,
+      "awarded_amount": 10584696.16,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-0190408485001",
+      "buyer_name": "FUNDACION MUNICIPAL DE LA MUJER Y EL NIÑO DE CUENCA",
+      "process_count": 882,
+      "awarded_amount": 457327.27,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1791905911001",
+      "buyer_name": "CORPORACION DE PROMOCION ECONOMICA CONQUITO",
+      "process_count": 734,
+      "awarded_amount": 674541.64,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1060040130001",
+      "buyer_name": "DIRECCION DISTRITAL 10D02 ANTONIO ANTE-OTAVALO-SALUD",
+      "process_count": 627,
+      "awarded_amount": 3494778.81,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1060014130001",
+      "buyer_name": "DIRECCION DISTRITAL 10 D03-COTACACHI-SALUD",
+      "process_count": 606,
+      "awarded_amount": 555833.86,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1768184250001",
+      "buyer_name": "COMANDO DE INTELIGENCIA MILITAR CONJUNTO DE LAS FUERZAS ARMADAS",
+      "process_count": 571,
+      "awarded_amount": 1730245.94,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1768007040001-2504",
+      "buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO",
+      "process_count": 559,
+      "awarded_amount": 86703313.07,
+      "processes_without_amount": 91
+    },
+    {
+      "buyer_id": "EC-RUC-1790174417001",
+      "buyer_name": "ALDEAS INFANTILES SOS ECUADOR",
+      "process_count": 518,
+      "awarded_amount": 731628.85,
+      "processes_without_amount": 3
+    },
+    {
+      "buyer_id": "EC-RUC-1792042704001",
+      "buyer_name": "FUNDACION MUSEOS DE LA CIUDAD",
+      "process_count": 511,
+      "awarded_amount": 2262854.47,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1768146750001",
+      "buyer_name": "SECRETARÍA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO",
+      "process_count": 504,
+      "awarded_amount": 31845050.65,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1768192860001",
+      "buyer_name": "MINISTERIO DEL AMBIENTE, AGUA Y TRANSICION ECOLOGICA",
+      "process_count": 503,
+      "awarded_amount": 1031498.69,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-0190160890001",
+      "buyer_name": "HOGAR MIGUEL LEON DE LA CIUDAD DE CUENCA",
+      "process_count": 473,
+      "awarded_amount": 465749.5,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1768193160001",
+      "buyer_name": "COORDINACIÓN ZONAL 9 - SENESCYT",
+      "process_count": 442,
+      "awarded_amount": 969533.43,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-0992236574001",
+      "buyer_name": "FUNDACION TERMINAL TERRESTRE DE GUAYAQUIL",
+      "process_count": 382,
+      "awarded_amount": 13883685.06,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-0968529080001",
+      "buyer_name": "CUERPO DE BOMBEROS DE SAMBORONDON",
+      "process_count": 364,
+      "awarded_amount": 364145.61,
+      "processes_without_amount": 1
+    },
+    {
+      "buyer_id": "EC-RUC-0992183721001",
+      "buyer_name": "GUAYAQUIL SIGLO XXI, FUNDACIÓN MUNICIPAL PARA LA REGENERACIÓN URBANA",
+      "process_count": 343,
+      "awarded_amount": 1970542.62,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-0990001340001",
+      "buyer_name": "ACERIAS NACIONALES DEL ECUADOR SOCIEDAD ANONIMA (A.N.D.E.C.)",
+      "process_count": 320,
+      "awarded_amount": 2837624.98,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1460024040001",
+      "buyer_name": "CEFAS-PATRONATO DEL GAPMS",
+      "process_count": 303,
+      "awarded_amount": 53063.19,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-0360032780001",
+      "buyer_name": "COORDINACION ZONAL 6 - SENESCYT",
+      "process_count": 299,
+      "awarded_amount": 268930.9,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1790932966001",
+      "buyer_name": "FAME S.A.",
+      "process_count": 296,
+      "awarded_amount": 130423.57,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-0992457597001",
+      "buyer_name": "CORPORACION PARA LA SEGURIDAD CIUDADANA DE GUAYAQUIL",
+      "process_count": 277,
+      "awarded_amount": 178330.7,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1791825314001",
+      "buyer_name": "FUNDACION CALASANZ",
+      "process_count": 264,
+      "awarded_amount": 148743.95,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1791818881001",
+      "buyer_name": "NUCLEO DE SOLCA MACH",
+      "process_count": 249,
+      "awarded_amount": 401085.45,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1391719868001",
+      "buyer_name": "FEDERACION DEPORTIVA DE MANABI",
+      "process_count": 232,
+      "awarded_amount": 21897.47,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1791827929001",
+      "buyer_name": "CONCENTRACIÓN DEPORTIVA DE PICHINCHA",
+      "process_count": 229,
+      "awarded_amount": 534308.89,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1768137410001",
+      "buyer_name": "MINISTERIO DE LA MUJER Y DERECHOS HUMANOS",
+      "process_count": 226,
+      "awarded_amount": 461901.41,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-0968604550001",
+      "buyer_name": "DIRECCIÓN ZONAL ZONA 8 - SECRETARIA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO",
+      "process_count": 211,
+      "awarded_amount": 5430899.01,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1791984714001",
+      "buyer_name": "FUNDACION TEATRO NACIONAL SUCRE",
+      "process_count": 189,
+      "awarded_amount": 243262.58,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1792170826001",
+      "buyer_name": "FUNDACION NIÑOS CON DESTINO EN LAS MANOS DE DIOS",
+      "process_count": 184,
+      "awarded_amount": 100286.23,
+      "processes_without_amount": 0
+    },
+    {
+      "buyer_id": "EC-RUC-1790819442001",
+      "buyer_name": "JUNTA DE POLITICA Y REGULACION FINANCIERA",
+      "process_count": 179,
+      "awarded_amount": 132686.13,
+      "processes_without_amount": 0
+    }
+  ]
+}
