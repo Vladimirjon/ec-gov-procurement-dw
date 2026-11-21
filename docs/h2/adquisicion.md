@@ -33,15 +33,17 @@ El archivo del año **2025** no fue descargado por dicho script, sino mediante `
 
 La integridad interna de cada ZIP fue comprobada mediante lectura del archivo JSON contenido con `scripts/profile_sercop_fields.py` (sin modificar el script oficial de reconocimiento). Se obtuvieron los siguientes totales de paquetes y releases OCDS:
 
-| Año | Entrada JSON interna | Paquetes | Releases | Anomalías detectadas | Contador del portal / Observación H1 |
+| Año | Entrada JSON interna | Paquetes | Releases | Anomalías detectadas | Contador del portal (21/11/2026) / Observación H1 |
 |:---:|---|:---:|:---:|---|---|
-| **2021** | `releases_2021.json` | 167.058 | 167.058 | Ninguna | pendiente: lo anota el líder con captura y fecha |
-| **2022** | `releases_2022.json` | 212.324 | 212.324 | Ninguna | pendiente: lo anota el líder con captura y fecha |
-| **2023** | `releases_2023.json` | 217.914 | 217.913 | 1 paquete con 0 releases (diferencia de 1) | pendiente: lo anota el líder con captura y fecha |
-| **2024** | `releases_2024.json` | 219.186 | 219.185 | 1 anomalía en `contracts` (1 release con contracts como objeto en vez de lista, según `reconocimiento.md`) | pendiente: lo anota el líder con captura y fecha |
-| **2025** | `releases_2025.json` | 191.440 | 191.440 | Ninguna | Comparación con H1: el portal reportó 190.619 al 11/10/2026 frente a 191.440 actuales (+821 procedimientos; actualización continua del portal). |
+| **2021** | `releases_2021.json` | 167.058 | 167.058 | Ninguna | Portal: 167.058 procedimientos publicados (consultado el 21/11/2026) |
+| **2022** | `releases_2022.json` | 212.324 | 212.324 | Ninguna | Portal: 212.324 procedimientos publicados (consultado el 21/11/2026) |
+| **2023** | `releases_2023.json` | 217.914 | 217.913 | 1 paquete con 0 releases (diferencia de 1) | Portal: 217.914 procedimientos publicados (consultado el 21/11/2026) |
+| **2024** | `releases_2024.json` | 219.186 | 219.185 | 1 anomalía en `contracts` (1 release con contracts como objeto en vez de lista, según `reconocimiento.md`) | Portal: 219.186 procedimientos publicados (consultado el 21/11/2026) |
+| **2025** | `releases_2025.json` | 191.440 | 191.440 | Ninguna | Comparación con H1: el portal reportó 190.619 al 11/10/2026 frente a 191.440 actuales (+821 procedimientos; actualización continua del portal). Portal: 191.440 procedimientos publicados (consultado el 21/11/2026). |
 
 **Total de releases en la ventana 2021–2025:** 1.007.920 releases.
+
+**Nota (inferencia, no afirmación del portal):** el contador del portal ("Procedimientos de Contratación Publicados", anotado por el líder desde la pantalla el 21/11/2026) coincide exactamente con el número de **paquetes** de cada ZIP en los cinco años; difiere en 1 del número de **releases** en 2023 y 2024 (1 paquete sin releases y 1 release con `contracts` como objeto, ya descritos arriba). No es una diferencia de descarga y no se corrige nada.
 
 ## 4. Estado de la evidencia cruda
 
