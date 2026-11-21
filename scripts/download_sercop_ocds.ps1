@@ -20,6 +20,12 @@ Carpeta existente o nueva donde se crea la subcarpeta de la descarga. En el repo
 principal es <raiz>/data/datos_crudos; en un worktree esa carpeta no existe, asi que se
 pasa la ruta absoluta de la carpeta principal.
 
+.PARAMETER Type
+Tipo de archivo solicitado al portal ('json', 'csv', 'xlsx'). Por defecto 'json'.
+
+.PARAMETER FileName
+Nombre del archivo de destino dentro de la subcarpeta creada. Por defecto 'releases_<Year>.zip'.
+
 .PARAMETER EvidenceCsv
 CSV versionado de procedencia. Por defecto docs/h2/evidencia/descargas-sercop.csv junto
 al script; se crea con cabecera si no existe y se le anade una fila.
@@ -42,6 +48,10 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputRoot,
 
+    [string]$Type = 'json',
+
+    [string]$FileName = '',
+
     [string]$EvidenceCsv = '',
 
     [string]$LicenseUrl = 'https://creativecommons.org/licenses/by/3.0/ec/',
@@ -62,10 +72,10 @@ Add-Type -AssemblyName System.Net.Http -ErrorAction Stop
 
 # The annual resource: all months, all procurement types. Observed in the portal filter.
 if ([string]::IsNullOrWhiteSpace($RequestUri)) {
-    $RequestUri = "https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/download?type=json&year=$Year&month=0&method=all"
+    $RequestUri = "https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/download?type=$Type&year=$Year&month=0&method=all"
 }
 $requestUri = $RequestUri
-$fileName = "releases_$Year.zip"
+$fileName = if (-not [string]::IsNullOrWhiteSpace($FileName)) { $FileName } else { "releases_$Year.zip" }
 # Ecuador has used UTC-5 without daylight saving time since 1992; the offset is fixed.
 $ecuadorOffset = [System.TimeSpan]::FromHours(-5)
 
@@ -76,7 +86,7 @@ if ([string]::IsNullOrWhiteSpace($EvidenceCsv)) {
 $outputRootFullPath = [System.IO.Path]::GetFullPath($OutputRoot)
 $evidenceCsvFullPath = [System.IO.Path]::GetFullPath($EvidenceCsv)
 $startedUtc = [System.DateTimeOffset]::UtcNow
-$folderName = 'sercop-ocds-json-{0}-{1}' -f $Year, $startedUtc.ToOffset($ecuadorOffset).ToString('yyyyMMdd-HHmmss')
+$folderName = 'sercop-ocds-{0}-{1}-{2}' -f $Type, $Year, $startedUtc.ToOffset($ecuadorOffset).ToString('yyyyMMdd-HHmmss')
 $downloadFolder = Join-Path $outputRootFullPath $folderName
 $zipPath = Join-Path $downloadFolder $fileName
 $headersPath = Join-Path $downloadFolder "headers-$Year.txt"
