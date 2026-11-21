@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "measured_at_utc": "2026-11-21T20:46:42.297680+00:00",
+    "measured_at_utc": "2026-11-21T21:43:09.489269+00:00",
     "catalog_file": "catalogo_instituciones_mdep.xlsx",
     "period": "2021-2025",
     "rule": "ADR 0001 (1. coincidencia simple EC-RUC-13; 2. raiz EC-RUC-13 con sufijo; nunca por nombre)"
@@ -11,7 +11,8 @@
       "total_processes": 1007920,
       "processes_with_awarded_amount": 964450,
       "processes_without_awarded_amount": 43470,
-      "total_awarded_amount": 30952880306.92
+      "total_awarded_amount": 30952880306.92,
+      "distinct_buyers": 6100
     },
     "coverage": {
       "processes": {
@@ -34,7 +35,257 @@
         "unmatched_amount": 765662321.52,
         "pct_unmatched": 2.47
       }
-    }
+    },
+    "root_validation": {
+      "total_distinct_roots": 3364,
+      "roots_with_13_digits": 3364,
+      "roots_in_catalog": 2875,
+      "pct_roots_in_catalog": 85.46,
+      "roots_with_multiple_buyer_ids": 2730,
+      "regex_failed_buyer_ids_count": 6
+    },
+    "top_20_roots_with_most_buyer_ids": [
+      {
+        "root_ruc": "1760003410001",
+        "buyer_ids_count": 2,
+        "process_count": 14145,
+        "buyer_ids": [
+          "EC-RUC-1760003410001",
+          "EC-RUC-1760003410001-41357"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "MUNICIPIO DE DISTRITO METROPOLITANO DE QUITO",
+        "sample_buyer_name": "GOBIERNO AUTONOMO DESCENTRALIZADO DEL DISTRITO METROPOLITANO DE QUITO"
+      },
+      {
+        "root_ruc": "1760004650001",
+        "buyer_ids_count": 2,
+        "process_count": 7999,
+        "buyer_ids": [
+          "EC-RUC-1760004650001",
+          "EC-RUC-1760004650001-39594"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL  -IESS",
+        "sample_buyer_name": "INSTITUTO ECUATORIANO DE SEGURIDAD SOCIAL"
+      },
+      {
+        "root_ruc": "1768152800001",
+        "buyer_ids_count": 2,
+        "process_count": 7939,
+        "buyer_ids": [
+          "EC-RUC-1768152800001",
+          "EC-RUC-1768152800001-238940"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "CORPORACION ELECTRICA DEL ECUADOR CELEC EP",
+        "sample_buyer_name": "CORPORACION ELECTRICA DEL ECUADOR CELEC EP."
+      },
+      {
+        "root_ruc": "0968599020001",
+        "buyer_ids_count": 2,
+        "process_count": 6671,
+        "buyer_ids": [
+          "EC-RUC-0968599020001",
+          "EC-RUC-0968599020001-462114"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "EMPRESA ELECTRICA PUBLICA ESTRATEGICA CORPORACION NACIONAL DE ELECTRICIDAD CNEL EP",
+        "sample_buyer_name": "EMPRESA ELÉCTRICA PÚBLICA ESTRATÉGICA CORPORACIÓN NACIONAL DE ELECTRICIDAD CNEL EP"
+      },
+      {
+        "root_ruc": "1360066490001",
+        "buyer_ids_count": 2,
+        "process_count": 4140,
+        "buyer_ids": [
+          "EC-RUC-1360066490001",
+          "EC-RUC-1360066490001-362824"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "COORDINACION ZONAL 4",
+        "sample_buyer_name": "COORDINACION ZONAL 4"
+      },
+      {
+        "root_ruc": "1560002480001",
+        "buyer_ids_count": 2,
+        "process_count": 3888,
+        "buyer_ids": [
+          "EC-RUC-1560002480001",
+          "EC-RUC-1560002480001-29112"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "GOBIERNO AUTONOMO DESCENTRALIZADO DE LA PROVINCIA DE ORELLANA",
+        "sample_buyer_name": "GOBIERNO AUTONOMO DESCENTRALIZADO DE LA PROVINCIA DE ORELLANA"
+      },
+      {
+        "root_ruc": "1760013210001",
+        "buyer_ids_count": 2,
+        "process_count": 3812,
+        "buyer_ids": [
+          "EC-RUC-1760013210001",
+          "EC-RUC-1760013210001-2438"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "SERVICIO DE RENTAS INTERNAS -SRI",
+        "sample_buyer_name": "SERVICIO DE RENTAS INTERNAS"
+      },
+      {
+        "root_ruc": "1768153530001",
+        "buyer_ids_count": 2,
+        "process_count": 3464,
+        "buyer_ids": [
+          "EC-RUC-1768153530001",
+          "EC-RUC-1768153530001-253178"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "EMPRESA PUBLICA DE HIDROCARBUROS DEL ECUADOR EP PETROECUADOR",
+        "sample_buyer_name": "EMPRESA PÚBLICA DE HIDROCARBUROS DEL ECUADOR EP PETROECUADOR"
+      },
+      {
+        "root_ruc": "1768188830001",
+        "buyer_ids_count": 2,
+        "process_count": 3212,
+        "buyer_ids": [
+          "EC-RUC-1768188830001",
+          "EC-RUC-1768188830001-869714"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "AGENCIA DE REGULACION Y CONTROL FITO Y ZOOSANITARIO - PLANTA CENTRAL",
+        "sample_buyer_name": "AGENCIA DE REGULACIÓN Y CONTROL FITO Y ZOOSANITARIO"
+      },
+      {
+        "root_ruc": "0160017400001",
+        "buyer_ids_count": 2,
+        "process_count": 3074,
+        "buyer_ids": [
+          "EC-RUC-0160017400001",
+          "EC-RUC-0160017400001-87497"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "HOSPITAL DE ESPECIALIDADES - JOSE CARRASCO ARTEAGA",
+        "sample_buyer_name": "HOSPITAL DE ESPECIALIDADES JOSÉ CARRASCO ARTEAGA"
+      },
+      {
+        "root_ruc": "1768046450001",
+        "buyer_ids_count": 2,
+        "process_count": 3002,
+        "buyer_ids": [
+          "EC-RUC-1768046450001",
+          "EC-RUC-1768046450001-54651"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "HOSPITAL DE ESPECIALIDADES - CARLOS ANDRADE MARIN",
+        "sample_buyer_name": "HOSPITAL DE ESPECIALIDADES CARLOS ANDRADE MARIN"
+      },
+      {
+        "root_ruc": "1768007040001",
+        "buyer_ids_count": 2,
+        "process_count": 2655,
+        "buyer_ids": [
+          "EC-RUC-1768007040001",
+          "EC-RUC-1768007040001-2504"
+        ],
+        "in_catalog": false,
+        "catalog_entity_name": null,
+        "sample_buyer_name": "CUERPO DE INGENIEROS DEL EJERCITO"
+      },
+      {
+        "root_ruc": "0660000870001",
+        "buyer_ids_count": 2,
+        "process_count": 2582,
+        "buyer_ids": [
+          "EC-RUC-0660000870001",
+          "EC-RUC-0660000870001-79844"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "GOBIERNO AUTONOMO DESCENTRALIZADO MUNICIPAL DEL CANTON GUANO",
+        "sample_buyer_name": "GOBIERNO AUTONOMO DESCENTRALIZADO MUNICIPAL DEL CANTON GUANO"
+      },
+      {
+        "root_ruc": "1760003330001",
+        "buyer_ids_count": 2,
+        "process_count": 2545,
+        "buyer_ids": [
+          "EC-RUC-1760003330001",
+          "EC-RUC-1760003330001-2426"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "GOBIERNO AUTONOMO DESCENTRALIZADO DE LA PROVINCIA DE PICHINCHA",
+        "sample_buyer_name": "GOBIERNO PROVINCIAL DE PICHINCHA"
+      },
+      {
+        "root_ruc": "1660016410001",
+        "buyer_ids_count": 2,
+        "process_count": 2545,
+        "buyer_ids": [
+          "EC-RUC-1660016410001",
+          "EC-RUC-1660016410001-385338"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "PATRONATO PROVINCIAL DE SERVICIO SOCIAL DE PASTAZA",
+        "sample_buyer_name": "PATRONATO PROVINCIAL DE SERVICIO SOCIAL DE PASTAZA"
+      },
+      {
+        "root_ruc": "0160006390001",
+        "buyer_ids_count": 2,
+        "process_count": 2507,
+        "buyer_ids": [
+          "EC-RUC-0160006390001",
+          "EC-RUC-0160006390001-12070"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "HOSPITAL PROVINCIAL GENERAL DOCENTE VICENTE CORRAL MOSCOSO",
+        "sample_buyer_name": "HOSPITAL VICENTE CORRAL MOSCOSO"
+      },
+      {
+        "root_ruc": "0968560160001",
+        "buyer_ids_count": 2,
+        "process_count": 2497,
+        "buyer_ids": [
+          "EC-RUC-0968560160001",
+          "EC-RUC-0968560160001-2810"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "HOSPITAL DE ESPECIALIDADES - TEODORO MALDONADO CARBO",
+        "sample_buyer_name": "HOSPITAL DE ESPECIALIDADES - TEODORO MALDONADO CARBO"
+      },
+      {
+        "root_ruc": "0960000220001",
+        "buyer_ids_count": 2,
+        "process_count": 2443,
+        "buyer_ids": [
+          "EC-RUC-0960000220001",
+          "EC-RUC-0960000220001-44856"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "MUNICIPIO DE GUAYAQUIL",
+        "sample_buyer_name": "MUNICIPALIDAD DE GUAYAQUIL"
+      },
+      {
+        "root_ruc": "1768001350001",
+        "buyer_ids_count": 2,
+        "process_count": 2430,
+        "buyer_ids": [
+          "EC-RUC-1768001350001",
+          "EC-RUC-1768001350001-54082"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "BRIGADA DE AVIACION DEL EJERCITO No. 15 PAQUISHA",
+        "sample_buyer_name": "BRIGADA DE AVIACION DE LA FUERZA TERRESTRE NO. 15 \"PAQUISHA\""
+      },
+      {
+        "root_ruc": "0660000360001",
+        "buyer_ids_count": 2,
+        "process_count": 2397,
+        "buyer_ids": [
+          "EC-RUC-0660000360001",
+          "EC-RUC-0660000360001-33554"
+        ],
+        "in_catalog": true,
+        "catalog_entity_name": "MUNICIPIO DE RIOBAMBA",
+        "sample_buyer_name": "GOBIERNO AUTONOMO DESCENTRALIZADO DEL CANTON RIOBAMBA"
+      }
+    ]
   },
   "years": [
     {
@@ -367,18 +618,18 @@
           "processes_without_amount": 0
         },
         {
-          "buyer_id": "EC-RUC-1791818881001",
-          "buyer_name": "NUCLEO DE SOLCA MACH",
-          "process_count": 66,
-          "awarded_amount": 24146.46,
-          "processes_without_amount": 0
-        },
-        {
           "buyer_id": "EC-RUC-1791984714001-251830",
           "buyer_name": "FUNDACION TEATRO NACIONAL SUCRE",
           "process_count": 66,
           "awarded_amount": 469935.96,
           "processes_without_amount": 1
+        },
+        {
+          "buyer_id": "EC-RUC-1791818881001",
+          "buyer_name": "NUCLEO DE SOLCA MACH",
+          "process_count": 66,
+          "awarded_amount": 24146.46,
+          "processes_without_amount": 0
         },
         {
           "buyer_id": "EC-RUC-1291727812001",
@@ -395,18 +646,18 @@
           "processes_without_amount": 3
         },
         {
-          "buyer_id": "EC-RUC-0968603900001-589754",
-          "buyer_name": "EMPRESA PUBLICA MUNICIPAL DE TURISMO, PROMOCION CIVICA Y RELACIONES INTERNACIONALES DE GUAYAQUIL,EP",
-          "process_count": 63,
-          "awarded_amount": 2367425.41,
-          "processes_without_amount": 0
-        },
-        {
           "buyer_id": "EC-RUC-0992179619001-27611",
           "buyer_name": "AUTORIDAD AEROPORTUARIA DE GUAYAQUIL FUNDACION DE LA M.I MUNICIPALIDAD DE GUAYAQUIL",
           "process_count": 63,
           "awarded_amount": 8904866.15,
           "processes_without_amount": 2
+        },
+        {
+          "buyer_id": "EC-RUC-0968603900001-589754",
+          "buyer_name": "EMPRESA PUBLICA MUNICIPAL DE TURISMO, PROMOCION CIVICA Y RELACIONES INTERNACIONALES DE GUAYAQUIL,EP",
+          "process_count": 63,
+          "awarded_amount": 2367425.41,
+          "processes_without_amount": 0
         }
       ]
     },
@@ -712,18 +963,18 @@
           "processes_without_amount": 8
         },
         {
-          "buyer_id": "EC-RUC-0990001340001",
-          "buyer_name": "ACERIAS NACIONALES DEL ECUADOR SOCIEDAD ANONIMA (A.N.D.E.C.)",
-          "process_count": 83,
-          "awarded_amount": 129781.8,
-          "processes_without_amount": 0
-        },
-        {
           "buyer_id": "EC-RUC-0990001340001-467908",
           "buyer_name": "ACERIAS NACIONALES DEL ECUADOR SOCIEDAD ANONIMA (A.N.D.E.C.)",
           "process_count": 83,
           "awarded_amount": 4530899.88,
           "processes_without_amount": 19
+        },
+        {
+          "buyer_id": "EC-RUC-0990001340001",
+          "buyer_name": "ACERIAS NACIONALES DEL ECUADOR SOCIEDAD ANONIMA (A.N.D.E.C.)",
+          "process_count": 83,
+          "awarded_amount": 129781.8,
+          "processes_without_amount": 0
         },
         {
           "buyer_id": "EC-RUC-1790819442001",
@@ -1845,17 +2096,17 @@
           "processes_without_amount": 0
         },
         {
-          "buyer_id": "EC-RUC-0791706955001",
-          "buyer_name": "FEDERACION DEPORTIVA PROVINCIAL DE EL ORO",
-          "process_count": 62,
-          "awarded_amount": 28703.93,
-          "processes_without_amount": 0
-        },
-        {
           "buyer_id": "EC-RUC-1792170826001",
           "buyer_name": "FUNDACION NIÑOS CON DESTINO EN LAS MANOS DE DIOS",
           "process_count": 62,
           "awarded_amount": 41694.44,
+          "processes_without_amount": 0
+        },
+        {
+          "buyer_id": "EC-RUC-0791706955001",
+          "buyer_name": "FEDERACION DEPORTIVA PROVINCIAL DE EL ORO",
+          "process_count": 62,
+          "awarded_amount": 28703.93,
           "processes_without_amount": 0
         },
         {

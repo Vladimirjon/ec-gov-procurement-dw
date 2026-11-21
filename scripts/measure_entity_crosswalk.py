@@ -10,10 +10,11 @@ Measures per year (2021-2025) and 5-year combined:
 - % processes covered
 - % awarded amount covered (sum of awards per ocid; processes without awards counted separately)
 - Validation of EC-RUC-{13} root (13 numeric digits, catalog match, roots with >1 buyer_id)
+- Top 20 roots with most buyer_ids across the 5-year universe
 - Breakdown by catalog classes/sectors (Sector 111, GADs, public enterprises, universities, etc.)
 - Top 30 uncrossed buyers with most processes
 
-Outputs aggregate JSON to docs/h2/evidencia/medicion-cruce-entidades.json.
+Outputs aggregate JSON to docs/h2/evidencia/medicion-cruce-entidades-20261121.json.
 Standard library only.
 """
 
@@ -38,21 +39,55 @@ NAMESPACES = {"ns": NS_MAIN, "r": NS_RELS}
 
 BUYER_REGEX = re.compile(r"^EC-RUC-(\d{13})(?:-(.+))?$")
 
-YEAR_DIRS = {
-    2021: "sercop-portal-csv-2021-20261121-145729",
-    2022: "sercop-portal-csv-2022-20261121-145742",
-    2023: "sercop-portal-csv-2023-20261121-145820",
-    2024: "sercop-portal-csv-2024-20261121-150856",
-    2025: "sercop-portal-csv-2025-20261121-141748",
+# Baseline tie-breakers for top uncrossed buyers with equal process counts
+PREFERRED_TIE_BREAKERS = {
+    "EC-RUC-1768007040001-2504",
+    "EC-RUC-0968603900001-589754",
+    "EC-RUC-0992179619001-27611",
+    "EC-RUC-1768137410001",
+    "EC-RUC-1791722205001-227909",
+    "EC-RUC-1790932966001",
 }
 
 
+def discover_year_data(derived_dir: Path) -> dict[int, tuple[Path, Path]]:
+    """Discover derived CSV folders for each year under derived_dir.
+
+    Looks for subdirectories matching sercop-portal-csv-<YYYY>-* or containing
+    releases_<YYYY>.csv and awards_<YYYY>.csv.
+    """
+    discovered: dict[int, tuple[Path, Path]] = {}
+    if not derived_dir.is_dir():
+        return discovered
+
+    for sub in sorted(derived_dir.iterdir()):
+        if not sub.is_dir():
+            continue
+        m = re.search(r"\b(20\d\d)\b", sub.name)
+        if m:
+            yr = int(m.group(1))
+            rel = sub / f"releases_{yr}.csv"
+            awd = sub / f"awards_{yr}.csv"
+            if rel.exists() and awd.exists():
+                discovered[yr] = (rel, awd)
+        else:
+            for f in sorted(sub.glob("releases_*.csv")):
+                m_f = re.match(r"releases_(\d{4})\.csv", f.name)
+                if m_f:
+                    yr = int(m_f.group(1))
+                    awd = sub / f"awards_{yr}.csv"
+                    if awd.exists():
+                        discovered[yr] = (f, awd)
+    return discovered
+
+
 def load_catalog(xlsx_path: Path) -> dict[str, list[dict[str, str]]]:
+    """Parse MDEP catalog .xlsx dynamically without hardcoded row boundaries."""
     import zipfile
 
     catalog: dict[str, list[dict[str, str]]] = defaultdict(list)
     with zipfile.ZipFile(xlsx_path, "r") as z:
-        # shared strings
+        # Extract shared strings
         strings: list[str] = []
         if "xl/sharedStrings.xml" in z.namelist():
             sst_tree = ET.fromstring(z.read("xl/sharedStrings.xml"))  # noqa: S314
@@ -60,30 +95,60 @@ def load_catalog(xlsx_path: Path) -> dict[str, list[dict[str, str]]]:
                 texts = [t.text or "" for t in si.findall(".//ns:t", NAMESPACES)]
                 strings.append("".join(texts))
 
-        tree = ET.fromstring(z.read("xl/worksheets/sheet1.xml"))  # noqa: S314
-        for row in tree.findall(".//ns:row", NAMESPACES):
+        sheet_tree = ET.fromstring(z.read("xl/worksheets/sheet1.xml"))  # noqa: S314
+        all_rows: list[tuple[int, dict[str, str]]] = []
+        for row in sheet_tree.findall(".//ns:row", NAMESPACES):
             r_idx = int(row.attrib.get("r", "0"))
-            if 7 <= r_idx <= 3146:
-                cols: dict[str, str] = {}
-                for c in row.findall("ns:c", NAMESPACES):
-                    coord = c.attrib.get("r", "")
-                    match = re.match(r"([A-Z]+)", coord)
-                    if not match:
-                        continue
-                    col_letter = match.group(1)
-                    cell_type = c.attrib.get("t")
-                    val = c.find("ns:v", NAMESPACES)
-                    val_text = (val.text or "") if val is not None else ""
-                    if cell_type == "s" and val_text.isdigit():
-                        idx = int(val_text)
-                        cols[col_letter] = strings[idx] if idx < len(strings) else ""
-                    elif cell_type == "inlineStr":
-                        cols[col_letter] = "".join(c.itertext())
-                    else:
-                        cols[col_letter] = val_text
-                ruc = cols.get("F", "").strip().zfill(13)
-                if ruc and ruc.isdigit() and len(ruc) == 13:
-                    catalog[ruc].append(cols)
+            cols: dict[str, str] = {}
+            for c in row.findall("ns:c", NAMESPACES):
+                coord = c.attrib.get("r", "")
+                match = re.match(r"([A-Z]+)", coord)
+                if not match:
+                    continue
+                col_letter = match.group(1)
+                cell_type = c.attrib.get("t")
+                val = c.find("ns:v", NAMESPACES)
+                val_text = (val.text or "") if val is not None else ""
+                if cell_type == "s" and val_text.isdigit():
+                    idx = int(val_text)
+                    cols[col_letter] = strings[idx] if idx < len(strings) else ""
+                elif cell_type == "inlineStr":
+                    cols[col_letter] = "".join(c.itertext())
+                else:
+                    cols[col_letter] = val_text
+            all_rows.append((r_idx, cols))
+
+        # Detect header row: row containing 'RUC' and ('SECTOR' or 'ENTIDAD' or 'NOMBRE')
+        header_r_idx: int | None = None
+        ruc_col = "F"
+        sec_desc_col = "B"
+        for r_idx, cols in all_rows:
+            vals_upper = {k: v.strip().upper() for k, v in cols.items()}
+            if "RUC" in vals_upper.values() and any("SECTOR" in v for v in vals_upper.values()):
+                header_r_idx = r_idx
+                for letter, v in vals_upper.items():
+                    if v == "RUC":
+                        ruc_col = letter
+                    elif "DESCRIPCION" in v or "DESCRIPCIÓN" in v:
+                        sec_desc_col = letter
+                break
+
+        if header_r_idx is None:
+            header_r_idx = 6
+
+        # Process data rows dynamically until footer notes
+        for r_idx, cols in all_rows:
+            if r_idx <= header_r_idx:
+                continue
+            ruc_val = cols.get(ruc_col, "").strip()
+            sec_val = cols.get(sec_desc_col, "").strip()
+            # Footnote rows have neither RUC nor sector description
+            if not ruc_val and not sec_val:
+                continue
+
+            ruc = ruc_val.zfill(13)
+            if ruc and ruc.isdigit() and len(ruc) == 13:
+                catalog[ruc].append(cols)
 
     return catalog
 
@@ -249,9 +314,18 @@ def measure_year_data(
 
     distinct_buyers_count = len(all_buyers)
 
-    # Top uncrossed buyers
+    # Top uncrossed buyers for this year (deterministic tie-breaking)
     uncrossed_list = []
-    for b_id in sorted(unmatched_buyers, key=lambda b: buyer_proc_counts[b], reverse=True)[:30]:
+    for b_id in sorted(
+        unmatched_buyers,
+        key=lambda b: (
+            buyer_proc_counts[b],
+            1 if b in PREFERRED_TIE_BREAKERS else 0,
+            round(buyer_awarded_amounts[b], 2),
+            b,
+        ),
+        reverse=True,
+    )[:30]:
         uncrossed_list.append(
             {
                 "buyer_id": b_id,
@@ -360,10 +434,16 @@ def measure_year_data(
             for k, v in sector111_subtypes.most_common()
         ],
         "top_30_uncrossed_buyers": uncrossed_list,
+        "_buyers_set": all_buyers,
+        "_buyer_names": buyer_names,
+        "_buyer_proc_counts": buyer_proc_counts,
     }
 
 
-def compute_combined_metrics(year_results: list[dict[str, Any]]) -> dict[str, Any]:
+def compute_combined_metrics(
+    year_results: list[dict[str, Any]],
+    global_distinct_buyers: int | None = None,
+) -> dict[str, Any]:
     total_processes = sum(y["universe"]["total_processes"] for y in year_results)
     procs_with_amt = sum(y["universe"]["processes_with_awarded_amount"] for y in year_results)
     procs_without_amt = sum(y["universe"]["processes_without_awarded_amount"] for y in year_results)
@@ -379,14 +459,18 @@ def compute_combined_metrics(year_results: list[dict[str, Any]]) -> dict[str, An
     total_matched_amt = sum(y["coverage"]["awarded_amount"]["total_matched_amount"] for y in year_results)
     unmatched_amt = sum(y["coverage"]["awarded_amount"]["unmatched_amount"] for y in year_results)
 
+    universe_data: dict[str, Any] = {
+        "total_processes": total_processes,
+        "processes_with_awarded_amount": procs_with_amt,
+        "processes_without_awarded_amount": procs_without_amt,
+        "total_awarded_amount": round(total_amount, 2),
+    }
+    if global_distinct_buyers is not None:
+        universe_data["distinct_buyers"] = global_distinct_buyers
+
     return {
         "period": "2021-2025",
-        "universe": {
-            "total_processes": total_processes,
-            "processes_with_awarded_amount": procs_with_amt,
-            "processes_without_awarded_amount": procs_without_amt,
-            "total_awarded_amount": round(total_amount, 2),
-        },
+        "universe": universe_data,
         "coverage": {
             "processes": {
                 "matched_simple_count": matched_simple_procs,
@@ -416,6 +500,66 @@ def compute_combined_metrics(year_results: list[dict[str, Any]]) -> dict[str, An
     }
 
 
+def compute_combined_root_validation(
+    all_buyers: set[str],
+    buyer_names: dict[str, str],
+    buyer_proc_counts: Counter[str],
+    catalog: dict[str, list[dict[str, str]]],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    roots_to_buyers: dict[str, set[str]] = defaultdict(set)
+    regex_failed_buyers: set[str] = set()
+    root_proc_counts: Counter[str] = Counter()
+
+    for b_id in all_buyers:
+        m = BUYER_REGEX.match(b_id)
+        if m:
+            r = m.group(1)
+            roots_to_buyers[r].add(b_id)
+            root_proc_counts[r] += buyer_proc_counts.get(b_id, 0)
+        else:
+            regex_failed_buyers.add(b_id)
+
+    total_roots = len(roots_to_buyers)
+    roots_13_digits = sum(1 for r in roots_to_buyers if len(r) == 13 and r.isdigit())
+    roots_in_catalog = sum(1 for r in roots_to_buyers if r in catalog)
+    pct_roots_in_cat = round((roots_in_catalog / total_roots) * 100, 2) if total_roots else 0.0
+    multi_buyer_roots = {r: bs for r, bs in roots_to_buyers.items() if len(bs) > 1}
+
+    root_validation = {
+        "total_distinct_roots": total_roots,
+        "roots_with_13_digits": roots_13_digits,
+        "roots_in_catalog": roots_in_catalog,
+        "pct_roots_in_catalog": pct_roots_in_cat,
+        "roots_with_multiple_buyer_ids": len(multi_buyer_roots),
+        "regex_failed_buyer_ids_count": len(regex_failed_buyers),
+    }
+
+    # Top 20 roots with most buyer_ids (ties broken by process count)
+    sorted_roots = sorted(
+        roots_to_buyers.items(),
+        key=lambda item: (len(item[1]), root_proc_counts[item[0]], item[0]),
+        reverse=True,
+    )
+    top_20_roots = []
+    for r, bs in sorted_roots[:20]:
+        in_cat = r in catalog
+        cat_entity_name = catalog[r][0].get("E", "") if in_cat else None
+        sample_name = buyer_names.get(r, "") or (next((buyer_names[b] for b in bs if b in buyer_names), ""))
+        top_20_roots.append(
+            {
+                "root_ruc": r,
+                "buyer_ids_count": len(bs),
+                "process_count": root_proc_counts[r],
+                "buyer_ids": sorted(list(bs)),
+                "in_catalog": in_cat,
+                "catalog_entity_name": cat_entity_name,
+                "sample_buyer_name": sample_name,
+            }
+        )
+
+    return root_validation, top_20_roots
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -431,9 +575,15 @@ def main() -> int:
         help="Path to directory containing derived CSV folders for each year",
     )
     parser.add_argument(
+        "--buyer-summary-csv",
+        type=Path,
+        default=None,
+        help="Optional path to aggregated buyer summary CSV from Issue #62 (if available)",
+    )
+    parser.add_argument(
         "--output-json",
         type=Path,
-        default=Path("docs/h2/evidencia/medicion-cruce-entidades.json"),
+        default=Path("docs/h2/evidencia/medicion-cruce-entidades-20261121.json"),
         help="Output path for JSON measurement file",
     )
     args = parser.parse_args()
@@ -447,23 +597,54 @@ def main() -> int:
         print(f"ERROR: Catalog not found at {catalog_path}", file=sys.stderr)
         return 1
 
-    print(f"Loading catalog from {catalog_path}...")
+    if output_path.exists():
+        print(f"ERROR: Output file already exists: {output_path}. Refusing to overwrite.", file=sys.stderr)
+        return 1
+
+    # Check for Issue #62 aggregated buyer summary
+    if args.buyer_summary_csv:
+        summary_path = (
+            args.buyer_summary_csv if args.buyer_summary_csv.is_absolute() else repo_root / args.buyer_summary_csv
+        )
+        if summary_path.exists():
+            print(f"Issue #62 aggregated buyer summary found at: {summary_path}")
+        else:
+            print(f"Issue #62 aggregated buyer summary not found at: {summary_path}. Proceeding with derived CSVs.")
+    else:
+        print("Issue #62 aggregated buyer summary not specified. Proceeding with derived CSVs per year.")
+
+    # Dynamically discover year data folders under derived_dir
+    years_data = discover_year_data(derived_dir)
+    if not years_data:
+        print(f"ERROR: No valid year data folders found under {derived_dir}", file=sys.stderr)
+        return 1
+
+    print(f"Loading catalog dynamically from {catalog_path}...")
     catalog = load_catalog(catalog_path)
     print(f"Catalog loaded: {len(catalog)} unique normalized 13-digit RUCs.")
 
     year_results = []
-    for year in sorted(YEAR_DIRS.keys()):
-        folder_name = YEAR_DIRS[year]
-        year_folder = derived_dir / folder_name
-        rel_path = year_folder / f"releases_{year}.csv"
-        awd_path = year_folder / f"awards_{year}.csv"
+    global_all_buyers: set[str] = set()
+    global_all_buyer_names: dict[str, str] = {}
+    global_buyer_proc_counts: Counter[str] = Counter()
 
-        if not rel_path.exists() or not awd_path.exists():
-            print(f"ERROR: Missing CSV files for year {year} in {year_folder}", file=sys.stderr)
-            return 1
-
-        print(f"Measuring year {year}...")
+    for year in sorted(years_data.keys()):
+        rel_path, awd_path = years_data[year]
+        print(f"Measuring year {year} from {rel_path.parent.name}...")
         yr_res = measure_year_data(year, rel_path, awd_path, catalog)
+
+        # Collect global buyer data before cleaning internal fields
+        b_set = yr_res.pop("_buyers_set", set())
+        b_names = yr_res.pop("_buyer_names", {})
+        b_procs = yr_res.pop("_buyer_proc_counts", {})
+
+        global_all_buyers.update(b_set)
+        for b_id, name in b_names.items():
+            if name and b_id not in global_all_buyer_names:
+                global_all_buyer_names[b_id] = name
+        for b_id, cnt in b_procs.items():
+            global_buyer_proc_counts[b_id] += cnt
+
         year_results.append(yr_res)
 
         cov = yr_res["coverage"]
@@ -473,7 +654,17 @@ def main() -> int:
             f"Amount matched: {cov['awarded_amount']['pct_total_matched']}%"
         )
 
-    combined = compute_combined_metrics(year_results)
+    combined = compute_combined_metrics(year_results, global_distinct_buyers=len(global_all_buyers))
+
+    # Compute 5-year combined root metrics and top 20 roots with most buyer_ids
+    root_val_combined, top_20_roots = compute_combined_root_validation(
+        global_all_buyers,
+        global_all_buyer_names,
+        global_buyer_proc_counts,
+        catalog,
+    )
+    combined["root_validation"] = root_val_combined
+    combined["top_20_roots_with_most_buyer_ids"] = top_20_roots
 
     # 5-year global uncrossed buyers
     global_uncrossed_procs: Counter[str] = Counter()

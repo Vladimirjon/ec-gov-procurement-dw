@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 import csv
 import json
 from pathlib import Path
@@ -12,6 +13,8 @@ import zipfile
 from measure_entity_crosswalk import (
     classify_sector111_entry,
     compute_combined_metrics,
+    compute_combined_root_validation,
+    discover_year_data,
     load_awards_amounts,
     load_catalog,
     measure_year_data,
@@ -288,12 +291,85 @@ def test_compute_combined_metrics(synthetic_crosswalk_data):
     cat_path, rel_path, awd_path = synthetic_crosswalk_data
     catalog = load_catalog(cat_path)
     yr1 = measure_year_data(2021, rel_path, awd_path, catalog)
-    combined = compute_combined_metrics([yr1])
+    combined = compute_combined_metrics([yr1], global_distinct_buyers=5)
 
     assert combined["period"] == "2021-2025"
     assert combined["universe"]["total_processes"] == 6
+    assert combined["universe"]["distinct_buyers"] == 5
     assert combined["coverage"]["processes"]["total_matched_count"] == 4
     assert combined["universe"]["total_awarded_amount"] == 8750.50
+
+
+def test_discover_year_data(tmp_path: Path):
+    derived_dir = tmp_path / "derived"
+    derived_dir.mkdir()
+
+    # Create dummy folders
+    folder_2021 = derived_dir / "sercop-portal-csv-2021-test"
+    folder_2021.mkdir()
+    (folder_2021 / "releases_2021.csv").write_text("dummy", encoding="utf-8")
+    (folder_2021 / "awards_2021.csv").write_text("dummy", encoding="utf-8")
+
+    folder_2022 = derived_dir / "folder-2022"
+    folder_2022.mkdir()
+    (folder_2022 / "releases_2022.csv").write_text("dummy", encoding="utf-8")
+    (folder_2022 / "awards_2022.csv").write_text("dummy", encoding="utf-8")
+
+    discovered = discover_year_data(derived_dir)
+    assert set(discovered.keys()) == {2021, 2022}
+    assert discovered[2021][0].name == "releases_2021.csv"
+    assert discovered[2022][1].name == "awards_2022.csv"
+
+
+def test_compute_combined_root_validation(synthetic_crosswalk_data):
+    cat_path, _, _ = synthetic_crosswalk_data
+    catalog = load_catalog(cat_path)
+
+    all_buyers = {
+        "EC-RUC-1760000150001",
+        "EC-RUC-0160016780001-100",
+        "EC-RUC-0160016780001",
+        "EC-RUC-0160000270001-99",
+        "EC-RUC-9999999999001",
+        "INVALID-BUYER-ID",
+    }
+    buyer_names = {
+        "EC-RUC-1760000150001": "Presidencia",
+        "EC-RUC-0160016780001-100": "Hospital Cuenca",
+        "EC-RUC-0160016780001": "MSP Base",
+        "EC-RUC-0160000270001-99": "GAD Cuenca",
+        "EC-RUC-9999999999001": "Bomberos X",
+    }
+    proc_counts = Counter(
+        {
+            "EC-RUC-1760000150001": 10,
+            "EC-RUC-0160016780001-100": 5,
+            "EC-RUC-0160016780001": 2,
+            "EC-RUC-0160000270001-99": 1,
+            "EC-RUC-9999999999001": 3,
+            "INVALID-BUYER-ID": 1,
+        }
+    )
+
+    root_val, top_roots = compute_combined_root_validation(
+        all_buyers,
+        buyer_names,
+        proc_counts,
+        catalog,
+    )
+
+    assert root_val["total_distinct_roots"] == 4
+    assert root_val["roots_with_13_digits"] == 4
+    assert root_val["roots_in_catalog"] == 3
+    assert root_val["roots_with_multiple_buyer_ids"] == 1  # 0160016780001 has base and -100
+    assert root_val["regex_failed_buyer_ids_count"] == 1
+
+    assert len(top_roots) == 4
+    # Root with most buyer_ids should be first
+    assert top_roots[0]["root_ruc"] == "0160016780001"
+    assert top_roots[0]["buyer_ids_count"] == 2
+    assert top_roots[0]["process_count"] == 7
+    assert top_roots[0]["in_catalog"] is True
 
 
 def test_measure_entity_crosswalk_cli(synthetic_crosswalk_data, tmp_path: Path):
@@ -302,10 +378,9 @@ def test_measure_entity_crosswalk_cli(synthetic_crosswalk_data, tmp_path: Path):
     # Setup mock derived folder structure for CLI
     derived_dir = tmp_path / "derived"
     derived_dir.mkdir()
-    from measure_entity_crosswalk import YEAR_DIRS
 
-    for yr, dname in YEAR_DIRS.items():
-        ydir = derived_dir / dname
+    for yr in [2021, 2022, 2023, 2024, 2025]:
+        ydir = derived_dir / f"sercop-portal-csv-{yr}-test"
         ydir.mkdir()
         # copy releases and awards
         (ydir / f"releases_{yr}.csv").write_bytes(rel_path.read_bytes())
@@ -329,3 +404,5 @@ def test_measure_entity_crosswalk_cli(synthetic_crosswalk_data, tmp_path: Path):
     data = json.loads(out_json.read_text(encoding="utf-8"))
     assert len(data["years"]) == 5
     assert data["combined_5_years"]["universe"]["total_processes"] == 30  # 6 * 5 years
+    assert "root_validation" in data["combined_5_years"]
+    assert "top_20_roots_with_most_buyer_ids" in data["combined_5_years"]

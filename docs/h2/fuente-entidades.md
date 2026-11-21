@@ -118,7 +118,7 @@ El perfilado se ejecutó mediante lectura directa de los flujos XML internos del
 
 ## 3. Medición del cruce con SERCOP (2021–2025)
 
-El cruce fue implementado y verificado en `scripts/measure_entity_crosswalk.py`, procesando los cinco años completos de `releases_AAAA.csv` y `awards_AAAA.csv` (Ruta A de datos derivados). La evidencia detallada está en `docs/h2/evidencia/medicion-cruce-entidades.json`.
+El cruce fue implementado y verificado en `scripts/measure_entity_crosswalk.py`, procesando los cinco años completos de `releases_AAAA.csv` y `awards_AAAA.csv` (Ruta A de datos derivados). La evidencia detallada está en `docs/h2/evidencia/medicion-cruce-entidades-20261121.json`.
 
 ### 3.1. Regla de cruce aplicada (ADR 0001, decisión 7)
 1. **Paso 1 (Coincidencia simple):** `buyer_id` coincide de forma completa y sin modificar con la forma simple `EC-RUC-{13 dígitos}` respecto a un RUC del catálogo.
@@ -148,20 +148,20 @@ En los 5 periodos evaluados (1.007.920 procesos y $30.952,88 millones adjudicado
 | Año | Compradores distintos | Compradores cruzados (%) | Total procesos | Procesos cruzados (%) | Monto adjudicado total (USD) | Monto cruzado (%) | Procesos sin monto |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **2021** | 4.745 | 4.382 (92,35 %) | 167.058 | 159.774 (95,64 %) | $4.676.997.257,82 | $4.548.832.006,40 (97,26 %) | 2.795 |
-| **2022** | 5.033 | 4.629 (91,97 %) | 212.324 | 202.970 (95,59 %) | $7.118.687.591,72 | $6.910.996.232,74 (97,08 %) | 9.388 |
-| **2023** | 4.999 | 4.598 (91,98 %) | 217.913 | 207.809 (95,36 %) | $6.037.778.222,93 | $5.875.964.978,77 (97,32 %) | 10.933 |
-| **2024** | 5.066 | 4.701 (92,80 %) | 219.185 | 210.804 (96,18 %) | $6.895.826.062,72 | $6.740.389.951,75 (97,75 %) | 11.025 |
-| **2025** | 4.973 | 4.623 (92,96 %) | 191.440 | 184.787 (96,52 %) | $6.223.591.171,73 | $6.111.034.815,74 (98,19 %) | 9.329 |
-| **Total** | — | — | **1.007.920** | **966.144 (95,86 %)** | **$30.952.880.306,92** | **$30.187.217.985,40 (97,53 %)** | **43.470** |
+| **2022** | 5.033 | 4.629 (91,97 %) | 212.324 | 202.970 (95,59 %) | $7.118.687.591,72 | $6.910.996.232,74 (97,08 %) | 14.604 |
+| **2023** | 4.999 | 4.598 (91,98 %) | 217.913 | 207.809 (95,36 %) | $6.037.778.222,93 | $5.875.964.978,77 (97,32 %) | 6.704 |
+| **2024** | 5.066 | 4.701 (92,80 %) | 219.185 | 210.804 (96,18 %) | $6.895.826.062,72 | $6.740.389.951,75 (97,75 %) | 11.020 |
+| **2025** | 4.973 | 4.623 (92,96 %) | 191.440 | 184.787 (96,52 %) | $6.223.591.171,73 | $6.111.034.815,74 (98,19 %) | 8.347 |
+| **Total** | **6.100** | — | **1.007.920** | **966.144 (95,86 %)** | **$30.952.880.306,92** | **$30.187.217.985,40 (97,53 %)** | **43.470** |
 
 *Nota sobre la dimensión temporal:* El año reportado corresponde al año del archivo anual de SERCOP. Tal como se documentó en el reconocimiento, el archivo de un año puede contener fechas de negocio de otros periodos (p. ej. en 2021 constan procesos con fecha de publicación de 2022). La definición definitiva de la fecha de corte se asigna en el Hito 2.
 
 ### 3.4. Validación de la raíz `EC-RUC-{13}` (ADR 0001, pendiente resuelto)
 
-Para cada uno de los 5 años se evaluaron las raíces extraídas:
-1. **Formato:** En los cinco años, el **100 % de las raíces extraídas** (2.799 en 2021; 2.941 en 2022; 2.947 en 2023; 2.982 en 2024; 2.931 en 2025) tienen exactamente **13 dígitos numéricos** y ninguna falló la expresión regular.
-2. **Coincidencia con el catálogo:** Entre el **89,68 % y el 91,03 %** de las raíces distintas de SERCOP existen en el catálogo MDEP.
-3. **Raíces con múltiples `buyer_id`:** Entre 1.946 y 2.089 raíces por año (y 2.730 en la ventana conjunta) se asocian a más de un `buyer_id`. Las raíces con mayor número de variantes corresponden a carteras con desconcentración operativa (Ministerio de Salud, Ministerio de Educación, Policía Nacional, EP Petroecuador).
+Para cada uno de los 5 años y para la ventana conjunta 2021–2025 se evaluaron las raíces extraídas:
+1. **Formato:** En los cinco años, el **100 % de las raíces extraídas** (2.799 en 2021; 2.941 en 2022; 2.947 en 2023; 2.982 en 2024; 2.931 en 2025; y **3.364 en la ventana conjunta**) tienen exactamente **13 dígitos numéricos** y ninguna falló la expresión regular (únicamente 6 `buyer_id` malformados atípicos en todo el universo de 5 años).
+2. **Coincidencia con el catálogo:** En la ventana conjunta 2021–2025, el **85,46 % de las raíces distintas (2.875 de 3.364)** existen en el catálogo MDEP (anualmente oscila entre 89,68 % y 91,03 %).
+3. **Raíces con múltiples `buyer_id`:** En los cinco años evaluados de forma conjunta, **2.730 raíces de 13 dígitos** se asocian a más de un `buyer_id` (anualmente entre 1.946 y 2.089 raíces). En el archivo de evidencia `medicion-cruce-entidades-20261121.json` se registran las 20 raíces con más `buyer_id`s y mayor volumen procesal (como GAD Distrito Metropolitano de Quito con 14.145 procesos, IESS con 7.999 procesos, CELEC EP con 7.939 procesos, CNEL EP con 6.671 procesos, SRI con 3.812 procesos, EP Petroecuador con 3.464 procesos, AGROCALIDAD con 3.212 procesos, hospitales de especialidades del IESS/MSP y unidades de defensa).
 
 ---
 
@@ -171,78 +171,89 @@ Al cruzar los procesos de SERCOP con el catálogo de e-SIGEF, los procesos se di
 
 ### 4.1. Distribución por sector del catálogo (muestra anual 2021)
 
-| Sector en catálogo MDEP | Procesos cruzados | % Procesos cruzados | Monto adjudicado (USD) | Condición frente al ADR 0001 |
-|---|:---:|:---:|:---:|---|
-| **ADMINISTRACION DEL ESTADO (111)** | 62.679 | 39,23 % | $1.764.321.405,10 | **Gobierno Central candidato** + Otras funciones |
-| GAD MUNICIPALES (122) | 41.012 | 25,67 % | $912.450.812,40 | Fuera de alcance (GAD) |
-| GAD PARROQUIALES (123) | 14.939 | 9,35 % | $78.120.450,15 | Fuera de alcance (GAD) |
-| ENTIDADES DE SEGURIDAD SOCIAL (113) | 11.370 | 7,12 % | $421.980.120,60 | Fuera de alcance (Seguridad Social) |
-| EMPRESAS PUBLICAS DE GAD (212) | 10.520 | 6,58 % | $315.600.410,00 | Fuera de alcance (Empresas GAD) |
-| GAD PROVINCIALES (121) | 7.053 | 4,41 % | $389.120.700,20 | Fuera de alcance (GAD) |
-| EMPRESAS PUBLICAS EJECUTIVA (211) | 4.450 | 2,79 % | $542.890.350,10 | Fuera de alcance (Empresas públicas) |
-| EDUCACION SUPERIOR (112) | 4.307 | 2,70 % | $89.410.220,50 | Fuera de alcance (Universidades) |
-| SOCIEDADES ANONIMAS (311) | 2.395 | 1,50 % | $24.110.500,00 | Fuera de alcance (Privadas/Mixtas) |
-| FINANCIERAS PUBLICAS (221) | 1.049 | 0,66 % | $10.827.037,35 | Fuera de alcance (Banca pública) |
-| **Subtotal cruzado** | **159.774** | **100,00 %** | **$4.548.832.006,40** | |
-| No cruzados | 7.284 | — | $128.165.251,42 | Requiere análisis top 30 |
+| Sector en catálogo MDEP | Procesos cruzados | % Procesos cruzados | Monto adjudicado (USD) | % del monto cruzado | Compradores distintos | Condición frente al ADR 0001 |
+|:---|:---:|:---:|:---:|:---:|:---:|:---|
+| **ADMINISTRACION DEL ESTADO (111)** | 62.679 | 39,23 % | $853.376.197,48 | 18,76 % | 1.604 | **Gobierno Central candidato** + Otras funciones |
+| GAD MUNICIPALES (122) | 41.012 | 25,67 % | $1.455.467.897,36 | 32,00 % | 835 | Fuera de alcance (GAD) |
+| GAD PARROQUIALES (123) | 14.939 | 9,35 % | $63.128.361,43 | 1,39 % | 1.104 | Fuera de alcance (GAD) |
+| ENTIDADES DE SEGURIDAD SOCIAL (113) | 11.370 | 7,12 % | $402.691.784,48 | 8,85 % | 203 | Fuera de alcance (Seguridad Social) |
+| EMPRESAS PUBLICAS DE LOS GOBIERNOS AUTONOMOS DESCENTRALIZADOS (212) | 10.520 | 6,58 % | $382.228.420,47 | 8,40 % | 335 | Fuera de alcance (Empresas GAD) |
+| GAD PROVINCIALES (121) | 7.053 | 4,41 % | $503.214.081,19 | 11,06 % | 70 | Fuera de alcance (GAD) |
+| EMPRESAS PUBLICAS DE LA FUNCION EJECUTIVA (211) | 4.450 | 2,79 % | $555.177.650,42 | 12,20 % | 71 | Fuera de alcance (Empresas públicas) |
+| ENTIDADES DE EDUCACION SUPERIOR (112) | 4.307 | 2,70 % | $95.433.208,65 | 2,10 % | 104 | Fuera de alcance (Universidades) |
+| SOCIEDADES ANONIMAS CON PARTICIPACION PUBLICA (311) | 2.395 | 1,50 % | $210.578.494,15 | 4,63 % | 33 | Fuera de alcance (Privadas/Mixtas) |
+| ENTIDADES FINANCIERAS PUBLICAS (221) | 1.049 | 0,66 % | $27.535.910,77 | 0,61 % | 23 | Fuera de alcance (Banca pública) |
+| **Subtotal cruzado** | **159.774** | **100,00 %** | **$4.548.832.006,40** | **100,00 %** | **4.382** | |
+| No cruzados | 7.284 | — | $128.165.251,42 | — | 363 | Requiere análisis top 30 |
 
 ### 4.2. Desglose interno del Sector 111 (Administración del Estado)
 
-El Sector 111 contiene 114 entidades institucionales en el catálogo. Al analizar la denominación de sus plantas centrales y EODs, se identifican cuatro subconjuntos:
+El Sector 111 agrupa 114 entidades institucionales matrices en el catálogo. Al aplicar la función de análisis exploratorio `classify_sector111_entry`, la distribución observada en 2021 refleja las siguientes cifras:
 
-1. **Presidencia y Vicepresidencia (Entidades 20, 21, 85):** 4 EODs en Presidencia, 1 en Vicepresidencia y Casa Militar Presidencial. Representan 115 procesos en 2021.
-2. **Ministerios de Estado (14 carteras):** Ministerios rectores y sus 670+ EODs (distritos de salud, educación, brigadas de defensa). Representan la gran mayoría de la contratación del gobierno central.
-3. **Institutos públicos adscritos (16 entidades):** INEC, IGM, INAMHI, INIAP, INSPI, INPC, INEVAL, INABIO, etc. Representan 821 procesos en 2021.
-4. **Otras funciones del Estado y órganos autónomos (FUERA DE ALCANCE según ADR 0001):**
-   - *Función Legislativa:* Asamblea Nacional (Entidad 1), Parlamento Andino (Entidad 3).
-   - *Función Judicial:* Consejo de la Judicatura (Entidad 10), Defensoría Pública (Entidad 15).
-   - *Función Electoral:* Consejo Nacional Electoral (Entidad 580), Tribunal Contencioso Electoral (Entidad 582).
-   - *Función de Transparencia y Control Social:* Contraloría General del Estado (Entidad 591), Defensoría del Pueblo (Entidad 643), Consejo de Participación Ciudadana (Entidad 583), Superintendencias de Bancos (592), Compañías (593), Economía Popular (916), Competencia Económica (935), Protección de Datos (138) y Ordenamiento Territorial (361).
-   - *Órganos Constitucionales y Autónomos:* Corte Constitucional (Entidad 581), Fiscalía General del Estado (Entidad 598), Procuraduría General del Estado (Entidad 590).
+- **Otras entidades de administración central (Agencias/Servicios/Secretarías/EODs):** 57.773 procesos (**92,17 %**).
+- **Otras funciones del Estado (fuera de alcance):** 3.156 procesos (**5,04 %**).
+- **Institutos dependientes:** 821 procesos (**1,31 %**).
+- **Ministerios (denominación explícita):** 814 procesos (**1,30 %**).
+- **Presidencia / Vicepresidencia:** 115 procesos (**0,18 %**).
+
+**Explicación metodológica de la distribución observada:** `classify_sector111_entry` clasifica por palabras clave contenidas en el campo `NOMBRE` del catálogo (heurística textual exploratoria). Por tal motivo, las cientos de Entidades Operativas Desconcentradas (EOD) pertenecientes a ministerios pero cuyos nombres propios no contienen explícitamente el vocablo «MINISTERIO» (por ejemplo, direcciones distritales de educación, hospitales generales, comandos de policía o batallones militares) son agrupadas dentro de «Otras entidades de administración central». Se declara expresamente en este informe que esta partición es una **heurística exploratoria preliminar** y no la clasificación institucional definitiva. La asignación formal jerárquica de cada EOD a su ministerio rector se implementará en la tabla semilla de entidades versionada en el issue #68.
+
+#### Desglose exploratorio del Sector 111 año por año (2021–2025)
+
+| Subconjunto institucional (heurística exploratoria) | 2021 | 2022 | 2023 | 2024 | 2025 | Total 5 años | % 5 años |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Otras entidades de administración central (Agencias/EODs) | 57.773 (92,17 %) | 66.322 (90,81 %) | 75.338 (91,39 %) | 73.918 (90,64 %) | 51.412 (88,22 %) | 324.763 | 90,72 % |
+| Otras funciones del Estado (fuera de alcance) | 3.156 (5,04 %) | 3.639 (4,98 %) | 4.311 (5,23 %) | 4.906 (6,02 %) | 4.244 (7,28 %) | 20.256 | 5,66 % |
+| Ministerios (nombre explícito) | 814 (1,30 %) | 1.731 (2,37 %) | 1.470 (1,78 %) | 1.298 (1,59 %) | 1.535 (2,63 %) | 6.848 | 1,91 % |
+| Institutos dependientes | 821 (1,31 %) | 1.077 (1,47 %) | 1.015 (1,23 %) | 1.243 (1,52 %) | 1.006 (1,73 %) | 5.162 | 1,44 % |
+| Presidencia / Vicepresidencia | 115 (0,18 %) | 268 (0,37 %) | 306 (0,37 %) | 185 (0,23 %) | 77 (0,13 %) | 951 | 0,27 % |
+| **Total Sector 111** | **62.679** | **73.037** | **82.440** | **81.550** | **58.274** | **357.980** | **100,00 %** |
+
+*Nota de alcance:* El subconjunto «Otras funciones del Estado» corresponde a órganos de la Función Legislativa (Asamblea Nacional, Parlamento Andino), Función Judicial (Consejo de la Judicatura, Defensoría Pública), Función Electoral (CNE, TCE), Función de Transparencia y Control Social (Contraloría General, Defensoría del Pueblo, CPCCS, Superintendencias) y órganos de control autónomos (Corte Constitucional, Fiscalía General, Procuraduría General). Aunque e-SIGEF las registra bajo el código presupuestario 111, están **fuera de alcance** del Gobierno Central según el ADR 0001.
 
 ---
 
 ## 5. Entidades no cruzadas de SERCOP (Top 30 global 2021–2025)
 
-En la ventana completa 2021–2025 existen 41.776 procesos (4,14 %) que no cruzan con el catálogo MDEP. Los 30 compradores con mayor número de procesos no cruzados acumulan 15.659 procesos y explican el 37,48 % del volumen no cruzado:
+En la ventana completa 2021–2025 existen 41.776 procesos (4,14 %) que no cruzan con el catálogo MDEP. Los 30 compradores con mayor número de procesos no cruzados acumulan **13.573 procesos y explican el 32,49 % del volumen no cruzado** (41.776 procesos):
 
 | # | `buyer_id` | Nombre del comprador en SERCOP | Procesos | Monto adjudicado (USD) | Sin monto | Causa identificada / Naturaleza jurídica |
 |:---:|---|---|:---:|:---:|:---:|---|
-| 1 | `EC-RUC-1768007040001` | CUERPO DE INGENIEROS DEL EJERCITO | 2.096 | $10.584.696,16 | 0 | Entidad militar adscrita a Defensa; RUC pasivo en catálogo 2026. |
-| 2 | `EC-RUC-0190408485001` | FUNDACION MUNICIPAL DE LA MUJER Y EL NIÑO DE CUENCA | 882 | $457.327,27 | 0 | Fundación municipal privada (fuera de alcance). |
-| 3 | `EC-RUC-1791905911001` | CORPORACION DE PROMOCION ECONOMICA CONQUITO | 734 | $674.541,64 | 0 | Corporación municipal del MDMQ (fuera de alcance). |
-| 4 | `EC-RUC-1060040130001` | DIRECCION DISTRITAL 10D02 ANTONIO ANTE-OTAVALO-SALUD | 627 | $3.494.778,81 | 0 | Distrito de salud histórico absorbido/RUC pasivo en 2026. |
-| 5 | `EC-RUC-1060014130001` | DIRECCION DISTRITAL 10 D03-COTACACHI-SALUD | 606 | $555.833,86 | 0 | Distrito de salud histórico absorbido/RUC pasivo en 2026. |
-| 6 | `EC-RUC-1768184250001` | COMANDO DE INTELIGENCIA MILITAR CONJUNTO DE LAS FFAA | 571 | $1.730.245,94 | 0 | Unidad militar de FF.AA. adscrita a Defensa; RUC pasivo. |
-| 7 | `EC-RUC-1768007040001-2504` | CUERPO DE INGENIEROS DEL EJERCITO | 559 | $86.703.313,07 | 91 | Unidad operativa desconcentrada del Cuerpo de Ingenieros. |
-| 8 | `EC-RUC-1790174417001` | ALDEAS INFANTILES SOS ECUADOR | 518 | $731.628,85 | 3 | Organización no gubernamental / privada (fuera de alcance). |
-| 9 | `EC-RUC-1792042704001` | FUNDACION MUSEOS DE LA CIUDAD | 511 | $2.262.854,47 | 0 | Fundación municipal del Distrito Metropolitano de Quito. |
-| 10 | `EC-RUC-1768146750001` | SECRETARÍA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO | 504 | $31.845.050,65 | 0 | Inmobiliar; reestructurada/absorbida en Presidencia/MDEP. |
-| 11 | `EC-RUC-1768192860001` | MINISTERIO DEL AMBIENTE, AGUA Y TRANSICION ECOLOGICA | 503 | $1.031.498,69 | 0 | **Ex-MAATE:** Fusión ministerial 2026 en MAE; RUC histórico no en catálogo. |
-| 12 | `EC-RUC-0190160890001` | HOGAR MIGUEL LEON DE LA CIUDAD DE CUENCA | 473 | $465.749,50 | 0 | Institución de beneficencia privada / social (fuera de alcance). |
-| 13 | `EC-RUC-1768193160001` | COORDINACIÓN ZONAL 9 - SENESCYT | 442 | $969.533,43 | 0 | Coordinación zonal de SENESCYT con RUC propio histórico. |
-| 14 | `EC-RUC-0992236574001` | FUNDACION TERMINAL TERRESTRE DE GUAYAQUIL | 382 | $13.883.685,06 | 0 | Fundación municipal de Guayaquil (fuera de alcance). |
-| 15 | `EC-RUC-0968529080001` | CUERPO DE BOMBEROS DE SAMBORONDON | 364 | $364.145,61 | 1 | Entidad bomberil cantonal (fuera de alcance). |
-| 16 | `EC-RUC-0992183721001` | GUAYAQUIL SIGLO XXI, FUNDACIÓN MUNICIPAL REGENERACIÓN | 343 | $1.970.542,62 | 0 | Fundación municipal de Guayaquil (fuera de alcance). |
-| 17 | `EC-RUC-0990001340001` | ACERIAS NACIONALES DEL ECUADOR S.A. (A.N.D.E.C.) | 320 | $2.837.624,98 | 0 | Empresa privada / participación accionaria (fuera de alcance). |
-| 18 | `EC-RUC-1460024040001` | CEFAS-PATRONATO DEL GAPMS | 303 | $53.063,19 | 0 | Patronato social provincial de Morona Santiago (GAD). |
-| 19 | `EC-RUC-0360032780001` | COORDINACION ZONAL 6 - SENESCYT | 299 | $268.930,90 | 0 | Coordinación zonal de SENESCYT con RUC propio histórico. |
-| 20 | `EC-RUC-1790932966001` | FAME S.A. | 296 | $130.423,57 | 0 | Fabricación de calzado militar S.A. (fuera de alcance). |
-| 21 | `EC-RUC-0992457597001` | CORPORACION SEGURIDAD CIUDADANA DE GUAYAQUIL | 277 | $178.330,70 | 0 | Corporación municipal de Guayaquil (fuera de alcance). |
-| 22 | `EC-RUC-1791825314001` | FUNDACION CALASANZ | 264 | $148.743,95 | 0 | Fundación privada confesional (fuera de alcance). |
-| 23 | `EC-RUC-1791818881001` | NUCLEO DE SOLCA MACHALA | 249 | $401.085,45 | 0 | Entidad privada de lucha contra el cáncer (fuera de alcance). |
-| 24 | `EC-RUC-1391719868001` | FEDERACION DEPORTIVA DE MANABI | 232 | $21.897,47 | 0 | Organismo deportivo provincial autónomo (fuera de alcance). |
-| 25 | `EC-RUC-1791827929001` | CONCENTRACIÓN DEPORTIVA DE PICHINCHA | 229 | $534.308,89 | 0 | Organismo deportivo provincial autónomo (fuera de alcance). |
-| 26 | `EC-RUC-1768137410001` | MINISTERIO DE LA MUJER Y DERECHOS HUMANOS | 226 | $461.901,41 | 0 | **Ministerio histórico:** Creado por escisión de DDHH; fusionado en MDH en 2026. |
-| 27 | `EC-RUC-0968604550001` | DIRECCIÓN ZONAL 8 - SETEGISP (INMOBILIAR) | 211 | $5.430.899,01 | 0 | Dirección zonal de Inmobiliar con RUC propio; pasivo en 2026. |
-| 28 | `EC-RUC-1791984714001` | FUNDACION TEATRO NACIONAL SUCRE | 189 | $243.262,58 | 0 | Fundación cultural municipal de Quito (fuera de alcance). |
-| 29 | `EC-RUC-1792170826001` | FUNDACION NIÑOS CON DESTINO EN LAS MANOS DE DIOS | 184 | $100.286,23 | 0 | ONG / entidad social privada (fuera de alcance). |
-| 30 | `EC-RUC-1790819442001` | JUNTA DE POLITICA Y REGULACION FINANCIERA | 179 | $132.686,13 | 0 | Cuerpo colegiado técnico de regulación financiera. |
+| 1 | `EC-RUC-1768007040001` | CUERPO DE INGENIEROS DEL EJERCITO | 2.096 | $10.584.696,16 | 0 | Inferencia (por el nombre): Entidad militar adscrita a Defensa; no consta en catálogo MDEP (indicio: nota 5 excluye RUC pasivo). |
+| 2 | `EC-RUC-0190408485001` | FUNDACION MUNICIPAL DE LA MUJER Y EL NIÑO DE CUENCA | 882 | $457.327,27 | 0 | Inferencia (por el nombre): Fundación municipal privada (fuera de alcance). |
+| 3 | `EC-RUC-1791905911001` | CORPORACION DE PROMOCION ECONOMICA CONQUITO | 734 | $674.541,64 | 0 | Inferencia (por el nombre): Corporación municipal del MDMQ (fuera de alcance). |
+| 4 | `EC-RUC-1060040130001` | DIRECCION DISTRITAL 10D02 ANTONIO ANTE-OTAVALO-SALUD | 627 | $3.494.778,81 | 0 | Inferencia (por el nombre): Distrito de salud; no figura en catálogo MDEP (indicio: nota 5). |
+| 5 | `EC-RUC-1060014130001` | DIRECCION DISTRITAL 10 D03-COTACACHI-SALUD | 606 | $555.833,86 | 0 | Inferencia (por el nombre): Distrito de salud; no figura en catálogo MDEP (indicio: nota 5). |
+| 6 | `EC-RUC-1768184250001` | COMANDO DE INTELIGENCIA MILITAR CONJUNTO DE LAS FFAA | 571 | $1.730.245,94 | 0 | Inferencia (por el nombre): Unidad militar de FF.AA.; no consta en catálogo MDEP (indicio: nota 5). |
+| 7 | `EC-RUC-1768007040001-2504` | CUERPO DE INGENIEROS DEL EJERCITO | 559 | $86.703.313,07 | 91 | Inferencia (por el nombre): Unidad desconcentrada del Cuerpo de Ingenieros; raíz no figura en catálogo MDEP. |
+| 8 | `EC-RUC-1790174417001` | ALDEAS INFANTILES SOS ECUADOR | 518 | $731.628,85 | 3 | Inferencia (por el nombre): Organización privada sin fines de lucro / ONG (fuera de alcance). |
+| 9 | `EC-RUC-1792042704001` | FUNDACION MUSEOS DE LA CIUDAD | 511 | $2.262.854,47 | 0 | Inferencia (por el nombre): Fundación municipal del Distrito Metropolitano de Quito (fuera de alcance). |
+| 10 | `EC-RUC-1768146750001` | SECRETARÍA TÉCNICA DE GESTIÓN INMOBILIARIA DEL SECTOR PÚBLICO | 504 | $31.845.050,65 | 0 | Inferencia (por el nombre): Entidad pública de gestión inmobiliaria; no figura en catálogo MDEP (indicio: nota 5). |
+| 11 | `EC-RUC-1768192860001` | MINISTERIO DEL AMBIENTE, AGUA Y TRANSICION ECOLOGICA | 503 | $1.031.498,69 | 0 | Inferencia (por el nombre): Cartera ministerial ambiental histórica; no figura con este RUC en catálogo MDEP (indicio: nota 5). |
+| 12 | `EC-RUC-0190160890001` | HOGAR MIGUEL LEON DE LA CIUDAD DE CUENCA | 473 | $465.749,50 | 0 | Inferencia (por el nombre): Institución social / benéfica de Cuenca (fuera de alcance). |
+| 13 | `EC-RUC-1768193160001` | COORDINACIÓN ZONAL 9 - SENESCYT | 442 | $969.533,43 | 0 | Inferencia (por el nombre): Coordinación zonal de educación superior; no figura con este RUC en catálogo MDEP. |
+| 14 | `EC-RUC-0992236574001` | FUNDACION TERMINAL TERRESTRE DE GUAYAQUIL | 382 | $13.883.685,06 | 0 | Inferencia (por el nombre): Fundación municipal de Guayaquil (fuera de alcance). |
+| 15 | `EC-RUC-0968529080001` | CUERPO DE BOMBEROS DE SAMBORONDON | 364 | $364.145,61 | 1 | Inferencia (por el nombre): Entidad bomberil cantonal (fuera de alcance). |
+| 16 | `EC-RUC-0992183721001` | GUAYAQUIL SIGLO XXI, FUNDACIÓN MUNICIPAL REGENERACIÓN | 343 | $1.970.542,62 | 0 | Inferencia (por el nombre): Fundación municipal de Guayaquil (fuera de alcance). |
+| 17 | `EC-RUC-0990001340001` | ACERIAS NACIONALES DEL ECUADOR S.A. (A.N.D.E.C.) | 320 | $2.837.624,98 | 0 | Inferencia (por el nombre): Empresa mercantil / sociedad anónima (fuera de alcance). |
+| 18 | `EC-RUC-1460024040001` | CEFAS-PATRONATO DEL GAPMS | 303 | $53.063,19 | 0 | Inferencia (por el nombre): Patronato social vinculado al GAD Provincial de Morona Santiago (fuera de alcance). |
+| 19 | `EC-RUC-0360032780001` | COORDINACION ZONAL 6 - SENESCYT | 299 | $268.930,90 | 0 | Inferencia (por el nombre): Coordinación zonal de educación superior; no figura en catálogo MDEP. |
+| 20 | `EC-RUC-1790932966001` | FAME S.A. | 296 | $130.423,57 | 0 | Inferencia (por el nombre): Empresa mercantil / sociedad anónima (fuera de alcance). |
+| 21 | `EC-RUC-0992457597001` | CORPORACION SEGURIDAD CIUDADANA DE GUAYAQUIL | 277 | $178.330,70 | 0 | Inferencia (por el nombre): Corporación municipal de Guayaquil (fuera de alcance). |
+| 22 | `EC-RUC-1791825314001` | FUNDACION CALASANZ | 264 | $148.743,95 | 0 | Inferencia (por el nombre): Fundación privada confesional (fuera de alcance). |
+| 23 | `EC-RUC-1791818881001` | NUCLEO DE SOLCA MACHALA | 249 | $401.085,45 | 0 | Inferencia (por el nombre): Entidad privada de lucha contra el cáncer (fuera de alcance). |
+| 24 | `EC-RUC-1391719868001` | FEDERACION DEPORTIVA DE MANABI | 232 | $21.897,47 | 0 | Inferencia (por el nombre): Federación deportiva provincial (fuera de alcance). |
+| 25 | `EC-RUC-1791827929001` | CONCENTRACIÓN DEPORTIVA DE PICHINCHA | 229 | $534.308,89 | 0 | Inferencia (por el nombre): Concentración deportiva provincial (fuera de alcance). |
+| 26 | `EC-RUC-1768137410001` | MINISTERIO DE LA MUJER Y DERECHOS HUMANOS | 226 | $461.901,41 | 0 | Inferencia (por el nombre): Cartera ministerial histórica; no figura con este RUC en catálogo MDEP (indicio: nota 5). |
+| 27 | `EC-RUC-0968604550001` | DIRECCIÓN ZONAL 8 - SETEGISP (INMOBILIAR) | 211 | $5.430.899,01 | 0 | Inferencia (por el nombre): Dirección zonal de gestión inmobiliaria pública; no figura en catálogo MDEP (indicio: nota 5). |
+| 28 | `EC-RUC-1791984714001` | FUNDACION TEATRO NACIONAL SUCRE | 189 | $243.262,58 | 0 | Inferencia (por el nombre): Fundación cultural municipal de Quito (fuera de alcance). |
+| 29 | `EC-RUC-1792170826001` | FUNDACION NIÑOS CON DESTINO EN LAS MANOS DE DIOS | 184 | $100.286,23 | 0 | Inferencia (por el nombre): Fundación social privada (fuera de alcance). |
+| 30 | `EC-RUC-1790819442001` | JUNTA DE POLITICA Y REGULACION FINANCIERA | 179 | $132.686,13 | 0 | Inferencia (por el nombre): Cuerpo colegiado de regulación financiera; no figura con este RUC en catálogo MDEP. |
 
 ### 5.1. Patrones de no cruce identificados
-1. **Fusiones ministeriales 2025–2026:** El caso crítico es el `MINISTERIO DEL AMBIENTE, AGUA Y TRANSICION ECOLOGICA` (MAATE, RUC `1768192860001`, 503 procesos) y el `MINISTERIO DE LA MUJER Y DERECHOS HUMANOS` (RUC `1768137410001`, 226 procesos). Ambas carteras contrataron intensamente entre 2021 y 2025, pero en el catálogo de agosto de 2026 sus RUCs constan como pasivos o absorbidos por `MAE` y `MDH` (nota 5 del catálogo: *"Excluye entidades que tienen RUC pasivo"*).
-2. **Entidades militares y de defensa:** El `CUERPO DE INGENIEROS DEL EJERCITO` (2.655 procesos) y el `COMANDO DE INTELIGENCIA MILITAR` (571 procesos) son unidades del Ministerio de Defensa que operan en SERCOP con RUC institucional propio no expuesto en e-SIGEF como entidad presupuestaria independiente.
-3. **Fundaciones y corporaciones municipales/privadas:** 14 de las 30 entidades corresponden a fundaciones municipales, ONGs o corporaciones que contratan por el portal de compras públicas pero son ajenas al Presupuesto General del Estado y están **fuera de alcance** del gobierno central.
+1. **Carteras ministeriales con posibles RUCs no vigentes:** El caso de `MINISTERIO DEL AMBIENTE, AGUA Y TRANSICION ECOLOGICA` (RUC `1768192860001`, 503 procesos) y el `MINISTERIO DE LA MUJER Y DERECHOS HUMANOS` (RUC `1768137410001`, 226 procesos). Ambas carteras presentan contratación en SERCOP, pero no constan con dichos RUCs en el catálogo MDEP de agosto de 2026. Como indicio relevante, la nota 5 del catálogo señala que «Excluye entidades que tienen RUC pasivo». No se afirma como hecho administrativo definitivo la causa de baja hasta contrastar los decretos ejecutivos correspondientes en el issue #68.
+2. **Entidades con posible vinculación a defensa:** Compradores como el `CUERPO DE INGENIEROS DEL EJERCITO` (2.655 procesos acumulando simple y sufijo) y el `COMANDO DE INTELIGENCIA MILITAR` (571 procesos) corresponden inferencialmente por su denominación a unidades militares de FF.AA. que operan en SERCOP con RUC institucional propio, sin constar en el catálogo de entidades presupuestarias del MDEP.
+3. **Fundaciones y corporaciones del ámbito municipal o privado (fuera de alcance):** 14 de las 30 entidades corresponden según su denominación a fundaciones cantonales, ONGs o corporaciones municipales que contratan en SERCOP pero son ajenas a la administración central del Estado.
 
 ---
 
@@ -254,8 +265,8 @@ En la ventana completa 2021–2025 existen 41.776 procesos (4,14 %) que no cruza
 | **Q-E02** | `Catalogo_MDEP · RUC` | **Unicidad / Grano** | **60 RUCs duplicados (120 filas, 3,82 %)**. El grano es `(ENTIDAD, EOD)` y no RUC. Hay RUCs repetidos por ministerios fusionados que comparten direcciones distritales. | Alto: Rompe la cardinalidad 1 a varios en el modelo dimensional de Power BI, generando relaciones varios a varios o duplicación de hechos en P1 a P3. | Desduplicar el catálogo a nivel de RUC en Power Query seleccionando la entidad matriz (`EOD = 0`) o con regla determinista de jerarquía. |
 | **Q-E03** | `Catalogo_MDEP · Hoja CATÁLOGO` | **Validez / Estructura** | Contiene 5 filas de títulos/blanco al inicio (1–5) y **8 filas de notas explicativas al pie (3147–3154)** con RUC y sector nulos. | Medio: Introduce registros corruptos con valores nulos si no se limpian los márgenes de la hoja. | Promover encabezados desde la fila 6 y filtrar filas donde `RUC` sea nulo o donde `DESCRIPCION SECTOR` esté vacío. |
 | **Q-E04** | `Catalogo_MDEP · Fecha` | **Oportunidad / Temporalidad** | Fotografía estática al **31/08/2026**. Cero columnas de fecha, vigencia o trazabilidad histórica de fusiones ocurridas en 2021–2025. | Crítico: Impide modelar cambios históricos con SCD tipo 2 exclusivamente con esta fuente para responder la evolución temporal de P1–P3. | Complementar con la semilla versionada `warehouse/seeds/entity_classification.csv` (#68), asignando fechas `valid_from` y `valid_to`. |
-| **Q-E05** | `SERCOP · buyer_id` vs `MDEP · RUC` | **Completitud** | **41.776 procesos (4,14 %)** y **$765,66M (2,47 %)** no cruzan con el catálogo. Incluye carteras clave del gobierno central como ex-MAATE (503 procesos) y Cuerpo de Ingenieros (2.655 procesos). | Alto: Deja fuera del gobierno central procesos legítimos de ministerios históricos en P1 a P3. | Incorporar manualmente en la semilla de entidades de H3 los RUCs pasivos del gobierno central detectados en el top 30 con su respectivo decreto de fusión. |
-| **Q-E06** | `SERCOP · buyer_id` (sufijo) | **Consistencia** | **2.730 raíces de 13 dígitos** en SERCOP tienen múltiples `buyer_id` con sufijo. El **80,84 % del monto adjudicado global ($25.020,93M)** proviene de `buyer_id`s con sufijo. | Crítico: Si el cruce se hiciera por string completo de `buyer_id`, se perdería el 80,84 % del presupuesto adjudicado en P1 a P3. | Validar la regla del ADR 0001: extraer la raíz `EC-RUC-{13}` en Power Query (`Text.Middle([buyer_id], 7, 13)`) cuando inicie con `EC-RUC-`. |
+| **Q-E05** | `SERCOP · buyer_id` vs `MDEP · RUC` | **Completitud** | **41.776 procesos (4,14 %)** y **$765,66M (2,47 %)** no cruzan con el catálogo. Incluye compradores con denominación ministerial como MAATE (503 procesos) o entidades con denominación militar como Cuerpo de Ingenieros (2.655 procesos). | Alto: Podría dejar fuera del gobierno central procesos legítimos de carteras históricas en P1 a P3 si correspondían a entidades activas en esos periodos. | En la semilla de entidades de H3 (#68), verificar el estatus histórico de estos RUCs contra fuentes oficiales y decretos de fusión para incorporarlos con su respectivo rango de vigencia si correspondían al gobierno central. |
+| **Q-E06** | `SERCOP · buyer_id` (sufijo) | **Consistencia** | **2.730 raíces de 13 dígitos** en SERCOP tienen múltiples `buyer_id` con sufijo en la ventana conjunta 2021–2025. El **80,84 % del monto adjudicado global ($25.020,93M)** proviene de `buyer_id`s con sufijo. | Crítico: Si el cruce se hiciera por string completo de `buyer_id`, se perdería el 80,84 % del presupuesto adjudicado en P1 a P3. | Validar la regla del ADR 0001: extraer la raíz `EC-RUC-{13}` en Power Query (`Text.Middle([buyer_id], 7, 13)`) cuando inicie con `EC-RUC-`. |
 | **Q-E07** | `Catalogo_MDEP · SECTOR 111` | **Exactitud / Alcance** | El Sector 111 ("ADMINISTRACION DEL ESTADO") agrupa a las **cinco funciones del Estado** (Asamblea, Función Judicial, CNE, CGE, etc.), no solo a la Función Ejecutiva. | Crítico: Filtrar ciegamente por `SECTOR == 111` violaría el ADR 0001, inflando el gobierno central con poderes autónomos fuera de alcance. | En la semilla de entidades de H3, clasificar individualmente las 114 entidades del Sector 111 asignando `Presidencia`, `Ministerio`, `Instituto` o `Fuera de alcance`. |
 
 ---
@@ -271,9 +282,9 @@ En la ventana completa 2021–2025 existen 41.776 procesos (4,14 %) que no cruza
    - Proporciona la asociación oficial entre el RUC y los códigos institucionales de `ENTIDAD` y `EOD`, permitiendo agrupar unidades desconcentradas bajo su cartera matriz.
 
 2. **Qué le falta y por qué no es autosuficiente:**
-   - **No delimita el Gobierno Central:** En el catálogo presupuestario, el Sector 111 mezcla a los ministerios con la Asamblea Nacional, la Corte Nacional de Justicia, el Consejo Nacional Electoral y la Contraloría General. La fuente carece de un atributo que separe la Función Ejecutiva de las otras funciones del Estado.
+   - **No delimita el Gobierno Central:** En el catálogo presupuestario, el Sector 111 agrupa tanto a la administración central como a las otras funciones del Estado (Asamblea Nacional, Corte Nacional de Justicia, CNE, Contraloría General). Además, el desglose exploratorio por palabras clave muestra que el 90,72 % de sus procesos corresponde a denominaciones genéricas o desconcentradas (EODs distritales, hospitalarias, policiales), 5,66 % a otras funciones fuera de alcance, 1,91 % a ministerios con nombre explícito, 1,44 % a institutos y 0,27 % a presidencia. La fuente carece de un atributo nativo que separe formalmente la Función Ejecutiva de los demás poderes del Estado.
    - **No resuelve la jerarquía ministerio → instituto:** El catálogo es plano; no contiene un campo relacional que indique de qué ministerio depende cada instituto adscrito.
-   - **No tiene memoria histórica (falta SCD tipo 2):** Al ser una foto estática de agosto de 2026, excluye carteras ministeriales históricas que se fusionaron entre 2021 y 2025 (como MAATE con 503 procesos o Ministerio de la Mujer con 226 procesos), las cuales quedan como compradores no cruzados.
+   - **No tiene memoria histórica (falta SCD tipo 2):** Al ser una foto estática de agosto de 2026, excluye carteras ministeriales históricas que pudieron operar entre 2021 y 2025 (como compradores con denominación de MAATE con 503 procesos o Ministerio de la Mujer con 226 procesos, cuyos RUCs no constan en el catálogo de 2026; indicio: nota 5 del catálogo sobre RUCs pasivos), las cuales quedan como compradores no cruzados.
 
 3. **Qué se debe agregar en el Hito 3:**
    - Construir en `warehouse/seeds/entity_classification.csv` (#68) la tabla semilla curada que tome como base los RUCs y códigos del catálogo MDEP y agregue:
