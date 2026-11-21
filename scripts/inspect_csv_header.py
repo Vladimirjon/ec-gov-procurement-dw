@@ -1,7 +1,8 @@
 """Inspect CSV header and structure without reporting record values or cell contents.
 
 Only Python's standard library is required. Describes encoding, delimiter,
-columns, and row count. Never outputs cell values or data records.
+columns, row count and how many fields hold a line break. Never outputs cell values or
+data records.
 """
 
 from __future__ import annotations
@@ -79,15 +80,25 @@ def detect_dialect_and_columns(path: Path, encoding: str) -> tuple[str, str, lis
     return delimiter, quotechar, columns
 
 
-def count_data_rows(path: Path, encoding: str, delimiter: str, quotechar: str) -> int:
-    """Count total data rows (excluding header) using csv.reader to handle multiline quotes."""
+def count_data_rows(path: Path, encoding: str, delimiter: str, quotechar: str) -> tuple[int, int]:
+    """Count data rows (excluding header) and fields holding a line break.
+
+    csv.reader keeps a line break inside quotes in the same record, so the row count is
+    the number of records. A connector that ignores quotes (Power Query with
+    QuoteStyle.None) splits such a record in two. Only counts are returned, never values.
+    """
+    rows = 0
+    fields_with_line_break = 0
     with path.open("r", encoding=encoding, newline="", errors="replace") as stream:
         reader = csv.reader(stream, delimiter=delimiter, quotechar=quotechar)
         try:
             next(reader)
         except StopIteration:
-            return 0
-        return sum(1 for _ in reader)
+            return 0, 0
+        for record in reader:
+            rows += 1
+            fields_with_line_break += sum(1 for field in record if "\n" in field or "\r" in field)
+    return rows, fields_with_line_break
 
 
 def inspect_csv_file(path: Path) -> dict[str, Any]:
@@ -99,7 +110,7 @@ def inspect_csv_file(path: Path) -> dict[str, Any]:
     file_sha256 = calculate_sha256(path)
     encoding = detect_encoding(path)
     delimiter, quotechar, columns = detect_dialect_and_columns(path, encoding)
-    row_count = count_data_rows(path, encoding, delimiter, quotechar)
+    row_count, fields_with_line_break = count_data_rows(path, encoding, delimiter, quotechar)
 
     header_bytes = ",".join(columns).encode("utf-8")
     header_sha256 = hashlib.sha256(header_bytes).hexdigest().upper()
@@ -114,6 +125,7 @@ def inspect_csv_file(path: Path) -> dict[str, Any]:
         "column_count": len(columns),
         "columns": columns,
         "row_count": row_count,
+        "fields_with_line_break": fields_with_line_break,
         "header_sha256": header_sha256,
     }
 

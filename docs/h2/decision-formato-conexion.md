@@ -2,8 +2,8 @@
 
 - **Documento:** Evaluación técnica y propuesta de decisión (Issue #60 / H2-02)
 - **Fecha:** 21 de noviembre de 2026
-- **Estado:** Propuesto (pendiente de verificación en Power BI Desktop y aprobación del líder)
-- **Autoría:** Grupo 5 (análisis automatizado con asistencia de Gemini 3.8 Flash; verificación en Power BI reservada al líder)
+- **Estado:** Aprobada la Ruta A por el líder en el chat el 21/11/2026 (tras la prueba en Power BI Desktop de la sección 8)
+- **Autoría:** Grupo 5 (primer borrador con asistencia de Gemini 3.8 Flash; correcciones, descargas de 2021 a 2024 y ampliación del análisis con Claude Sonnet 5.5; la prueba en Power BI Desktop la hizo el líder)
 - **Referencias:** Guía Hito 2 (secciones 3.1, 5, 8); [ADR 0005](../adr/0005-hitos-2-y-3-power-bi.md); `docs/h2/adquisicion.md`; `docs/sources/reconocimiento.md`; `docs/sources/sercop-2025-portal-csv-summary.json`
 
 ---
@@ -31,8 +31,8 @@ Se recomienda adoptar la **Ruta A (CSV del portal)** por las siguientes razones:
 4. **Cumplimiento estricto de la guía del profesor:** la guía H2 (sección 3.1 y 8) establece taxativamente: *«Prefiere archivos CSV o Excel descargables»* y exige que las consultas de Power BI *«solo tengan pasos de conexión; la limpieza queda para el Hito 3»*. Conectar a CSV nativos del portal mediante el conector `Texto/CSV` o `Carpeta` evita requerir scripts de extracción intermedios en la capa cruda.
 5. **Privacidad garantizada:** el CSV del portal no incluye datos de contacto personales (`parties[].contactPoint`), cumpliendo de fábrica la restricción del proyecto.
 
-### Plan de contingencia inmediato: Ruta B
-Si la prueba del líder en Power BI Desktop (sección 8 de este documento) evidencia lentitud inmanejable al perfilar el archivo `tender_2025.csv` (118,9 MB) sobre «todo el conjunto de datos» en su equipo portátil, se adopta de inmediato la **Ruta B (JSON + extractor #66)**, conectando Power BI a los CSV derivados ultralivianos generados por `scripts/flatten_sercop_ocds.py`. La Ruta C (JSON directo en Power Query) queda descartada por inviabilidad de memoria RAM.
+### Plan de respaldo: Ruta B
+La prueba del líder en Power BI Desktop (sección 8) no mostró lentitud ni bloqueos al perfilar `tender_2025.csv` (118,9 MB) sobre «todo el conjunto de datos». Si más adelante apareciera un problema de rendimiento con los años 2021 a 2024, se pasa a la **Ruta B (JSON + extractor del issue #66)**. Ese extractor (`scripts/flatten_sercop_ocds.py`) está en desarrollo y todavía no existe en el repositorio. La Ruta C (JSON directo en Power Query) no se probó: el issue #60 la considera improbable y, con la Ruta A, no hace falta.
 
 ---
 
@@ -55,11 +55,29 @@ La descarga se realizó el 21 de noviembre de 2026 mediante el script del reposi
 | **Fila de procedencia** | `docs/h2/evidencia/descargas-sercop.csv`, fila 7 | Registrada automáticamente por el script |
 | **Licencia** | `https://creativecommons.org/licenses/by/3.0/ec/` (CC BY 3.0 Ecuador) | Declarada en metadatos OCDS |
 
+### 2.1. Descargas de 2021 a 2024 (CSV)
+
+Con el visto bueno del líder en el chat (21/11/2026) se descargaron los CSV anuales de 2021 a 2024 con el mismo script y el mismo patrón de enlace (`type=csv`). Cada ZIP crudo está en `data/datos_crudos/sercop-ocds-csv-AAAA-*/`, marcado como de solo lectura, y se extrajo a `data/derivados/sercop-portal-csv-AAAA-*/`. Todos traen las mismas 8 tablas que 2025.
+
+| Año | Bytes recibidos | Content-Length | Hash SHA-256 del ZIP | Hora local de inicio |
+|:---:|---:|---:|---|:---:|
+| 2021 | 28.761.104 | 28.761.104 | `60A843EFC8CDD78230A3D7C83CC2539AEE2C7E97EC59098EB9D939CADD4A2B61` | 14:57:29 |
+| 2022 | 41.920.182 | 41.920.182 | `1229CD3C9BE1BC8C7CF80173939A550FF4E4CDB9631F4BD12633ED6033DA4802` | 14:57:42 |
+| 2023 | 37.679.239 | 37.679.239 | `2C334812E8BC99A609125B48149A2B8CA7264271B56440FDD1768D6E31893C02` | 14:58:20 |
+| 2024 | 41.439.857 | 41.439.857 | `B14D3AFFD0C40AB8D5B66FA5B9367D6B10B9BAA7C5D314019A40211E2B8114B5` | 15:08:56 |
+
+**Intentos fallidos (se conservan como evidencia, no se borran):**
+- **2023, primer intento** (`sercop-ocds-csv-2023-20261121-145750`): la conexión se cortó y se recibieron 27.190.096 de 37.679.239 bytes. El script no reintenta; quedó su fila en `descargas-sercop.csv` (con el hash vacío) y se repitió la descarga en una carpeta nueva.
+- **2024, primer intento** (`sercop-ocds-csv-2024-20261121-145834`): el proceso quedó detenido en 9.231.566 bytes durante más de 10 minutos y se terminó a mano. Como el script solo escribe la fila de procedencia al terminar, **este intento no tiene fila** en `descargas-sercop.csv`; su carpeta parcial sigue en `data/datos_crudos/`. Se repitió en una carpeta nueva.
+- En ambos casos la causa del corte no se determinó (igual que el corte de 2025 descrito en `docs/h2/adquisicion.md`).
+
+**Integridad y conteo:** los cuatro ZIP válidos pasaron la prueba de integridad de Python (`zipfile.testzip`, sin errores) y contienen 8 archivos cada uno. Las filas de `releases_AAAA.csv` coinciden con la columna «Releases» del JSON de cada año en `docs/h2/adquisicion.md` (sección 3): 167.058 (2021), 212.324 (2022), 217.913 (2023) y 219.185 (2024). En 2023 y 2024 el JSON tiene un paquete más que releases (217.914 y 219.186 paquetes), por eso la comparación se hace con releases.
+
 ---
 
 ## 3. Estructura de las tablas CSV inspeccionadas
 
-El ZIP fue descomprimido hacia una carpeta derivada sin alterar el archivo original. Las 8 tablas resultantes fueron inspeccionadas mediante el script `scripts/inspect_csv_header.py` (ejecutado con Python 3.14 estándar, sin dependencias externas, registrando su salida en `docs/sources/sercop-2025-portal-csv-summary.json`):
+El ZIP fue descomprimido hacia una carpeta derivada sin alterar el archivo original. Las 8 tablas resultantes fueron inspeccionadas mediante el script `scripts/inspect_csv_header.py` (biblioteca estándar de Python, sin dependencias externas; la versión de Python y el SHA-256 del script quedan registrados en cada resumen, `docs/sources/sercop-AAAA-portal-csv-summary.json`). El resumen solo contiene tamaños, hashes, columnas, número de registros y número de campos con salto de línea; las demás cifras de este documento (valores distintos, campos con dato, distribución de adjudicaciones) salieron de un recuento aparte con el módulo `csv` de Python, que no está versionado (ver sección 9):
 
 | Archivo CSV | Tamaño (bytes) | Filas de datos | Columnas | Codificación | Delimitador | Comillas | SHA-256 del archivo |
 |---|---:|---:|:---:|:---:|:---:|:---:|---|
@@ -155,6 +173,22 @@ Para el modelo dimensional (ADR 0005, punto 3), cuyo hecho `FactContratacion` ti
 1. **Datos de partes secundarias (`parties`):** el JSON contiene una lista `parties` con roles adicionales (`tenderer`, `payer`, `procuringEntity`) y datos de contacto (`contactPoint`: teléfono, correo). En el CSV, solo se preservan `buyer_id`/`buyer_name` en `releases`, `procuringEntity_id`/`name` en `tender`, y `id`/`name` de proveedores en `suppliers`. **Impacto:** Ninguno para P1–P3. Por el contrario, esto beneficia al proyecto porque evita filtrar datos personales de contacto en Power Query.
 2. **Tablas omitidas en el CSV:** no se incluyen tablas para subastas electrónicas (`auctions`, 15.722 en JSON), ofertas de licitadores (`bids`, 2.763 en JSON), procesos relacionados (`relatedProcesses`, 152.797 en JSON) ni documentos adjuntos. **Impacto:** Ninguno. Ninguna de las tres preguntas de negocio requiere estas entidades.
 
+### 5.5. Hallazgo: campos con salto de línea en `tender`
+
+`tender_AAAA.csv` trae campos de texto con saltos de línea dentro de comillas. Un lector que respeta las comillas (como el módulo `csv` de Python) los trata como parte de un solo registro; uno que las ignora parte ese registro en varias filas. Conteo de campos con salto de línea (campo `fields_with_line_break` de los resúmenes `docs/sources/sercop-AAAA-portal-csv-summary.json`):
+
+| Año | Registros de `tender` | Campos con salto de línea | `releases` | `awards` |
+|:---:|---:|---:|---:|---:|
+| 2021 | 165.616 | 380 | 0 | 0 |
+| 2022 | 203.147 | 358 | 0 | 0 |
+| 2023 | 213.841 | 61 | 0 | 0 |
+| 2024 | 212.386 | 0 | 0 | 0 |
+| 2025 | 186.358 | 1 | 0 | 0 |
+
+**Observado en Power BI Desktop (2025):** `tender_2025` muestra 186.360 filas en el paso «Origen» (antes de promover encabezados), igual que las 186.360 líneas físicas del archivo (1 de encabezado, 186.358 registros y 1 línea extra por el salto de línea). Tras promover encabezados quedan 186.359 filas, una más que los 186.358 registros reales. Esto es coherente con una conexión que ignora las comillas (`QuoteStyle.None`, que es lo que genera por defecto el asistente de Texto/CSV según nuestra inferencia). **No se leyó el valor de `QuoteStyle` en la fórmula** (la captura la mostraba cortada), así que la causa exacta queda como inferencia hasta abrir esa fórmula completa.
+
+**Consecuencia:** en 2021 serían hasta 380 filas de más. Como H2 diagnostica y no corrige, el hallazgo se documenta aquí y se registra en el libro de calidad; en las consultas del issue #63 el parámetro `QuoteStyle=QuoteStyle.Csv` es parte de la conexión (no una limpieza) y debe fijarse en `Licitaciones_SERCOP`.
+
 ---
 
 ## 6. Comparación de rutas y regla de decisión
@@ -164,7 +198,7 @@ Para el modelo dimensional (ADR 0005, punto 3), cuyo hecho `FactContratacion` ti
 | **Formato de origen** | Tablas CSV oficiales (`.zip`, 35 MB) | Archivos CSV planos ad hoc generados desde JSON | JSON crudo anual (1,72 GB por año) |
 | **Cumplimiento de guía H2** | **Máximo:** conector `Texto/CSV`, sin código intermedio | Medio: requiere script transformador previo | Bajo: parseo complejo en M |
 | **Carga en Power BI Desktop** | Ligera: lectura nativa de CSV en columnas | Ligera: solo columnas elegidas | Crítica: riesgo alto de congelamiento y desbordamiento de RAM |
-| **Dependencia de software** | Ninguna: provisto directamente por SERCOP | Depende del script `flatten_sercop_ocds.py` | Ninguna |
+| **Dependencia de software** | Ninguna: provisto directamente por SERCOP | Depende del extractor del issue #66 (aún no existe en el repositorio) | Ninguna |
 | **Trazabilidad y procedencia** | Directa: URL oficial de SERCOP en inventario | Requiere documentar el script y el ZIP de origen | Directa |
 | **Grano y fidelidad** | Grano nativo OCDS separado (proceso vs adjudicación) | Grano precalculado en Python | Jerárquico anidado |
 
@@ -186,6 +220,7 @@ Para el modelo dimensional (ADR 0005, punto 3), cuyo hecho `FactContratacion` ti
   - `Procesos_SERCOP`: `Csv.Document(File.Contents(".../releases_2025.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv])` con promoción de encabezados.
   - `Licitaciones_SERCOP`: conexión similar a `tender_2025.csv`.
   - `Adjudicaciones_SERCOP`: conexión similar a `awards_2025.csv`.
+  - `QuoteStyle=QuoteStyle.Csv` en las tres conexiones, y de forma obligatoria en `Licitaciones_SERCOP`, por los campos con salto de línea de la sección 5.5.
 - La combinación o cruce de licitaciones y adjudicaciones con el proceso queda reservada para el Hito 3, evitando violar la regla de *«solo diagnosticar, no corregir ni transformar en H2»*.
 
 ### En el Issue #69 (Diccionario de datos y matriz de cobertura en Excel):
@@ -219,20 +254,26 @@ Este procedimiento debe ser ejecutado por el líder en Power BI Desktop (Windows
 8. Repetir la conexión para `awards_2025.csv` (37 MB).
 9. Completar la siguiente tabla con los resultados reales observados:
 
-### Resultados de la prueba en Power BI Desktop (a completar por el líder):
+### Resultados de la prueba en Power BI Desktop (21/11/2026, registrados por el líder en el chat)
+
+Las mediciones son estimaciones del líder, sin cronómetro. Lo que el líder no anotó queda como «No registrado»; no se inventa.
 
 | Variable evaluada | `releases_2025.csv` (48 MB) | `tender_2025.csv` (119 MB) | `awards_2025.csv` (37 MB) |
 |---|---|---|---|
-| **Codificación detectada automáticamente** | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] |
-| **Delimitador detectado** | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] |
-| **Tiempo de carga inicial a Power Query (segundos)** | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] |
-| **Tiempo de perfilado «todo el conjunto» (segundos)** | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] |
-| **¿El equipo responde de forma fluida (sin colgarse)?** | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] |
-| **Memoria RAM ocupada por Power BI (Administrador de tareas)** | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] | [PENDIENTE: lo anota el líder] |
+| **Codificación detectada por Power BI** | No registrada (el script detectó `utf-8`) | No registrada (el script detectó `utf-8`) | No registrada (el script detectó `utf-8`) |
+| **Delimitador detectado** | Coma: columnas bien separadas en la captura | Coma: columnas bien separadas en la captura | No registrado (el script detectó coma) |
+| **Tiempo de carga inicial a Power Query** | Inmediato (vista previa) | Inmediato (vista previa de las primeras 1.000 filas) | No registrado por separado |
+| **Tiempo de perfilado «todo el conjunto»** | No registrado; fluido | Hasta unos 60 s en la calidad de columnas (29 columnas); estimación del líder | No registrado |
+| **¿El equipo responde de forma fluida (sin colgarse)?** | Sí | Sí | Sí (el líder: «en ningún momento se colgó el equipo») |
+| **Memoria RAM ocupada por Power BI** | No registrada | No registrada | No registrada |
+| **Filas vistas en Power Query** | 191.440 (coincide con el archivo) | 186.360 en «Origen» y 186.359 tras promover encabezados (el archivo tiene 186.358 registros, ver sección 5.5) | No registrado |
+
+**Perfil de columnas observado (capturas del líder):** en `releases_2025`, `ocid` tiene 191.440 valores distintos y únicos; `buyer_id` tiene 4.973 distintos (504 únicos) y `buyer_name` 3.266 distintos (212 únicos), es decir, hay más identificadores que nombres; `initiationType` tiene un solo valor. En `tender_2025`, `ocid`, `release_id` e `id` tienen 186.359 valores distintos y únicos (la fila de más de la sección 5.5). Son cifras nacionales, sin filtrar por sector.
 
 ### Veredicto del líder:
-- [ ] **Aprobada Ruta A (CSV del portal):** Power BI Desktop maneja fluidamente las tres tablas y se avanza con esta opción para #62 y #63.
-- [ ] **Requiere Ruta B (Extractor #66):** El archivo `tender_2025.csv` causa lentitud excesiva y se prefiere conectar a los CSV derivados filtrados de #66.
+El líder aprobó la Ruta A en el chat el 21/11/2026 («Sí, apruebo Ruta A»).
+- [x] **Aprobada Ruta A (CSV del portal):** Power BI Desktop maneja fluidamente las tres tablas y se avanza con esta opción para #62 y #63.
+- [ ] **Requiere Ruta B (extractor del issue #66):** el archivo `tender_2025.csv` causa lentitud excesiva y se prefiere conectar a los CSV derivados de #66.
 
 ---
 
@@ -240,16 +281,22 @@ Este procedimiento debe ser ejecutado por el líder en Power BI Desktop (Windows
 
 Siguiendo las reglas de honestidad técnica y calidad senior del repositorio:
 
-### Lo que se midió y verificó empíricamente:
-- Petición HTTP real y cabeceras de respuesta del portal SERCOP para el recurso `type=csv` (estado 200, Content-Length 35.097.532 bytes).
-- Hash SHA-256 del ZIP crudo descargado (`66FFF557785F9C9592E68B0B9A9D22609C1BE880586E0DEA534617B302F83B0A`).
-- Descompresión controlada en `data/derivados/` verificando la preservación intacta del archivo crudo.
-- Dimensiones, tamaños, hashes y recuento exhaustivo de filas y columnas de las 8 tablas mediante `scripts/inspect_csv_header.py`.
-- Codificación UTF-8 estricta sin BOM y delimitador coma en todas las tablas.
-- Presencia y completitud de todos los campos de P1 a P3 fila por fila.
-- Grano de cada tabla: 1 fila por `ocid` en `releases` (191.440) y `tender` (186.358); preservación exacta de los 300 casos multi-adjudicación en `awards`.
-- Suite de pruebas automatizadas: 128 pruebas de pytest pasando y verificación de lint/formato con `ruff` sin errores.
+### Lo que se midió y verificó:
+- Petición HTTP real y cabeceras de respuesta del portal SERCOP para el recurso `type=csv` (estado 200) y bytes recibidos iguales al `Content-Length` en las cinco descargas completas (2021 a 2025), con su hash SHA-256 en `docs/h2/evidencia/descargas-sercop.csv`.
+- Descompresión controlada en `data/derivados/` sin alterar los ZIP crudos, e integridad de los ZIP válidos con `zipfile.testzip`.
+- Tamaños, hashes, columnas, número de registros y número de campos con salto de línea de las 8 tablas de cada año, con `scripts/inspect_csv_header.py` (resúmenes en `docs/sources/sercop-AAAA-portal-csv-summary.json`).
+- Prueba de apertura y perfilado de las tres tablas de 2025 en Power BI Desktop por el líder (sección 8).
+- Suite del repositorio: `uv sync --locked`, `ruff check`, `ruff format --check` y `pytest` sin fallos al cerrar esta revisión (ver el PR).
+
+### Lo que se midió con un recuento aparte, no versionado:
+Estas cifras salieron de un recuento con el módulo `csv` de Python sobre los archivos extraídos de 2025, hecho por Gemini 3.8 Flash y recalculado de forma independiente por Claude Sonnet 5.5 el 21/11/2026 con los mismos resultados. No hay un script del repositorio que las reproduzca, así que quien revise el PR no puede regenerarlas con un comando:
+- `ocid` distintos y vacíos en `releases` y `tender` (191.440 y 186.358, sin duplicados ni vacíos).
+- Filas con dato en las columnas de P1 a P3 (`procurementMethod`, `procurementMethodDetails`, `value_amount`, `tenderPeriod_startDate`, `amount`, `date`).
+- Distribución de adjudicaciones por proceso: 183.098 procesos con adjudicación, 300 con más de una (1.914 filas, máximo 233).
+- Que todos los `ocid` de `tender` y `awards` existen en `releases`.
 
 ### Lo que NO se midió (queda pendiente y no se inventa):
-- **Apertura en Power BI Desktop:** los agentes no tienen entorno gráfico de Windows ni ejecutan Power BI Desktop; el tiempo de renderizado, consumo de memoria y respuesta de la UI depende del hardware del líder y debe ser medido por él en el runbook de la sección 8.
-- **Descargas de años anteriores (2021 a 2024) en CSV:** en estricto apego a la autorización del líder (*«Apruebo descargar UN archivo: el CSV anual de 2025»*), no se descargaron ni midieron los CSV de 2021 a 2024.
+- **Memoria RAM, codificación y delimitador detectados por Power BI y tiempos exactos:** no se anotaron; solo hay estimaciones del líder.
+- **Perfilado en Power BI de 2021 a 2024:** solo se probó 2025. Los CSV de esos años están descargados e inspeccionados con el script, pero no se abrieron en Power BI.
+- **Valor de `QuoteStyle` en la conexión generada por Power BI:** no se leyó completo; la causa de la fila de más en `tender_2025` es una inferencia (sección 5.5).
+- **Campos de P1 a P3 y grano en 2021 a 2024:** solo se comprobaron en 2025; en 2021 a 2024 se contaron registros y saltos de línea, nada más.

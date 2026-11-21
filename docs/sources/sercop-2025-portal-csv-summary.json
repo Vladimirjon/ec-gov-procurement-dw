@@ -1,7 +1,7 @@
 {
-  "inspected_at_utc": "2026-11-21T19:30:25.211521+00:00",
-  "script_sha256": "0C8F4CA05BEABA85733B5616EBCC5986E8DB03CF0D91F8E0B29F59C6D8C07002",
-  "python_version": "3.12.10",
+  "inspected_at_utc": "2026-11-21T20:14:39.582150+00:00",
+  "script_sha256": "4BD62139575533450CC2B9807742C130E9C334D375F977A4CA049732095C4770",
+  "python_version": "3.14.10",
   "directory_name": "sercop-portal-csv-2025-20261121-141748",
   "total_csv_files": 8,
   "files": [
@@ -33,6 +33,7 @@
         "contractPeriod_durationInDays"
       ],
       "row_count": 184712,
+      "fields_with_line_break": 0,
       "header_sha256": "978CA469965F9A5BF5C5E35C5C215A96FB27095CDC0F27EF1B8166449153C4B4"
     },
     {
@@ -60,6 +61,7 @@
         "dateSigned"
       ],
       "row_count": 181515,
+      "fields_with_line_break": 0,
       "header_sha256": "0A5695370FE83CD125C00A2DF8EDD4D7CEBDDA11B389C7B955930F07445C4502"
     },
     {
@@ -74,6 +76,7 @@
         "extension"
       ],
       "row_count": 7,
+      "fields_with_line_break": 0,
       "header_sha256": "26F1DE33979D065BA8D86789DE634228E3540FEE2F6E5A66EEBF93F78D83077D"
     },
     {
@@ -96,6 +99,7 @@
         "PublishedDate"
       ],
       "row_count": 1,
+      "fields_with_line_break": 0,
       "header_sha256": "F41E665C7062EC43A65EBF9B5F17937493A38689CE27D44B8723334D7CEACAF4"
     },
     {
@@ -116,6 +120,7 @@
         "budget_currency"
       ],
       "row_count": 37821,
+      "fields_with_line_break": 1,
       "header_sha256": "9AB5AC64D13177776602D864A4BD76CEE3C4FBD26EEEC96AB77B8638741F8FD9"
     },
     {
@@ -137,6 +142,7 @@
         "tag"
       ],
       "row_count": 191440,
+      "fields_with_line_break": 0,
       "header_sha256": "32FAD6705120D3188545CA94DD549AFEBE2B09B4985DB31F5BDA13DF4B4A5520"
     },
     {
@@ -155,6 +161,7 @@
         "name"
       ],
       "row_count": 184709,
+      "fields_with_line_break": 0,
       "header_sha256": "971574EF642A427CB608334DE78A36A178708B73C4EE79CE5D85A03F45DE5F79"
     },
     {
@@ -197,6 +204,7 @@
         "numberOfTenderers"
       ],
       "row_count": 186358,
+      "fields_with_line_break": 1,
       "header_sha256": "AB625EFA8A366AADD6F4C014548EDC53C7C1282A0C3CBC968B26335AB44E398B"
     }
   ]

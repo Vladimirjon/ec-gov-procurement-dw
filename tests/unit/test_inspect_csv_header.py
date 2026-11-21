@@ -54,6 +54,8 @@ def test_inspect_csv_file_basic(synthetic_csv: Path):
     assert report["columns"] == ["ocid", "buyer_id", "buyer_name", "amount", "notes"]
     # 3 data rows even though one row has a newline inside quotes
     assert report["row_count"] == 3
+    # exactly one field holds a line break; physical lines (5) exceed records (3 + header)
+    assert report["fields_with_line_break"] == 1
     assert report["file_size_bytes"] == synthetic_csv.stat().st_size
     assert report["sha256"] == calculate_sha256(synthetic_csv)
 
@@ -77,6 +79,7 @@ def test_single_column_csv(synthetic_single_column_csv: Path):
     assert report["column_count"] == 1
     assert report["columns"] == ["extension"]
     assert report["row_count"] == 3
+    assert report["fields_with_line_break"] == 0
 
 
 def test_inspect_directory(tmp_path: Path, synthetic_csv: Path, synthetic_single_column_csv: Path):
