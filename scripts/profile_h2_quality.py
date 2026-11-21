@@ -317,6 +317,7 @@ def profile_year(
     year: int,
     table_paths: dict[str, Path],
     reference_awarded_2025: float = 7318.7,
+    repo_root: Path | None = None,
 ) -> dict[str, Any]:
     """Execute complete six-dimension profiling for a single year."""
     csv.field_size_limit(10 * 1024 * 1024)
@@ -778,8 +779,16 @@ def profile_year(
     # Input file metadata
     inputs_meta: dict[str, Any] = {}
     for tbl_name, p in sorted(table_paths.items()):
+        p_str = p.as_posix()
+        if "/data/derivados/" in p_str:
+            rel_path = "data/derivados/" + p_str.split("/data/derivados/", 1)[1]
+        elif repo_root and p.is_relative_to(repo_root):
+            rel_path = p.relative_to(repo_root).as_posix()
+        else:
+            rel_path = p.name
+
         inputs_meta[tbl_name] = {
-            "relative_path": str(p).replace("\\", "/"),
+            "relative_path": rel_path,
             "file_name": p.name,
             "size_bytes": p.stat().st_size,
             "sha256": calculate_sha256(p),
@@ -1368,6 +1377,24 @@ def generate_summary_csv_rows(year_results: list[dict[str, Any]], cross_year: di
         add_row(
             "unicidad",
             "awards",
+            "(ocid,release_id)",
+            "pares_duplicados",
+            yr,
+            uniq["awards_pairs_duplicates"],
+            "filas",
+        )
+        add_row(
+            "unicidad",
+            "contracts",
+            "(ocid,release_id)",
+            "pares_duplicados",
+            yr,
+            uniq["contracts_pairs_duplicates"],
+            "filas",
+        )
+        add_row(
+            "unicidad",
+            "awards",
             "(ocid,id)",
             "award_id_duplicado_en_proceso",
             yr,
@@ -1602,6 +1629,10 @@ def generate_summary_csv_rows(year_results: list[dict[str, Any]], cross_year: di
     add_row(
         "unicidad", "Adjudicaciones_SERCOP", "ocid", "procesos_multi_adjudicacion", "total", tot_multi_awd, "procesos"
     )
+    tot_awd_pairs_dups = sum(y["uniqueness"]["awards_pairs_duplicates"] for y in year_results)
+    tot_cnt_pairs_dups = sum(y["uniqueness"]["contracts_pairs_duplicates"] for y in year_results)
+    add_row("unicidad", "awards", "(ocid,release_id)", "pares_duplicados", "total", tot_awd_pairs_dups, "filas")
+    add_row("unicidad", "contracts", "(ocid,release_id)", "pares_duplicados", "total", tot_cnt_pairs_dups, "filas")
 
     return rows
 
@@ -1639,22 +1670,28 @@ def main() -> int:
         default=None,
         help="Path for buyer summary CSV output (default: docs/h2/evidencia/perfil-calidad-sercop-por-comprador.csv)",
     )
+    parser.add_argument(
+        "--output-suffix",
+        type=str,
+        default="",
+        help="Optional suffix for output filenames (e.g. -v2)",
+    )
 
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[1]
     derived_dir = args.derived_dir if args.derived_dir.is_absolute() else repo_root / args.derived_dir
     output_dir = args.output_dir if args.output_dir.is_absolute() else repo_root / args.output_dir
+    suffix = args.output_suffix
+    buyer_summary_default_name = f"perfil-calidad-sercop-por-comprador{suffix}.csv"
     buyer_summary_path = (
-        args.buyer_summary_csv
-        if args.buyer_summary_csv is not None
-        else output_dir / "perfil-calidad-sercop-por-comprador.csv"
+        args.buyer_summary_csv if args.buyer_summary_csv is not None else output_dir / buyer_summary_default_name
     )
     if not buyer_summary_path.is_absolute():
         buyer_summary_path = repo_root / buyer_summary_path
 
     # Check that outputs do not overwrite existing files
-    resumen_csv_path = output_dir / "perfil-calidad-sercop-resumen.csv"
+    resumen_csv_path = output_dir / f"perfil-calidad-sercop-resumen{suffix}.csv"
     existing_outputs: list[Path] = []
     if resumen_csv_path.exists():
         existing_outputs.append(resumen_csv_path)
@@ -1662,7 +1699,7 @@ def main() -> int:
         existing_outputs.append(buyer_summary_path)
 
     for yr in args.years:
-        json_yr_path = output_dir / f"perfil-calidad-sercop-{yr}.json"
+        json_yr_path = output_dir / f"perfil-calidad-sercop-{yr}{suffix}.json"
         if json_yr_path.exists():
             existing_outputs.append(json_yr_path)
 
@@ -1680,7 +1717,24 @@ def main() -> int:
 
     script_path = Path(__file__).resolve()
     script_sha256 = compute_script_sha256(script_path)
-    exec_cmd = " ".join([sys.executable, *sys.argv])
+
+    cmd_parts = [
+        "python",
+        "-I",
+        f"scripts/{script_path.name}",
+        "--derived-dir",
+        "data/derivados",
+        "--output-dir",
+        "docs/h2/evidencia",
+        "--years",
+        *[str(y) for y in sorted(args.years)],
+        "--reference-awarded-2025",
+        str(args.reference_awarded_2025),
+    ]
+    if suffix:
+        cmd_parts.extend(["--output-suffix", suffix])
+    cmd_parts.extend(["--buyer-summary-csv", f"docs/h2/evidencia/{buyer_summary_path.name}"])
+    exec_cmd = " ".join(cmd_parts)
     exec_time_utc = datetime.now(UTC).isoformat()
 
     print(f"Starting SERCOP quality profiling for years: {args.years}")
@@ -1692,7 +1746,7 @@ def main() -> int:
     for yr in sorted(args.years):
         print(f"\n--- Profiling year {yr} ---")
         tables = years_data[yr]
-        res = profile_year(yr, tables, reference_awarded_2025=args.reference_awarded_2025)
+        res = profile_year(yr, tables, reference_awarded_2025=args.reference_awarded_2025, repo_root=repo_root)
         # Extract internal tracking before serialization
         buyer_summary_dict = res.pop("_buyer_summary", {})
         all_buyer_summaries.extend(buyer_summary_dict.values())
@@ -1735,7 +1789,7 @@ def main() -> int:
             },
             **res,
         }
-        json_out = output_dir / f"perfil-calidad-sercop-{yr}.json"
+        json_out = output_dir / f"perfil-calidad-sercop-{yr}{suffix}.json"
         with json_out.open("w", encoding="utf-8", newline="\n") as f:
             json.dump(full_json_payload, f, indent=2, ensure_ascii=False)
             f.write("\n")

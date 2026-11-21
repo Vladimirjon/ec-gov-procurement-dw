@@ -574,3 +574,11 @@ def test_cli_execution_and_no_overwrite(tmp_path: Path):
     proc2 = subprocess.run(cmd, capture_output=True, text=True)
     assert proc2.returncode == 1
     assert "Refusing to overwrite existing output files" in proc2.stderr
+
+    # Third run with new suffix: should SUCCEED
+    cmd_v2 = [*cmd, "--output-suffix=-v2"]
+    proc3 = subprocess.run(cmd_v2, capture_output=True, text=True)
+    assert proc3.returncode == 0, f"STDOUT: {proc3.stdout}\nSTDERR: {proc3.stderr}"
+    assert (output_dir / "perfil-calidad-sercop-2021-v2.json").exists()
+    assert (output_dir / "perfil-calidad-sercop-resumen-v2.csv").exists()
+    assert (output_dir / "perfil-calidad-sercop-por-comprador-v2.csv").exists()

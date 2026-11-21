@@ -42,6 +42,8 @@ validez,tender,procurementMethod,metodos_fuera_de_catalogo,2021,0,filas
 unicidad,releases,ocid,ocid_duplicados_en_anio,2021,0,filas
 unicidad,releases,"(ocid,id)",pares_duplicados,2021,0,filas
 unicidad,tender,"(ocid,release_id)",pares_duplicados,2021,0,filas
+unicidad,awards,"(ocid,release_id)",pares_duplicados,2021,2717,filas
+unicidad,contracts,"(ocid,release_id)",pares_duplicados,2021,2146,filas
 unicidad,awards,"(ocid,id)",award_id_duplicado_en_proceso,2021,0,filas
 unicidad,Adjudicaciones_SERCOP,ocid,procesos_multi_adjudicacion,2021,386,procesos
 consistencia,releases,buyer_id,buyer_id_forma_simple,2021,128854,filas
@@ -99,6 +101,8 @@ validez,tender,procurementMethod,metodos_fuera_de_catalogo,2022,0,filas
 unicidad,releases,ocid,ocid_duplicados_en_anio,2022,0,filas
 unicidad,releases,"(ocid,id)",pares_duplicados,2022,0,filas
 unicidad,tender,"(ocid,release_id)",pares_duplicados,2022,0,filas
+unicidad,awards,"(ocid,release_id)",pares_duplicados,2022,2447,filas
+unicidad,contracts,"(ocid,release_id)",pares_duplicados,2022,2236,filas
 unicidad,awards,"(ocid,id)",award_id_duplicado_en_proceso,2022,0,filas
 unicidad,Adjudicaciones_SERCOP,ocid,procesos_multi_adjudicacion,2022,424,procesos
 consistencia,releases,buyer_id,buyer_id_forma_simple,2022,153455,filas
@@ -156,6 +160,8 @@ validez,tender,procurementMethod,metodos_fuera_de_catalogo,2023,0,filas
 unicidad,releases,ocid,ocid_duplicados_en_anio,2023,0,filas
 unicidad,releases,"(ocid,id)",pares_duplicados,2023,0,filas
 unicidad,tender,"(ocid,release_id)",pares_duplicados,2023,0,filas
+unicidad,awards,"(ocid,release_id)",pares_duplicados,2023,1775,filas
+unicidad,contracts,"(ocid,release_id)",pares_duplicados,2023,1601,filas
 unicidad,awards,"(ocid,id)",award_id_duplicado_en_proceso,2023,0,filas
 unicidad,Adjudicaciones_SERCOP,ocid,procesos_multi_adjudicacion,2023,329,procesos
 consistencia,releases,buyer_id,buyer_id_forma_simple,2023,174786,filas
@@ -213,6 +219,8 @@ validez,tender,procurementMethod,metodos_fuera_de_catalogo,2024,0,filas
 unicidad,releases,ocid,ocid_duplicados_en_anio,2024,0,filas
 unicidad,releases,"(ocid,id)",pares_duplicados,2024,0,filas
 unicidad,tender,"(ocid,release_id)",pares_duplicados,2024,0,filas
+unicidad,awards,"(ocid,release_id)",pares_duplicados,2024,2274,filas
+unicidad,contracts,"(ocid,release_id)",pares_duplicados,2024,2015,filas
 unicidad,awards,"(ocid,id)",award_id_duplicado_en_proceso,2024,0,filas
 unicidad,Adjudicaciones_SERCOP,ocid,procesos_multi_adjudicacion,2024,362,procesos
 consistencia,releases,buyer_id,buyer_id_forma_simple,2024,169758,filas
@@ -270,6 +278,8 @@ validez,tender,procurementMethod,metodos_fuera_de_catalogo,2025,0,filas
 unicidad,releases,ocid,ocid_duplicados_en_anio,2025,0,filas
 unicidad,releases,"(ocid,id)",pares_duplicados,2025,0,filas
 unicidad,tender,"(ocid,release_id)",pares_duplicados,2025,0,filas
+unicidad,awards,"(ocid,release_id)",pares_duplicados,2025,1614,filas
+unicidad,contracts,"(ocid,release_id)",pares_duplicados,2025,1360,filas
 unicidad,awards,"(ocid,id)",award_id_duplicado_en_proceso,2025,0,filas
 unicidad,Adjudicaciones_SERCOP,ocid,procesos_multi_adjudicacion,2025,300,procesos
 consistencia,releases,buyer_id,buyer_id_forma_simple,2025,153618,filas
@@ -282,9 +292,9 @@ consistencia,tender,procuringEntity_id,coincidencia_raiz_con_buyer_id,2025,15353
 consistencia,tender,procuringEntity_id,raiz_diferente_de_buyer_id,2025,0,filas
 consistencia,awards,amount_vs_corrected,amount_difiere_de_corrected,2025,0,filas
 consistencia,awards,amount_vs_entered,amount_difiere_de_entered,2025,0,filas
-exactitud,awards,amount,monto_adjudicado_referencia_oficial,2025,7318700000.00,USD
-exactitud,awards,amount,diferencia_absoluta_vs_referencia,2025,1095108828.27,USD
-exactitud,awards,amount,diferencia_relativa_vs_referencia,2025,-14.96,porcentaje
+exactitud,awards,amount,monto_adjudicado_referencia_oficial,2025,7318700000000000.00,USD
+exactitud,awards,amount,diferencia_absoluta_vs_referencia,2025,7318693776408828.00,USD
+exactitud,awards,amount,diferencia_relativa_vs_referencia,2025,-100.0,porcentaje
 oportunidad,releases,date,pct_fecha_fuera_del_anio_archivo,2025,7.57,porcentaje
 oportunidad,releases,date,ultima_fecha_observada,2025,2026-11-21T03:38:41-05:00,fecha
 control,releases,*,filas_releases,total,1007920,filas
@@ -301,3 +311,5 @@ control,Procesos_SERCOP,amount_estimado_solo,procesos_con_estimado_sin_adjudicac
 control,Procesos_SERCOP,amount_ninguno,procesos_sin_ningun_importe,total,40491,procesos
 unicidad,releases,ocid,ocid_compartidos_entre_anios,total,0,procesos
 unicidad,Adjudicaciones_SERCOP,ocid,procesos_multi_adjudicacion,total,1801,procesos
+unicidad,awards,"(ocid,release_id)",pares_duplicados,total,10827,filas
+unicidad,contracts,"(ocid,release_id)",pares_duplicados,total,9358,filas

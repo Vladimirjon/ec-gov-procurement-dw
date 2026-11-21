@@ -1,57 +1,57 @@
 {
   "metadata": {
     "script_name": "profile_h2_quality.py",
-    "script_sha256": "099AABCDF45D5F3F32F16CC1DF614CB56820023B3D5F3D0822C1A9E86CF7D00A",
-    "execution_command": "C:\\Users\\johan\\AppData\\Local\\Programs\\Python\\Python312\\python.exe scripts/profile_h2_quality.py --derived-dir C:\\Users\\johan\\Desktop\\UNI\\7 Semestre\\Business Intelligence\\ec-gov-procurement-dw\\data\\derivados --output-dir docs/h2/evidencia",
-    "executed_at_utc": "2026-11-21T22:36:48.836375+00:00",
+    "script_sha256": "19F8F2FA96AAAC657335B261D8FE29451787470CCCE400BF83119D8DDAD75608",
+    "execution_command": "python -I scripts/profile_h2_quality.py --derived-dir data/derivados --output-dir docs/h2/evidencia --years 2021 2022 2023 2024 2025 --reference-awarded-2025 7318700000.0 --output-suffix -v2 --buyer-summary-csv docs/h2/evidencia/perfil-calidad-sercop-por-comprador-v2.csv",
+    "executed_at_utc": "2026-11-21T23:14:22.022386+00:00",
     "year": 2023
   },
   "year": 2023,
   "input_files": {
     "awards": {
-      "relative_path": "C:/Users/johan/Desktop/UNI/7 Semestre/Business Intelligence/ec-gov-procurement-dw/data/derivados/sercop-portal-csv-2023-20261121-145820/awards_2023.csv",
+      "relative_path": "data/derivados/sercop-portal-csv-2023-20261121-145820/awards_2023.csv",
       "file_name": "awards_2023.csv",
       "size_bytes": 42461180,
       "sha256": "905B48E336F981A8687BD8F0988B5A4F160D06D18A94BB6F4D429D908C0A283D"
     },
     "contracts": {
-      "relative_path": "C:/Users/johan/Desktop/UNI/7 Semestre/Business Intelligence/ec-gov-procurement-dw/data/derivados/sercop-portal-csv-2023-20261121-145820/contracts_2023.csv",
+      "relative_path": "data/derivados/sercop-portal-csv-2023-20261121-145820/contracts_2023.csv",
       "file_name": "contracts_2023.csv",
       "size_bytes": 40902482,
       "sha256": "4115D53DDD668432CE0DA90689042C1F6DE172929D2950668FE10BBB47EA49B0"
     },
     "extensions": {
-      "relative_path": "C:/Users/johan/Desktop/UNI/7 Semestre/Business Intelligence/ec-gov-procurement-dw/data/derivados/sercop-portal-csv-2023-20261121-145820/extensions_2023.csv",
+      "relative_path": "data/derivados/sercop-portal-csv-2023-20261121-145820/extensions_2023.csv",
       "file_name": "extensions_2023.csv",
       "size_bytes": 757,
       "sha256": "9AE0A9EB81D484976FD4F5D8625DDAEF368D74301CF0C7D58B659C2D8E1CA57B"
     },
     "metadata": {
-      "relative_path": "C:/Users/johan/Desktop/UNI/7 Semestre/Business Intelligence/ec-gov-procurement-dw/data/derivados/sercop-portal-csv-2023-20261121-145820/metadata_2023.csv",
+      "relative_path": "data/derivados/sercop-portal-csv-2023-20261121-145820/metadata_2023.csv",
       "file_name": "metadata_2023.csv",
       "size_bytes": 491,
       "sha256": "182E4792179C8C87C7ECB71AABB94D058BC29F441AA226ADF34E90154B6D5B9B"
     },
     "planning": {
-      "relative_path": "C:/Users/johan/Desktop/UNI/7 Semestre/Business Intelligence/ec-gov-procurement-dw/data/derivados/sercop-portal-csv-2023-20261121-145820/planning_2023.csv",
+      "relative_path": "data/derivados/sercop-portal-csv-2023-20261121-145820/planning_2023.csv",
       "file_name": "planning_2023.csv",
       "size_bytes": 12347479,
       "sha256": "7D44C0C8727ED49E39F1AF319D5DD4BF9AFE708C54EBA779767B8C3E172E4694"
     },
     "releases": {
-      "relative_path": "C:/Users/johan/Desktop/UNI/7 Semestre/Business Intelligence/ec-gov-procurement-dw/data/derivados/sercop-portal-csv-2023-20261121-145820/releases_2023.csv",
+      "relative_path": "data/derivados/sercop-portal-csv-2023-20261121-145820/releases_2023.csv",
       "file_name": "releases_2023.csv",
       "size_bytes": 54530086,
       "sha256": "5E12D2F9EE5813761AECE8B72404274F5C0DE4E59A3C4F97A3E63FA6C1D7628C"
     },
     "suppliers": {
-      "relative_path": "C:/Users/johan/Desktop/UNI/7 Semestre/Business Intelligence/ec-gov-procurement-dw/data/derivados/sercop-portal-csv-2023-20261121-145820/suppliers_2023.csv",
+      "relative_path": "data/derivados/sercop-portal-csv-2023-20261121-145820/suppliers_2023.csv",
       "file_name": "suppliers_2023.csv",
       "size_bytes": 38876640,
       "sha256": "351F17DDF67E60E399D923B08690437ACDB22644353D20ED0B72680CFA45172E"
     },
     "tender": {
-      "relative_path": "C:/Users/johan/Desktop/UNI/7 Semestre/Business Intelligence/ec-gov-procurement-dw/data/derivados/sercop-portal-csv-2023-20261121-145820/tender_2023.csv",
+      "relative_path": "data/derivados/sercop-portal-csv-2023-20261121-145820/tender_2023.csv",
       "file_name": "tender_2023.csv",
       "size_bytes": 136729553,
       "sha256": "E4A98BBB9436AC43565310398D6C09D5EC4B6EDC03CA5615873353F9D3EE86C6"
