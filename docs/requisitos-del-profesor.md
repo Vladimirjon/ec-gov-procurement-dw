@@ -5,7 +5,11 @@
   en `Instrucciones_Curso/` (local, ignorada por git). Los PDF mandan; esta
   lista es un resumen propio para trabajar. Se actualiza cuando el profesor
   publique o cambie un hito.
-- **Revisada:** 2026-11-03; sección B actualizada el 2026-11-08.
+- **Revisada:** 2026-11-03; sección B actualizada el 2026-11-08; secciones F
+  y G (guías de los hitos 2 y 3, `Hito 2 Adquisición y calidad de datos.pdf` y
+  `Hito 3 Modelo dimensional y presentación de avance.pdf`) añadidas el
+  2026-11-20. Las filas de la sección A que mencionan `stg` en PostgreSQL o el
+  DDL para H2 y H3 se leen con la contradicción 7 de la sección E.
 - **Estado:** ✅ cubierto · ⚠ parcial o pendiente de verificar · ❌ falta ·
   ❓ el profesor se contradice (ver al final).
 
@@ -110,3 +114,55 @@ reparte por componentes del documento (ver [PLAN.md](PLAN.md)).
 6. **Dimensiones conformadas con un solo hecho:** se pide 1 hecho y 3
    dimensiones conformadas. *Propuesta: es válido con un hecho; si se agrega un
    segundo hecho, las dimensiones se comparten.*
+7. **Hitos 2 y 3: guía general frente a guías específicas (20/11/2026).** La
+   guía general pide para H2 `stg` en PostgreSQL, notebook de perfilado y
+   diccionario en Excel, y para H3 matriz de bus, estrella y DDL ejecutado; las
+   guías específicas piden `.pbix` con Power Query y un libro de Excel (H2) y
+   `.pbix` con el modelo, documento de diseño PDF y diapositivas (H3).
+   *Propuesta (ADR 0005, D1): mandan las guías específicas; PostgreSQL, `stg` y
+   DDL pasan al Hito 4. El DDL de respaldo es un issue opcional.*
+8. **Nombre de los archivos de H2 y H3:** `Proyecto_EquipoX_Hito2.pbix` y
+   `..._Hito3.pbix`, sin definir `X`. *Resuelto por el líder el 20/11: el
+   profesor asignó el nombre «Grupo 5», así que `X` = `Grupo5`
+   (`Proyecto_Grupo5_Hito2`).*
+9. **Hora límite de las entregas del 21 y 22/11:** las guías no la indican.
+   *Resuelto por el líder el 20/11: 23:59 de cada día.*
+
+## F. Hito 2 (guía del Hito 2, 20/11/2026): requisitos y dónde se cubren
+
+La guía manda; esta tabla es un resumen propio. Estado: ❌ falta · ⚠ en curso ·
+✅ cubierto. «Issue» es el código del título del issue de GitHub (milestone H2).
+
+| # | Directriz (sección de la guía) | Estado | Issue |
+|---|---|---|---|
+| H2-1 | `.pbix` con las fuentes de las tres preguntas conectadas; ≥1 conjunto de datos por pregunta; consulta con nombre claro; solo pasos de conexión (4.1) | ❌ | H2-05 |
+| H2-2 | Archivos originales sin modificar en `datos_crudos` (4.1, 5, 9) | ❌ | H2-01 |
+| H2-3 | Inventario: entidad, enlace exacto, formato y conector, periodo, frecuencia, filas y fecha de descarga (4.2) | ❌ | H2-01, H2-03, H2-06 |
+| H2-4 | Diccionario: grano de cada tabla en una frase; por campo descripción, tipo, valores válidos, rol (medida o atributo) y observación del perfil (4.3) | ❌ | H2-06 |
+| H2-5 | Perfilado sobre **todo el conjunto**, no las primeras 1000 filas (3.3, 5) | ❌ | H2-04, H2-05 |
+| H2-6 | Diagnóstico: tabla y campo, dimensión de calidad, evidencia medible, impacto en las preguntas, acción para H3 (4.4); seis dimensiones revisadas (3.2) | ❌ | H2-04, H2-06 |
+| H2-7 | Matriz de cobertura de las tres preguntas; si una no se puede responder, se ajusta y se explica (4.5) | ❌ | H2-06 |
+| H2-8 | Total de control inicial por tabla (filas y suma de la medida) (5, paso 10) | ❌ | H2-04 |
+| H2-9 | Libro con equipo, sector y fecha al inicio (6) | ❌ | H2-06 |
+| H2-10 | No se corrige nada en H2; la limpieza es de H3 (1, 5, 9) | ⚠ | todos |
+| H2-11 | Entrega `Proyecto_EquipoX_Hito2.pbix` + libro con Fuentes, Diccionario, Calidad y Cobertura (ficha) el 21/11/2026 | ❌ | H2-07 |
+
+## G. Hito 3 (guía del Hito 3, 20/11/2026): requisitos y dónde se cubren
+
+| # | Directriz (sección de la guía) | Estado | Issue |
+|---|---|---|---|
+| H3-1 | Acciones del diagnóstico de H2 aplicadas en Power Query y documentadas, con total de control antes y después (4.1, 4.3, 5) | ❌ | H3-03, H3-06 |
+| H3-2 | Cuatro pasos de Kimball por tabla de hechos: proceso, grano, dimensiones y hechos, en ese orden (3.1, 4.2) | ❌ | H3-01 |
+| H3-3 | Matriz de bus (4.2, 6.2) | ❌ | H3-01 |
+| H3-4 | Al menos un hecho y tres dimensiones, una de ellas de tiempo (4.1) | ❌ | H3-04 |
+| H3-5 | Claves únicas en las dimensiones; relaciones de uno a varios con filtro único (4.1, 5) | ❌ | H3-04, H3-05 |
+| H3-6 | Convención `Fact…`/`Dim…`, columnas de clave ocultas, grano en la descripción de la tabla (4.1, 8) | ❌ | H3-05 |
+| H3-7 | La tabla de hechos solo tiene claves y medidas; no guarda tasas ni porcentajes (3.2, 7) | ❌ | H3-01, H3-04 |
+| H3-8 | Totales de control cuadran: filas del hecho = filas de origen y la suma de la medida no cambia (5, 7) | ❌ | H3-03, H3-04 |
+| H3-9 | Página de prueba con una matriz o gráfico simple que responde al menos una pregunta (4.1) | ❌ | H3-05 |
+| H3-10 | Documento de diseño PDF (máx. 8 pp sin anexos): cuatro pasos, matriz de bus, captura de la vista de modelo, tabla pregunta → hechos y dimensiones (4.2) | ❌ | H3-07 |
+| H3-11 | Bitácora: problema, transformación, nombre del paso en Power Query y total de control (4.3, 6.3) | ❌ | H3-06 |
+| H3-12 | Presentación de 10 minutos más 5 de preguntas con la estructura de 6.4; presentan todos; demostración en Power BI (4.4) | ❌ | H3-08 |
+| H3-13 | Nombre del equipo, sector y fecha en la portada del documento y en la primera diapositiva (6) | ❌ | H3-07, H3-08 |
+| H3-14 | Entrega `Proyecto_EquipoX_Hito3.pbix`, documento PDF y diapositivas PDF el 22/11/2026 (ficha) | ❌ | H3-09 |
+| H3-15 | (Guía general) DDL del esquema `dw` ejecutado en PostgreSQL | ❓ | H3-10 (opcional) |

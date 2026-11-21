@@ -10,6 +10,7 @@ instrucciones del profesor (los dos PDF) mandan sobre cualquier ADR.
 | [0002](0002-datos-crudos-versionados.md) | Datos crudos versionados y cargas reproducibles | Aceptado |
 | [0003](0003-pila-tecnologica.md) | Pila tecnológica | Aceptado |
 | [0004](0004-modelo-dimensional.md) | Modelo dimensional | Aceptado |
+| [0005](0005-hitos-2-y-3-power-bi.md) | Hitos 2 y 3 en Power BI, convención de nombres y un hecho | Propuesto |
 
 El 3/11/2026 se reescribieron los cuatro para ajustarlos a las guías del
 profesor. Las versiones anteriores están en el historial de Git. Ese mismo

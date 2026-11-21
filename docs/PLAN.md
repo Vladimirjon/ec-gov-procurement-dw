@@ -3,12 +3,16 @@
 - **Estado:** reemplaza el plan por fases del 10/10/2026. Cambios solo por PR
   aprobado por el líder.
 - **Fecha:** 2026-11-03
-- **Regla de vigencia:** las instrucciones oficiales son los dos PDF del
-  profesor, guardados localmente en `Instrucciones_Curso/` (ignorada por git):
+- **Regla de vigencia:** las instrucciones oficiales son los PDF del profesor,
+  guardados localmente en `Instrucciones_Curso/` (ignorada por git). Para cada
+  hito manda su guía específica sobre la guía general:
   - `Proyecto Integrador BI ISWD743.pdf`: guía general, requisitos, hitos y
     rúbricas.
   - `Hito 1 - Perfil institucional y preguntas de negocio.pdf`: guía del
     Hito 1.
+  - `Hito 2 Adquisición y calidad de datos.pdf` y
+    `Hito 3 Modelo dimensional y presentación de avance.pdf` (publicadas el
+    20/11/2026), con su texto en `Instrucciones_Curso/_md/`.
 
   Todo lo anterior (fases 0 a 5, entregables E0, F1-E1, F1-E2, F2 a F5, sus
   fechas y su calendario) **queda sin vigor** salvo que un hito nuevo lo
@@ -17,16 +21,17 @@
 
 ## Qué dice el profesor
 
-El proyecto se organiza en seis hitos, cada uno alimenta al siguiente. Hoy
-solo el **Hito 1** tiene fecha: se revisa el **9 de noviembre de 2026**
-(por confirmar en el aula virtual). Los demás no tienen fecha; las semanas
-de la guía son referencia.
+El proyecto se organiza en seis hitos, cada uno alimenta al siguiente. El
+**Hito 1** se revisó el 9 de noviembre de 2026; el **Hito 2** vence el sábado
+**21/11/2026** y el **Hito 3** el domingo **22/11/2026**, ambos a las **23:59**
+(fechas y hora del líder). Los hitos 4 a 6 no tienen guía
+detallada ni fecha; las semanas de la guía son referencia.
 
 | Hito | Semana | Entregable | Estado |
 |---|---|---|---|
-| H1 | 5 | Perfil del sector + matriz de 3 preguntas (PDF, máx. 6 pp) | **En curso** |
-| H2 | 6 | Datos en `stg` (PostgreSQL), diccionario en Excel, notebook de perfilado, informe de calidad | Sin guía detallada ni fecha |
-| H3 | 8 | Matriz de bus, estrella, DDL ejecutado, exposición de 10 min | Sin guía detallada ni fecha |
+| H1 | 5 | Perfil del sector + matriz de 3 preguntas (PDF, máx. 6 pp) | **Entregado** (8/11/2026) |
+| H2 | 6 | `.pbix` con fuentes conectadas + libro de Excel (Fuentes, Diccionario, Calidad, Cobertura) | **En curso**, vence el sábado 21/11/2026 |
+| H3 | 8 | `.pbix` con el modelo dimensional + documento de diseño PDF (máx. 8 pp) + diapositivas PDF; exposición de 10 min | **En curso**, vence el domingo 22/11/2026 |
 | H4 | 11 | ETL de un solo comando, carga inicial e incremental, SCD 2, reconciliación | Sin guía detallada ni fecha |
 | H5 | 13 | OLAP, tablero en Power BI, modelo analítico en Python | Sin guía detallada ni fecha |
 | H6 | 16 | Entrega final y defensa | Sin guía detallada ni fecha |
@@ -65,6 +70,27 @@ persona verifica y cita su parte, y entra por PR pequeño.
 Calendario interno (no oficial): secciones en PR el jueves 5/11; integración
 y revisión del líder el viernes 6/11; verificación final el sábado 7/11;
 margen el domingo 8/11.
+
+## Hitos 2 y 3 (20/11/2026)
+
+El 20/11/2026 el líder recibió las guías detalladas de los hitos 2 y 3
+(`Instrucciones_Curso/_md/Hito2.md` y `Hito3.md`, locales). Mandan sobre la guía
+general para esos hitos; la diferencia (Power BI y libro de Excel en lugar de
+`stg` en PostgreSQL y DDL) está en el [ADR 0005](adr/0005-hitos-2-y-3-power-bi.md)
+y sus requisitos, en `requisitos-del-profesor.md` (secciones F y G). No hay
+tiempo para repartir tareas por persona: el líder dirige, los agentes ejecutan
+y la parte de Power BI Desktop la hace el líder.
+
+| Fecha | Trabajo |
+|---|---|
+| Vie 20/11 | Descarga de 2021–2025, decisión del formato de conexión, segunda fuente (entidades), perfilado completo; diseño dimensional |
+| Sáb 21/11 | Conexión y perfilado en Power BI, libro de Excel, entrega del Hito 2; semilla de clasificación de entidades |
+| Dom 22/11 | Transformaciones, dimensiones y hecho, modelo en Power BI, bitácora, PDF de diseño, diapositivas, entrega del Hito 3 |
+
+Las tareas son los issues del milestone **H2** y **H3** de GitHub; el issue de
+coordinación («H2/H3 · Coordinación») tiene el mapa con dependencias, ejecutor y
+plan de recorte. Hora límite de cada entrega: **23:59** (sábado 21/11 y domingo
+22/11). El equipo se llama **Grupo 5** (asignado por el profesor).
 
 ## Qué se conserva del trabajo anterior
 
