@@ -440,6 +440,278 @@ def measure_year_data(
     }
 
 
+REQUIRED_BUYER_SUMMARY_COLUMNS = {
+    "anio",
+    "buyer_id",
+    "buyer_name_mas_frecuente",
+    "procesos",
+    "adjudicaciones",
+    "suma_adjudicado",
+    "suma_estimado",
+    "procesos_con_ambos_importes",
+    "procesos_sin_monto_adjudicado",
+}
+
+
+def load_buyer_summary_csv(path: Path) -> dict[int, list[dict[str, str]]]:
+    """Load aggregated buyer summary CSV and group rows by year.
+
+    Validates that all required columns are present; raises ValueError otherwise.
+    """
+    if not path.exists():
+        raise FileNotFoundError(f"Buyer summary CSV not found: {path}")
+
+    summary_by_year: dict[int, list[dict[str, str]]] = defaultdict(list)
+    with path.open("r", encoding="utf-8", newline="", errors="replace") as f:
+        reader = csv.DictReader(f)
+        if not reader.fieldnames:
+            raise ValueError(f"Buyer summary CSV has no header: {path}")
+        missing = REQUIRED_BUYER_SUMMARY_COLUMNS - set(reader.fieldnames)
+        if missing:
+            raise ValueError(f"Missing required columns in buyer summary CSV: {sorted(missing)}")
+
+        for row in reader:
+            yr_str = row.get("anio", "").strip()
+            if not yr_str:
+                continue
+            try:
+                yr = int(yr_str)
+                summary_by_year[yr].append(row)
+            except ValueError:
+                continue
+
+    return summary_by_year
+
+
+def measure_year_from_summary(
+    year: int,
+    rows: list[dict[str, str]],
+    catalog: dict[str, list[dict[str, str]]],
+) -> dict[str, Any]:
+    """Measure crosswalk coverage for a single year directly from buyer summary rows.
+
+    Produces identical metrics to measure_year_data without re-reading releases and awards.
+    """
+    total_processes = 0
+    processes_with_amount = 0
+    processes_without_amount = 0
+    total_awarded_amount = 0.0
+
+    all_buyers: set[str] = set()
+    buyer_names: dict[str, str] = {}
+    buyer_proc_counts: Counter[str] = Counter()
+    buyer_awarded_amounts: dict[str, float] = defaultdict(float)
+    buyer_no_amt_procs: Counter[str] = Counter()
+
+    matched_simple_buyers: set[str] = set()
+    matched_root_buyers: set[str] = set()
+    unmatched_buyers: set[str] = set()
+
+    matched_simple_procs = 0
+    matched_root_procs = 0
+    unmatched_procs = 0
+
+    matched_simple_amount = 0.0
+    matched_root_amount = 0.0
+    unmatched_amount = 0.0
+
+    regex_matched_buyers: set[str] = set()
+    regex_failed_buyers: set[str] = set()
+    roots_to_buyers: dict[str, set[str]] = defaultdict(set)
+
+    sector_proc_counts: Counter[str] = Counter()
+    sector_amounts: dict[str, float] = defaultdict(float)
+    sector_buyers: dict[str, set[str]] = defaultdict(set)
+    sector111_subtypes: Counter[str] = Counter()
+
+    for r in rows:
+        b_id = r["buyer_id"].strip()
+        b_name = r.get("buyer_name_mas_frecuente", "").strip()
+        procs = int(r.get("procesos", 0))
+        amt = float(r.get("suma_adjudicado", 0.0))
+        no_amt = int(r.get("procesos_sin_monto_adjudicado", 0))
+        has_amt_procs = procs - no_amt
+
+        total_processes += procs
+        processes_with_amount += has_amt_procs
+        processes_without_amount += no_amt
+        total_awarded_amount += amt
+
+        all_buyers.add(b_id)
+        if b_name and b_id not in buyer_names:
+            buyer_names[b_id] = b_name
+        buyer_proc_counts[b_id] += procs
+        buyer_awarded_amounts[b_id] += amt
+        buyer_no_amt_procs[b_id] += no_amt
+
+        m = BUYER_REGEX.match(b_id)
+        if m:
+            regex_matched_buyers.add(b_id)
+            root_ruc = m.group(1)
+            suffix = m.group(2)
+            roots_to_buyers[root_ruc].add(b_id)
+
+            if root_ruc in catalog:
+                cat_rows = catalog[root_ruc]
+                sec_desc = cat_rows[0].get("B", "").strip() or "DESCONOCIDO"
+                sector_proc_counts[sec_desc] += procs
+                sector_amounts[sec_desc] += amt
+                sector_buyers[sec_desc].add(b_id)
+
+                if cat_rows[0].get("A", "").strip() == "111":
+                    sub_t = classify_sector111_entry(cat_rows[0].get("E", ""))
+                    sector111_subtypes[sub_t] += procs
+
+                if suffix is None:
+                    matched_simple_buyers.add(b_id)
+                    matched_simple_procs += procs
+                    matched_simple_amount += amt
+                else:
+                    matched_root_buyers.add(b_id)
+                    matched_root_procs += procs
+                    matched_root_amount += amt
+            else:
+                unmatched_buyers.add(b_id)
+                unmatched_procs += procs
+                unmatched_amount += amt
+        else:
+            regex_failed_buyers.add(b_id)
+            unmatched_buyers.add(b_id)
+            unmatched_procs += procs
+            unmatched_amount += amt
+
+    total_matched_buyers = matched_simple_buyers | matched_root_buyers
+    total_matched_procs = matched_simple_procs + matched_root_procs
+    total_matched_amount = matched_simple_amount + matched_root_amount
+
+    distinct_buyers_count = len(all_buyers)
+
+    # Top uncrossed buyers for this year (deterministic tie-breaking)
+    uncrossed_list = []
+    for b_id in sorted(
+        unmatched_buyers,
+        key=lambda b: (
+            buyer_proc_counts[b],
+            1 if b in PREFERRED_TIE_BREAKERS else 0,
+            round(buyer_awarded_amounts[b], 2),
+            b,
+        ),
+        reverse=True,
+    )[:30]:
+        uncrossed_list.append(
+            {
+                "buyer_id": b_id,
+                "buyer_name": buyer_names.get(b_id, ""),
+                "process_count": buyer_proc_counts[b_id],
+                "awarded_amount": round(buyer_awarded_amounts[b_id], 2),
+                "processes_without_amount": buyer_no_amt_procs[b_id],
+            }
+        )
+
+    # Multi-buyer roots
+    multi_buyer_roots = {r: bs for r, bs in roots_to_buyers.items() if len(bs) > 1}
+    catalog_roots_count = sum(1 for r in roots_to_buyers if r in catalog)
+    pct_cat_roots = round((catalog_roots_count / len(roots_to_buyers)) * 100, 2) if roots_to_buyers else 0.0
+
+    return {
+        "year": year,
+        "releases_file": "perfil-calidad-sercop-por-comprador.csv",
+        "awards_file": "perfil-calidad-sercop-por-comprador.csv",
+        "universe": {
+            "distinct_buyers": distinct_buyers_count,
+            "total_processes": total_processes,
+            "processes_with_awarded_amount": processes_with_amount,
+            "processes_without_awarded_amount": processes_without_amount,
+            "total_awarded_amount": round(total_awarded_amount, 2),
+        },
+        "coverage": {
+            "buyers": {
+                "matched_simple_count": len(matched_simple_buyers),
+                "pct_matched_simple": round((len(matched_simple_buyers) / distinct_buyers_count) * 100, 2)
+                if distinct_buyers_count
+                else 0.0,
+                "matched_root_count": len(matched_root_buyers),
+                "pct_matched_root": round((len(matched_root_buyers) / distinct_buyers_count) * 100, 2)
+                if distinct_buyers_count
+                else 0.0,
+                "total_matched_count": len(total_matched_buyers),
+                "pct_total_matched": round((len(total_matched_buyers) / distinct_buyers_count) * 100, 2)
+                if distinct_buyers_count
+                else 0.0,
+                "unmatched_count": len(unmatched_buyers),
+                "pct_unmatched": round((len(unmatched_buyers) / distinct_buyers_count) * 100, 2)
+                if distinct_buyers_count
+                else 0.0,
+            },
+            "processes": {
+                "matched_simple_count": matched_simple_procs,
+                "pct_matched_simple": round((matched_simple_procs / total_processes) * 100, 2)
+                if total_processes
+                else 0.0,
+                "matched_root_count": matched_root_procs,
+                "pct_matched_root": round((matched_root_procs / total_processes) * 100, 2) if total_processes else 0.0,
+                "total_matched_count": total_matched_procs,
+                "pct_total_matched": round((total_matched_procs / total_processes) * 100, 2)
+                if total_processes
+                else 0.0,
+                "unmatched_count": unmatched_procs,
+                "pct_unmatched": round((unmatched_procs / total_processes) * 100, 2) if total_processes else 0.0,
+            },
+            "awarded_amount": {
+                "matched_simple_amount": round(matched_simple_amount, 2),
+                "pct_matched_simple": round((matched_simple_amount / total_awarded_amount) * 100, 2)
+                if total_awarded_amount
+                else 0.0,
+                "matched_root_amount": round(matched_root_amount, 2),
+                "pct_matched_root": round((matched_root_amount / total_awarded_amount) * 100, 2)
+                if total_awarded_amount
+                else 0.0,
+                "total_matched_amount": round(total_matched_amount, 2),
+                "pct_total_matched": round((total_matched_amount / total_awarded_amount) * 100, 2)
+                if total_awarded_amount
+                else 0.0,
+                "unmatched_amount": round(unmatched_amount, 2),
+                "pct_unmatched": round((unmatched_amount / total_awarded_amount) * 100, 2)
+                if total_awarded_amount
+                else 0.0,
+            },
+        },
+        "root_validation": {
+            "total_distinct_roots": len(roots_to_buyers),
+            "roots_with_13_digits": sum(1 for r in roots_to_buyers if len(r) == 13 and r.isdigit()),
+            "roots_in_catalog": catalog_roots_count,
+            "pct_roots_in_catalog": pct_cat_roots,
+            "roots_with_multiple_buyer_ids": len(multi_buyer_roots),
+            "regex_failed_buyer_ids_count": len(regex_failed_buyers),
+        },
+        "catalog_sectors": [
+            {
+                "sector_description": sec,
+                "process_count": cnt,
+                "pct_of_matched_procs": round((cnt / total_matched_procs) * 100, 2) if total_matched_procs else 0.0,
+                "awarded_amount": round(sector_amounts[sec], 2),
+                "pct_of_matched_amount": round((sector_amounts[sec] / total_matched_amount) * 100, 2)
+                if total_matched_amount
+                else 0.0,
+                "distinct_buyers": len(sector_buyers[sec]),
+            }
+            for sec, cnt in sector_proc_counts.most_common()
+        ],
+        "sector111_breakdown": [
+            {
+                "class_type": k,
+                "process_count": v,
+                "pct_of_sector111_procs": round((v / sector_proc_counts.get("ADMINISTRACION DEL ESTADO", 1)) * 100, 2),
+            }
+            for k, v in sector111_subtypes.most_common()
+        ],
+        "top_30_uncrossed_buyers": uncrossed_list,
+        "_buyers_set": all_buyers,
+        "_buyer_names": buyer_names,
+        "_buyer_proc_counts": buyer_proc_counts,
+    }
+
+
 def compute_combined_metrics(
     year_results: list[dict[str, Any]],
     global_distinct_buyers: int | None = None,
@@ -602,22 +874,31 @@ def main() -> int:
         return 1
 
     # Check for Issue #62 aggregated buyer summary
+    summary_by_year: dict[int, list[dict[str, str]]] = {}
     if args.buyer_summary_csv:
         summary_path = (
             args.buyer_summary_csv if args.buyer_summary_csv.is_absolute() else repo_root / args.buyer_summary_csv
         )
-        if summary_path.exists():
-            print(f"Issue #62 aggregated buyer summary found at: {summary_path}")
-        else:
-            print(f"Issue #62 aggregated buyer summary not found at: {summary_path}. Proceeding with derived CSVs.")
+        if not summary_path.exists():
+            print(f"ERROR: Buyer summary CSV not found at: {summary_path}", file=sys.stderr)
+            return 1
+        print(f"Loading buyer summary CSV from: {summary_path}...")
+        try:
+            summary_by_year = load_buyer_summary_csv(summary_path)
+            print(f"Loaded buyer summary covering {len(summary_by_year)} years.")
+        except (ValueError, FileNotFoundError) as e:
+            print(f"ERROR loading buyer summary CSV: {e}", file=sys.stderr)
+            return 1
     else:
         print("Issue #62 aggregated buyer summary not specified. Proceeding with derived CSVs per year.")
 
-    # Dynamically discover year data folders under derived_dir
-    years_data = discover_year_data(derived_dir)
-    if not years_data:
-        print(f"ERROR: No valid year data folders found under {derived_dir}", file=sys.stderr)
-        return 1
+    years_data: dict[int, tuple[Path, Path]] = {}
+    if not summary_by_year:
+        # Dynamically discover year data folders under derived_dir
+        years_data = discover_year_data(derived_dir)
+        if not years_data:
+            print(f"ERROR: No valid year data folders found under {derived_dir}", file=sys.stderr)
+            return 1
 
     print(f"Loading catalog dynamically from {catalog_path}...")
     catalog = load_catalog(catalog_path)
@@ -628,10 +909,15 @@ def main() -> int:
     global_all_buyer_names: dict[str, str] = {}
     global_buyer_proc_counts: Counter[str] = Counter()
 
-    for year in sorted(years_data.keys()):
-        rel_path, awd_path = years_data[year]
-        print(f"Measuring year {year} from {rel_path.parent.name}...")
-        yr_res = measure_year_data(year, rel_path, awd_path, catalog)
+    active_years = sorted(summary_by_year.keys()) if summary_by_year else sorted(years_data.keys())
+    for year in active_years:
+        if summary_by_year:
+            print(f"Measuring year {year} from buyer summary...")
+            yr_res = measure_year_from_summary(year, summary_by_year[year], catalog)
+        else:
+            rel_path, awd_path = years_data[year]
+            print(f"Measuring year {year} from {rel_path.parent.name}...")
+            yr_res = measure_year_data(year, rel_path, awd_path, catalog)
 
         # Collect global buyer data before cleaning internal fields
         b_set = yr_res.pop("_buyers_set", set())

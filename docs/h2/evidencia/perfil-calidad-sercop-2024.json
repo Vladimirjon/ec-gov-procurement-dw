@@ -1,0 +1,669 @@
+{
+  "metadata": {
+    "script_name": "profile_h2_quality.py",
+    "script_sha256": "F4F0DE2857DE6B143A0DB27CE62E6C67BA2177556444D20451F2ABECB312EB8B",
+    "execution_command": "python -I scripts/profile_h2_quality.py --derived-dir data/derivados --output-dir docs/h2/evidencia --years 2021 2022 2023 2024 2025 --reference-awarded-2025 7318.7 --buyer-summary-csv docs/h2/evidencia/perfil-calidad-sercop-por-comprador.csv",
+    "executed_at_utc": "2026-11-21T23:38:39.135435+00:00",
+    "year": 2024
+  },
+  "year": 2024,
+  "input_files": {
+    "awards": {
+      "relative_path": "data/derivados/sercop-portal-csv-2024-20261121-150856/awards_2024.csv",
+      "file_name": "awards_2024.csv",
+      "size_bytes": 42683917,
+      "sha256": "5398288E9BB24835D642EC80AC42F64744ADB6820D729ACA288E077E68A97426"
+    },
+    "contracts": {
+      "relative_path": "data/derivados/sercop-portal-csv-2024-20261121-150856/contracts_2024.csv",
+      "file_name": "contracts_2024.csv",
+      "size_bytes": 40874548,
+      "sha256": "0A855EF7A5616A74D014DFB87EACE0974B3E9D1383603B5A64B50A032C0C1D1F"
+    },
+    "extensions": {
+      "relative_path": "data/derivados/sercop-portal-csv-2024-20261121-150856/extensions_2024.csv",
+      "file_name": "extensions_2024.csv",
+      "size_bytes": 757,
+      "sha256": "9AE0A9EB81D484976FD4F5D8625DDAEF368D74301CF0C7D58B659C2D8E1CA57B"
+    },
+    "metadata": {
+      "relative_path": "data/derivados/sercop-portal-csv-2024-20261121-150856/metadata_2024.csv",
+      "file_name": "metadata_2024.csv",
+      "size_bytes": 491,
+      "sha256": "930C4924C5C8520DD3FA9FE519BDC69E789AC7B4B0263CEF37F04ECFF6DA21CE"
+    },
+    "planning": {
+      "relative_path": "data/derivados/sercop-portal-csv-2024-20261121-150856/planning_2024.csv",
+      "file_name": "planning_2024.csv",
+      "size_bytes": 14243555,
+      "sha256": "485B848B5F74DDAA1C164669BB295A77AA5893A03431D4DE6E325221FE57F856"
+    },
+    "releases": {
+      "relative_path": "data/derivados/sercop-portal-csv-2024-20261121-150856/releases_2024.csv",
+      "file_name": "releases_2024.csv",
+      "size_bytes": 55152909,
+      "sha256": "59DC691B193682AF1A65DADC6BE1D73236CEF195DCDCE6C75CB8074C2BFEC3B8"
+    },
+    "suppliers": {
+      "relative_path": "data/derivados/sercop-portal-csv-2024-20261121-150856/suppliers_2024.csv",
+      "file_name": "suppliers_2024.csv",
+      "size_bytes": 38711775,
+      "sha256": "CED1184606BFD04C7911E00830009703716C438E8DA1B3AFFABFC915F031CA5D"
+    },
+    "tender": {
+      "relative_path": "data/derivados/sercop-portal-csv-2024-20261121-150856/tender_2024.csv",
+      "file_name": "tender_2024.csv",
+      "size_bytes": 136474719,
+      "sha256": "37715B0156623AA49FB4171B3EC7B025890AAD8529B4D0EA874507DD64D21DA5"
+    }
+  },
+  "control_totals": {
+    "total_releases": 219185,
+    "distinct_ocids": 219185,
+    "total_tender_rows": 212386,
+    "distinct_tender_ocids": 212386,
+    "total_awards_rows": 210445,
+    "distinct_awards_ocids": 208171,
+    "total_contracts_rows": 206289,
+    "distinct_contracts_ocids": 204274,
+    "sum_awards_amount": 6895826062.72,
+    "sum_tender_value_amount": 5518333500.28,
+    "sum_contracts_amount": 126347765798.05,
+    "processes_with_both_amounts": 187672,
+    "pct_processes_with_both_amounts": 85.62,
+    "processes_with_award_no_estimate": 20493,
+    "pct_processes_with_award_no_estimate": 9.35,
+    "processes_with_estimate_no_award": 654,
+    "pct_processes_with_estimate_no_award": 0.3,
+    "processes_without_any_amount": 10366,
+    "pct_processes_without_any_amount": 4.73
+  },
+  "completeness": {
+    "buyer_id_missing": 0,
+    "buyer_name_missing": 0,
+    "procurement_method_missing": 0,
+    "procurement_method_details_missing": 0,
+    "tender_value_amount": {
+      "empty": 24060,
+      "zero": 0,
+      "positive": 188326,
+      "negative": 0,
+      "non_numeric": 0,
+      "completeness_pct_on_tender": 88.67,
+      "completeness_pct_on_releases": 85.92
+    },
+    "awards_amount": {
+      "empty": 6,
+      "zero": 0,
+      "positive": 210439,
+      "negative": 0,
+      "non_numeric": 0,
+      "completeness_pct_on_awards": 100.0,
+      "completeness_pct_on_releases": 94.97
+    },
+    "corrected_value_amount": {
+      "empty": 210445,
+      "populated": 0
+    },
+    "entered_value_amount": {
+      "empty": 210445,
+      "populated": 0
+    },
+    "candidate_dates_coverage": {
+      "release_date": {
+        "populated": 219185,
+        "pct_on_releases": 100.0
+      },
+      "tender_period_start_date": {
+        "populated": 42768,
+        "pct_on_tender": 20.14,
+        "pct_on_releases": 19.51
+      },
+      "award_date": {
+        "populated": 33993,
+        "pct_on_awards": 16.15,
+        "pct_on_releases": 14.99
+      },
+      "contract_date_signed": {
+        "populated": 36670,
+        "pct_on_contracts": 17.78,
+        "pct_on_releases": 16.73
+      }
+    }
+  },
+  "validity": {
+    "tender_value_amount": {
+      "positive": 188326,
+      "empty": 24060
+    },
+    "awards_amount": {
+      "positive": 210439,
+      "empty": 6
+    },
+    "currencies": {
+      "tender_value_currency": {
+        "USD": 188326,
+        "": 24060
+      },
+      "awards_currency": {
+        "USD": 210439,
+        "": 6
+      },
+      "contracts_currency": {
+        "": 169619,
+        "USD": 36670
+      }
+    },
+    "dates": {
+      "release_date": {
+        "unparseable": 0,
+        "before_2015": 0,
+        "future": 0,
+        "after_file_year": 20832
+      },
+      "tender_period_start_date": {
+        "unparseable": 0,
+        "before_2015": 0,
+        "future": 0,
+        "after_file_year": 0
+      },
+      "award_date": {
+        "unparseable": 0,
+        "before_2015": 0,
+        "future": 0,
+        "after_file_year": 3788
+      },
+      "contract_date_signed": {
+        "unparseable": 0,
+        "before_2015": 0,
+        "future": 0,
+        "after_file_year": 6061
+      }
+    },
+    "procurement_methods": {
+      "distribution": {
+        "selective": 122446,
+        "direct": 61517,
+        "open": 27976,
+        "limited": 447
+      },
+      "unexpected_methods": {}
+    },
+    "status_distributions": {
+      "tender": {
+        "complete": 173153,
+        "active": 39233
+      },
+      "awards": {
+        "active": 169611,
+        "": 40834
+      },
+      "contracts": {
+        "terminated": 150407,
+        "active": 55882
+      }
+    }
+  },
+  "uniqueness": {
+    "releases_ocid_duplicates_within_year": 0,
+    "releases_pairs_ocid_relid_duplicates": 0,
+    "tender_ocid_duplicates": 0,
+    "tender_pairs_duplicates": 0,
+    "awards_pairs_duplicates": 2274,
+    "awards_duplicate_id_within_process": 0,
+    "contracts_pairs_duplicates": 2015,
+    "multiplicity_of_awards": {
+      "processes_with_0_awards": 11014,
+      "processes_with_1_award": 207809,
+      "processes_with_more_than_1_award": 362,
+      "full_awards_per_process_histogram": {
+        "0": 11014,
+        "1": 207809,
+        "2": 207,
+        "3": 41,
+        "4": 17,
+        "5": 12,
+        "6": 15,
+        "7": 10,
+        "8": 6,
+        "9": 6,
+        "10": 4,
+        "11": 4,
+        "12": 3,
+        "13": 2,
+        "14": 1,
+        "15": 1,
+        "17": 1,
+        "18": 2,
+        "19": 2,
+        "20": 1,
+        "21": 2,
+        "22": 2,
+        "23": 3,
+        "25": 2,
+        "26": 2,
+        "27": 1,
+        "29": 1,
+        "30": 1,
+        "31": 1,
+        "35": 1,
+        "43": 1,
+        "45": 2,
+        "60": 1,
+        "71": 1,
+        "85": 1,
+        "105": 2,
+        "110": 1,
+        "137": 1,
+        "208": 1
+      }
+    }
+  },
+  "consistency": {
+    "buyer_id_formats": {
+      "simple": 169758,
+      "suffix": 49418,
+      "malformed": 9
+    },
+    "buyer_names_per_buyer_id": {
+      "distinct_buyer_ids": 5066,
+      "buyer_ids_with_1_name": 5009,
+      "buyer_ids_with_multiple_names": 57,
+      "max_names_for_single_buyer_id": 2
+    },
+    "buyer_ids_per_buyer_name": {
+      "distinct_buyer_names": 3256,
+      "buyer_names_with_1_id": 1406,
+      "buyer_names_with_multiple_ids": 1850,
+      "max_ids_for_single_buyer_name": 4
+    },
+    "buyer_id_vs_procuring_entity_id": {
+      "exact_match": 42768,
+      "same_13digit_root_different_suffix": 169501,
+      "different_root": 0,
+      "missing_either": 117
+    },
+    "amount_vs_corrected_and_entered_value": {
+      "amount_vs_corrected_both_present": 0,
+      "amount_vs_corrected_different": 0,
+      "amount_vs_entered_both_present": 0,
+      "amount_vs_entered_different": 0
+    },
+    "procurement_method_details_cardinality": {
+      "direct": 466,
+      "limited": 2,
+      "open": 7,
+      "selective": 60
+    }
+  },
+  "accuracy": {},
+  "timeliness": {
+    "release_date": {
+      "pct_outside_file_year": 9.5,
+      "min_date": "2024-01-02T00:00:00-05:00",
+      "max_date": "2026-01-01T16:41:45-05:00",
+      "monthly_distribution": {
+        "2024-01": 4910,
+        "2024-02": 16447,
+        "2024-03": 23292,
+        "2024-04": 22773,
+        "2024-05": 17846,
+        "2024-06": 16473,
+        "2024-07": 17361,
+        "2024-08": 15331,
+        "2024-09": 16263,
+        "2024-10": 13867,
+        "2024-11": 19370,
+        "2024-12": 14420,
+        "2025-01": 3778,
+        "2025-02": 2919,
+        "2025-03": 1948,
+        "2025-04": 1670,
+        "2025-05": 1702,
+        "2025-06": 1528,
+        "2025-07": 1395,
+        "2025-08": 1675,
+        "2025-09": 1443,
+        "2025-10": 1169,
+        "2025-11": 623,
+        "2025-12": 979,
+        "2026-01": 3
+      }
+    },
+    "tender_period_start_date": {
+      "pct_outside_file_year": 0.0,
+      "min_date": "2024-01-02T10:00:00-05:00",
+      "max_date": "2024-12-31T17:30:00-05:00",
+      "monthly_distribution": {
+        "2024-01": 378,
+        "2024-02": 1532,
+        "2024-03": 3077,
+        "2024-04": 3896,
+        "2024-05": 3352,
+        "2024-06": 3554,
+        "2024-07": 4245,
+        "2024-08": 4310,
+        "2024-09": 3444,
+        "2024-10": 4469,
+        "2024-11": 5165,
+        "2024-12": 5346
+      }
+    },
+    "award_date": {
+      "pct_outside_file_year": 11.14,
+      "min_date": "2024-01-10T17:17:14-05:00",
+      "max_date": "2025-12-24T10:36:55-05:00",
+      "monthly_distribution": {
+        "2024-01": 56,
+        "2024-02": 485,
+        "2024-03": 1318,
+        "2024-04": 2299,
+        "2024-05": 3200,
+        "2024-06": 2688,
+        "2024-07": 3176,
+        "2024-08": 2939,
+        "2024-09": 3068,
+        "2024-10": 3012,
+        "2024-11": 3553,
+        "2024-12": 4411,
+        "2025-01": 1908,
+        "2025-02": 1169,
+        "2025-03": 359,
+        "2025-04": 204,
+        "2025-05": 69,
+        "2025-06": 39,
+        "2025-07": 24,
+        "2025-08": 7,
+        "2025-09": 2,
+        "2025-10": 5,
+        "2025-11": 1,
+        "2025-12": 1
+      }
+    },
+    "contract_date_signed": {
+      "pct_outside_file_year": 16.53,
+      "min_date": "2024-01-17T00:00:00-05:00",
+      "max_date": "2025-12-31T00:00:00-05:00",
+      "monthly_distribution": {
+        "2024-01": 19,
+        "2024-02": 257,
+        "2024-03": 887,
+        "2024-04": 1932,
+        "2024-05": 2945,
+        "2024-06": 2960,
+        "2024-07": 3437,
+        "2024-08": 3202,
+        "2024-09": 3397,
+        "2024-10": 3370,
+        "2024-11": 3672,
+        "2024-12": 4531,
+        "2025-01": 2500,
+        "2025-02": 1866,
+        "2025-03": 934,
+        "2025-04": 401,
+        "2025-05": 199,
+        "2025-06": 83,
+        "2025-07": 36,
+        "2025-08": 19,
+        "2025-09": 9,
+        "2025-10": 5,
+        "2025-11": 5,
+        "2025-12": 4
+      }
+    }
+  },
+  "field_profiles": {
+    "releases": {
+      "ocid": {
+        "table": "releases",
+        "field": "ocid",
+        "total_rows": 219185,
+        "empty_count": 0,
+        "populated_count": 219185,
+        "distinct_count": 219185,
+        "completeness_pct": 100.0
+      },
+      "buyer_id": {
+        "table": "releases",
+        "field": "buyer_id",
+        "total_rows": 219185,
+        "empty_count": 0,
+        "populated_count": 219185,
+        "distinct_count": 5066,
+        "completeness_pct": 100.0
+      },
+      "buyer_name": {
+        "table": "releases",
+        "field": "buyer_name",
+        "total_rows": 219185,
+        "empty_count": 0,
+        "populated_count": 219185,
+        "distinct_count": 3256,
+        "completeness_pct": 100.0
+      },
+      "date": {
+        "table": "releases",
+        "field": "date",
+        "total_rows": 219185,
+        "empty_count": 0,
+        "populated_count": 219185,
+        "distinct_count": 16880,
+        "completeness_pct": 100.0,
+        "min_date": "2024-01-02T00:00:00-05:00",
+        "max_date": "2026-01-01T16:41:45-05:00"
+      }
+    },
+    "tender": {
+      "procurementMethod": {
+        "table": "tender",
+        "field": "procurementMethod",
+        "total_rows": 212386,
+        "empty_count": 0,
+        "populated_count": 212386,
+        "distinct_count": 4,
+        "completeness_pct": 100.0,
+        "distribution": {
+          "selective": 122446,
+          "direct": 61517,
+          "open": 27976,
+          "limited": 447
+        }
+      },
+      "procurementMethodDetails": {
+        "table": "tender",
+        "field": "procurementMethodDetails",
+        "total_rows": 212386,
+        "empty_count": 0,
+        "populated_count": 212386,
+        "distinct_count": 535,
+        "completeness_pct": 100.0
+      },
+      "value_amount": {
+        "table": "tender",
+        "field": "value_amount",
+        "total_rows": 212386,
+        "empty_count": 24060,
+        "populated_count": 188326,
+        "distinct_count": 61527,
+        "completeness_pct": 88.67,
+        "min": 0.03,
+        "max": 97791477.89
+      },
+      "value_currency": {
+        "table": "tender",
+        "field": "value_currency",
+        "total_rows": 212386,
+        "empty_count": 24060,
+        "populated_count": 188326,
+        "distinct_count": 1,
+        "completeness_pct": 88.67,
+        "distribution": {
+          "USD": 188326
+        }
+      },
+      "status": {
+        "table": "tender",
+        "field": "status",
+        "total_rows": 212386,
+        "empty_count": 0,
+        "populated_count": 212386,
+        "distinct_count": 2,
+        "completeness_pct": 100.0,
+        "distribution": {
+          "complete": 173153,
+          "active": 39233
+        }
+      },
+      "tenderPeriod_startDate": {
+        "table": "tender",
+        "field": "tenderPeriod_startDate",
+        "total_rows": 212386,
+        "empty_count": 169618,
+        "populated_count": 42768,
+        "distinct_count": 5199,
+        "completeness_pct": 20.14,
+        "min_date": "2024-01-02T10:00:00-05:00",
+        "max_date": "2024-12-31T17:30:00-05:00"
+      }
+    },
+    "awards": {
+      "id": {
+        "table": "awards",
+        "field": "id",
+        "total_rows": 210445,
+        "empty_count": 2,
+        "populated_count": 210443,
+        "distinct_count": 210187,
+        "completeness_pct": 100.0
+      },
+      "status": {
+        "table": "awards",
+        "field": "status",
+        "total_rows": 210445,
+        "empty_count": 40834,
+        "populated_count": 169611,
+        "distinct_count": 1,
+        "completeness_pct": 80.6,
+        "distribution": {
+          "active": 169611
+        }
+      },
+      "date": {
+        "table": "awards",
+        "field": "date",
+        "total_rows": 210445,
+        "empty_count": 176452,
+        "populated_count": 33993,
+        "distinct_count": 32995,
+        "completeness_pct": 16.15,
+        "min_date": "2024-01-10T17:17:14-05:00",
+        "max_date": "2025-12-24T10:36:55-05:00"
+      },
+      "amount": {
+        "table": "awards",
+        "field": "amount",
+        "total_rows": 210445,
+        "empty_count": 6,
+        "populated_count": 210439,
+        "distinct_count": 76055,
+        "completeness_pct": 100.0,
+        "min": 0.03,
+        "max": 89998355.28
+      },
+      "currency": {
+        "table": "awards",
+        "field": "currency",
+        "total_rows": 210445,
+        "empty_count": 6,
+        "populated_count": 210439,
+        "distinct_count": 1,
+        "completeness_pct": 100.0,
+        "distribution": {
+          "USD": 210439
+        }
+      },
+      "correctedValue_amount": {
+        "table": "awards",
+        "field": "correctedValue_amount",
+        "total_rows": 210445,
+        "empty_count": 210445,
+        "populated_count": 0,
+        "distinct_count": 0,
+        "completeness_pct": 0.0,
+        "min": null,
+        "max": null,
+        "distribution": {}
+      },
+      "enteredValue_amount": {
+        "table": "awards",
+        "field": "enteredValue_amount",
+        "total_rows": 210445,
+        "empty_count": 210445,
+        "populated_count": 0,
+        "distinct_count": 0,
+        "completeness_pct": 0.0,
+        "min": null,
+        "max": null,
+        "distribution": {}
+      }
+    },
+    "contracts": {
+      "id": {
+        "table": "contracts",
+        "field": "id",
+        "total_rows": 206289,
+        "empty_count": 0,
+        "populated_count": 206289,
+        "distinct_count": 206032,
+        "completeness_pct": 100.0
+      },
+      "status": {
+        "table": "contracts",
+        "field": "status",
+        "total_rows": 206289,
+        "empty_count": 0,
+        "populated_count": 206289,
+        "distinct_count": 2,
+        "completeness_pct": 100.0,
+        "distribution": {
+          "terminated": 150407,
+          "active": 55882
+        }
+      },
+      "dateSigned": {
+        "table": "contracts",
+        "field": "dateSigned",
+        "total_rows": 206289,
+        "empty_count": 169619,
+        "populated_count": 36670,
+        "distinct_count": 401,
+        "completeness_pct": 17.78,
+        "min_date": "2024-01-17T00:00:00-05:00",
+        "max_date": "2025-12-31T00:00:00-05:00"
+      },
+      "amount": {
+        "table": "contracts",
+        "field": "amount",
+        "total_rows": 206289,
+        "empty_count": 169619,
+        "populated_count": 36670,
+        "distinct_count": 26853,
+        "completeness_pct": 17.78,
+        "min": 0.01,
+        "max": 43024246320.0
+      },
+      "currency": {
+        "table": "contracts",
+        "field": "currency",
+        "total_rows": 206289,
+        "empty_count": 169619,
+        "populated_count": 36670,
+        "distinct_count": 1,
+        "completeness_pct": 17.78,
+        "distribution": {
+          "USD": 36670
+        }
+      }
+    }
+  }
+}
