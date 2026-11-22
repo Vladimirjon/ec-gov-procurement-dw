@@ -1,0 +1,28 @@
+grupo,etapa,tipo_entidad,anio,filas,suma_adjudicado_usd,suma_estimado_usd
+cadena,Nacional descargado,,,1007920,30952880306.92,25072968705.53
+cadena,Sin ocid duplicados,,,1007920,30952880306.92,25072968705.53
+cadena,Ventana 2021-2025,,,993425,28187165730.91,22805452044.61
+alcance,Fuera del gobierno central,,,669686,21864546771.50,18264813598.78
+alcance,Dudoso o sin clasificar,,,48639,810819796.83,700242162.39
+alcance,En el hecho,,,275100,5511799162.58,3840396283.44
+cadena,Sector clasificado,,,275100,5511799162.58,3840396283.44
+cadena,FactContratacion,,,275100,5511799162.58,3840396283.44
+tipo_anio,FactContratacion,ministerio,2022,55155,979688699.59,654807738.50
+tipo_anio,FactContratacion,ministerio,2021,46248,461593738.94,295638677.16
+tipo_anio,FactContratacion,presidencia,2021,29,1699763.40,2815455.45
+tipo_anio,FactContratacion,presidencia,2022,132,6825250.07,8616508.06
+tipo_anio,FactContratacion,ministerio,2023,64361,1510146432.77,1113908268.28
+tipo_anio,FactContratacion,presidencia,2023,84,9088793.57,11356113.12
+tipo_anio,FactContratacion,ministerio,2024,64006,1305436417.10,897249940.88
+tipo_anio,FactContratacion,presidencia,2024,28,2362463.95,1405686.54
+tipo_anio,FactContratacion,ministerio,2025,45017,1213816637.51,833471851.45
+tipo_anio,FactContratacion,presidencia,2025,40,21140965.68,21126044.00
+exclusion,Fuera de la ventana 2021-2025,,,14495,2765714576.01,2267516660.92
+tipo_anio,FactContratacion,instituto,2021,0,,
+tipo_anio,FactContratacion,instituto,2022,0,,
+tipo_anio,FactContratacion,instituto,2023,0,,
+tipo_anio,FactContratacion,instituto,2024,0,,
+tipo_anio,FactContratacion,instituto,2025,0,,
+dimension,DimTiempo,,,60,,
+dimension,DimEntidad,,,587,,
+dimension,DimMetodo,,,28,,
