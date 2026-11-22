@@ -2,3 +2,4 @@
 # El hash depende de los finales de línea, así que se versionan y se leen
 # siempre con LF, también en Windows.
 *.py text eol=lf
+*.pq text eol=lf
