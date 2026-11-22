@@ -74,6 +74,11 @@ def load_tables(base):
             match = ROOT_RE.match(row["buyer_id"])
             processes[row["ocid"]] = (moment.year * 100 + moment.month, match and match.group(1), year)
             buyer_ids.add(row["buyer_id"])
+            compiled = row["id"].endswith("-compiled")
+            counts["release_id_compiled"] += compiled
+            if moment.year > year:
+                counts["release_year_after_archive_year"] += 1
+                counts["release_year_after_archive_year_compiled"] += compiled
         for row in read_rows(folder / f"tender_{year}.csv"):
             counts["tender_rows"] += 1
             counts["tender_repeated_ocid"] += row["ocid"] in tenders
@@ -161,6 +166,9 @@ def measure(base):
     out["processes_with_awarded_amount"] = len(has_amount)
     out["processes_with_award_rows_and_no_amount"] = len(awards) - len(has_amount)
     out["processes_with_partial_amounts"] = sum(1 for v in awards.values() if 0 < v[2] < v[0])
+    out["release_id_compiled"] = counts["release_id_compiled"]
+    out["release_year_after_archive_year"] = counts["release_year_after_archive_year"]
+    out["release_year_after_archive_year_compiled"] = counts["release_year_after_archive_year_compiled"]
     out["processes_with_several_awards"] = len(multiple)
     out["processes_with_several_awards_in_window"] = len(multiple & in_window)
     out["tender_rows_in_window"] = sum(1 for o in in_window if o in tenders)

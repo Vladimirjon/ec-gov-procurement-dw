@@ -22,7 +22,7 @@ def write(path, header, rows):
 def build_year(base, year, releases, tenders, awards):
     folder = base / f"sercop-portal-csv-{year}-20990101-000000"
     folder.mkdir()
-    write(folder / f"releases_{year}.csv", ["ocid", "buyer_id", "date"], releases)
+    write(folder / f"releases_{year}.csv", ["ocid", "id", "buyer_id", "date"], releases)
     write(
         folder / f"tender_{year}.csv",
         ["ocid", "value_amount", "procurementMethod", "procurementMethodDetails"],
@@ -42,11 +42,11 @@ def test_measure_counts_windows_amounts_and_multiple_awards(tmp_path):
         tmp_path,
         2090,
         [
-            ["o1", "EC-RUC-1000000000001-5", "2021-01-31T23:30:00-05:00"],
-            ["o2", "EC-RUC-1000000000001", "2025-12-15T10:00:00-05:00"],
-            ["o3", "EC-RUC-2000000000001", "2026-01-02T10:00:00-05:00"],
-            ["o4", "MALFORMED", "2022-06-01T10:00:00-05:00"],
-            ["o5", "EC-RUC-3000000000001", "2023-03-01T10:00:00-05:00"],
+            ["o1", "o1-compiled", "EC-RUC-1000000000001-5", "2021-01-31T23:30:00-05:00"],
+            ["o2", "o2-compiled", "EC-RUC-1000000000001", "2025-12-15T10:00:00-05:00"],
+            ["o3", "o3-compiled", "EC-RUC-2000000000001", "2026-01-02T10:00:00-05:00"],
+            ["o4", "o4-compiled", "MALFORMED", "2022-06-01T10:00:00-05:00"],
+            ["o5", "o5-compiled", "EC-RUC-3000000000001", "2023-03-01T10:00:00-05:00"],
         ],
         [
             ["o1", "100.00", "open", "Licitación"],
@@ -92,7 +92,7 @@ def test_main_writes_json_and_never_overwrites(tmp_path):
     build_year(
         tmp_path,
         2090,
-        [["o1", "EC-RUC-1000000000001", "2021-02-01T10:00:00-05:00"]],
+        [["o1", "o1-compiled", "EC-RUC-1000000000001", "2021-02-01T10:00:00-05:00"]],
         [["o1", "", "open", "Licitación"]],
         [["o1", "5.00"]],
     )
@@ -119,7 +119,7 @@ def test_measure_rejects_two_downloads_of_the_same_year(tmp_path):
 
 
 def test_measure_rejects_a_repeated_ocid(tmp_path):
-    row = ["o1", "EC-RUC-1000000000001", "2021-02-01T10:00:00-05:00"]
+    row = ["o1", "o1-compiled", "EC-RUC-1000000000001", "2021-02-01T10:00:00-05:00"]
     build_year(tmp_path, 2090, [row, row], [["o1", "", "open", "Licitación"]], [["o1", "5.00"]])
     try:
         module.measure(tmp_path)
@@ -127,3 +127,21 @@ def test_measure_rejects_a_repeated_ocid(tmp_path):
         assert "ocid" in str(error)
         return
     raise AssertionError("a repeated ocid was accepted")
+
+
+def test_measure_counts_compiled_ids_and_release_year_after_archive_year(tmp_path):
+    build_year(
+        tmp_path,
+        2020,
+        [
+            ["o1", "o1-compiled", "EC-RUC-1000000000001", "2021-02-01T10:00:00-05:00"],
+            ["o2", "o2", "EC-RUC-1000000000001", "2021-03-01T10:00:00-05:00"],
+            ["o3", "o3-compiled", "EC-RUC-1000000000001", "2020-12-01T10:00:00-05:00"],
+        ],
+        [],
+        [],
+    )
+    result = module.measure(tmp_path)
+    assert result["release_id_compiled"] == 2
+    assert result["release_year_after_archive_year"] == 2
+    assert result["release_year_after_archive_year_compiled"] == 1
