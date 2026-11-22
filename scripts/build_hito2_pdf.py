@@ -279,7 +279,9 @@ def calidad(c: Counter) -> str:
         f"<p>Se evaluaron las seis dimensiones de calidad (completitud, validez, exactitud, consistencia, unicidad y oportunidad) en cada tabla. "
         f"El diagnóstico registra {q} hallazgos con evidencia, identificados como <code>Q-nn</code> (SERCOP) y <code>Q-Enn</code> (catálogo de entidades), "
         f"y {s} mediciones sin hallazgos, identificadas como <code>S-nn</code>. La columna de acción constituye el listado de tareas del Hito 3; "
-        "en este hito no se corrigió ningún dato.</p>"
+        "en este hito no se corrigió ningún dato. "
+        "El perfilado se realizó sobre todo el conjunto de datos y no sobre una muestra: en Power Query, la calidad, la distribución y el perfil de columna se calcularon con la opción «todo el conjunto de datos» en lugar de las primeras 1.000 filas, "
+        "y las cifras del diccionario y del diagnóstico se obtuvieron con una lectura completa de los 1.007.920 procesos, 981.348 licitaciones y 975.302 adjudicaciones de 2021 a 2025 y de los 3.140 registros del catálogo.</p>"
         + c.caption("Hallazgos de calidad, evidencia, impacto y acción propuesta")
         + f"<table class='wide-table'><colgroup>{widths}</colgroup><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>"
         + c.caption("Matriz de control: tabla por dimensión de calidad")
@@ -310,11 +312,11 @@ def cobertura(c: Counter) -> str:
     )
     return (
         "<h2>Parte 4. Matriz de cobertura</h2>"
-        "<p>La matriz contrasta cada pregunta del Hito 1 con los campos requeridos y determina si los datos obtenidos permiten responderla. Los campos necesarios están presentes en las fuentes conectadas; en las tres preguntas la disponibilidad es parcial y la columna de decisión documenta el ajuste aplicado.</p>"
+        "<p>La matriz contrasta cada pregunta del Hito 1 con los campos requeridos y determina si los datos obtenidos permiten responderla. Los campos necesarios están presentes en las fuentes conectadas; en las tres preguntas la disponibilidad es parcial, las tres se mantienen y la columna de decisión documenta el ajuste aplicado.</p>"
         + c.caption("Cobertura de las preguntas P1, P2 y P3")
         + f"<table><colgroup>{widths}</colgroup><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>"
         + "<h3>Conclusión</h3>"
-        "<p>Los campos que requieren P1, P2 y P3 están disponibles en las fuentes conectadas, por lo que las tres preguntas se mantienen con los ajustes registrados en la tabla anterior: el tipo de entidad se obtiene al clasificar los compradores en el Hito 3, la fecha de negocio se asigna con la regla propuesta en el hallazgo Q-10 y P2 se calcula sobre los procesos que tienen ambos importes (86,18 % del total), sin tratar los vacíos como cero.</p>"
+        "<p>Los campos que requieren P1, P2 y P3 están disponibles en las fuentes conectadas, por lo que las tres preguntas se mantienen con los ajustes registrados en la tabla anterior: el tipo de entidad se obtiene al clasificar los compradores en el Hito 3, la fecha de negocio es releases.date (hallazgo Q-10) y P2 se calcula sobre los procesos que tienen ambos importes (86,18 % del total), sin tratar los vacíos como cero.</p>"
     )
 
 
