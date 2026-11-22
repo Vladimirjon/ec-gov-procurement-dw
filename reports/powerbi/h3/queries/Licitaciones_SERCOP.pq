@@ -39,10 +39,10 @@ let
     #"Importe estimado decimal anulable" = Table.TransformColumns(
         #"Método sin espacios repetidos ni saltos de línea",
         {{"value_amount", each if _ = null or Text.Trim(_) = "" then null else Decimal.From(_, "en-US"),
-          type nullable number}}
+          type nullable Decimal.Type}}
     ),
     #"Unicidad de licitación verificada" =
-        if Table.RowCount(Table.Distinct(#"Importe estimado decimal anulable", {"ocid"}))
+        if Table.RowCount(Table.Distinct(Table.SelectColumns(#"Importe estimado decimal anulable", {"ocid"})))
             <> Table.RowCount(#"Importe estimado decimal anulable")
         then error "Q-06 y S-04: ocid duplicados en licitaciones; detener y registrar, sin borrar filas."
         else #"Importe estimado decimal anulable",

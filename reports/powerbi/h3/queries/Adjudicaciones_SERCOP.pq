@@ -27,10 +27,10 @@ let
     #"Importe adjudicado decimal anulable" = Table.TransformColumns(
         #"Campos de adjudicación sin importes vacíos de oferta",
         {{"amount", each if _ = null or Text.Trim(_) = "" then null else Decimal.From(_, "en-US"),
-          type nullable number}}
+          type nullable Decimal.Type}}
     ),
     #"Unicidad de adjudicación verificada" =
-        if Table.RowCount(Table.Distinct(#"Importe adjudicado decimal anulable", {"ocid", "id"}))
+        if Table.RowCount(Table.Distinct(Table.SelectColumns(#"Importe adjudicado decimal anulable", {"ocid", "id"})))
             <> Table.RowCount(#"Importe adjudicado decimal anulable")
         then error "Q-06: claves de adjudicación duplicadas; detener y registrar el conteo, sin borrar filas."
         else #"Importe adjudicado decimal anulable",
@@ -44,7 +44,7 @@ let
     // La suma antes/después y las exclusiones se contrastan con controles-esperados.csv.
     #"Adjudicaciones agrupadas por ocid (suma, conteo)" = Table.Group(
         #"Importes negativos excluidos", {"ocid"},
-        {{"MontoAdjudicado", each List.Sum([amount], Precision.Decimal), type nullable number},
+        {{"MontoAdjudicado", each List.Sum([amount], Precision.Decimal), type nullable Decimal.Type},
          {"NumAdjudicaciones", each Table.RowCount(_), Int64.Type}}
     )
 in

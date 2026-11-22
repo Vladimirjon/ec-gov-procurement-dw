@@ -31,7 +31,7 @@ let
         then error "S-05: claves vacías; detener y registrar el conteo, sin imputar."
         else #"Campos para comprobar claves",
     #"Unicidad de proceso verificada" =
-        if Table.RowCount(Table.Distinct(#"Claves completas verificadas", {"ocid"}))
+        if Table.RowCount(Table.Distinct(Table.SelectColumns(#"Claves completas verificadas", {"ocid"})))
             <> Table.RowCount(#"Claves completas verificadas")
         then error "Q-06: ocid duplicados; detener y registrar el conteo, sin borrar filas."
         else #"Claves completas verificadas",
