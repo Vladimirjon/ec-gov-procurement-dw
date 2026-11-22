@@ -3,7 +3,7 @@
 Produces deliverables/h2/Proyecto_Grupo5_Hito2.xlsx from the four versioned CSVs:
 - docs/h2/fuentes.csv (Template 6.1 + License + SHA-256)
 - docs/h2/diccionario.csv (Template 6.2 with grain, roles, units, profilings)
-- docs/h2/calidad.csv (Template 6.3 with Q-01..Q-12, Q-E01..Q-E08, S-01..S-04 and 4x6 matrix)
+- docs/h2/calidad.csv (Template 6.3 with Q-01..Q-13, Q-E01..Q-E08, S-01..S-05 and 4x6 matrix)
 - docs/h2/cobertura.csv (Template 6.4 with P1..P3, availability and decisions)
 
 Only the Python standard library is used (zipfile, xml.etree.ElementTree, csv).
@@ -484,7 +484,7 @@ def generate_portada_sheet() -> tuple[list[list[tuple[str, int]]], list[float], 
             ("Hoja 4: Calidad", 3),
             ("Plantilla 6.3: Diagnóstico de calidad", 2),
             (
-                "Diagnóstico en seis dimensiones: hallazgos Q-01..Q-12, Q-E01..Q-E08, S-01..S-04 y "
+                "Diagnóstico en seis dimensiones: hallazgos Q-01..Q-13, Q-E01..Q-E08, S-01..S-05 y "
                 "Matriz Tabla × Dimensión",  # noqa: RUF001
                 2,
             ),
@@ -623,7 +623,7 @@ def generate_calidad_sheet(
     # Section 1 Header
     rows.append(
         [
-            ("1. Diagnóstico de calidad multidimensional (Hallazgos Q-01..Q-12, Q-E01..Q-E08 y S-01..S-04)", 9),
+            ("1. Diagnóstico de calidad multidimensional (Hallazgos Q-01..Q-13, Q-E01..Q-E08 y S-01..S-05)", 9),
             ("", 9),
             ("", 9),
             ("", 9),
@@ -689,9 +689,9 @@ def generate_calidad_sheet(
     matrix_rows = [
         (
             "Procesos_SERCOP",
-            "Q-03",
+            "S-05",
             "Q-04, Q-E08",
-            "Q-07",
+            "Q-07, Q-13",
             "Q-06",
             "S-01",
             "Q-10",
