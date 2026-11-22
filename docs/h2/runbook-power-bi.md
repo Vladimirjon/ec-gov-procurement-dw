@@ -76,4 +76,3 @@ Guárdalas en `docs/h2/evidencia/capturas/`; revisa antes de compartir que no se
 7. `S07-totales.png`: control agregado, si se aprobó y ejecutó, sin datos individuales.
 
 ## Desvíos
-
