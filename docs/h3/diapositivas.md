@@ -1,17 +1,12 @@
 # Diapositivas del Hito 3
 
-Las 11 diapositivas de la presentación. Cada título afirma una idea y lo de abajo la demuestra. El guion está en `guion-presentacion.md`.
+Portada y una diapositiva por integrante. El guion está en `guion-presentacion.md`.
 
-1. **Trazabilidad de la contratación pública del gobierno central** (Francis Bravo, 15 s).
-2. **Los datos de contratación son abiertos, pero no permiten leer el gasto por tipo de entidad** (Francis Bravo, 40 s).
-3. **El modelo cubre los ministerios y la Presidencia; los institutos esperan validación** (Francis Bravo, 35 s).
-4. **Tres preguntas guían el modelo: qué pasó, dónde se desvía y qué viene** (Francis Bravo, 30 s).
-5. **Siete fuentes abiertas entran al modelo a través de 21 transformaciones controladas** (Ismael Freire, 40 s).
-6. **Cada uno de los 21 hallazgos del diagnóstico tiene su corrección y su total de control** (Ismael Freire, 40 s).
-7. **De 1.007.920 procesos nacionales, 275.100 son del gobierno central y las sumas cuadran al centavo** (Ismael Freire, 40 s).
-8. **Un hecho a grano de proceso y tres dimensiones responden las tres preguntas** (Harry Guajan, 70 s).
-9. **El modelo está construido en Power BI con relaciones de uno a varios y filtro único** (Harry Guajan, 50 s).
-10. **El total del modelo coincide al centavo con un cálculo independiente en Python** (Johann Pasquel, 120 s).
-11. **Dos procedimientos concentran el 65 % del monto adjudicado del gobierno central** (Jorge Torres, 120 s).
+1. **Trazabilidad de la contratación pública** (Francis Bravo).
+2. **El Estado publica cada compra, pero no dice cuánto gasta el gobierno central** (Francis Bravo).
+3. **Un millón de registros abiertos, depurados con 21 correcciones que se pueden verificar** (Ismael Freire).
+4. **Un hecho por proceso y tres dimensiones bastan para responder las tres preguntas** (Harry Guajan).
+5. **El modelo en Power BI y un cálculo independiente dan el mismo total, al centavo** (Johann Pasquel).
+6. **Dos procedimientos concentran casi dos tercios del monto adjudicado** (Jorge Torres).
 
-Foto de portada: Palacio de Carondelet, Taty2007, Wikimedia Commons, CC BY 3.0. Logo: Escuela Politécnica Nacional. Capturas de Power BI: equipo, 22/11/2026.
+Imágenes: portal de Contrataciones Abiertas Ecuador (SERCOP), capturado el 22/11/2026; logo de la Escuela Politécnica Nacional; identificación de la República del Ecuador y de SERCOP tomada de ese portal, como atribución de la fuente de datos. Proyecto académico sin relación con SERCOP.
