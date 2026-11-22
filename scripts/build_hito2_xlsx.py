@@ -697,7 +697,7 @@ def generate_calidad_sheet(
             "Q-04, Q-05, Q-11",
             "Q-08",
             "S-04",
-            "S-01",
+            "No medida",
             "Q-03",
         ),
         (

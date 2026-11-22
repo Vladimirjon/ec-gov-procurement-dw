@@ -5,7 +5,10 @@ and tests production deliverables/h2/Proyecto_Grupo5_Hito2.xlsx integrity.
 Only the Python standard library is used; no Excel installation required.
 """
 
+import importlib.util
+import json
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
@@ -18,6 +21,10 @@ SCRIPT = Path(__file__).resolve().parents[2] / "scripts" / "build_hito2_xlsx.py"
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 XML_NS = {"s": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+
+spec = importlib.util.spec_from_file_location("compare_hito2", REPO_ROOT / "scripts" / "compare_hito2_xlsx_sources.py")
+compare = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(compare)
 
 
 def make_synthetic_csvs(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
@@ -224,13 +231,14 @@ def test_build_hito2_xlsx_production_workbook():
         assert sheets == ["Portada", "Fuentes", "Diccionario", "Calidad", "Cobertura"]
 
         # 1. Portada checks: Equipo, Sector, Fecha
-        portada_xml = zf.read("xl/worksheets/sheet1.xml").decode("utf-8")
+        cells = compare.load_workbook_cells(prod_xlsx)
+        portada_xml = " ".join(cells["Portada"].values())
         assert "Grupo 5" in portada_xml
         assert "Gobierno central" in portada_xml
         assert "21/11/26" in portada_xml
 
         # 2. Fuentes checks: 5 sercop years + MDEP + gob.ec
-        fuentes_xml = zf.read("xl/worksheets/sheet2.xml").decode("utf-8")
+        fuentes_xml = " ".join(cells["Fuentes"].values())
         for year in ["2021", "2022", "2023", "2024", "2025"]:
             assert f"SERCOP — Contratación Abierta (OCDS) {year}" in fuentes_xml
         assert "MDEP — Catálogo Institucional e-SIGEF" in fuentes_xml
@@ -239,7 +247,7 @@ def test_build_hito2_xlsx_production_workbook():
         assert "6A7AD388D0B1B4D4C71C7BD82BDB78C4A43B24E84EF8C1E6584DE0662E88AEAA" in fuentes_xml
 
         # 3. Diccionario checks: 4 tables, grain, units
-        diccionario_xml = zf.read("xl/worksheets/sheet3.xml").decode("utf-8")
+        diccionario_xml = " ".join(cells["Diccionario"].values())
         assert "Tabla: Procesos_SERCOP" in diccionario_xml
         assert "Tabla: Licitaciones_SERCOP" in diccionario_xml
         assert "Tabla: Adjudicaciones_SERCOP" in diccionario_xml
@@ -251,7 +259,7 @@ def test_build_hito2_xlsx_production_workbook():
         assert "Medida del hecho" in diccionario_xml
 
         # 4. Calidad checks: Q-01..Q-11, Q-E01..Q-E08, S-01..S-04, matrix
-        calidad_xml = zf.read("xl/worksheets/sheet4.xml").decode("utf-8")
+        calidad_xml = " ".join(cells["Calidad"].values())
         for i in range(1, 12):
             assert f"Q-{i:02d}" in calidad_xml
         for i in range(1, 9):
@@ -261,7 +269,7 @@ def test_build_hito2_xlsx_production_workbook():
         assert "Matriz de control: Tabla × Dimensión" in calidad_xml  # noqa: RUF001
 
         # 5. Cobertura checks: P1, P2, P3
-        cobertura_xml = zf.read("xl/worksheets/sheet5.xml").decode("utf-8")
+        cobertura_xml = " ".join(cells["Cobertura"].values())
         assert "P1. ¿Cómo evolucionó" in cobertura_xml
         assert "P2. ¿Qué métodos" in cobertura_xml
         assert "P3. ¿Cuál es el monto" in cobertura_xml
@@ -272,3 +280,60 @@ def test_build_hito2_xlsx_production_workbook():
             text = zf.read(m).decode("utf-8", errors="replace")
             assert "[VERIFICAR]" not in text
             assert "[PENDIENTE]" not in text
+
+
+def test_compare_detects_wrong_cell_even_if_value_exists_elsewhere():
+    expected = {"Calidad": {"D3": "10", "D4": "20"}}
+    actual = {"Calidad": {"D3": "20", "D4": "10"}}
+    assert len(compare.compare_cells(actual, expected)) == 2
+
+
+def test_reader_supports_shared_and_inline_strings(tmp_path: Path):
+    path = tmp_path / "shared.xlsx"
+    with zipfile.ZipFile(path, "w") as zf:
+        zf.writestr(
+            "xl/workbook.xml",
+            '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
+            'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+            '<sheets><sheet name="Calidad" sheetId="1" r:id="rId1"/></sheets></workbook>',
+        )
+        zf.writestr(
+            "xl/_rels/workbook.xml.rels",
+            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            '<Relationship Id="rId1" Target="worksheets/sheet1.xml"/></Relationships>',
+        )
+        zf.writestr(
+            "xl/sharedStrings.xml",
+            '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+            "<si><r><t>Texto </t></r><r><t>compartido</t></r></si></sst>",
+        )
+        zf.writestr(
+            "xl/worksheets/sheet1.xml",
+            '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+            '<sheetData><row><c r="A1" t="s"><v>0</v></c>'
+            '<c r="B1" t="inlineStr"><is><t>Texto directo</t></is></c></row></sheetData></worksheet>',
+        )
+    assert compare.load_workbook_cells(path) == {"Calidad": {"A1": "Texto compartido", "B1": "Texto directo"}}
+
+
+def test_evidence_comparison_detects_a_changed_source(tmp_path: Path):
+    """A source change must be detected even when the workbook text is unchanged."""
+    for relative in [
+        "docs/h2/fuentes.csv",
+        "docs/h2/calidad.csv",
+        "docs/h2/cobertura.csv",
+        "docs/h2/evidencia/descargas-sercop.csv",
+        "docs/h2/evidencia/descargas-entidades.csv",
+        *(f"docs/h2/evidencia/perfil-calidad-sercop-{year}.json" for year in range(2021, 2026)),
+    ]:
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(REPO_ROOT / relative, destination)
+    errors, _ = compare.evidence_checks(tmp_path)
+    assert errors == []
+    profile = tmp_path / "docs/h2/evidencia/perfil-calidad-sercop-2021.json"
+    data = json.loads(profile.read_text(encoding="utf-8"))
+    data["control_totals"]["processes_with_both_amounts"] += 1
+    profile.write_text(json.dumps(data), encoding="utf-8", newline="\n")
+    errors, _ = compare.evidence_checks(tmp_path)
+    assert "P2 ambos importes" in errors

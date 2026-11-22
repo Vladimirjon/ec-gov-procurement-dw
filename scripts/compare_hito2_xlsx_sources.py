@@ -1,171 +1,189 @@
-"""Compare numbers and hashes in Proyecto_Grupo5_Hito2.xlsx against official source files.
+"""Check Hito 2 workbook cell contents and selected figures against source evidence.
 
-Checks:
-1. File counts and SHA-256 in Fuentes sheet vs descargas-sercop.csv and descargas-entidades.csv.
-2. Control totals and field profiles in Diccionario sheet vs perfil-calidad-sercop-AAAA.json and perfil-entidades.json.
-3. Quantified metrics in Calidad sheet (Q-01..Q-10, Q-E01..Q-E08) vs perfil-calidad and medicion-cruce.
-4. Universe and percentage in Cobertura sheet (P2 processes with both amounts, P3 months) vs sources.
-
-Prints a comprehensive audit report comparing expected vs observed values.
+The CSV comparison covers every populated cell created by the workbook generator.
+The evidence checks cover only the metrics explicitly listed below; they do not
+claim to validate every fact, interpretation, or number in the workbook.
 """
 
+import csv
+import importlib.util
+import json
 from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
-import zipfile
+from zipfile import ZipFile
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-XLSX_PATH = REPO_ROOT / "deliverables" / "h2" / "Proyecto_Grupo5_Hito2.xlsx"
-XML_NS = {"s": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+XLSX_PATH = REPO_ROOT / "deliverables/h2/Proyecto_Grupo5_Hito2.xlsx"
+NS = {
+    "s": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
+    "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+}
+REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships"
 
 
-def load_workbook_texts() -> dict[str, str]:
-    sheet_texts = {}
-    with zipfile.ZipFile(XLSX_PATH, "r") as zf:
-        wb_root = ET.fromstring(zf.read("xl/workbook.xml"))  # noqa: S314
-        for idx, sheet in enumerate(wb_root.findall(".//s:sheet", XML_NS), start=1):
-            name = sheet.attrib["name"]
-            sheet_xml = zf.read(f"xl/worksheets/sheet{idx}.xml").decode("utf-8")
-            sheet_texts[name] = sheet_xml
-    return sheet_texts
+def load_workbook_cells(path: Path) -> dict[str, dict[str, str]]:
+    """Read cell values from inline strings or Excel shared strings by sheet and address."""
+    with ZipFile(path) as zf:
+        workbook = ET.fromstring(zf.read("xl/workbook.xml"))  # noqa: S314
+        relationships = ET.fromstring(zf.read("xl/_rels/workbook.xml.rels"))  # noqa: S314
+        targets = {r.attrib["Id"]: r.attrib["Target"] for r in relationships.findall(f"{{{REL_NS}}}Relationship")}
+        shared = []
+        if "xl/sharedStrings.xml" in zf.namelist():
+            root = ET.fromstring(zf.read("xl/sharedStrings.xml"))  # noqa: S314
+            shared = ["".join(t.text or "" for t in item.findall(".//s:t", NS)) for item in root.findall("s:si", NS)]
+        sheets = {}
+        for sheet in workbook.findall(".//s:sheet", NS):
+            target = targets[sheet.attrib[f"{{{NS['r']}}}id"]].lstrip("/")
+            if not target.startswith("xl/"):
+                target = "xl/" + target
+            root = ET.fromstring(zf.read(target))  # noqa: S314
+            cells = {}
+            for cell in root.findall(".//s:sheetData/s:row/s:c", NS):
+                value = cell.find("s:v", NS)
+                cell_type = cell.get("t")
+                if cell_type == "inlineStr":
+                    text = "".join(t.text or "" for t in cell.findall("s:is//s:t", NS))
+                elif cell_type == "s" and value is not None:
+                    text = shared[int(value.text)]
+                else:
+                    text = value.text if value is not None and value.text is not None else ""
+                if text:
+                    cells[cell.attrib["r"]] = text
+            sheets[sheet.attrib["name"]] = cells
+        return sheets
+
+
+def _column(index: int) -> str:
+    name = ""
+    while index:
+        index, remainder = divmod(index - 1, 26)
+        name = chr(65 + remainder) + name
+    return name
+
+
+def expected_workbook_cells(root: Path) -> dict[str, dict[str, str]]:
+    """Recreate the generator's content without writing a workbook."""
+    path = root / "scripts/build_hito2_xlsx.py"
+    spec = importlib.util.spec_from_file_location("build_hito2_for_comparison", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    generators = {
+        "Portada": module.generate_portada_sheet(),
+        "Fuentes": module.generate_fuentes_sheet(root / "docs/h2/fuentes.csv"),
+        "Diccionario": module.generate_diccionario_sheet(root / "docs/h2/diccionario.csv"),
+        "Calidad": module.generate_calidad_sheet(root / "docs/h2/calidad.csv"),
+        "Cobertura": module.generate_cobertura_sheet(root / "docs/h2/cobertura.csv"),
+    }
+    result = {}
+    for name, (rows, _widths, _freeze, _merges) in generators.items():
+        result[name] = {
+            f"{_column(col)}{row}": text
+            for row, values in enumerate(rows, 1)
+            for col, (text, _style) in enumerate(values, 1)
+            if text
+        }
+    return result
+
+
+def compare_cells(actual: dict, expected: dict) -> list[str]:
+    errors = []
+    for sheet in sorted(set(actual) | set(expected)):
+        for cell in sorted(set(actual.get(sheet, {})) | set(expected.get(sheet, {}))):
+            if actual.get(sheet, {}).get(cell) != expected.get(sheet, {}).get(cell):
+                errors.append(f"{sheet}!{cell}: contenido distinto del CSV o generador")
+    return errors
+
+
+def _read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open(encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def evidence_checks(root: Path) -> tuple[list[str], int]:
+    """Check listed figures in their specific CSV record against versioned evidence."""
+    profiles = [
+        json.loads((root / f"docs/h2/evidencia/perfil-calidad-sercop-{year}.json").read_text(encoding="utf-8"))
+        for year in range(2021, 2026)
+    ]
+    downloads = _read_csv(root / "docs/h2/evidencia/descargas-sercop.csv")
+    entity_downloads = _read_csv(root / "docs/h2/evidencia/descargas-entidades.csv")
+    sources = _read_csv(root / "docs/h2/fuentes.csv")
+    quality = {row["id"]: row for row in _read_csv(root / "docs/h2/calidad.csv")}
+    coverage = {row["pregunta"][:2]: row for row in _read_csv(root / "docs/h2/cobertura.csv")}
+    errors = []
+    checks = 0
+
+    def require(label: str, condition: bool) -> None:
+        nonlocal checks
+        checks += 1
+        if not condition:
+            errors.append(label)
+
+    def number(value: int) -> str:
+        return f"{value:,}".replace(",", ".")
+
+    for index, year in enumerate(range(2021, 2026)):
+        matches = [
+            r
+            for r in downloads
+            if r["year"] == str(year) and "type=csv&" in r["url"] and r["sha256"] and r["http_status"] == "200"
+        ]
+        require(f"Fuentes {year}: descarga CSV única", len(matches) == 1)
+        if len(matches) == 1:
+            source = sources[index]
+            download = matches[0]
+            require(f"Fuentes {year}: URL", download["url"] in source["entidad_enlace"])
+            require(f"Fuentes {year}: SHA-256", source["sha256"].upper() == download["sha256"].upper())
+            releases = profiles[index]["control_totals"]["total_releases"]
+            require(f"Fuentes {year}: releases", number(releases) in source["filas_fecha_descarga"])
+
+    for index, url in [(5, entity_downloads[0]["url"]), (6, entity_downloads[1]["url"])]:
+        download = next(r for r in entity_downloads if r["url"] == url)
+        require(f"Fuentes {index + 1}: URL", url in sources[index]["entidad_enlace"])
+        require(f"Fuentes {index + 1}: SHA-256", sources[index]["sha256"].upper() == download["sha256"].upper())
+
+    totals = lambda key: sum(p["control_totals"][key] for p in profiles)  # noqa: E731
+    releases = totals("total_releases")
+    tenders = totals("total_tender_rows")
+    both = totals("processes_with_both_amounts")
+    no_award_amount = totals("processes_with_estimate_no_award") + totals("processes_without_any_amount")
+    empty_tender = sum(p["completeness"]["tender_value_amount"]["empty"] for p in profiles)
+    for label, row, field, value in [
+        ("P1 procesos", coverage["P1"], "decision", releases),
+        ("P1 licitaciones", coverage["P1"], "decision", tenders),
+        ("P1 sin licitación", coverage["P1"], "decision", releases - tenders),
+        ("P1 sin monto adjudicado", coverage["P1"], "decision", no_award_amount),
+        ("P2 ambos importes", coverage["P2"], "decision", both),
+        ("P2 licitaciones sin estimado", coverage["P2"], "decision", empty_tender),
+        ("P2 sin monto adjudicado", coverage["P2"], "decision", no_award_amount),
+        ("Q-01 licitaciones sin estimado", quality["Q-01"], "problema_evidencia", empty_tender),
+        ("S-01 releases", quality["S-01"], "problema_evidencia", releases),
+    ]:
+        require(label, number(value) in row[field])
+    percentage = f"{both / releases * 100:.2f}".replace(".", ",") + " %"
+    require("P2 porcentaje nacional", percentage in coverage["P2"]["decision"])
+    for date_key in ("release_date", "award_date"):
+        months = set().union(*(p["timeliness"][date_key]["monthly_distribution"] for p in profiles))
+        complete = all(f"{y}-{m:02d}" in months for y in range(2021, 2026) for m in range(1, 13))
+        require(f"60 meses con {date_key}", complete)
+    return errors, checks
 
 
 def main() -> int:
-    sheet_texts = load_workbook_texts()
-    discrepancies = []
-    comparisons = []
-
-    # 1. Check Fuentes hashes and rows
-    fuentes_xml = sheet_texts["Fuentes"]
-
-    # SERCOP CSV Hashes
-    expected_sercop_hashes = {
-        "2021": "60A843EFC8CDD78230A3D7C83CC2539AEE2C7E97EC59098EB9D939CADD4A2B61",
-        "2022": "1229CD3C9BE1BC8C7CF80173939A550FF4E4CDB9631F4BD12633ED6033DA4802",
-        "2023": "2C334812E8BC99A609125B48149A2B8CA7264271B56440FDD1768D6E31893C02",
-        "2024": "B14D3AFFD0C40AB8D5B66FA5B9367D6B10B9BAA7C5D314019A40211E2B8114B5",
-        "2025": "66FFF557785F9C9592E68B0B9A9D22609C1BE880586E0DEA534617B302F83B0A",
-    }
-    for yr, h in expected_sercop_hashes.items():
-        found = h in fuentes_xml
-        comparisons.append((f"Fuentes SERCOP {yr} SHA-256", h, "Presente" if found else "AUSENTE"))
-        if not found:
-            discrepancies.append(f"Hash SERCOP {yr} not found in Fuentes")
-
-    # MDEP & gob.ec Hashes
-    mdep_hash = "6A7AD388D0B1B4D4C71C7BD82BDB78C4A43B24E84EF8C1E6584DE0662E88AEAA"
-    found_mdep = mdep_hash in fuentes_xml
-    comparisons.append(("Fuentes MDEP SHA-256", mdep_hash, "Presente" if found_mdep else "AUSENTE"))
-    if not found_mdep:
-        discrepancies.append("Hash MDEP not found in Fuentes")
-
-    gobec_hash = "8332390FB0F6936BCF5DEEADFE728E539A8EE1D8E0472D58FC502A0504B082E8"
-    found_gobec = gobec_hash in fuentes_xml
-    comparisons.append(("Fuentes gob.ec SHA-256", gobec_hash, "Presente" if found_gobec else "AUSENTE"))
-    if not found_gobec:
-        discrepancies.append("Hash gob.ec not found in Fuentes")
-
-    # 2. Check Diccionario numbers
-    diccionario_xml = sheet_texts["Diccionario"]
-    expected_dicc_numbers = [
-        ("Total releases 2021-2025", "1.007.920"),
-        ("Simple form buyer_id", "780.471"),
-        ("Suffix form buyer_id", "227.406"),
-        ("Malformed buyer_id count", "43"),
-        ("Distinct buyer_names 2025", "3.263"),
-        ("Distinct buyer_ids 2025", "4.973"),
-        ("Missing value_amount 5yr", "109.793"),
-        ("Tender value sum USD", "25.072.968.705,53"),
-        ("Awards amount sum USD", "30.952.880.306,92"),
-        ("Awards with positive amount", "975.281"),
-        ("Multi-award processes count", "1.801"),
-        ("MDEP active records", "3.140"),
-        ("MDEP truncated RUCs (12 digits)", "1.266"),
-        ("MDEP distinct entity codes", "603"),
-        ("MDEP normalized RUCs", "3.080"),
-        ("Tabla Licitaciones_SERCOP", "Licitaciones_SERCOP"),
-        ("Grano Licitaciones_SERCOP", "Una fila = una etapa o convocatoria de licitación"),
-    ]
-    for label, val in expected_dicc_numbers:
-        found = val in diccionario_xml
-        comparisons.append((f"Diccionario: {label}", val, "Presente" if found else "AUSENTE"))
-        if not found:
-            discrepancies.append(f"Diccionario value {val} ({label}) not found")
-
-    # 3. Check Calidad numbers
-    calidad_xml = sheet_texts["Calidad"]
-    expected_calidad_metrics = [
-        ("Q-01 empty tender value", "109.793"),
-        ("Q-01 both amounts processes", "868.576"),
-        ("Q-02 empty awards values", "975.302"),
-        ("Q-03 releases coverage", "1.007.920"),
-        ("Q-06 multi-award processes", "1.801"),
-        ("Q-06 additional award rows", "10.827"),
-        ("Q-07 simple buyer_id", "780.471"),
-        ("Q-07 suffix buyer_id", "227.406"),
-        ("Q-07 malformed buyer_id", "43"),
-        ("Q-08 exact match buyer vs procuring", "201.249"),
-        ("Q-08 root match suffix diff", "779.657"),
-        ("Q-09 official reference USD", "7.318,7"),
-        ("Q-09 measured 2025 sum USD", "6.223,59"),
-        ("Q-09 unexplained difference USD", "1.095,11"),
-        ("Q-09 relative diff pct", "-14,96 %"),
-        ("Q-10 processes outside file year 2021", "18.235"),
-        ("Q-11 total fields with line breaks", "800"),
-        ("Q-11 line breaks procurementMethodDetails", "796"),
-        ("Q-11 tender control total", "981.348"),
-        ("Q-E01 truncated RUCs MDEP", "1.266"),
-        ("Q-E01 pct truncated MDEP", "40,32 %"),
-        ("Q-E02 duplicated RUCs MDEP", "60"),
-        ("Q-E02 duplicated rows MDEP", "120"),
-        ("Q-E05 unmatched processes count", "41.776"),
-        ("Q-E05 unmatched processes pct", "4,14 %"),
-        ("Q-E05 unmatched amount", "$765,66M"),
-        ("Q-E06 roots with multiple buyer_id", "2.730"),
-        ("Q-E06 suffix amount pct", "80,84 %"),
-        ("Q-E07 sector 111 rows", "990"),
-        ("Q-E07 sector 111 pct", "31,53 %"),
-        ("Q-E08 malformed buyer_ids count", "6"),
-    ]
-    for label, val in expected_calidad_metrics:
-        found = val in calidad_xml
-        comparisons.append((f"Calidad: {label}", val, "Presente" if found else "AUSENTE"))
-        if not found:
-            discrepancies.append(f"Calidad metric {val} ({label}) not found")
-
-    # 4. Check Cobertura numbers
-    cobertura_xml = sheet_texts["Cobertura"]
-    expected_cobertura = [
-        ("P2 processes with both amounts", "868.576"),
-        ("P2 pct with both amounts", "86,18 %"),
-        ("P2 empty value_amount", "109.793"),
-        ("P2 empty awards", "43.470"),
-        ("P3 monthly series length", "60 meses"),
-    ]
-    for label, val in expected_cobertura:
-        found = val in cobertura_xml
-        comparisons.append((f"Cobertura: {label}", val, "Presente" if found else "AUSENTE"))
-        if not found:
-            discrepancies.append(f"Cobertura metric {val} ({label}) not found")
-
-    # Print results
-    print("=" * 80)
-    print("REPORTE DE VERIFICACIÓN CRUZADA: LIBRO EXCEL VS FUENTES OFICIALES (JSON/CSV)")
-    print("=" * 80)
-    print(f"{'Métrica evaluada':<45} | {'Valor esperado':<20} | {'Estado':<10}")
-    print("-" * 80)
-    for label, val, status in comparisons:
-        print(f"{label:<45} | {val:<20} | {status:<10}")
-    print("-" * 80)
-    print(f"Total verificaciones: {len(comparisons)} | Discrepancias: {len(discrepancies)}")
-    if discrepancies:
-        print("\nDISCREPANCIAS DETECTADAS:")
-        for d in discrepancies:
-            print(f"- {d}")
-        return 1
-    print("\nTODAS LAS CIFRAS COINCIDEN AL 100 % CON LAS FUENTES Y EVIDENCIA VERSIONADA.")
-    return 0
+    actual = load_workbook_cells(XLSX_PATH)
+    expected = expected_workbook_cells(REPO_ROOT)
+    errors = compare_cells(actual, expected)
+    evidence_errors, count = evidence_checks(REPO_ROOT)
+    errors.extend(evidence_errors)
+    print(f"Celdas contrastadas con CSV/generador: {sum(map(len, expected.values()))}")
+    print(f"Controles seleccionados contra JSON/CSV de evidencia: {count}")
+    print(f"Discrepancias: {len(errors)}")
+    for error in errors:
+        print(f"- {error}")
+    print("Los controles de evidencia son parciales; no verifican todas las cifras ni interpretaciones.")
+    return int(bool(errors))
 
 
 if __name__ == "__main__":
