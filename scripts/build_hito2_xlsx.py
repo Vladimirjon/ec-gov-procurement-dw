@@ -396,7 +396,7 @@ def generate_portada_sheet() -> tuple[list[list[tuple[str, int]]], list[float], 
     merges: list[str] = []
 
     # Row 1: Title
-    rows.append([("PROYECTO INTEGRADOR DE BUSINESS INTELLIGENCE — FIS-EPN", 8)])
+    rows.append([("PROYECTO INTEGRADOR DE BUSINESS INTELLIGENCE (FIS-EPN)", 8)])
     merges.append("A1:C1")
 
     # Row 2: Subtitle

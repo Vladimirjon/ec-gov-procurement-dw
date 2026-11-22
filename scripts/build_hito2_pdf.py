@@ -125,7 +125,7 @@ def control_totals() -> list[tuple[str, str, str, str, str]]:
     entities = json.loads((ROOT / "docs/h2/evidencia/perfil-entidades.json").read_text(encoding="utf-8"))
     records = entities["workbook_structure"]["data_rows_range"]["total_records"]
     return [
-        ("Procesos_SERCOP", "releases, 2021–2025", number(int(total("total_releases"))), "—", ""),
+        ("Procesos_SERCOP", "releases, 2021–2025", number(int(total("total_releases"))), "No aplica", ""),
         (
             "Licitaciones_SERCOP",
             "tender, 2021–2025",
@@ -140,7 +140,7 @@ def control_totals() -> list[tuple[str, str, str, str, str]]:
             money(total("sum_awards_amount")),
             "monto adjudicado",
         ),
-        ("Entidades_MDEP", "hoja CATÁLOGO", number(records), "—", ""),
+        ("Entidades_MDEP", "hoja CATÁLOGO", number(records), "No aplica", ""),
     ]
 
 
@@ -151,11 +151,7 @@ def header() -> str:
         f'<p class="meta"><b>Nombres:</b> {esc(NAMES)}</p>'
         f'<p class="meta"><b>Sector:</b> {esc(SECTOR)}</p>'
         f'<p class="meta"><b>Fecha:</b> {esc(DATE)}</p>'
-        '<p style="margin-top:4mm">Este documento reúne las cuatro partes que pide la guía del Hito 2 (apartados 4.2 a 4.5): '
-        "el inventario de fuentes, el diccionario de datos, el diagnóstico de calidad y la matriz de cobertura de las tres "
-        "preguntas de negocio del Hito 1. Las fuentes están conectadas en el archivo <code>.pbix</code> adjunto, con consultas "
-        "que solo tienen pasos de conexión. Aquí se diagnostica y no se corrige: los archivos originales no se modificaron y "
-        "cada problema lleva su evidencia y una acción para el Hito 3.</p>"
+        '<p style="margin-top:4mm">El presente documento contiene el inventario de fuentes, el diccionario de datos, el diagnóstico de calidad y la matriz de cobertura del Hito 2 (apartados 4.2 a 4.5 de la guía). Las fuentes se encuentran conectadas en el archivo <code>.pbix</code> entregado, cuyas consultas contienen únicamente pasos de conexión. El hito es de carácter diagnóstico: los archivos originales no fueron modificados y cada problema identificado se acompaña de su evidencia medible y de una acción para el Hito 3.</p>'
     )
 
 
@@ -163,7 +159,8 @@ def fuentes(c: Counter) -> str:
     rows = read_csv("fuentes.csv")
     body, hashes = [], []
     for r in rows:
-        entity, _, link = r["entidad_enlace"].partition(" — ")
+        entity, sep, rest = r["entidad_enlace"].partition(": http")
+        link = "http" + rest if sep else ""
         body.append(
             f"<tr><td><b>{esc(r['fuente'])}</b></td><td>{esc(entity)}<span class='url'>{esc(link)}</span></td>"
             f"<td>{esc(r['formato_conector'])}</td><td>{esc(r['periodo_actualizacion'])}</td>"
@@ -189,16 +186,13 @@ def fuentes(c: Counter) -> str:
     )
     return (
         "<h2>Parte 1. Inventario de fuentes</h2>"
-        f"<p>Son {len(rows)} fuentes: los cinco archivos anuales de contratación abierta de SERCOP (2021 a 2025, en formato CSV), "
-        "el catálogo institucional del MDEP y el directorio <code>gob.ec</code>, que solo se usa para contrastar nombres. "
-        "Todo se descargó el 21/11/2026 y se guardó sin modificar; la huella SHA-256 de la Tabla 2 permite comprobarlo.</p>"
+        f"<p>El inventario comprende {len(rows)} fuentes: los cinco archivos anuales de contratación abierta de SERCOP (2021 a 2025, formato CSV), el catálogo institucional del MDEP y el directorio <code>gob.ec</code>, utilizado únicamente como contraste de nombres. Los archivos se descargaron el 21/11/2026 y se conservaron sin modificación; las huellas SHA-256 de la Tabla 2 permiten verificar su integridad.</p>"
         + c.caption("Fuentes de datos: procedencia, formato y periodo")
         + f"<table><colgroup>{widths}</colgroup><thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody></table>"
         + c.caption("Huella SHA-256 de cada archivo descargado")
         + f"<table><colgroup><col style='width:34%'><col style='width:66%'></colgroup><thead><tr><th>Fuente</th><th>SHA-256</th></tr></thead><tbody>{''.join(hashes)}</tbody></table>"
         + "<h3>Totales de control iniciales</h3>"
-        + "<p>Antes de tocar nada se registró el número de filas de cada tabla y la suma de su medida principal. Son totales "
-        "nacionales, sin filtros, y el Hito 3 los compara antes y después de limpiar.</p>"
+        + "<p>Previo a cualquier transformación se registró el número de filas de cada tabla y la suma de su medida principal. Los totales son nacionales, no incluyen filtros y constituyen la referencia de control para el Hito 3.</p>"
         + c.caption("Totales de control por tabla (2021–2025)")
         + "<table><colgroup><col style='width:40%'><col style='width:18%'><col style='width:42%'></colgroup>"
         "<thead><tr><th>Tabla</th><th class='num'>Filas</th><th class='num'>Suma de la medida</th></tr></thead>"
@@ -242,10 +236,8 @@ def diccionario(c: Counter) -> str:
         )
     return (
         '<h2 style="break-before: page">Parte 2. Diccionario de datos</h2>'
-        f"<p>El diccionario cubre las {len(set(r['tabla'] for r in rows))} tablas que usan las preguntas P1 a P3; los nombres son los de las consultas de Power BI. "
-        "Cada tabla indica su grano, es decir, lo que representa una fila. El rol es <i>medida</i> cuando el campo se suma o se promedia "
-        "y <i>atributo</i> cuando sirve para filtrar o agrupar. Las tasas, como la desviación porcentual, no son medidas de la tabla de hechos: "
-        "se calculan después con medidas y no se guardan.</p>" + "".join(tables)
+        f"<p>El diccionario comprende las {len(set(r['tabla'] for r in rows))} tablas utilizadas por las preguntas P1 a P3, nombradas como las consultas de Power BI. Para cada tabla se define el grano, es decir, lo que representa una fila. El rol de cada campo se clasifica como <i>medida</i>, cuando se suma o se promedia, o como <i>atributo</i>, cuando se emplea para filtrar o agrupar. Las tasas, como la desviación porcentual, no se almacenan como medidas de la tabla de hechos: se calculan posteriormente mediante medidas.</p>"
+        + "".join(tables)
     )
 
 
@@ -284,9 +276,9 @@ def calidad(c: Counter) -> str:
     s = sum(1 for r in rows if r["id"].startswith("S-"))
     return (
         '<div class="wide"><h2>Parte 3. Diagnóstico de calidad</h2>'
-        f"<p>Se revisaron las seis dimensiones de la guía (completitud, validez, exactitud, consistencia, unicidad y oportunidad) en cada tabla. "
-        f"Hay {q} hallazgos con evidencia, identificados como <code>Q-nn</code> (SERCOP) y <code>Q-Enn</code> (catálogo de entidades), y {s} "
-        "mediciones que no encontraron problemas, identificadas como <code>S-nn</code>. La columna de acción es la lista de tareas del Hito 3; "
+        f"<p>Se evaluaron las seis dimensiones de calidad (completitud, validez, exactitud, consistencia, unicidad y oportunidad) en cada tabla. "
+        f"El diagnóstico registra {q} hallazgos con evidencia, identificados como <code>Q-nn</code> (SERCOP) y <code>Q-Enn</code> (catálogo de entidades), "
+        f"y {s} mediciones sin hallazgos, identificadas como <code>S-nn</code>. La columna de acción constituye el listado de tareas del Hito 3; "
         "en este hito no se corrigió ningún dato.</p>"
         + c.caption("Hallazgos de calidad, evidencia, impacto y acción propuesta")
         + f"<table class='wide-table'><colgroup>{widths}</colgroup><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>"
@@ -318,19 +310,11 @@ def cobertura(c: Counter) -> str:
     )
     return (
         "<h2>Parte 4. Matriz de cobertura</h2>"
-        "<p>La matriz cruza cada pregunta del Hito 1 con los campos que necesita y confirma si los datos conseguidos alcanzan para responderla. "
-        "En las tres la respuesta es <i>parcial</i>: los campos existen en las fuentes, pero la pregunta se responde con los ajustes que explica la última columna.</p>"
+        "<p>La matriz contrasta cada pregunta del Hito 1 con los campos requeridos y determina si los datos obtenidos permiten responderla. Los campos necesarios están presentes en las fuentes conectadas; en las tres preguntas la disponibilidad es parcial y la columna de decisión documenta el ajuste aplicado.</p>"
         + c.caption("Cobertura de las preguntas P1, P2 y P3")
         + f"<table><colgroup>{widths}</colgroup><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>"
-        + "<h3>Qué falta para responder las tres preguntas</h3>"
-        "<ul>"
-        "<li><b>Tipo de entidad.</b> No es un campo de la fuente: sale de clasificar a cada comprador (Presidencia, ministerio, instituto) y del alcance de gobierno central. "
-        "La clasificación se construye en el Hito 3 uniendo por identificador y raíz del RUC, nunca por nombre, y lo dudoso queda fuera de los indicadores.</li>"
-        "<li><b>Fecha de negocio.</b> La fecha de publicación del proceso (<code>releases.date</code>) está en el 100 % de los procesos y es la candidata recomendada; "
-        "como el archivo anual no coincide con el año de la fecha, su uso queda sujeto a la aprobación del equipo.</li>"
-        "<li><b>Importes ausentes.</b> P2 se calcula solo con los procesos que tienen valor estimado y monto adjudicado (86,18 % de los procesos), "
-        "sin tratar un vacío como cero.</li>"
-        "</ul>"
+        + "<h3>Conclusión</h3>"
+        "<p>Los campos que requieren P1, P2 y P3 están disponibles en las fuentes conectadas, por lo que las tres preguntas se mantienen con los ajustes registrados en la tabla anterior: el tipo de entidad se obtiene al clasificar los compradores en el Hito 3, la fecha de negocio se asigna con la regla propuesta en el hallazgo Q-10 y P2 se calcula sobre los procesos que tienen ambos importes (86,18 % del total), sin tratar los vacíos como cero.</p>"
     )
 
 
