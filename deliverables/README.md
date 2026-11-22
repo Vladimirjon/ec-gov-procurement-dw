@@ -75,8 +75,11 @@ Calidad y Cobertura, precedidas de la Portada institucional) generado desde los
 archivos de contenido `docs/h2/fuentes.csv`, `diccionario.csv`, `calidad.csv` y
 `cobertura.csv` con `python -I scripts/build_hito2_xlsx.py`.
 
-- **Regeneración:** regenerar el libro sobrescribe cualquier retoque de formato hecho
-  a mano en Excel; si se modifican los CSV o el script, se vuelve a generar y a revisar.
+- **Regeneración:** regenerar el libro sobrescribe el formato. Si se modifican los CSV o el
+  script, se vuelve a generar, se aplica el formato del Hito 2 con
+  `pwsh -NoProfile -File scripts/format_hito2_xlsx.ps1 -Path deliverables/h2/Proyecto_Grupo5_Hito2.xlsx`
+  (Excel por automatización, sin cambiar valores) y se comprueba con
+  `python -I scripts/compare_hito2_xlsx_sources.py`.
 - **Apertura y verificación:** un entorno automatizado no puede abrir Excel; la apertura
   limpia y sin reparación la confirma el líder al abrir el archivo en Excel Desktop.
 - **Plan B:** si por cualquier motivo el archivo `.xlsx` requiriese reparación en una
