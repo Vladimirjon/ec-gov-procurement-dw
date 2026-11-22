@@ -53,8 +53,9 @@ SEED_COLUMNS = [
 IN_SCOPE = ("presidencia", "ministerio", "instituto")
 OVERRIDE_COLUMNS = {"scope", "key", "entity_type", "decided_on", "decision_note"}
 # Optional columns: parent_entity (documented parent) and evidence (source of the decision).
-# Scopes: ruc_root, udaf, sector, and propuesta (approve every proposed row of one type).
-OVERRIDE_SCOPES = ("ruc_root", "udaf", "sector", "propuesta")
+# Scopes: ruc_root, udaf, sector, propuesta (approve every proposed row of one type) and
+# proposed (resolve every doubtful catalog row whose proposed_type is the key).
+OVERRIDE_SCOPES = ("ruc_root", "udaf", "sector", "propuesta", "proposed")
 
 # Catalog sector (code) -> (status, source). All of them are fuera_de_alcance.
 SECTOR_OUT = {
@@ -374,7 +375,7 @@ def match_buyer(buyer_id: str, index: dict[str, CatalogEntry], fallback_names: d
 
 
 def read_overrides(path: Path) -> list[dict[str, str]]:
-    """Leader decisions: scope is ruc_root, udaf, sector or propuesta; key is the root, UDAF, sector or type."""
+    """Read the leader's decisions: scope is ruc_root, udaf, sector, propuesta or proposed."""
     with path.open("r", encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f)
         missing = OVERRIDE_COLUMNS - set(reader.fieldnames or [])
@@ -385,13 +386,13 @@ def read_overrides(path: Path) -> list[dict[str, str]]:
     for r in rows:
         if r["scope"] not in OVERRIDE_SCOPES or r["entity_type"] not in valid:
             raise ValueError(f"invalid override: {r}")
-        if r["scope"] == "propuesta" and r["key"] != r["entity_type"]:
+        if r["scope"] in ("propuesta", "proposed") and r["key"] != r["entity_type"]:
             raise ValueError(f"a propuesta override keeps the type: {r}")
     return rows
 
 
 def apply_overrides(seed: list[SeedRow], overrides: list[dict[str, str]]) -> int:
-    """Apply leader decisions to matched rows (never to malformed ids); returns rows decided.
+    """Apply the leader's decisions to rows (never to malformed ids); returns rows decided.
 
     Two decisions that give one row different types are an error, not a silent last-wins.
     """
@@ -407,8 +408,10 @@ def apply_overrides(seed: list[SeedRow], overrides: list[dict[str, str]]) -> int
                 hit = row.catalog_udaf == key
             elif scope == "sector":
                 hit = row.catalog_sector == key
-            else:
+            elif scope == "propuesta":
                 hit = row.status == "propuesta" and row.entity_type == key
+            else:
+                hit = row.status == "dudosa" and row.proposed_type == key and row.match_type in ("exacta", "raiz")
             if not hit:
                 continue
             if decided.get(i, ov["entity_type"]) != ov["entity_type"]:
@@ -418,7 +421,7 @@ def apply_overrides(seed: list[SeedRow], overrides: list[dict[str, str]]) -> int
             row.proposed_type = ""
             row.status = "aprobada"
             evidence = (ov.get("evidence") or "").strip()
-            row.source = f"decision del lider {ov['decided_on']}" + (f"; {evidence}" if evidence else "")
+            row.source = f"decision delegada por el lider {ov['decided_on']}" + (f"; {evidence}" if evidence else "")
             row.note = ov["decision_note"]
             if (ov.get("parent_entity") or "").strip():
                 row.parent_entity = ov["parent_entity"].strip()
@@ -513,14 +516,19 @@ def segment(row: SeedRow) -> str:
     return "sin_clasificar:dudosa"
 
 
-def coverage(seed: list[SeedRow], agg: dict[tuple[int, str], list[float]]) -> dict[str, Any]:
-    by_buyer = {row.buyer_id: row for row in seed}
-    table: dict[int, dict[str, list[float]]] = defaultdict(lambda: defaultdict(lambda: [0, 0, 0.0]))
-    for (year, buyer), (procs, with_amount, amount) in agg.items():
-        cell = table[year][segment(by_buyer[buyer])]
-        cell[0] += procs
-        cell[1] += with_amount
-        cell[2] += amount
+def scope_reason(year: int, row: SeedRow) -> str:
+    """Expected ControlAlcance reason, in the order of the H3 dimensional design."""
+    if not 2021 <= year <= 2025:
+        return "Fuera de la ventana 2021-2025"
+    if row.ruc_root and row.status == "aprobada":
+        if row.entity_type in IN_SCOPE:
+            return "En el hecho"
+        if row.entity_type == "fuera_de_alcance":
+            return "Fuera del gobierno central"
+    return "Dudoso o sin clasificar"
+
+
+def summarize_coverage(table: dict[int, dict[str, list[float]]]) -> dict[str, Any]:
     grand: dict[str, list[float]] = defaultdict(lambda: [0, 0, 0.0])
     years: dict[str, Any] = {}
     for year in sorted(table):
@@ -537,6 +545,22 @@ def coverage(seed: list[SeedRow], agg: dict[tuple[int, str], list[float]]) -> di
         for seg, v in sorted(grand.items())
     }
     return {"years": years, "total_2021_2025": total}
+
+
+def coverage(seed: list[SeedRow], agg: dict[tuple[int, str], list[float]]) -> dict[str, Any]:
+    by_buyer = {row.buyer_id: row for row in seed}
+    by_classification: dict[int, dict[str, list[float]]] = defaultdict(lambda: defaultdict(lambda: [0, 0, 0.0]))
+    by_scope: dict[int, dict[str, list[float]]] = defaultdict(lambda: defaultdict(lambda: [0, 0, 0.0]))
+    for (year, buyer), (procs, with_amount, amount) in agg.items():
+        row = by_buyer[buyer]
+        for cell in (by_classification[year][segment(row)], by_scope[year][scope_reason(year, row)]):
+            cell[0] += procs
+            cell[1] += with_amount
+            cell[2] += amount
+    return {
+        **summarize_coverage(by_classification),
+        "control_alcance": summarize_coverage(by_scope),
+    }
 
 
 def doubtful_cases(seed: list[SeedRow], agg: dict[tuple[int, str], list[float]]) -> list[dict[str, Any]]:

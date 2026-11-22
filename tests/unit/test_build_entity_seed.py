@@ -296,7 +296,7 @@ def test_override_keeps_documented_parent_and_evidence_on_an_uncrossed_root(inde
     row = seed[0]
     assert (row.entity_type, row.status, row.proposed_type) == ("ministerio", "aprobada", "")
     assert row.parent_entity == "MINISTERIO DE PRUEBA UNO - PLANTA CENTRAL"
-    assert row.source == "decision del lider 2026-11-22; catalogo oficial sintetico"
+    assert row.source == "decision delegada por el lider 2026-11-22; catalogo oficial sintetico"
 
 
 def test_sector_and_propuesta_scopes_approve_only_what_they_name(index) -> None:
@@ -314,7 +314,28 @@ def test_sector_and_propuesta_scopes_approve_only_what_they_name(index) -> None:
     assert apply_overrides(seed, rows) == 2
     assert [r.status for r in seed] == ["aprobada", "aprobada", "dudosa", "aprobada"]
     assert seed[2].entity_type == "sin_clasificar"
-    assert "decision del lider" in seed[0].source and "decision del lider" not in seed[3].source
+    assert "decision delegada por el lider" in seed[0].source and "decision delegada por el lider" not in seed[3].source
+
+
+def test_proposed_scope_resolves_only_catalog_doubtful_rows_with_that_recommendation(index) -> None:
+    seed = [
+        match_buyer("EC-RUC-1700000090001", index, {}),  # servicio: dudosa, proposed fuera
+        match_buyer("EC-RUC-1700000080001", index, {}),  # instituto: dudosa, proposed instituto
+        match_buyer("EC-RUC-1700000100001", index, {}),  # vicepresidencia: dudosa, proposed presidencia
+        match_buyer("EC-RUC-1799999990001", index, {}),  # sin cruce: no recommendation
+    ]
+    rows = [
+        {
+            "scope": "proposed",
+            "key": "fuera_de_alcance",
+            "entity_type": "fuera_de_alcance",
+            "decided_on": "2026-11-22",
+            "decision_note": "n",
+        }
+    ]
+    assert apply_overrides(seed, rows) == 1
+    assert [r.status for r in seed] == ["aprobada", "dudosa", "dudosa", "dudosa"]
+    assert seed[0].entity_type == "fuera_de_alcance"
 
 
 def test_conflicting_decisions_for_one_row_fail(index, tmp_path: Path) -> None:
@@ -438,6 +459,38 @@ def test_coverage_splits_years_segments_and_excludes_out_of_range_from_the_total
     total = cov["total_2021_2025"]
     assert total["ministerio:propuesta"]["processes"] == 2  # the 2026 process is not in the 2021-2025 total
     assert sum(v["processes"] for v in total.values()) == 6
+
+
+def test_coverage_reconciles_by_scope_reason_using_the_approved_status() -> None:
+    seed = [
+        SeedRow("EC-RUC-1700000030001", "1700000030001", "exacta", entity_type="ministerio", status="aprobada"),
+        SeedRow("EC-RUC-1700000130001", "1700000130001", "exacta", entity_type="fuera_de_alcance", status="aprobada"),
+        SeedRow("EC-RUC-1700000140001", "1700000140001", "exacta", entity_type="fuera_de_alcance", status="propuesta"),
+        SeedRow("EC-RUC-1700000080001", "1700000080001", "exacta"),
+        SeedRow("EC-RUC-1700000030001PE1", "", "malformado"),
+    ]
+    agg = {
+        (2024, seed[0].buyer_id): [1, 1, 40.0],
+        (2024, seed[1].buyer_id): [2, 2, 300.0],
+        (2024, seed[2].buyer_id): [3, 2, 20.0],
+        (2025, seed[3].buyer_id): [4, 2, 15.0],
+        (2025, seed[4].buyer_id): [1, 0, 0.0],
+        (2026, seed[0].buyer_id): [1, 1, 999.0],
+    }
+    control = coverage(seed, agg)["control_alcance"]
+    assert control["years"]["2024"] == {
+        "En el hecho": {"processes": 1, "processes_with_amount": 1, "awarded_amount": 40.0},
+        "Fuera del gobierno central": {"processes": 2, "processes_with_amount": 2, "awarded_amount": 300.0},
+        "Dudoso o sin clasificar": {"processes": 3, "processes_with_amount": 2, "awarded_amount": 20.0},
+    }
+    assert control["years"]["2026"] == {
+        "Fuera de la ventana 2021-2025": {"processes": 1, "processes_with_amount": 1, "awarded_amount": 999.0},
+    }
+    assert control["total_2021_2025"] == {
+        "En el hecho": {"processes": 1, "processes_with_amount": 1, "awarded_amount": 40.0},
+        "Fuera del gobierno central": {"processes": 2, "processes_with_amount": 2, "awarded_amount": 300.0},
+        "Dudoso o sin clasificar": {"processes": 8, "processes_with_amount": 4, "awarded_amount": 35.0},
+    }
 
 
 def test_doubtful_cases_are_ranked_by_weight_and_skip_approved_rows(index, derived: Path) -> None:

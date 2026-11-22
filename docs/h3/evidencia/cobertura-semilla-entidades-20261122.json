@@ -9,16 +9,15 @@
     "distinct_rucs": 3080
   },
   "seed_rows": 6100,
-  "overrides_applied_rows": 1500,
+  "overrides_applied_rows": 1955,
   "status_counts": {
-    "aprobada": 4925,
-    "propuesta": 210,
-    "dudosa": 965
+    "aprobada": 5380,
+    "dudosa": 720
   },
   "entity_type_counts": {
-    "fuera_de_alcance": 3993,
-    "sin_clasificar": 965,
-    "ministerio": 1140,
+    "fuera_de_alcance": 4227,
+    "sin_clasificar": 720,
+    "ministerio": 1151,
     "presidencia": 2
   },
   "match_type_counts": {
@@ -31,19 +30,14 @@
     "years": {
       "2021": {
         "fuera_de_alcance:aprobada": {
-          "processes": 83769,
-          "processes_with_amount": 81912,
-          "awarded_amount": 1721323698.85
-        },
-        "fuera_de_alcance:propuesta": {
-          "processes": 6691,
-          "processes_with_amount": 6501,
-          "awarded_amount": 162361891.7
+          "processes": 94817,
+          "processes_with_amount": 92738,
+          "awarded_amount": 1938571563.15
         },
         "ministerio:aprobada": {
-          "processes": 46080,
-          "processes_with_amount": 45774,
-          "awarded_amount": 458015801.06
+          "processes": 46248,
+          "processes_with_amount": 45939,
+          "awarded_amount": 461593738.94
         },
         "presidencia:aprobada": {
           "processes": 29,
@@ -51,31 +45,26 @@
           "awarded_amount": 1699763.4
         },
         "sin_clasificar:dudosa": {
-          "processes": 5931,
-          "processes_with_amount": 5887,
-          "awarded_amount": 63035547.88
+          "processes": 1574,
+          "processes_with_amount": 1562,
+          "awarded_amount": 8149575.28
         },
         "sin_clasificar:sin_cruce": {
-          "processes": 6323,
-          "processes_with_amount": 6254,
-          "awarded_amount": 62253784.56
+          "processes": 6155,
+          "processes_with_amount": 6089,
+          "awarded_amount": 58675846.68
         }
       },
       "2022": {
         "fuera_de_alcance:aprobada": {
-          "processes": 123492,
-          "processes_with_amount": 113825,
-          "awarded_amount": 3961803490.44
-        },
-        "fuera_de_alcance:propuesta": {
-          "processes": 10990,
-          "processes_with_amount": 10050,
-          "awarded_amount": 416144883.38
+          "processes": 140706,
+          "processes_with_amount": 129728,
+          "awarded_amount": 4545612262.99
         },
         "ministerio:aprobada": {
-          "processes": 54825,
-          "processes_with_amount": 52020,
-          "awarded_amount": 973830473.42
+          "processes": 55155,
+          "processes_with_amount": 52323,
+          "awarded_amount": 979688699.59
         },
         "presidencia:aprobada": {
           "processes": 132,
@@ -83,9 +72,9 @@
           "awarded_amount": 6825250.07
         },
         "sin_clasificar:dudosa": {
-          "processes": 8439,
-          "processes_with_amount": 7892,
-          "awarded_amount": 192317526.31
+          "processes": 2215,
+          "processes_with_amount": 2039,
+          "awarded_amount": 24653637.14
         },
         "sin_clasificar:malformado": {
           "processes": 7,
@@ -93,26 +82,21 @@
           "awarded_amount": 2807.89
         },
         "sin_clasificar:sin_cruce": {
-          "processes": 8916,
-          "processes_with_amount": 8484,
-          "awarded_amount": 201294789.08
+          "processes": 8586,
+          "processes_with_amount": 8181,
+          "awarded_amount": 195436562.91
         }
       },
       "2023": {
         "fuera_de_alcance:aprobada": {
-          "processes": 127344,
-          "processes_with_amount": 122715,
-          "awarded_amount": 4487700490.01
-        },
-        "fuera_de_alcance:propuesta": {
-          "processes": 12135,
-          "processes_with_amount": 11524,
-          "awarded_amount": 516762419.51
+          "processes": 146548,
+          "processes_with_amount": 141140,
+          "awarded_amount": 5221961566.99
         },
         "ministerio:aprobada": {
-          "processes": 63983,
-          "processes_with_amount": 62699,
-          "awarded_amount": 1492840976.62
+          "processes": 64361,
+          "processes_with_amount": 63066,
+          "awarded_amount": 1510146432.77
         },
         "presidencia:aprobada": {
           "processes": 84,
@@ -120,9 +104,9 @@
           "awarded_amount": 9088793.57
         },
         "sin_clasificar:dudosa": {
-          "processes": 9088,
-          "processes_with_amount": 8852,
-          "awarded_amount": 256887812.15
+          "processes": 2019,
+          "processes_with_amount": 1951,
+          "awarded_amount": 39389154.68
         },
         "sin_clasificar:malformado": {
           "processes": 25,
@@ -130,26 +114,21 @@
           "awarded_amount": 17761.27
         },
         "sin_clasificar:sin_cruce": {
-          "processes": 9936,
-          "processes_with_amount": 9743,
-          "awarded_amount": 170776425.13
+          "processes": 9558,
+          "processes_with_amount": 9376,
+          "awarded_amount": 153470968.98
         }
       },
       "2024": {
         "fuera_de_alcance:aprobada": {
-          "processes": 125976,
-          "processes_with_amount": 118711,
-          "awarded_amount": 4319205063.94
-        },
-        "fuera_de_alcance:propuesta": {
-          "processes": 11813,
-          "processes_with_amount": 11021,
-          "awarded_amount": 547996548.38
+          "processes": 143419,
+          "processes_with_amount": 135131,
+          "awarded_amount": 5137097242.94
         },
         "ministerio:aprobada": {
-          "processes": 63658,
-          "processes_with_amount": 61496,
-          "awarded_amount": 1297484445.16
+          "processes": 64006,
+          "processes_with_amount": 61827,
+          "awarded_amount": 1305436417.1
         },
         "presidencia:aprobada": {
           "processes": 28,
@@ -157,9 +136,9 @@
           "awarded_amount": 2362463.95
         },
         "sin_clasificar:dudosa": {
-          "processes": 7880,
-          "processes_with_amount": 7574,
-          "awarded_amount": 302684056.11
+          "processes": 2250,
+          "processes_with_amount": 2175,
+          "awarded_amount": 32788425.49
         },
         "sin_clasificar:malformado": {
           "processes": 9,
@@ -167,26 +146,21 @@
           "awarded_amount": 1315.6
         },
         "sin_clasificar:sin_cruce": {
-          "processes": 8058,
-          "processes_with_amount": 7772,
-          "awarded_amount": 156614967.6
+          "processes": 7710,
+          "processes_with_amount": 7441,
+          "awarded_amount": 148662995.66
         }
       },
       "2025": {
         "fuera_de_alcance:aprobada": {
-          "processes": 126129,
-          "processes_with_amount": 120044,
-          "awarded_amount": 4367210309.17
-        },
-        "fuera_de_alcance:propuesta": {
-          "processes": 12113,
-          "processes_with_amount": 11451,
-          "awarded_amount": 515397582.61
+          "processes": 144196,
+          "processes_with_amount": 137276,
+          "awarded_amount": 5021304135.43
         },
         "ministerio:aprobada": {
-          "processes": 44761,
-          "processes_with_amount": 43619,
-          "awarded_amount": 1204171447.88
+          "processes": 45017,
+          "processes_with_amount": 43863,
+          "awarded_amount": 1213816637.51
         },
         "presidencia:aprobada": {
           "processes": 40,
@@ -194,9 +168,9 @@
           "awarded_amount": 21140965.68
         },
         "sin_clasificar:dudosa": {
-          "processes": 8018,
-          "processes_with_amount": 7780,
-          "awarded_amount": 166849642.61
+          "processes": 2064,
+          "processes_with_amount": 1999,
+          "awarded_amount": 28153398.96
         },
         "sin_clasificar:malformado": {
           "processes": 2,
@@ -204,26 +178,21 @@
           "awarded_amount": 69.86
         },
         "sin_clasificar:sin_cruce": {
-          "processes": 6721,
-          "processes_with_amount": 6511,
-          "awarded_amount": 131062466.06
+          "processes": 6465,
+          "processes_with_amount": 6267,
+          "awarded_amount": 121417276.43
         }
       },
       "2026": {
         "fuera_de_alcance:aprobada": {
-          "processes": 10830,
-          "processes_with_amount": 10439,
-          "awarded_amount": 2219942213.73
-        },
-        "fuera_de_alcance:propuesta": {
-          "processes": 1168,
-          "processes_with_amount": 1120,
-          "awarded_amount": 228999197.5
+          "processes": 12234,
+          "processes_with_amount": 11792,
+          "awarded_amount": 2512564503.86
         },
         "ministerio:aprobada": {
-          "processes": 1866,
-          "processes_with_amount": 1836,
-          "awarded_amount": 209086384.02
+          "processes": 1874,
+          "processes_with_amount": 1844,
+          "awarded_amount": 209965271.31
         },
         "presidencia:aprobada": {
           "processes": 7,
@@ -231,32 +200,27 @@
           "awarded_amount": 5857433.79
         },
         "sin_clasificar:dudosa": {
-          "processes": 301,
-          "processes_with_amount": 298,
-          "awarded_amount": 67283257.73
+          "processes": 65,
+          "processes_with_amount": 65,
+          "awarded_amount": 3660165.1
         },
         "sin_clasificar:sin_cruce": {
-          "processes": 323,
-          "processes_with_amount": 316,
-          "awarded_amount": 34546089.24
+          "processes": 315,
+          "processes_with_amount": 308,
+          "awarded_amount": 33667201.95
         }
       }
     },
     "total_2021_2025": {
       "fuera_de_alcance:aprobada": {
-        "processes": 586710,
-        "processes_with_amount": 557207,
-        "awarded_amount": 18857243052.41
-      },
-      "fuera_de_alcance:propuesta": {
-        "processes": 53742,
-        "processes_with_amount": 50547,
-        "awarded_amount": 2158663325.58
+        "processes": 669686,
+        "processes_with_amount": 636013,
+        "awarded_amount": 21864546771.5
       },
       "ministerio:aprobada": {
-        "processes": 273307,
-        "processes_with_amount": 265608,
-        "awarded_amount": 5426343144.14
+        "processes": 274787,
+        "processes_with_amount": 267018,
+        "awarded_amount": 5470681925.91
       },
       "presidencia:aprobada": {
         "processes": 313,
@@ -264,9 +228,9 @@
         "awarded_amount": 41117236.67
       },
       "sin_clasificar:dudosa": {
-        "processes": 39356,
-        "processes_with_amount": 37985,
-        "awarded_amount": 981774585.06
+        "processes": 10122,
+        "processes_with_amount": 9726,
+        "awarded_amount": 133134191.55
       },
       "sin_clasificar:malformado": {
         "processes": 43,
@@ -274,9 +238,122 @@
         "awarded_amount": 21954.62
       },
       "sin_clasificar:sin_cruce": {
-        "processes": 39954,
-        "processes_with_amount": 38764,
-        "awarded_amount": 722002432.43
+        "processes": 38474,
+        "processes_with_amount": 37354,
+        "awarded_amount": 677663650.66
+      }
+    },
+    "control_alcance": {
+      "years": {
+        "2021": {
+          "Dudoso o sin clasificar": {
+            "processes": 7729,
+            "processes_with_amount": 7651,
+            "awarded_amount": 66825421.96
+          },
+          "En el hecho": {
+            "processes": 46277,
+            "processes_with_amount": 45966,
+            "awarded_amount": 463293502.34
+          },
+          "Fuera del gobierno central": {
+            "processes": 94817,
+            "processes_with_amount": 92738,
+            "awarded_amount": 1938571563.15
+          }
+        },
+        "2022": {
+          "Dudoso o sin clasificar": {
+            "processes": 10808,
+            "processes_with_amount": 10227,
+            "awarded_amount": 220093007.94
+          },
+          "En el hecho": {
+            "processes": 55287,
+            "processes_with_amount": 52441,
+            "awarded_amount": 986513949.66
+          },
+          "Fuera del gobierno central": {
+            "processes": 140706,
+            "processes_with_amount": 129728,
+            "awarded_amount": 4545612262.99
+          }
+        },
+        "2023": {
+          "Dudoso o sin clasificar": {
+            "processes": 11602,
+            "processes_with_amount": 11351,
+            "awarded_amount": 192877884.93
+          },
+          "En el hecho": {
+            "processes": 64445,
+            "processes_with_amount": 63142,
+            "awarded_amount": 1519235226.34
+          },
+          "Fuera del gobierno central": {
+            "processes": 146548,
+            "processes_with_amount": 141140,
+            "awarded_amount": 5221961566.99
+          }
+        },
+        "2024": {
+          "Dudoso o sin clasificar": {
+            "processes": 9969,
+            "processes_with_amount": 9625,
+            "awarded_amount": 181452736.75
+          },
+          "En el hecho": {
+            "processes": 64034,
+            "processes_with_amount": 61851,
+            "awarded_amount": 1307798881.05
+          },
+          "Fuera del gobierno central": {
+            "processes": 143419,
+            "processes_with_amount": 135131,
+            "awarded_amount": 5137097242.94
+          }
+        },
+        "2025": {
+          "Dudoso o sin clasificar": {
+            "processes": 8531,
+            "processes_with_amount": 8267,
+            "awarded_amount": 149570745.25
+          },
+          "En el hecho": {
+            "processes": 45057,
+            "processes_with_amount": 43900,
+            "awarded_amount": 1234957603.19
+          },
+          "Fuera del gobierno central": {
+            "processes": 144196,
+            "processes_with_amount": 137276,
+            "awarded_amount": 5021304135.43
+          }
+        },
+        "2026": {
+          "Fuera de la ventana 2021-2025": {
+            "processes": 14495,
+            "processes_with_amount": 14016,
+            "awarded_amount": 2765714576.01
+          }
+        }
+      },
+      "total_2021_2025": {
+        "Dudoso o sin clasificar": {
+          "processes": 48639,
+          "processes_with_amount": 47121,
+          "awarded_amount": 810819796.83
+        },
+        "En el hecho": {
+          "processes": 275100,
+          "processes_with_amount": 267300,
+          "awarded_amount": 5511799162.58
+        },
+        "Fuera del gobierno central": {
+          "processes": 669686,
+          "processes_with_amount": 636013,
+          "awarded_amount": 21864546771.5
+        }
       }
     }
   }
