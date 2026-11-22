@@ -83,6 +83,9 @@ def control(rows, group, stage):
 
 
 class ExpectedModelTests(unittest.TestCase):
+    def test_root_suffix_matches_power_query_validation(self):
+        self.assertEqual(model.root_of("EC-RUC-0100000000001-unit\nnext"), "0100000000001")
+
     def test_multiple_awards_window_doubt_root_and_blanks(self):
         with tempfile.TemporaryDirectory() as directory:
             base = Path(directory)

@@ -14,7 +14,7 @@ import re
 
 
 YEARS = tuple(range(2021, 2026))
-ROOT = re.compile(r"EC-RUC-([0-9]{13})(?:-[^\r\n]+)?")
+ROOT = re.compile(r"EC-RUC-([0-9]{13})(?:-[\s\S]+)?")
 SECTOR = {"presidencia", "ministerio", "instituto"}
 FIELDS = ("grupo", "etapa", "tipo_entidad", "anio", "filas", "suma_adjudicado_usd", "suma_estimado_usd")
 
@@ -140,10 +140,13 @@ def measure(base, seed, years=YEARS):
         for stage in ("Nacional descargado", "Sin ocid duplicados"):
             add(stats["cadena", stage, "", ""], awarded, estimated)
         if not 2021 <= moment.year <= 2025:
+            reason = "Fuera de la ventana 2021-2025"
+            add(stats["control_alcance", reason, "", moment.year], awarded, estimated)
             add(stats["exclusion", "Fuera de la ventana 2021-2025", "", ""], awarded, estimated)
             continue
         add(stats["cadena", "Ventana 2021-2025", "", ""], awarded, estimated)
         reason, kind = classification(buyer, exact, roots)
+        add(stats["control_alcance", reason, "", moment.year], awarded, estimated)
         add(stats["alcance", reason, "", ""], awarded, estimated)
         if reason != "En el hecho":
             continue

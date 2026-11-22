@@ -46,7 +46,7 @@ y se confirma. Para las referencias se usa clic derecho **Referencia**, nunca
 |---|---|---|---|
 | 1 | [Semilla_Entidades](../../reports/powerbi/h3/queries/Semilla_Entidades.pq), consulta en blanco | No | F2: 6.100 compradores distintos, raíz compatible con el patrón; `RaizAprobada` exige tipo único y todas las filas aprobadas |
 | 2 | [Origen_Modelo](../../reports/powerbi/h3/queries/Origen_Modelo.pq), referencia a Procesos | No | E1: 1.007.920 filas y `ocid` distintos; las combinaciones monetarias conservan el grano |
-| 3 | [ControlAlcance](../../reports/powerbi/h3/queries/ControlAlcance.pq), referencia a Origen_Modelo | No | E1: motivos exclusivos por año; al sumar los años reproduce la tabla de exclusiones de abajo |
+| 3 | [ControlAlcance](../../reports/powerbi/h3/queries/ControlAlcance.pq), referencia a Origen_Modelo | No | E1, grupo `control_alcance`: mismas combinaciones de motivo y año; al sumar los años reproduce las exclusiones agregadas de abajo |
 | 4 | [DimTiempo](../../reports/powerbi/h3/queries/DimTiempo.pq), consulta en blanco | Sí | E1: 60 filas y claves distintas; enero de 2021 a diciembre de 2025, sin huecos |
 | 5 | [DimEntidad](../../reports/powerbi/h3/queries/DimEntidad.pq), referencia a Origen_Modelo | Sí | E1: 587 filas y claves distintas: 586 raíces admitidas más Sin clasificar; una fila por raíz |
 | 6 | [DimMetodo](../../reports/powerbi/h3/queries/DimMetodo.pq), referencia a Licitaciones | Sí | E1: 28 filas, claves y pares únicos: 27 pares nacionales más Sin licitación |
@@ -112,11 +112,11 @@ resultados: la comprobación final se hace en Desktop.
 
 | Etapa, en orden | Filas | Σ MontoAdjudicado | Σ ValorEstimado | Motivo del cambio |
 |---|---:|---:|---:|---|
-| Nacional descargado, cinco archivos de procesos | 1.007.920 | 30.952.880.306,92 | 25.072.968.705,53 | F1, importes unidos después de agrupar adjudicaciones |
-| Sin `ocid` duplicados entre archivos | 1.007.920 | 30.952.880.306,92 | 25.072.968.705,53 | No hay repetidos; se comprueba, no se eliminan filas arbitrarias |
-| Ventana de fecha 2021-2025 | 993.425 | 28.187.165.730,91 | 22.805.452.044,61 | Se excluyen los procesos fechados en 2026 |
-| Sector clasificado y aprobado | 275.100 | 5.511.799.162,58 | 3.840.396.283,44 | Se excluyen fuera de alcance y dudosos o sin clasificar según F2 |
-| FactContratacion, tras combinar dimensiones | 275.100 | 5.511.799.162,58 | 3.840.396.283,44 | Las combinaciones no deben cambiar filas ni sumas |
+| Nacional descargado | 1.007.920 | 30.952.880.306,92 | 25.072.968.705,53 | Cinco archivos anuales de procesos F1; importes unidos después de agrupar adjudicaciones |
+| Sin ocid duplicados | 1.007.920 | 30.952.880.306,92 | 25.072.968.705,53 | No hay repetidos; se comprueba, no se eliminan filas arbitrarias |
+| Ventana 2021-2025 | 993.425 | 28.187.165.730,91 | 22.805.452.044,61 | Se excluyen los procesos fechados en 2026 |
+| Sector clasificado | 275.100 | 5.511.799.162,58 | 3.840.396.283,44 | Se excluyen fuera de alcance y dudosos o sin clasificar según F2 |
+| FactContratacion | 275.100 | 5.511.799.162,58 | 3.840.396.283,44 | Tras combinar dimensiones no deben cambiar filas ni sumas |
 
 Fuente de todas las celdas numéricas: E1, grupo `cadena`. El último salto es el
 resultado esperado de una combinación con claves únicas, calculado por Python;
@@ -124,11 +124,12 @@ la ejecución y conservación efectiva en M no se han confirmado.
 
 | Exclusión secuencial | Filas | Σ MontoAdjudicado | Σ ValorEstimado |
 |---|---:|---:|---:|
-| Fuera de la ventana 2021-2025, fecha de 2026 | 14.495 | 2.765.714.576,01 | 2.267.516.660,92 |
-| Fuera del gobierno central dentro de la ventana | 669.686 | 21.864.546.771,50 | 18.264.813.598,78 |
-| Dudoso o sin clasificar dentro de la ventana | 48.639 | 810.819.796,83 | 700.242.162,39 |
+| Fuera de la ventana 2021-2025 | 14.495 | 2.765.714.576,01 | 2.267.516.660,92 |
+| Fuera del gobierno central | 669.686 | 21.864.546.771,50 | 18.264.813.598,78 |
+| Dudoso o sin clasificar | 48.639 | 810.819.796,83 | 700.242.162,39 |
 
-Fuente: E1, grupos `exclusion` y `alcance`. La suma de sector y exclusiones
+Fuente: E1, grupos `exclusion` y `alcance`. El grupo `control_alcance` contiene
+los mismos motivos y años que la consulta M. La suma de sector y exclusiones
 reproduce exactamente ambas sumas y las filas nacionales; no hay solapamientos.
 Los 43 procesos con comprador malformado señalados por F2 están incluidos en el
 grupo dudoso, no constituyen una cuarta exclusión que deba restarse otra vez.
@@ -217,32 +218,4 @@ incompatibles y adjudicaciones o licitaciones sin proceso. Aplica los mismos fil
 de moneda y negativos de las consultas intermedias. Las sumas conservan Decimal y
 los importes ausentes permanecen ausentes.
 
-El entorno de esta copia no permitió completar `uv sync --locked`: el caché global
-denegó acceso y, al usar un caché local, las descargas quedaron bloqueadas por la
-red del entorno. Se intentaron `uv run ruff check`, `uv run ruff format --check`
-y `uv run pytest -q`; los tres fallaron antes de analizar código por dependencias
-no disponibles. No se declaran aprobados. La ejecución directa de las siete pruebas
-nuevas con Python 3.14 y `-I` pasó. Un intento
-adicional de descubrir toda la suite con unittest falló por imports y ausencia
-de pytest; no constituye validación de la suite del repositorio.
-
-| Comando o control ejecutado en esta copia | Resultado real |
-|---|---|
-| `uv sync --locked` | Salida 1; acceso denegado al caché global, después descarga bloqueada con caché local |
-| `uv run ruff check` | Salida 1 antes del lint; dependencias ausentes y red bloqueada |
-| `uv run ruff format --check` | Salida 1 antes del formateador; dependencias ausentes y red bloqueada |
-| `uv run pytest -q` | Salida 1 antes de ejecutar pruebas; dependencias ausentes y red bloqueada |
-| `python -I tests/unit/test_expected_model_h3.py` con Python 3.14 | Salida 0; siete pruebas sintéticas aprobadas |
-| Script independiente sobre F1 y F2, dos corridas | Salida 0; 27 controles agregados por corrida, CSV idénticos byte a byte |
-| `git diff --check` | Salida 0; sin errores de espacios en el cambio rastreado |
-| Lectura estricta UTF-8, LF y búsqueda de tildes dañadas | Doce archivos comprobados, sin CR ni coincidencias de letras separadas por `?` |
-
-Los intentos con caché local y modo sin conexión evitan repetir descargas que el
-entorno deniega; no cambian las versiones fijadas del repositorio. También se
-intentó usar el entorno preparado de la carpeta principal sin sincronizar, pero
-el acceso al ejecutable de Ruff fue denegado. No se alteró ese entorno.
-
-La implementación y las pruebas fueron realizadas por Codex, sin subagentes.
-Se recomienda que el integrador repita los tres comandos en el entorno preparado
-y que el líder ejecute las consultas antes de dar por confirmado el modelo en
-Power BI. No se requiere cambiar alcance, semilla, arquitectura ni dependencias.
+Verificación del 22/11/2026: `uv sync --locked`, `uv run ruff check`, `uv run ruff format --check` y `uv run pytest -q` (223 pruebas) pasan; dos ejecuciones del script sobre F1 y F2 producen el mismo CSV de 43 controles. Ninguna consulta de dimensión ni de hecho se ha ejecutado aún en Power BI: las cifras de este runbook son las esperadas, no las observadas.

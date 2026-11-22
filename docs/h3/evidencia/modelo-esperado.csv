@@ -2,21 +2,37 @@ grupo,etapa,tipo_entidad,anio,filas,suma_adjudicado_usd,suma_estimado_usd
 cadena,Nacional descargado,,,1007920,30952880306.92,25072968705.53
 cadena,Sin ocid duplicados,,,1007920,30952880306.92,25072968705.53
 cadena,Ventana 2021-2025,,,993425,28187165730.91,22805452044.61
+control_alcance,Fuera del gobierno central,,2022,140706,4545612262.99,3889626409.83
 alcance,Fuera del gobierno central,,,669686,21864546771.50,18264813598.78
+control_alcance,Dudoso o sin clasificar,,2022,10808,220093007.94,206292308.74
 alcance,Dudoso o sin clasificar,,,48639,810819796.83,700242162.39
+control_alcance,En el hecho,,2022,55287,986513949.66,663424246.56
 alcance,En el hecho,,,275100,5511799162.58,3840396283.44
 cadena,Sector clasificado,,,275100,5511799162.58,3840396283.44
 cadena,FactContratacion,,,275100,5511799162.58,3840396283.44
 tipo_anio,FactContratacion,ministerio,2022,55155,979688699.59,654807738.50
+control_alcance,En el hecho,,2021,46277,463293502.34,298454132.61
 tipo_anio,FactContratacion,ministerio,2021,46248,461593738.94,295638677.16
+control_alcance,Fuera del gobierno central,,2021,94817,1938571563.15,1676877708.01
+control_alcance,Dudoso o sin clasificar,,2021,7729,66825421.96,56524120.04
 tipo_anio,FactContratacion,presidencia,2021,29,1699763.40,2815455.45
 tipo_anio,FactContratacion,presidencia,2022,132,6825250.07,8616508.06
+control_alcance,Fuera del gobierno central,,2023,146548,5221961566.99,4433910739.81
+control_alcance,Dudoso o sin clasificar,,2023,11602,192877884.93,155315494.17
+control_alcance,En el hecho,,2023,64445,1519235226.34,1125264381.40
 tipo_anio,FactContratacion,ministerio,2023,64361,1510146432.77,1113908268.28
 tipo_anio,FactContratacion,presidencia,2023,84,9088793.57,11356113.12
+control_alcance,Fuera del gobierno central,,2024,143419,5137097242.94,4201674489.20
+control_alcance,En el hecho,,2024,64034,1307798881.05,898655627.42
 tipo_anio,FactContratacion,ministerio,2024,64006,1305436417.10,897249940.88
+control_alcance,Dudoso o sin clasificar,,2024,9969,181452736.75,161203182.72
 tipo_anio,FactContratacion,presidencia,2024,28,2362463.95,1405686.54
+control_alcance,Dudoso o sin clasificar,,2025,8531,149570745.25,120907056.72
+control_alcance,Fuera del gobierno central,,2025,144196,5021304135.43,4062724251.93
+control_alcance,En el hecho,,2025,45057,1234957603.19,854597895.45
 tipo_anio,FactContratacion,ministerio,2025,45017,1213816637.51,833471851.45
 tipo_anio,FactContratacion,presidencia,2025,40,21140965.68,21126044.00
+control_alcance,Fuera de la ventana 2021-2025,,2026,14495,2765714576.01,2267516660.92
 exclusion,Fuera de la ventana 2021-2025,,,14495,2765714576.01,2267516660.92
 tipo_anio,FactContratacion,instituto,2021,0,,
 tipo_anio,FactContratacion,instituto,2022,0,,

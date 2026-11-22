@@ -15,8 +15,8 @@ let
     #"Tipos etiquetados" = Table.TransformColumns(#"Raíz renombrada", {{"TipoEntidad", each
         Record.Field([presidencia="Presidencia", ministerio="Ministerio", instituto="Instituto"], _), type text}}),
     #"Vigencias informativas tipadas" = Table.TransformColumns(#"Tipos etiquetados",
-        {{"VigenteDesde", each if _ = null or _ = "" then null else Date.FromText(_, [Format="yyyy-MM-dd"]), type nullable date},
-         {"VigenteHasta", each if _ = null or _ = "" then null else Date.FromText(_, [Format="yyyy-MM-dd"]), type nullable date}}),
+        {{"VigenteDesde", each if _ = null or _ = "" then null else Date.FromText(_, [Format="yyyy-MM-dd", Culture="en-US"]), type nullable date},
+         {"VigenteHasta", each if _ = null or _ = "" then null else Date.FromText(_, [Format="yyyy-MM-dd", Culture="en-US"]), type nullable date}}),
     #"Miembro sin clasificar agregado" = Table.InsertRows(#"Vigencias informativas tipadas", 0,
         {[RucRaiz="NO_IDENTIFICADO", Entidad="Sin clasificar", TipoEntidad="Sin clasificar",
           EntidadRectora=null, VigenteDesde=null, VigenteHasta=null]}),
