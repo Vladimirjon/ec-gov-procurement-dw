@@ -123,8 +123,11 @@ script cambia sin un resumen nuevo en `docs/sources/` que registre su hash.
 - **Equipo y plazos:** el equipo se llama **Grupo 5** (nombre asignado por el
   profesor; «Trazabilidad Pública» fue el nombre del Hito 1 y ya no se usa). Las
   entregas vencen a las **23:59** del sábado 21/11 (H2) y del domingo 22/11 (H3).
-- **Nombres de archivo** (`EquipoX` = `Grupo5`): `Proyecto_Grupo5_Hito2.pbix` y
-  `.xlsx`; `Proyecto_Grupo5_Hito3.pbix`, `..._Hito3_Diseno.pdf`,
+- **Nombres de archivo** (`EquipoX` = `Grupo5`). **H2, según el aula virtual:**
+  `H2FC-BravoFreireGuajanPasquelTorres.pbix` y un solo PDF
+  `H2BravoFreireGuajanPasquelTorres.pdf` (partes 4.2 a 4.5; encabezado con Título,
+  Equipo #, Nombres y Fecha); el libro `.xlsx` queda en `deliverables/h2/`. H3 hasta
+  confirmar con el aula: `Proyecto_Grupo5_Hito3.pbix`, `..._Hito3_Diseno.pdf`,
   `..._Hito3_Presentacion.pdf` y `..._Hito3_Bitacora.xlsx`. Fecha en portada:
   21/11/26 (H2) y 22/11/26 (H3). H3: documento de máximo 8 páginas sin anexos;
   presentación de 10 min + 5, todos exponen.

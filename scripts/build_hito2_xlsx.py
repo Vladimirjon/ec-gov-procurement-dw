@@ -400,14 +400,14 @@ def generate_portada_sheet() -> tuple[list[list[tuple[str, int]]], list[float], 
     merges.append("A1:C1")
 
     # Row 2: Subtitle
-    rows.append([("Hito 2: Adquisición y calidad de datos — Documentación y diagnóstico oficial", 3)])
+    rows.append([("Hito 2 - Adquisición y calidad de datos", 3)])
     merges.append("A2:C2")
 
     # Row 3: Blank
     rows.append([])
 
     # Rows 4-9: Project metadata card
-    rows.append([("Equipo:", 10), ("Grupo 5", 11), ("", 11)])
+    rows.append([("Equipo #:", 10), ("Grupo 5", 11), ("", 11)])
     merges.append("B4:C4")
     rows.append([("Sector asignado:", 10), ("Gobierno central del Ecuador", 11), ("", 11)])
     merges.append("B5:C5")
@@ -415,7 +415,7 @@ def generate_portada_sheet() -> tuple[list[list[tuple[str, int]]], list[float], 
     merges.append("B6:C6")
     rows.append(
         [
-            ("Integrantes:", 10),
+            ("Nombres:", 10),
             ("Francis Bravo, Ismael Freire, Harry Guajan, Johann Pasquel, Jorge Torres", 11),
             ("", 11),
         ]
@@ -424,7 +424,12 @@ def generate_portada_sheet() -> tuple[list[list[tuple[str, int]]], list[float], 
     rows.append(
         [
             ("Entregables oficiales:", 10),
-            ("Proyecto_Grupo5_Hito2.pbix (Power BI Desktop) y Proyecto_Grupo5_Hito2.xlsx (Libro de cuatro partes)", 11),
+            (
+                "H2FC-BravoFreireGuajanPasquelTorres.pbix (Power BI Desktop) y "
+                "H2BravoFreireGuajanPasquelTorres.pdf (Fuentes, Diccionario, Calidad y Cobertura: "
+                "apartados 4.2 a 4.5 de la guía)",
+                11,
+            ),
             ("", 11),
         ]
     )
@@ -436,7 +441,7 @@ def generate_portada_sheet() -> tuple[list[list[tuple[str, int]]], list[float], 
     # Row 10: Section Subtitle
     rows.append(
         [
-            ("Estructura del libro de Excel (Cuatro partes de la Guía del Hito 2):", 9),
+            ("Contenido: las cuatro partes de la guía del Hito 2 (apartados 4.2 a 4.5):", 9),
             ("", 9),
             ("", 9),
         ]
@@ -479,7 +484,7 @@ def generate_portada_sheet() -> tuple[list[list[tuple[str, int]]], list[float], 
             ("Hoja 4: Calidad", 3),
             ("Plantilla 6.3: Diagnóstico de calidad", 2),
             (
-                "Diagnóstico en seis dimensiones: hallazgos Q-01..Q-11, Q-E01..Q-E08, S-01..S-04 y "
+                "Diagnóstico en seis dimensiones: hallazgos Q-01..Q-12, Q-E01..Q-E08, S-01..S-04 y "
                 "Matriz Tabla × Dimensión",  # noqa: RUF001
                 2,
             ),
@@ -618,7 +623,7 @@ def generate_calidad_sheet(
     # Section 1 Header
     rows.append(
         [
-            ("1. Diagnóstico de calidad multidimensional (Hallazgos Q-01..Q-11, Q-E01..Q-E08 y S-01..S-04)", 9),
+            ("1. Diagnóstico de calidad multidimensional (Hallazgos Q-01..Q-12, Q-E01..Q-E08 y S-01..S-04)", 9),
             ("", 9),
             ("", 9),
             ("", 9),

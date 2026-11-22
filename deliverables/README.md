@@ -27,7 +27,7 @@ deliverables/
 | Hito | Entregable según el profesor | Archivo |
 |---|---|---|
 | H1 | Documento con el perfil del sector y la matriz de 3 preguntas, máx. 6 páginas sin anexos. Al inicio: nombre del equipo, sector y fecha | `Hito1_Apellido1Apellido2ApellidoN.pdf` |
-| H2 | `.pbix` con las fuentes conectadas y un libro de Excel (o Word/PDF) con Fuentes, Diccionario, Calidad y Cobertura. Vence el 21/11/2026 | `Proyecto_Grupo5_Hito2.pbix` y `h2/Proyecto_Grupo5_Hito2.xlsx` |
+| H2 | `.pbix` con las fuentes conectadas y un libro de Excel (o Word/PDF; en el aula, un solo PDF) con Fuentes, Diccionario, Calidad y Cobertura. Vence el 21/11/2026 | `H2FC-BravoFreireGuajanPasquelTorres.pbix` y `H2BravoFreireGuajanPasquelTorres.pdf` (el aula pidió un solo PDF con las partes 4.2 a 4.5; se genera desde `h2/Proyecto_Grupo5_Hito2.xlsx`) |
 | H3 | `.pbix` con el modelo dimensional, documento de diseño en PDF (máx. 8 páginas sin anexos) y diapositivas en PDF; presentación de 10 min + 5 de preguntas. Vence el 22/11/2026 | `Proyecto_Grupo5_Hito3.pbix`, `h3/Proyecto_Grupo5_Hito3_Diseno.pdf` y `h3/Proyecto_Grupo5_Hito3_Presentacion.pdf` |
 | H4 | Scripts ETL, carga inicial e incremental, bitácora de cargas y reporte de reconciliación | **[PENDIENTE]** guía del profesor |
 | H5 | Consultas OLAP, tablero `.pbix`, notebook del modelo analítico y resumen de 1 página | **[PENDIENTE]** guía del profesor |
@@ -70,7 +70,7 @@ el modelo viven en `reports/powerbi/` y `docs/h2/`, `docs/h3/`.
 
 ### Libro de Excel del Hito 2
 
-`h2/Proyecto_Grupo5_Hito2.xlsx` es el libro de cuatro partes (Fuentes, Diccionario,
+`h2/Proyecto_Grupo5_Hito2.xlsx` es el libro de cuatro partes (el PDF de entrega se exporta desde Excel: A4 horizontal, ajustar todas las columnas a una página de ancho, sin cambiar el contenido) (Fuentes, Diccionario,
 Calidad y Cobertura, precedidas de la Portada institucional) generado desde los
 archivos de contenido `docs/h2/fuentes.csv`, `diccionario.csv`, `calidad.csv` y
 `cobertura.csv` con `python -I scripts/build_hito2_xlsx.py`.
