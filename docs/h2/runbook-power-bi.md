@@ -1,8 +1,8 @@
 # Hito 2: conexión y perfilado en Power BI
 
-Procedimiento para el líder. Las consultas M y este procedimiento **no se han ejecutado ni verificado en Desktop**. Solo se probó 2025 anteriormente; 2021–2024 y la combinación de cinco años siguen sin probarse en Desktop ([decisión de conexión, §8](decision-formato-conexion.md)). No se corrigen datos en H2. `gob.ec` se omite: es apoyo nominal ([fuente de entidades](fuente-entidades.md)).
+Procedimiento para el líder. El líder ejecutó las cuatro consultas en Desktop y comprobó los totales combinados 2021–2025 el 21/11/2026. La reapertura en otra ubicación y la portabilidad de parámetros siguen sin verificar. No se corrigen datos en H2. `gob.ec` se omite: es apoyo nominal ([fuente de entidades](fuente-entidades.md)).
 
-Versión de Power BI Desktop: __________. Nombre mostrado para calidad de columna(s): __________.
+Versión instalada de Power BI Desktop: 2.159.1231.0 (paquete de Microsoft Store, verificado el 21/11/2026). En la interfaz observada: **Column quality**, **Column distribution** y **Column profile**.
 
 ## Integridad antes de conectar
 
@@ -47,7 +47,7 @@ Origen: [perfilado SERCOP §2](perfilado-sercop.md) y `evidencia/perfil-calidad-
 
 Suma `awards.amount`: USD 30.952.880.306,92; `tender.value_amount`: USD 25.072.968.705,53. Si no coinciden, revisa primero `QuoteStyle.Csv` en tender, después UTF-8 y el paso Tipo cambiado; registra la diferencia real. Para contingencia de solo 2025, deja constancia del recorte y compara con la fila de 2025 y los importes del CSV de resumen; no afirmes cobertura de cinco años.
 
-Las columnas CSV sin cambio de tipo son texto: sus mínimos y máximos son alfabéticos y no permiten sumar como números. **Solo con aprobación del líder**, se puede crear una consulta temporal `Control_Totales`, deshabilitar su carga (clic derecho sobre la consulta > habilitar carga, si aparece marcada) y pegar el siguiente M en Editor avanzado. Usa copias de las columnas, convierte con cultura `en-US`, preserva errores y nulos, y no carga al modelo. Es una comprobación temporal, no limpieza de las consultas originales; no se ha probado en Desktop. Si hay errores o discrepancias, registrarlos; no sustituirlos por cero.
+Las columnas CSV sin cambio de tipo son texto: sus mínimos y máximos son alfabéticos y no permiten sumar como números. **Solo con aprobación del líder**, se puede crear una consulta temporal `Control_Totales`, deshabilitar su carga (clic derecho sobre la consulta > habilitar carga, si aparece marcada) y pegar el siguiente M en Editor avanzado. Usa copias de las columnas, convierte con cultura `en-US`, preserva errores y nulos, y no carga al modelo. Es una comprobación temporal, no limpieza de las consultas originales; se comprobó en Desktop con una consulta temporal equivalente y dos decimales para comparar. Si hay errores o discrepancias, registrarlos; no sustituirlos por cero.
 
 ```powerquery
 let
@@ -67,12 +67,29 @@ Para verificar portabilidad, prepara otra carpeta con la misma estructura y los 
 
 Guárdalas en `docs/h2/evidencia/capturas/`; revisa antes de compartir que no se vean valores de personas o proveedores. Evita `title`, `description` y otras columnas libres que puedan contener datos personales.
 
-1. `S01-vista-previa-utf8.png`: vista previa, codificación y delimitador, sin valores sensibles.
-2. `S02-perfil-conjunto-completo.png`: barra de estado con el perfil completo.
-3. `S03-procesos-calidad.png`: calidad/distribución/perfil de columnas de identificación de entidad pública.
-4. `S04-licitaciones-calidad.png`: calidad/distribución/perfil de método o monto, sin texto libre.
-5. `S05-adjudicaciones-calidad.png`: calidad/distribución/perfil de monto, sin proveedores.
-6. `S06-entidades-calidad.png`: perfil de una columna de entidad pública del catálogo.
-7. `S07-totales.png`: control agregado, si se aprobó y ejecutó, sin datos individuales.
+1. `S01-vista-previa-utf8.png`: vista previa, codificación y delimitador.
+2. `S02-control-filas.png`: conteos agregados de las tres tablas SERCOP.
+3. `S03-control-totales.png`: sumas agregadas de adjudicado y estimado.
+4. Pendiente: perfil de conjunto completo, calidad y distribución de campos clave de cada tabla, sin rutas personales ni datos de personas o proveedores.
+
+## Ejecución y desvíos registrados
+
+- El líder conectó las cuatro consultas, activó el perfil completo, aplicó los cambios y guardó el PBIX el 21/11/2026. Las capturas guardadas muestran la vista previa UTF-8 (`S01`), los tres conteos (`S02`) y las dos sumas (`S03`). Las consultas temporales `Control_Filas` y `Control_Totales` aparecen sin carga en el editor.
+- El perfil completo se observó en capturas del líder, pero se descartaron para publicación porque muestran parte de una ruta personal. Faltan capturas publicables de calidad, distribución y perfil por tabla y del modo de conjunto completo.
+- Power BI mostró relaciones automáticas entre las tablas SERCOP al aplicar. No se han validado; su diseño corresponde a H3. El catálogo MDEP conserva columnas genéricas y filas de títulos y notas.
+- PBIX guardado: 243.078.890 bytes. Supera 100 MB; falta decisión sobre versionado. El tiempo no se cronometró. Los parámetros guardan rutas personales en el archivo.
+- El perfil del catálogo completo incluye títulos, encabezados y notas; sus porcentajes no son exclusivamente de los registros institucionales.
+
+## Cobertura de P1 a P3
+
+La matriz de preguntas está en `docs/requirements/hito1.md`, Parte 2 y las cabeceras se comprobaron en los CSV de cada año:
+
+| Pregunta | Campos disponibles en las fuentes conectadas | Limitación |
+|---|---|---|
+| P1 | `releases`: `ocid`, `buyer_id`, `date`; `tender`: `ocid`, `procurementMethod`; `awards`: `ocid`, `amount`; catálogo MDEP | El tipo de entidad y la clasificación de gobierno central no están resueltos. |
+| P2 | Los anteriores y `tender.value_amount` | Hay importes ausentes; unir y agrupar adjudicaciones corresponde a H3. |
+| P3 | `releases.date`, `buyer_id` y `awards.amount` | La fecha de negocio, la serie mensual y la clasificación histórica requieren resolución posterior. |
+
+El catálogo de 2026 no ofrece por sí solo la jerarquía ni la vigencia histórica para clasificar el gobierno central ([fuente-entidades.md](fuente-entidades.md), secciones 6 y 7). La disponibilidad de campos no demuestra que ya se puedan responder las preguntas en el modelo.
 
 ## Desvíos
