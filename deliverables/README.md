@@ -68,6 +68,22 @@ datos de personas). Aquí entran también el libro de Excel de H2 y los PDF de H
 cuando el líder los apruebe por PR. Las consultas M y los runbooks que producen
 el modelo viven en `reports/powerbi/` y `docs/h2/`, `docs/h3/`.
 
+### Libro de Excel del Hito 2
+
+`h2/Proyecto_Grupo5_Hito2.xlsx` es el libro de cuatro partes (Fuentes, Diccionario,
+Calidad y Cobertura, precedidas de la Portada institucional) generado desde los
+archivos de contenido `docs/h2/fuentes.csv`, `diccionario.csv`, `calidad.csv` y
+`cobertura.csv` con `python -I scripts/build_hito2_xlsx.py`.
+
+- **Regeneración:** regenerar el libro sobrescribe cualquier retoque de formato hecho
+  a mano en Excel; si se modifican los CSV o el script, se vuelve a generar y a revisar.
+- **Apertura y verificación:** un entorno automatizado no puede abrir Excel; la apertura
+  limpia y sin reparación la confirma el líder al abrir el archivo en Excel Desktop.
+- **Plan B:** si por cualquier motivo el archivo `.xlsx` requiriese reparación en una
+  versión específica de Excel, el plan de respaldo consiste en importar a un libro nuevo
+  de Excel los cuatro archivos CSV fuente (`docs/h2/fuentes.csv`, `diccionario.csv`,
+  `calidad.csv` y `cobertura.csv`), darles formato tabular a mano y añadir la portada.
+
 ## Plantilla opcional
 
 `plantilla/plantilla-entregable.docx` es una base en APA 7 con el encabezado
