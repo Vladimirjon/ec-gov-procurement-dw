@@ -1,6 +1,5 @@
 import importlib.util
 from pathlib import Path
-import re
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -11,28 +10,28 @@ spec.loader.exec_module(module)
 
 def test_document_has_the_header_and_the_four_parts_asked_by_the_classroom():
     page = module.document()
-    assert "Hito 2 - Adquisición y calidad de datos" in page
-    for label in ("Equipo #", "Nombres", "Fecha"):
-        assert f"<dt>{label}</dt>" in page
+    assert "<h1>Hito 2 - Adquisición y calidad de datos</h1>" in page
+    for label in ("Equipo #:", "Nombres:", "Fecha:"):
+        assert f"<b>{label}</b>" in page
     for heading in (
-        "4.2 Inventario de fuentes",
-        "4.3 Diccionario de datos",
-        "4.4 Diagnóstico de calidad",
-        "4.5 Matriz de cobertura",
+        "Parte 1. Inventario de fuentes",
+        "Parte 2. Diccionario de datos",
+        "Parte 3. Diagnóstico de calidad",
+        "Parte 4. Matriz de cobertura",
     ):
-        assert f"<h2>{heading}</h2>" in page
+        assert f"{heading}</h2>" in page
 
 
 def test_every_csv_row_reaches_the_pdf_and_the_matrix_is_complete():
     page = module.document()
     findings = len(module.read_csv("calidad.csv"))
-    assert page.count("<tr class='finding") == findings
-    assert page.count("class='m-") == 24  # 4 tables x 6 dimensions
+    assert page.count("<tr class='finding'>") == findings
+    assert page.count("<td class='m") == 24  # 4 tables x 6 dimensions
     assert "No medida" not in page
     for marker in ("[VERIFICAR]", "[PENDIENTE]"):
         assert marker not in page
-    dictionary_rows = len(module.read_csv("diccionario.csv"))
-    assert len(re.findall(r"<td class='field'>", page)) == dictionary_rows
+    assert page.count("<td class='field'>") == len(module.read_csv("diccionario.csv"))
+    assert page.count("<td class='hash'>") == len(module.read_csv("fuentes.csv"))
 
 
 def test_control_totals_come_from_the_profile_evidence():
