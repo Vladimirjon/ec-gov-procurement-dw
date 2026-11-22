@@ -14,6 +14,7 @@ from build_entity_seed import (
     aggregate_sercop,
     apply_overrides,
     build_catalog_index,
+    check_root_consistency,
     classify_group,
     coverage,
     discover_years,
@@ -133,7 +134,7 @@ def test_read_catalog_without_header_fails(tmp_path: Path) -> None:
     [
         ("111", "PRESIDENCIA DE LA REPUBLICA - PLANTA CENTRAL", "presidencia", "propuesta"),
         ("111", "MINISTERIO  DE  SALUD - PLANTA CENTRAL", "ministerio", "propuesta"),
-        ("111", "INSTITUTO NACIONAL DE PRUEBA", "instituto", "propuesta"),
+        ("111", "INSTITUTO NACIONAL DE PRUEBA", "sin_clasificar", "dudosa"),
         ("111", "ASAMBLEA NACIONAL", "fuera_de_alcance", "aprobada"),
         ("111", "SUPERINTENDENCIA DE BANCOS", "fuera_de_alcance", "propuesta"),
         ("111", "SERVICIO DE RENTAS INTERNAS", "sin_clasificar", "dudosa"),
@@ -152,6 +153,7 @@ def test_classify_group(sector: str, name: str, entity_type: str, status: str) -
 
 def test_doubtful_group_carries_a_firm_recommendation() -> None:
     assert classify_group("111", "SERVICIO DE RENTAS INTERNAS").proposed_type == "fuera_de_alcance"
+    assert classify_group("111", "INSTITUTO NACIONAL DE PRUEBA").proposed_type == "instituto"
     assert classify_group("111", "VICEPRESIDENCIA DE LA REPUBLICA").proposed_type == "presidencia"
     assert classify_group("111", "CASA MILITAR PRESIDENCIAL - PLANTA CENTRAL").proposed_type == "presidencia"
 
@@ -231,9 +233,9 @@ def test_other_state_functions_and_sectors_are_out_of_scope(index) -> None:
 
 
 def write_overrides(path: Path, rows: list[dict[str, str]]) -> Path:
-    cols = ["scope", "key", "entity_type", "decided_on", "decision_note"]
+    cols = ["scope", "key", "entity_type", "decided_on", "decision_note", "parent_entity", "evidence"]
     with path.open("w", encoding="utf-8", newline="\n") as f:
-        w = csv.DictWriter(f, fieldnames=cols, lineterminator="\n")
+        w = csv.DictWriter(f, fieldnames=cols, restval="", lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
     return path
@@ -271,6 +273,76 @@ def test_overrides_apply_by_udaf_and_root_but_not_to_malformed(index, tmp_path: 
     assert (seed[2].entity_type, seed[2].status) == ("ministerio", "aprobada")
     assert "2026-11-22" in seed[2].source
     assert (seed[3].entity_type, seed[3].status) == ("sin_clasificar", "dudosa")
+
+
+def test_institute_by_denomination_is_doubtful_not_in_scope(index) -> None:
+    row = match_buyer("EC-RUC-1700000080001", index, {})
+    assert (row.entity_type, row.status, row.proposed_type) == ("sin_clasificar", "dudosa", "instituto")
+    assert row.catalog_sector == "111" and row.catalog_udaf == "64"
+
+
+def test_override_keeps_documented_parent_and_evidence_on_an_uncrossed_root(index) -> None:
+    seed = [match_buyer("EC-RUC-1799999990001", index, {"1799999990001": "DISTRITO"})]
+    ov = {
+        "scope": "ruc_root",
+        "key": "1799999990001",
+        "entity_type": "ministerio",
+        "decided_on": "2026-11-22",
+        "decision_note": "n",
+        "parent_entity": "MINISTERIO DE PRUEBA UNO - PLANTA CENTRAL",
+        "evidence": "catalogo oficial sintetico",
+    }
+    assert apply_overrides(seed, [ov]) == 1
+    row = seed[0]
+    assert (row.entity_type, row.status, row.proposed_type) == ("ministerio", "aprobada", "")
+    assert row.parent_entity == "MINISTERIO DE PRUEBA UNO - PLANTA CENTRAL"
+    assert row.source == "decision del lider 2026-11-22; catalogo oficial sintetico"
+
+
+def test_sector_and_propuesta_scopes_approve_only_what_they_name(index) -> None:
+    seed = [
+        match_buyer("EC-RUC-1700000140001", index, {}),  # sector 113, fuera, propuesta
+        match_buyer("EC-RUC-1700000030001", index, {}),  # ministerio, propuesta
+        match_buyer("EC-RUC-1700000080001", index, {}),  # instituto by name, dudosa
+        match_buyer("EC-RUC-1700000130001", index, {}),  # sector 122, fuera, aprobada
+    ]
+    base = {"decided_on": "2026-11-22", "decision_note": "n"}
+    rows = [
+        {"scope": "sector", "key": "113", "entity_type": "fuera_de_alcance", **base},
+        {"scope": "propuesta", "key": "ministerio", "entity_type": "ministerio", **base},
+    ]
+    assert apply_overrides(seed, rows) == 2
+    assert [r.status for r in seed] == ["aprobada", "aprobada", "dudosa", "aprobada"]
+    assert seed[2].entity_type == "sin_clasificar"
+    assert "decision del lider" in seed[0].source and "decision del lider" not in seed[3].source
+
+
+def test_conflicting_decisions_for_one_row_fail(index, tmp_path: Path) -> None:
+    seed = [match_buyer("EC-RUC-1700000090001", index, {})]
+    base = {"decided_on": "d", "decision_note": "n"}
+    rows = [
+        {"scope": "udaf", "key": "135", "entity_type": "fuera_de_alcance", **base},
+        {"scope": "ruc_root", "key": "1700000090001", "entity_type": "ministerio", **base},
+    ]
+    with pytest.raises(ValueError, match="conflicting"):
+        apply_overrides(seed, rows)
+    bad = write_overrides(
+        tmp_path / "p.csv",
+        [{"scope": "propuesta", "key": "ministerio", "entity_type": "instituto", **base}],
+    )
+    with pytest.raises(ValueError, match="keeps the type"):
+        read_overrides(bad)
+
+
+def test_root_consistency_detects_a_decision_that_splits_a_root(index) -> None:
+    seed = [
+        match_buyer("EC-RUC-1700000030001", index, {}),
+        match_buyer("EC-RUC-1700000030001-5", index, {}),
+        match_buyer("EC-RUC-1700000090001", index, {}),
+    ]
+    assert check_root_consistency(seed) == []
+    seed[1].status = "aprobada"
+    assert check_root_consistency(seed) == ["1700000030001"]
 
 
 def test_overrides_reject_unknown_scope_or_type(tmp_path: Path) -> None:
@@ -357,14 +429,14 @@ def test_coverage_splits_years_segments_and_excludes_out_of_range_from_the_total
     seed = [match_buyer(b, index, fallback) for b in sorted({b for _, b in agg})]
     cov = coverage(seed, agg)
     assert set(cov["years"]) == {"2024", "2025", "2026"}
-    assert cov["years"]["2024"]["ministerio"]["processes"] == 2
-    assert cov["years"]["2024"]["ministerio"]["awarded_amount"] == 120.5
+    assert cov["years"]["2024"]["ministerio:propuesta"]["processes"] == 2
+    assert cov["years"]["2024"]["ministerio:propuesta"]["awarded_amount"] == 120.5
     assert cov["years"]["2024"]["sin_clasificar:dudosa"]["processes"] == 1
     assert cov["years"]["2025"]["sin_clasificar:sin_cruce"]["processes"] == 2
     assert cov["years"]["2025"]["sin_clasificar:malformado"]["processes"] == 1
-    assert cov["years"]["2026"]["ministerio"]["processes"] == 1
+    assert cov["years"]["2026"]["ministerio:propuesta"]["processes"] == 1
     total = cov["total_2021_2025"]
-    assert total["ministerio"]["processes"] == 2  # the 2026 process is not in the 2021-2025 total
+    assert total["ministerio:propuesta"]["processes"] == 2  # the 2026 process is not in the 2021-2025 total
     assert sum(v["processes"] for v in total.values()) == 6
 
 

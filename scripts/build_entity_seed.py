@@ -6,9 +6,11 @@ Crosswalk rule (ADR 0001, decisions 6 and 7), never by buyer name:
 3. otherwise the buyer is ``sin_clasificar`` (no catalog match or malformed id).
 
 Classification comes from the MDEP catalog only (sector, UDAF group and the group's
-head name); it is a team criterion, not a course rule. Every catalog group that does
-not fit Presidencia, ministerio or instituto is ``dudosa`` and stays out of the
-indicators until the leader approves it, through ``--overrides``. Standard library
+head name); it is a team criterion, not a course rule. Only rows with status ``aprobada``
+and a type of Presidencia, ministerio or instituto are admitted to the sector (the rule
+FactContratacion applies). Every catalog group that does not fit Presidencia or
+ministerio is ``dudosa`` until its dependency is documented, and ``propuesta`` rows
+wait for approval; the leader's decisions are applied with ``--overrides``. Standard library
 only; outputs are never overwritten.
 """
 
@@ -34,6 +36,7 @@ SEED_COLUMNS = [
     "buyer_id",
     "ruc_root",
     "match_type",
+    "catalog_sector",
     "catalog_udaf",
     "catalog_eod",
     "entity_name",
@@ -49,6 +52,9 @@ SEED_COLUMNS = [
 ]
 IN_SCOPE = ("presidencia", "ministerio", "instituto")
 OVERRIDE_COLUMNS = {"scope", "key", "entity_type", "decided_on", "decision_note"}
+# Optional columns: parent_entity (documented parent) and evidence (source of the decision).
+# Scopes: ruc_root, udaf, sector, and propuesta (approve every proposed row of one type).
+OVERRIDE_SCOPES = ("ruc_root", "udaf", "sector", "propuesta")
 
 # Catalog sector (code) -> (status, source). All of them are fuera_de_alcance.
 SECTOR_OUT = {
@@ -107,6 +113,7 @@ class SeedRow:
     buyer_id: str
     ruc_root: str
     match_type: str
+    catalog_sector: str = ""
     catalog_udaf: str = ""
     catalog_eod: str = ""
     entity_name: str = ""
@@ -121,7 +128,7 @@ class SeedRow:
     note: str = ""
 
 
-CatalogEntry = tuple[Classification, str, str, str, str]
+CatalogEntry = tuple[Classification, str, str, str, str, str]
 
 
 def norm(text: str) -> str:
@@ -239,10 +246,14 @@ def classify_group(sector: str, head_name: str) -> Classification:
     if name.startswith("MINISTERIO"):
         return Classification("ministerio", "propuesta", "catalogo MDEP sector 111 + ADR 0001 decision 1")
     if name.startswith("INSTITUTO"):
+        # The denomination is not proof of ministerial dependency (ADR 0001 decision 1), and some
+        # institutes are not attached to any ministry: dudosa until the attachment is documented.
         return Classification(
-            "instituto",
-            "propuesta",
-            "criterio del equipo: denominacion Instituto en el catalogo; dependencia ministerial no verificada",
+            "sin_clasificar",
+            "dudosa",
+            "criterio del equipo: instituto por denominacion; adscripcion ministerial no acreditada",
+            proposed_type="instituto",
+            note="instituto por denominacion: falta respaldo de adscripcion",
         )
     return Classification(
         "sin_clasificar",
@@ -271,10 +282,10 @@ def recommend_doubtful(head_name: str) -> str:
 def classify_catalog_root(rows: list[CatalogRow], heads: dict[tuple[str, str], CatalogRow]) -> CatalogEntry:
     """Classify one catalog RUC that may appear in several (UDAF, EOD) rows.
 
-    Returns (classification, entity_name, parent_entity, udaf, eod). When the rows
+    Returns (classification, entity_name, parent_entity, udaf, eod, sector). When the rows
     disagree on the outcome the root is ambiguous: sin_clasificar, dudosa. When they
     agree but sit under different parents, the parent is left empty. UDAF and EOD are
-    kept only when the RUC belongs to a single group.
+    kept only when the RUC belongs to a single group; the sector only when it is unique.
     """
     results = []
     for row in sorted(rows, key=lambda r: (r.sector, int(r.udaf) if r.udaf.isdigit() else 0, r.eod)):
@@ -283,6 +294,7 @@ def classify_catalog_root(rows: list[CatalogRow], heads: dict[tuple[str, str], C
         parent = head.name if head is not None and head is not row else ""
         results.append((row, cls, parent))
     first_row, first_cls, first_parent = results[0]
+    sector = first_row.sector if len({r.sector for r, _, _ in results}) == 1 else ""
     outcomes = {(cls.entity_type, cls.proposed_type, cls.status) for _, cls, _ in results}
     if len(outcomes) > 1:
         where = "; ".join(f"{r.sector}/{r.udaf}/{r.eod}" for r, _, _ in results)
@@ -297,6 +309,7 @@ def classify_catalog_root(rows: list[CatalogRow], heads: dict[tuple[str, str], C
             "",
             "",
             "",
+            sector,
         )
     note = first_cls.note
     parent = first_parent
@@ -306,7 +319,8 @@ def classify_catalog_root(rows: list[CatalogRow], heads: dict[tuple[str, str], C
     cls = Classification(first_cls.entity_type, first_cls.status, first_cls.source, first_cls.proposed_type, note)
     # A RUC in several groups has no single UDAF: a group-level decision must not reach it.
     one_group = len({(r.sector, r.udaf) for r, _, _ in results}) == 1
-    return cls, first_row.name, parent, first_row.udaf if one_group else "", first_row.eod if one_group else ""
+    udaf, eod = (first_row.udaf, first_row.eod) if one_group else ("", "")
+    return cls, first_row.name, parent, udaf, eod, sector
 
 
 def build_catalog_index(rows: list[CatalogRow]) -> dict[str, CatalogEntry]:
@@ -340,11 +354,12 @@ def match_buyer(buyer_id: str, index: dict[str, CatalogEntry], fallback_names: d
             source="sin cruce: la raiz no consta en el catalogo MDEP",
             note="RUC fuera del catalogo (Q-E05)",
         )
-    cls, name, parent, udaf, eod = entry
+    cls, name, parent, udaf, eod, sector = entry
     return SeedRow(
         buyer_id=buyer_id,
         ruc_root=root,
         match_type="raiz" if suffix else "exacta",
+        catalog_sector=sector,
         catalog_udaf=udaf,
         catalog_eod=eod,
         entity_name=name,
@@ -359,7 +374,7 @@ def match_buyer(buyer_id: str, index: dict[str, CatalogEntry], fallback_names: d
 
 
 def read_overrides(path: Path) -> list[dict[str, str]]:
-    """Leader decisions: scope is ``ruc_root`` or ``udaf``; key is the root or the UDAF code."""
+    """Leader decisions: scope is ruc_root, udaf, sector or propuesta; key is the root, UDAF, sector or type."""
     with path.open("r", encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f)
         missing = OVERRIDE_COLUMNS - set(reader.fieldnames or [])
@@ -368,27 +383,55 @@ def read_overrides(path: Path) -> list[dict[str, str]]:
         rows = list(reader)
     valid = {*IN_SCOPE, "fuera_de_alcance", "sin_clasificar"}
     for r in rows:
-        if r["scope"] not in ("ruc_root", "udaf") or r["entity_type"] not in valid:
+        if r["scope"] not in OVERRIDE_SCOPES or r["entity_type"] not in valid:
             raise ValueError(f"invalid override: {r}")
+        if r["scope"] == "propuesta" and r["key"] != r["entity_type"]:
+            raise ValueError(f"a propuesta override keeps the type: {r}")
     return rows
 
 
 def apply_overrides(seed: list[SeedRow], overrides: list[dict[str, str]]) -> int:
-    """Apply leader decisions to matched rows (never to malformed ids); returns rows changed."""
-    applied = 0
+    """Apply leader decisions to matched rows (never to malformed ids); returns rows decided.
+
+    Two decisions that give one row different types are an error, not a silent last-wins.
+    """
+    decided: dict[int, str] = {}
     for ov in overrides:
-        for row in seed:
+        scope, key = ov["scope"], ov["key"]
+        for i, row in enumerate(seed):
             if row.match_type == "malformado":
                 continue
-            hit = row.ruc_root == ov["key"] if ov["scope"] == "ruc_root" else row.catalog_udaf == ov["key"]
+            if scope == "ruc_root":
+                hit = row.ruc_root == key
+            elif scope == "udaf":
+                hit = row.catalog_udaf == key
+            elif scope == "sector":
+                hit = row.catalog_sector == key
+            else:
+                hit = row.status == "propuesta" and row.entity_type == key
             if not hit:
                 continue
+            if decided.get(i, ov["entity_type"]) != ov["entity_type"]:
+                raise ValueError(f"conflicting decisions for {row.buyer_id}")
+            decided[i] = ov["entity_type"]
             row.entity_type = ov["entity_type"]
+            row.proposed_type = ""
             row.status = "aprobada"
-            row.source = f"decision del lider {ov['decided_on']}"
+            evidence = (ov.get("evidence") or "").strip()
+            row.source = f"decision del lider {ov['decided_on']}" + (f"; {evidence}" if evidence else "")
             row.note = ov["decision_note"]
-            applied += 1
-    return applied
+            if (ov.get("parent_entity") or "").strip():
+                row.parent_entity = ov["parent_entity"].strip()
+    return len(decided)
+
+
+def check_root_consistency(seed: list[SeedRow]) -> list[str]:
+    """Roots whose buyer_ids do not share one (type, status): FactContratacion treats them as doubtful."""
+    outcomes: dict[str, set[tuple[str, str]]] = defaultdict(set)
+    for row in seed:
+        if row.ruc_root:
+            outcomes[row.ruc_root].add((row.entity_type, row.status))
+    return sorted(root for root, found in outcomes.items() if len(found) > 1)
 
 
 # --------------------------------------------------------------------------- SERCOP
@@ -462,7 +505,7 @@ def fallback_names_by_root(names: dict[str, Counter]) -> dict[str, str]:
 def segment(row: SeedRow) -> str:
     """Bucket used in the coverage tables."""
     if row.entity_type != "sin_clasificar":
-        return row.entity_type
+        return f"{row.entity_type}:{row.status}"
     if row.match_type == "malformado":
         return "sin_clasificar:malformado"
     if row.match_type == "sin_cruce":
@@ -579,6 +622,10 @@ def main(argv: list[str] | None = None) -> int:
     fallback = fallback_names_by_root(names)
     seed = [match_buyer(b, index, fallback) for b in sorted({buyer for _, buyer in agg})]
     applied = apply_overrides(seed, read_overrides(args.overrides)) if args.overrides else 0
+    inconsistent = check_root_consistency(seed)
+    if inconsistent:
+        print(f"ERROR: roots with mixed classifications across buyer_ids: {inconsistent[:5]}", file=sys.stderr)
+        return 1
     cov = coverage(seed, agg)
     cases = doubtful_cases(seed, agg)
 

@@ -1,0 +1,10 @@
+scope,key,entity_type,decided_on,decision_note,parent_entity,evidence
+propuesta,presidencia,presidencia,2026-11-22,"D3: Presidencia por cabecera del catalogo, aprobada por el lider",,
+propuesta,ministerio,ministerio,2026-11-22,"D3: ministerios por cabecera del catalogo, aprobados por el lider",,
+sector,113,fuera_de_alcance,2026-11-22,"D3: seguridad social fuera de alcance, exclusion justificada en el Hito 1 y en la normativa presupuestaria",,Hito 1; docs/sources/entidades.md (Directrices Proforma 2027 del MEF)
+udaf,52,fuera_de_alcance,2026-11-22,"D2: Policia Nacional fuera del alcance vigente (Presidencia, ministerios e institutos dependientes)",,"COESCOP, arts. 61 y 63 (cita de la revision del PR 88)"
+udaf,57,fuera_de_alcance,2026-11-22,"D2: Policia Nacional fuera del alcance vigente (Presidencia, ministerios e institutos dependientes)",,"COESCOP, arts. 61 y 63 (cita de la revision del PR 88)"
+udaf,58,fuera_de_alcance,2026-11-22,"D2: Policia Nacional fuera del alcance vigente (Presidencia, ministerios e institutos dependientes)",,"COESCOP, arts. 61 y 63 (cita de la revision del PR 88)"
+udaf,214,fuera_de_alcance,2026-11-22,"D3: INEVAL no sujeto a adscripcion ministerial, fuera del alcance vigente",,"LOEI, art. 67 (cita de la revision del PR 88)"
+ruc_root,1060040130001,ministerio,2026-11-22,"D1: direccion distrital de salud 10D02, acreditada bajo el Ministerio de Salud Publica",MINISTERIO DE SALUD PUBLICA - PLANTA CENTRAL,Catalogo oficial de instituciones al 31/03/2018 del MEF (cita de la revision del PR 88)
+ruc_root,1060014130001,ministerio,2026-11-22,"D1: direccion distrital de salud 10D03, acreditada bajo el Ministerio de Salud Publica",MINISTERIO DE SALUD PUBLICA - PLANTA CENTRAL,Catalogo oficial de instituciones al 31/03/2018 del MEF (cita de la revision del PR 88)
