@@ -1,7 +1,8 @@
 // Intermedia sin carga. Referencia al origen limpio, con una fila por ocid nacional.
 // Diseño 6.5: ventana, coincidencia exacta o raíz, conflicto, admisión y solo después IdEntidad.
 let
-    Origen = Procesos_SERCOP,
+    // Table.Buffer: la tabla se calcula una vez; las guardas no vuelven a leer los CSV.
+    Origen = Table.Buffer(Procesos_SERCOP),
     Semilla = Table.Buffer(Semilla_Entidades),
     #"Semilla por raíz sin duplicados" = Table.Distinct(Table.Buffer(Table.Sort(
         Table.SelectRows(Semilla, each [ruc_root] <> null and [ruc_root] <> ""),
@@ -43,8 +44,8 @@ let
         else [Detalle], type text),
     #"Método sin licitación identificado" = Table.ReplaceValue(#"Procedimiento normalizado", null,
         "Sin licitación", Replacer.ReplaceValue, {"MetodoOCDS"}),
-    #"Columnas del origen de modelo" = Table.RemoveColumns(#"Método sin licitación identificado",
-        {"Exacta", "PorRaiz", "Detalle"}),
+    #"Columnas del origen de modelo" = Table.Buffer(Table.RemoveColumns(#"Método sin licitación identificado",
+        {"Exacta", "PorRaiz", "Detalle"})),
     #"Grano nacional conservado verificado" =
         if Table.RowCount(#"Columnas del origen de modelo") <> Table.RowCount(Origen)
             or Table.RowCount(Table.Distinct(#"Columnas del origen de modelo", {"ocid"})) <> Table.RowCount(Origen)
