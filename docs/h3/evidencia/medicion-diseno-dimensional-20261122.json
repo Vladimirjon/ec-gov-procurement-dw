@@ -1,0 +1,241 @@
+{
+  "processes": 1007920,
+  "tender_rows": 981348,
+  "tender_repeated_ocid": 0,
+  "awards_rows": 975302,
+  "awards_without_process": 0,
+  "processes_by_release_year": {
+    "2021": 148823,
+    "2022": 206801,
+    "2023": 222595,
+    "2024": 217422,
+    "2025": 197784,
+    "2026": 14495
+  },
+  "processes_in_window": 993425,
+  "processes_after_window": 14495,
+  "processes_before_window": 0,
+  "months_with_processes_in_window": 60,
+  "awarded_total": 30952880306.92,
+  "awarded_in_window": 28187165730.91,
+  "awarded_outside_window": 2765714576.01,
+  "processes_with_award_outside_window": 14016,
+  "in_window_with_other_archive_year": 81898,
+  "method_values": {
+    "selective": 576278,
+    "direct": 272593,
+    "open": 129718,
+    "limited": 2759
+  },
+  "method_details_distinct": 704,
+  "method_details_distinct_normalised": 704,
+  "method_details_empty": 1,
+  "method_details_with_several_methods": 0,
+  "catalogue_details_distinct": 681,
+  "catalogue_tender_rows": 780097,
+  "procedures_distinct": 27,
+  "procedures": [
+    {
+      "method": "selective",
+      "procedure": "Catálogo electrónico - Mejor oferta",
+      "tenders": 539447,
+      "awarded": 306737958.66
+    },
+    {
+      "method": "direct",
+      "procedure": "Catálogo electrónico - Compra directa",
+      "tenders": 232387,
+      "awarded": 3243470147.18
+    },
+    {
+      "method": "open",
+      "procedure": "Subasta Inversa Electrónica",
+      "tenders": 109792,
+      "awarded": 8438955182.43
+    },
+    {
+      "method": "selective",
+      "procedure": "Menor Cuantía",
+      "tenders": 28567,
+      "awarded": 1627761082.99
+    },
+    {
+      "method": "direct",
+      "procedure": "Contratacion directa",
+      "tenders": 12809,
+      "awarded": 290556872.81
+    },
+    {
+      "method": "open",
+      "procedure": "Cotización",
+      "tenders": 10007,
+      "awarded": 3028491456.37
+    },
+    {
+      "method": "direct",
+      "procedure": "Bienes y Servicios únicos",
+      "tenders": 8220,
+      "awarded": 1089168882.99
+    },
+    {
+      "method": "direct",
+      "procedure": "Comunicación Social – Contratación Directa",
+      "tenders": 6715,
+      "awarded": 200198500.61
+    },
+    {
+      "method": "selective",
+      "procedure": "Catálogo electrónico - Gran compra puja",
+      "tenders": 6523,
+      "awarded": 1294543154.22
+    },
+    {
+      "method": "direct",
+      "procedure": "Contratos entre Entidades Públicas o sus subsidiarias",
+      "tenders": 5581,
+      "awarded": 2154842655.2
+    },
+    {
+      "method": "open",
+      "procedure": "Licitación",
+      "tenders": 5321,
+      "awarded": 6387496065.65
+    },
+    {
+      "method": "open",
+      "procedure": "Licitación de Seguros",
+      "tenders": 3889,
+      "awarded": 795118035.3
+    },
+    {
+      "method": "direct",
+      "procedure": "Obra artística, científica o literaria",
+      "tenders": 3322,
+      "awarded": 137693085.75
+    },
+    {
+      "method": "direct",
+      "procedure": "Repuestos o Accesorios",
+      "tenders": 2880,
+      "awarded": 262431368.07
+    },
+    {
+      "method": "limited",
+      "procedure": "Lista corta",
+      "tenders": 2233,
+      "awarded": 382319236.73
+    },
+    {
+      "method": "selective",
+      "procedure": "Catálogo electrónico - Gran compra mejor oferta",
+      "tenders": 1740,
+      "awarded": 480381294.84
+    },
+    {
+      "method": "open",
+      "procedure": "Concurso publico",
+      "tenders": 677,
+      "awarded": 199231552.5
+    },
+    {
+      "method": "limited",
+      "procedure": "Comunicación Social – Proceso de Selección",
+      "tenders": 523,
+      "awarded": 104456725.44
+    },
+    {
+      "method": "direct",
+      "procedure": "Asesoría y Patrocinio Jurídico",
+      "tenders": 335,
+      "awarded": 23926231.24
+    },
+    {
+      "method": "direct",
+      "procedure": "Transporte de correo interno o internacional",
+      "tenders": 199,
+      "awarded": 9324025.18
+    },
+    {
+      "method": "direct",
+      "procedure": "Contratación Directa por Terminación Unilateral",
+      "tenders": 105,
+      "awarded": 70921656.5
+    },
+    {
+      "method": "open",
+      "procedure": "Concurso Público por Lista Corta Desierta",
+      "tenders": 31,
+      "awarded": 5903135.22
+    },
+    {
+      "method": "direct",
+      "procedure": "Contrataciones con empresas públicas internacionales",
+      "tenders": 25,
+      "awarded": 418549938.34
+    },
+    {
+      "method": "direct",
+      "procedure": "Asesoría y Patrocinio Jurídico – Cons. puntuales y específicas",
+      "tenders": 15,
+      "awarded": 104560.0
+    },
+    {
+      "method": "limited",
+      "procedure": "Lista Corta por Contratación Directa Desierta",
+      "tenders": 3,
+      "awarded": 46139.19
+    },
+    {
+      "method": "open",
+      "procedure": "Concurso Público por Contratación Directa Desierta",
+      "tenders": 1,
+      "awarded": 1050.0
+    },
+    {
+      "method": "selective",
+      "procedure": "Sin detalle",
+      "tenders": 1,
+      "awarded": 250313.51
+    }
+  ],
+  "processes_without_tender_row": 26572,
+  "awarded_without_tender_row": 0,
+  "awarded_by_method": {
+    "open": 18855196477.47,
+    "direct": 7901187923.87,
+    "selective": 3709673804.22,
+    "limited": 486822101.36
+  },
+  "processes_with_award_rows": 964475,
+  "processes_with_awarded_amount": 964450,
+  "processes_with_award_rows_and_no_amount": 25,
+  "processes_with_partial_amounts": 0,
+  "release_id_compiled": 179447,
+  "release_year_after_archive_year": 96393,
+  "release_year_after_archive_year_compiled": 96393,
+  "processes_with_several_awards": 1801,
+  "processes_with_several_awards_in_window": 1682,
+  "tender_rows_in_window": 966853,
+  "award_rows_in_window": 960375,
+  "extra_award_rows_in_window": 9917,
+  "extra_award_rows": 10827,
+  "awarded_in_processes_with_several_awards": 327040896.43,
+  "tender_with_estimated_amount": 871555,
+  "estimated_total": 25072968705.53,
+  "estimated_overcount_if_award_rows_joined_1_to_n": 1558960424.49,
+  "processes_with_both_amounts": 868576,
+  "processes_with_both_amounts_in_window": 861904,
+  "processes_with_several_awards_and_both_amounts": 1801,
+  "awarded_in_both": 22513925124.49,
+  "estimated_in_both": 23559792776.46,
+  "estimated_in_window": 22805452044.61,
+  "awarded_in_both_in_window": 20547138708.22,
+  "estimated_in_both_in_window": 21456965754.58,
+  "processes_with_estimated_only": 2979,
+  "processes_with_awarded_only": 95874,
+  "buyer_ids_distinct": 6100,
+  "buyer_ids_without_root_pattern": 6,
+  "processes_without_root": 43,
+  "roots_distinct": 3364,
+  "roots_distinct_in_window": 3362
+}
