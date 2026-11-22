@@ -53,18 +53,17 @@ insumo del hito siguiente.
    (`FactAdjudicacion`, grano: una adjudicación) o una cuarta dimensión solo si
    el diagnóstico de H2 o una pregunta lo exigen. La tabla de hechos no guarda
    tasas ni porcentajes (guía H3, 3.2): guarda numerador y denominador.
-4. **El `.pbix` sí se versiona en Git** (decisión del líder, 20/11/2026), en
-   `deliverables/h2/` y `deliverables/h3/`, por PR. GitHub avisa a partir de
-   50 MB y rechaza archivos de más de 100 MB: se mide el tamaño antes de
-   commitear y, si pasa de unos 50 MB, se consulta al líder (Git LFS sería
-   infraestructura nueva y necesitaría su aprobación). El archivo lleva datos
-   embebidos (datos públicos con licencia CC BY 3.0 Ecuador): solo las columnas
-   necesarias y nunca datos de personas. Se versionan además las consultas M
-   (`reports/powerbi/`), los runbooks y la evidencia agregada.
-   *Nota:* esto excepciona la regla de no guardar datasets en `deliverables/`;
-   los datos crudos y derivados siguen fuera de Git.
+4. **El `.pbix` no se versiona en Git** (decisión del líder, 21/11/2026, que
+   reemplaza la del 20/11). El de H2 pesa 243 MB y GitHub rechaza archivos de
+   más de 100 MB; Git LFS sería infraestructura nueva y no se adopta. Los
+   `*.pbix` y las plantillas `*.pbit` están en `.gitignore` y el `.pbix` se
+   entrega por el aula virtual. Se versionan las consultas M
+   (`reports/powerbi/`), los runbooks, el libro de Excel y la evidencia
+   agregada. Los datos crudos y derivados siguen fuera de Git.
 5. **Tablas de H2** (el nombre de la tabla es el de la consulta de Power BI):
-   `Procesos_SERCOP`, `Adjudicaciones_SERCOP` y `Entidades_MDEP`. Los contratos
+   `Procesos_SERCOP`, `Licitaciones_SERCOP`, `Adjudicaciones_SERCOP` y
+   `Entidades_MDEP` (la cuarta se añadió el 21/11/2026: P2 necesita el importe
+   estimado de `tender`). Los contratos
    quedan fuera: P1 a P3 no los usan y solo el 15,33 % de los de 2025 trae
    importe (dato nacional, `reconocimiento.md`). No se cargan datos de contacto
    de personas (decisión D3 de `requisitos-del-profesor.md`).

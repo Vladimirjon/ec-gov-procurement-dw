@@ -102,11 +102,11 @@ script cambia sin un resumen nuevo en `docs/sources/` que registre su hash.
 - **Quién hace qué:** los agentes escriben scripts, consultas M (`.pq`) y
   runbooks; **Power BI Desktop lo opera el líder** (un agente no puede abrirlo ni
   probar un `.pq`: no afirmes que corre hasta que el líder lo confirme). El
-  `.pbix` **sí se versiona** (decisión del líder, 20/11) en `deliverables/h2|h3/`
-  por PR; GitHub rechaza archivos de más de 100 MB, así que se mide su tamaño
-  antes de commitear y, si pasa de unos 50 MB, se consulta al líder (Git LFS
-  sería infraestructura nueva). Lleva datos embebidos: solo columnas necesarias y
-  nunca datos de personas.
+  `.pbix` **no se versiona** (decisión del líder, 21/11, que reemplaza la del
+  20/11): pesa cientos de MB (el de H2, 243 MB) y GitHub rechaza archivos de más
+  de 100 MB. Está en `.gitignore` (`*.pbix`, `*.pbit`) y se entrega por el aula
+  virtual; el repo guarda las consultas M, los runbooks y la evidencia. Lleva
+  datos embebidos y rutas locales: nunca datos de personas.
 - **Dónde va cada cosa:** crudos en `data/datos_crudos/` y derivados en
   `data/derivados/` (rutas absolutas de la carpeta principal, ignoradas);
   evidencia agregada en `docs/h2/evidencia/` y `docs/h3/evidencia/`;

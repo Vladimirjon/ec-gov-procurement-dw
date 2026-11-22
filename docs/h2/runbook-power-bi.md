@@ -1,6 +1,6 @@
 # Hito 2: conexión y perfilado en Power BI
 
-Procedimiento para el líder. El líder ejecutó las cuatro consultas en Desktop y comprobó los totales combinados 2021–2025 el 21/11/2026. La reapertura en otra ubicación y la portabilidad de parámetros siguen sin verificar. No se corrigen datos en H2. `gob.ec` se omite: es apoyo nominal ([fuente de entidades](fuente-entidades.md)).
+Procedimiento para el líder. El líder ejecutó las cuatro consultas en Desktop y comprobó los totales combinados 2021–2025 el 21/11/2026. La actualización desde otra ubicación no se probó (decisión del líder, ver Cierre del #63). No se corrigen datos en H2. `gob.ec` se omite: es apoyo nominal ([fuente de entidades](fuente-entidades.md)).
 
 Versión instalada de Power BI Desktop: 2.159.1231.0 (paquete de Microsoft Store, verificado el 21/11/2026). En la interfaz observada: **Column quality**, **Column distribution** y **Column profile**.
 
@@ -30,7 +30,7 @@ $registros | ForEach-Object {
 9. Anota el grano de cada consulta (comentario al inicio de cada `.pq`) y comprueba combinaciones repetidas de las claves sin eliminar duplicados. Para MDEP distingue las filas de títulos y notas de los registros reales. Los controles agregados de #62 y el hallazgo Q-E02 son referencia, no sustituyen una comprobación en Desktop.
 10. Registra el conteo observado y compáralo con la tabla siguiente. No conviertas vacíos en cero. Para sumar, consulta al líder sobre el control temporal descrito abajo.
 11. Registra en el libro de Excel los problemas observados, dimensión, evidencia, impacto y acción propuesta para H3; completa la matriz de cobertura para P1–P3. Anota diferencias y desvíos sin forzarlos.
-12. **Cerrar y aplicar** y guarda como `deliverables/h2/Proyecto_Grupo5_Hito2.pbix`. Mide el tamaño antes de añadirlo a Git y avisa al líder si supera ~50 MB; GitHub rechaza archivos mayores de 100 MB. No actives Git LFS ni elimines columnas sin la decisión correspondiente. Los parámetros guardan rutas locales en el `.pbix`; revisa su exposición antes de compartirlo.
+12. Antes de cerrar, en **Archivo > Opciones y configuración > Opciones > Archivo actual > Carga de datos** desmarca la detección automática de relaciones (en la interfaz en inglés: *Autodetect new relationships after data is loaded*). **Cerrar y aplicar** y guarda como `deliverables/h2/Proyecto_Grupo5_Hito2.pbix`. Después abre la **Vista de modelo** y, si Desktop creó relaciones, elimínalas: H2 solo conecta y diagnostica; las relaciones se diseñan en H3 (relaciones 1 a varios con filtro único). Anota en Ejecución y desvíos cuántas había. El `.pbix` **no se versiona** (decisión del líder, 21/11/2026; está en `.gitignore`): se entrega por el aula virtual. Los parámetros guardan rutas locales dentro del `.pbix`; no lo compartas fuera del curso.
 
 ## Totales de control
 
@@ -48,6 +48,21 @@ Origen: [perfilado SERCOP §2](perfilado-sercop.md) y `evidencia/perfil-calidad-
 Suma `awards.amount`: USD 30.952.880.306,92; `tender.value_amount`: USD 25.072.968.705,53. Si no coinciden, revisa primero `QuoteStyle.Csv` en tender, después UTF-8 y el paso Tipo cambiado; registra la diferencia real. Para contingencia de solo 2025, deja constancia del recorte y compara con la fila de 2025 y los importes del CSV de resumen; no afirmes cobertura de cinco años.
 
 Las columnas CSV sin cambio de tipo son texto: sus mínimos y máximos son alfabéticos y no permiten sumar como números. **Solo con aprobación del líder**, se puede crear una consulta temporal `Control_Totales`, deshabilitar su carga (clic derecho sobre la consulta > habilitar carga, si aparece marcada) y pegar el siguiente M en Editor avanzado. Usa copias de las columnas, convierte con cultura `en-US`, preserva errores y nulos, y no carga al modelo. Es una comprobación temporal, no limpieza de las consultas originales; se comprobó en Desktop con una consulta temporal equivalente y dos decimales para comparar. Si hay errores o discrepancias, registrarlos; no sustituirlos por cero.
+
+Consulta temporal `Control_Filas` (misma regla: carga deshabilitada, no es limpieza), usada para S02:
+
+```powerquery
+let
+    Resultado = #table({"Tabla", "Filas"}, {
+        {"Procesos", Table.RowCount(Procesos_SERCOP)},
+        {"Licitaciones", Table.RowCount(Licitaciones_SERCOP)},
+        {"Adjudicaciones", Table.RowCount(Adjudicaciones_SERCOP)}
+    })
+in
+    Resultado
+```
+
+Consulta temporal `Control_Totales`, usada para S03:
 
 ```powerquery
 let
@@ -70,14 +85,17 @@ Guárdalas en `docs/h2/evidencia/capturas/`; revisa antes de compartir que no se
 1. `S01-vista-previa-utf8.png`: vista previa, codificación y delimitador.
 2. `S02-control-filas.png`: conteos agregados de las tres tablas SERCOP.
 3. `S03-control-totales.png`: sumas agregadas de adjudicado y estimado.
-4. Pendiente: perfil de conjunto completo, calidad y distribución de campos clave de cada tabla, sin rutas personales ni datos de personas o proveedores.
+Perfil de conjunto completo: no hay capturas publicadas. El líder lo realizó y lo declaró el 21/11/2026 (Calidad de columna, Distribución y Perfil de columna con «todo el conjunto de datos»); las capturas originales muestran rutas personales y el líder decidió no publicarlas. S01 a S03 son la evidencia gráfica del repositorio.
+
+Si en el futuro se agrega una captura, debe mostrar solo la tabla y no el panel Queries (muestra el valor de los parámetros de ruta, con el nombre de usuario). S02 y S03 ya publicadas tienen esos valores tapados.
 
 ## Ejecución y desvíos registrados
 
 - El líder conectó las cuatro consultas, activó el perfil completo, aplicó los cambios y guardó el PBIX el 21/11/2026. Las capturas guardadas muestran la vista previa UTF-8 (`S01`), los tres conteos (`S02`) y las dos sumas (`S03`). Las consultas temporales `Control_Filas` y `Control_Totales` aparecen sin carga en el editor.
-- El perfil completo se observó en capturas del líder, pero se descartaron para publicación porque muestran parte de una ruta personal. Faltan capturas publicables de calidad, distribución y perfil por tabla y del modo de conjunto completo.
-- Power BI mostró relaciones automáticas entre las tablas SERCOP al aplicar. No se han validado; su diseño corresponde a H3. El catálogo MDEP conserva columnas genéricas y filas de títulos y notas.
-- PBIX guardado: 243.078.890 bytes. Supera 100 MB; falta decisión sobre versionado. El tiempo no se cronometró. Los parámetros guardan rutas personales en el archivo.
+- Perfil completo: el líder lo activó y lo declaró hecho el 21/11/2026; las capturas originales se descartaron para publicación porque muestran parte de una ruta personal (decisión del líder: no publicarlas). S02 y S03 mostraban el comienzo de las rutas en el panel de parámetros; se taparon antes de subirlas (el archivo original sigue solo en el equipo del líder).
+- Power BI creó tres relaciones automáticas al aplicar, verificadas en la plantilla `.pbit` y en la Vista de modelo: `Licitaciones_SERCOP.ocid` a `Procesos_SERCOP.ocid` (uno a uno, filtro en ambas direcciones), `Adjudicaciones_SERCOP.ocid` a `Procesos_SERCOP.ocid` y `Adjudicaciones_SERCOP.release_id` a `Licitaciones_SERCOP.release_id` (cardinalidad no definida). No son un diseño validado: H3 define relaciones 1 a varios con filtro único. El líder las eliminó y guardó el `.pbix` el 21/11/2026 (declaración del líder; el revisor no puede abrir el `.pbix`).
+- Verificación estática con la plantilla `.pbit` exportada por el líder el 21/11/2026 (sin datos, parámetros sin valor): las cuatro consultas coinciden con los `.pq` del repositorio (la de Procesos sin el comentario inicial), todas leen las rutas desde `RutaDerivados` y `RutaDatosCrudos` (sin rutas fijas) y no tienen el paso «Tipo cambiado»; además están las consultas temporales `Control_Filas` y `Control_Totales`. Esto no sustituye una actualización real en otra carpeta.  El catálogo MDEP conserva columnas genéricas y filas de títulos y notas.
+- PBIX guardado: 243.078.890 bytes. Supera el límite de 100 MB de GitHub: por decisión del líder (21/11/2026) no se versiona y se entrega por el aula virtual. El tiempo no se cronometró. Los parámetros guardan rutas personales en el archivo.
 - El perfil del catálogo completo incluye títulos, encabezados y notas; sus porcentajes no son exclusivamente de los registros institucionales.
 
 ## Cobertura de P1 a P3
@@ -92,4 +110,14 @@ La matriz de preguntas está en `docs/requirements/hito1.md`, Parte 2 y las cabe
 
 El catálogo de 2026 no ofrece por sí solo la jerarquía ni la vigencia histórica para clasificar el gobierno central ([fuente-entidades.md](fuente-entidades.md), secciones 6 y 7). La disponibilidad de campos no demuestra que ya se puedan responder las preguntas en el modelo.
 
-## Desvíos
+## Cierre del #63 (decisiones del líder, 21/11/2026)
+
+Criterios del issue que se cumplen: consultas conectadas solo con pasos de conexión y con nombre claro; originales intactos (6 SHA-256 coinciden); filas y sumas coinciden con #62; rutas como parámetros (verificado en la plantilla `.pbit`); capturas sin valores de personas; runbook con desvíos anotados.
+
+Criterios que el líder dispensó:
+
+1. El `.pbix` no se versiona (243.078.890 bytes; GitHub rechaza más de 100 MB). Está en `.gitignore` y se entrega por el aula virtual.
+2. Prueba de actualización desde otra carpeta: no se hace; la portabilidad es un criterio del issue, no de la guía del profesor, y queda verificada de forma estática.
+3. Capturas de perfil de conjunto completo: no se publican; el líder declara que el perfilado se hizo con todo el conjunto.
+
+La revisión y aprobación del PR las hace el líder (la protección de `main` exige una aprobación).

@@ -60,12 +60,12 @@ a revisar el resultado. El script falla si queda una marca [VERIFICAR] o
 La guía escribe `Proyecto_EquipoX_Hito2` y `Proyecto_EquipoX_Hito3` sin definir
 `X`: el profesor asignó al equipo el nombre **Grupo 5**, así que son
 `Proyecto_Grupo5_Hito2` y `Proyecto_Grupo5_Hito3`. Las entregas vencen a las
-23:59 del 21/11 (H2) y del 22/11 (H3). Los `.pbix` **sí se versionan** (decisión
-del líder, ADR 0005): entran aquí por PR, y como GitHub rechaza archivos de más
-de 100 MB se mide su tamaño antes de commitear y, si pasa de unos 50 MB, se
-consulta al líder. Llevan datos embebidos (solo las columnas necesarias, nunca
-datos de personas). Aquí entran también el libro de Excel de H2 y los PDF de H3,
-cuando el líder los apruebe por PR. Las consultas M y los runbooks que producen
+23:59 del 21/11 (H2) y del 22/11 (H3). Los `.pbix` **no se versionan**
+(decisión del líder, 21/11/2026, ADR 0005): pesan cientos de MB (el de H2,
+243 MB), GitHub rechaza archivos de más de 100 MB y están en `.gitignore`; se
+entregan por el aula virtual. Llevan datos embebidos y rutas locales, nunca
+datos de personas. Aquí entran el libro de Excel de H2 y los PDF de H3, cuando
+el líder los apruebe por PR. Las consultas M y los runbooks que producen
 el modelo viven en `reports/powerbi/` y `docs/h2/`, `docs/h3/`.
 
 ## Plantilla opcional
@@ -79,8 +79,7 @@ conserva o se reemplaza cuando haya más hitos con guía.
 
 ## Reglas
 
-- Aquí no se guardan datos reales ni datasets, salvo los datos embebidos en un
-  `.pbix` entregable (ver arriba).
+- Aquí no se guardan datos reales ni datasets, y tampoco los `.pbix` (ver arriba).
 - Un archivo final solo entra por PR aprobado por el líder.
 - El uso de IA se declara en el informe del hito que lo pida (qué se pidió y
   cómo se verificó), según la guía general del proyecto.

@@ -21,6 +21,12 @@ venv/
 env/
 ENV/
 
+# --- Power BI ----------------------------------------------------------
+# Los .pbix (cientos de MB, con datos embebidos y rutas locales) y las plantillas
+# .pbit exportadas para revisión no se versionan; se entregan por el aula virtual.
+*.pbix
+*.pbit
+
 # --- Secretos y configuración local --------------------------------------
 .env
 .env.*
