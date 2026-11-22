@@ -27,7 +27,7 @@ deliverables/
 | Hito | Entregable según el profesor | Archivo |
 |---|---|---|
 | H1 | Documento con el perfil del sector y la matriz de 3 preguntas, máx. 6 páginas sin anexos. Al inicio: nombre del equipo, sector y fecha | `Hito1_Apellido1Apellido2ApellidoN.pdf` |
-| H2 | `.pbix` con las fuentes conectadas y un libro de Excel (o Word/PDF) con Fuentes, Diccionario, Calidad y Cobertura. Vence el 21/11/2026 | `Proyecto_Grupo5_Hito2.pbix` y `h2/Proyecto_Grupo5_Hito2.xlsx` |
+| H2 | `.pbix` con las fuentes conectadas y un libro de Excel (o Word/PDF; en el aula, un solo PDF) con Fuentes, Diccionario, Calidad y Cobertura. Vence el 21/11/2026 | `H2FC-BravoFreireGuajanPasquelTorres.pbix` y `H2BravoFreireGuajanPasquelTorres.pdf` (el aula pidió un solo PDF con las partes 4.2 a 4.5; está en `h2/`) |
 | H3 | `.pbix` con el modelo dimensional, documento de diseño en PDF (máx. 8 páginas sin anexos) y diapositivas en PDF; presentación de 10 min + 5 de preguntas. Vence el 22/11/2026 | `Proyecto_Grupo5_Hito3.pbix`, `h3/Proyecto_Grupo5_Hito3_Diseno.pdf` y `h3/Proyecto_Grupo5_Hito3_Presentacion.pdf` |
 | H4 | Scripts ETL, carga inicial e incremental, bitácora de cargas y reporte de reconciliación | **[PENDIENTE]** guía del profesor |
 | H5 | Consultas OLAP, tablero `.pbix`, notebook del modelo analítico y resumen de 1 página | **[PENDIENTE]** guía del profesor |
@@ -70,13 +70,16 @@ el modelo viven en `reports/powerbi/` y `docs/h2/`, `docs/h3/`.
 
 ### Libro de Excel del Hito 2
 
-`h2/Proyecto_Grupo5_Hito2.xlsx` es el libro de cuatro partes (Fuentes, Diccionario,
+`h2/Proyecto_Grupo5_Hito2.xlsx` es el libro de cuatro partes (el PDF de entrega no se exporta de Excel: lo genera `python -I scripts/build_hito2_pdf.py --output h2/H2BravoFreireGuajanPasquelTorres.pdf` desde los mismos CSV, con Edge o Chrome instalado) (Fuentes, Diccionario,
 Calidad y Cobertura, precedidas de la Portada institucional) generado desde los
 archivos de contenido `docs/h2/fuentes.csv`, `diccionario.csv`, `calidad.csv` y
 `cobertura.csv` con `python -I scripts/build_hito2_xlsx.py`.
 
-- **Regeneración:** regenerar el libro sobrescribe cualquier retoque de formato hecho
-  a mano en Excel; si se modifican los CSV o el script, se vuelve a generar y a revisar.
+- **Regeneración:** regenerar el libro sobrescribe el formato. Si se modifican los CSV o el
+  script, se vuelve a generar, se aplica el formato del Hito 2 con
+  `pwsh -NoProfile -File scripts/format_hito2_xlsx.ps1 -Path deliverables/h2/Proyecto_Grupo5_Hito2.xlsx`
+  (Excel por automatización, sin cambiar valores) y se comprueba con
+  `python -I scripts/compare_hito2_xlsx_sources.py`.
 - **Apertura y verificación:** un entorno automatizado no puede abrir Excel; la apertura
   limpia y sin reparación la confirma el líder al abrir el archivo en Excel Desktop.
 - **Plan B:** si por cualquier motivo el archivo `.xlsx` requiriese reparación en una

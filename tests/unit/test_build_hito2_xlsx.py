@@ -240,9 +240,9 @@ def test_build_hito2_xlsx_production_workbook():
         # 2. Fuentes checks: 5 sercop years + MDEP + gob.ec
         fuentes_xml = " ".join(cells["Fuentes"].values())
         for year in ["2021", "2022", "2023", "2024", "2025"]:
-            assert f"SERCOP — Contratación Abierta (OCDS) {year}" in fuentes_xml
-        assert "MDEP — Catálogo Institucional e-SIGEF" in fuentes_xml
-        assert "MINTEL — Directorio gob.ec" in fuentes_xml
+            assert f"SERCOP: Contratación Abierta (OCDS) {year}" in fuentes_xml
+        assert "MDEP: Catálogo Institucional e-SIGEF" in fuentes_xml
+        assert "MINTEL: Directorio gob.ec" in fuentes_xml
         assert "CC BY 3.0 EC" in fuentes_xml
         assert "6A7AD388D0B1B4D4C71C7BD82BDB78C4A43B24E84EF8C1E6584DE0662E88AEAA" in fuentes_xml
 

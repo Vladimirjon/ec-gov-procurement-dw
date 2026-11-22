@@ -125,6 +125,7 @@ reparte por componentes del documento (ver [PLAN.md](PLAN.md)).
    `..._Hito3.pbix`, sin definir `X`. *Resuelto por el líder el 20/11: el
    profesor asignó el nombre «Grupo 5», así que `X` = `Grupo5`
    (`Proyecto_Grupo5_Hito2`).*
+   *Actualización 21/11: para H2 el aula virtual pidió `H2FC-Apellido1Apellido2Apellido3.pbix` y `H2Apellido1Apellido2Apellido3.pdf` (un solo PDF con 4.2 a 4.5); manda el aula. Los nombres de H3 se confirman con sus instrucciones del aula.*
 9. **Hora límite de las entregas del 21 y 22/11:** las guías no la indican.
    *Resuelto por el líder el 20/11: 23:59 de cada día.*
 
@@ -135,17 +136,17 @@ La guía manda; esta tabla es un resumen propio. Estado: ❌ falta · ⚠ en cur
 
 | # | Directriz (sección de la guía) | Estado | Issue |
 |---|---|---|---|
-| H2-1 | `.pbix` con las fuentes de las tres preguntas conectadas; ≥1 conjunto de datos por pregunta; consulta con nombre claro; solo pasos de conexión (4.1) | ❌ | H2-05 |
-| H2-2 | Archivos originales sin modificar en `datos_crudos` (4.1, 5, 9) | ❌ | H2-01 |
-| H2-3 | Inventario: entidad, enlace exacto, formato y conector, periodo, frecuencia, filas y fecha de descarga (4.2) | ❌ | H2-01, H2-03, H2-06 |
-| H2-4 | Diccionario: grano de cada tabla en una frase; por campo descripción, tipo, valores válidos, rol (medida o atributo) y observación del perfil (4.3) | ❌ | H2-06 |
-| H2-5 | Perfilado sobre **todo el conjunto**, no las primeras 1000 filas (3.3, 5) | ❌ | H2-04, H2-05 |
-| H2-6 | Diagnóstico: tabla y campo, dimensión de calidad, evidencia medible, impacto en las preguntas, acción para H3 (4.4); seis dimensiones revisadas (3.2) | ❌ | H2-04, H2-06 |
-| H2-7 | Matriz de cobertura de las tres preguntas; si una no se puede responder, se ajusta y se explica (4.5) | ❌ | H2-06 |
-| H2-8 | Total de control inicial por tabla (filas y suma de la medida) (5, paso 10) | ❌ | H2-04 |
-| H2-9 | Libro con equipo, sector y fecha al inicio (6) | ❌ | H2-06 |
-| H2-10 | No se corrige nada en H2; la limpieza es de H3 (1, 5, 9) | ⚠ | todos |
-| H2-11 | Entrega `Proyecto_EquipoX_Hito2.pbix` + libro con Fuentes, Diccionario, Calidad y Cobertura (ficha) el 21/11/2026 | ❌ | H2-07 |
+| H2-1 | `.pbix` con las fuentes de las tres preguntas conectadas; ≥1 conjunto de datos por pregunta; consulta con nombre claro; solo pasos de conexión (4.1) | ✅ | H2-05 · consultas de `reports/powerbi/h2/queries/` y `docs/h2/runbook-power-bi.md` (#63) |
+| H2-2 | Archivos originales sin modificar en `datos_crudos` (4.1, 5, 9) | ✅ | H2-01 · 6 SHA-256 comprobados contra `docs/h2/evidencia/descargas-*.csv` |
+| H2-3 | Inventario: entidad, enlace exacto, formato y conector, periodo, frecuencia, filas y fecha de descarga (4.2) | ✅ | H2-01, H2-03, H2-06 · hoja Fuentes (`docs/h2/fuentes.csv`) |
+| H2-4 | Diccionario: grano de cada tabla en una frase; por campo descripción, tipo, valores válidos, rol (medida o atributo) y observación del perfil (4.3) | ✅ | H2-06 · hoja Diccionario (`docs/h2/diccionario.csv`) |
+| H2-5 | Perfilado sobre **todo el conjunto**, no las primeras 1000 filas (3.3, 5) | ✅ | H2-04, H2-05 · declarado por el líder el 21/11/2026; sin capturas publicadas (muestran rutas personales) |
+| H2-6 | Diagnóstico: tabla y campo, dimensión de calidad, evidencia medible, impacto en las preguntas, acción para H3 (4.4); seis dimensiones revisadas (3.2) | ✅ | H2-04, H2-06 · hoja Calidad, hallazgos Q-01 a Q-12, Q-E01 a Q-E08 y S-01 a S-04 |
+| H2-7 | Matriz de cobertura de las tres preguntas; si una no se puede responder, se ajusta y se explica (4.5) | ✅ | H2-06 · hoja Cobertura (`docs/h2/cobertura.csv`) |
+| H2-8 | Total de control inicial por tabla (filas y suma de la medida) (5, paso 10) | ✅ | H2-04 · S02 y S03 y `docs/h2/runbook-power-bi.md` |
+| H2-9 | Libro con equipo, sector y fecha al inicio (6) | ✅ | H2-06 · portada del libro y del PDF |
+| H2-10 | No se corrige nada en H2; la limpieza es de H3 (1, 5, 9) | ✅ | todos |
+| H2-11 | Entrega en el aula virtual el 21/11/2026: `H2FC-BravoFreireGuajanPasquelTorres.pbix` y un solo PDF `H2BravoFreireGuajanPasquelTorres.pdf` con las partes 4.2 a 4.5 y el encabezado Título, Equipo #, Nombres y Fecha (instrucciones del aula; difieren de la guía) | ⚠ | H2-07 |
 
 ## G. Hito 3 (guía del Hito 3, 20/11/2026): requisitos y dónde se cubren
 
