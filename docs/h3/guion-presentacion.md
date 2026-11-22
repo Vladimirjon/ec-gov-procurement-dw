@@ -1,94 +1,92 @@
-# Guion de presentación | Hito 3
+# Guion de la presentación del Hito 3
 
-**Duración total: 600 segundos (10:00).** Asignación propuesta; el equipo puede cambiarla. Las cifras se citan junto a su origen.
+Presentación de 12 diapositivas (16:9) armada como artefacto; el texto de cada intervención también está en las notas del orador.
 
-## Diapositiva 1 | 60 s | Francis Bravo
+Reparto propuesto (el equipo puede cambiarlo): Francis Bravo 1–4, Ismael Freire 5–7, Harry Guajan 8–9, Johann Pasquel 10 (demo), Jorge Torres 11–12. Cada integrante habla 120 segundos.
 
-«En el periodo 2021 a 2025, el modelo que construimos registra USD 5.511,80 millones adjudicados en el sector delimitado. Esta cifra resume el avance del Hito 3: pasar del diagnóstico de datos a un modelo que permita analizar contratación por tiempo, entidad y procedimiento. Somos el Grupo 5 y presentamos el modelo dimensional y su prueba en Power BI.» (Origen del total: confirmación de Power BI del 22/11/2026; conciliación anual independiente en Python. La captura `pagina-prueba.png` muestra USD 5.511.799.162,58.)
+## Bloque 1. Sector y preguntas (2 min)
 
-**Transición:** «Para entender qué responde este modelo, recordemos las tres preguntas de negocio.»
+### 1. Trazabilidad de la contratación pública del gobierno central · Francis Bravo · 15 s
 
-## Diapositiva 2 | 60 s | Francis Bravo
+«Buenas tardes. Somos el Grupo 5. La imagen es el Palacio de Carondelet, sede del gobierno central: el sector que estudiamos. Nuestro proyecto sigue el rastro de cómo ese gobierno contrata.» Pasar a la siguiente sin detenerse.
 
-«P1 describe cómo evoluciona el monto adjudicado por método, año y tipo de entidad. P2 compara el valor adjudicado con el estimado para observar desviaciones y orientar controles. P3 pregunta cuánto podría adjudicarse mensualmente durante el primer semestre de 2026 por tipo de entidad. Las decisiones corresponden a entidades contratantes, SERCOP y, para la programación, al MEF. Esa última relación con el presupuesto es una inferencia del equipo, no una atribución normativa.» (Origen de P1 a P3 y actores: `docs/requirements/hito1.md`.)
+### 2. Planteamiento del problema · Francis Bravo · 40 s
 
-**Transición:** «Con esas preguntas claras, veamos el universo de datos y qué controles aplicamos.»
+«En cinco años el Estado adjudicó más de treinta mil millones de dólares en un millón de procesos. Todo está publicado como datos abiertos, pero en bruto: un archivo por año, una fila por transacción, sin decir qué tipo de entidad compró. Con esos archivos un analista del Ministerio de Economía no puede responder cuánto compra el gobierno central, por qué procedimiento ni cuánto se desvía de lo estimado. Ese es el problema que resolvemos.» Cifras: totales de control del Hito 2 (1.007.920 procesos; USD 30.952.880.306,92).
 
-## Diapositiva 3 | 60 s | Ismael Freire
+### 3. Alcance y decisores · Francis Bravo · 35 s
 
-«Los datos proceden de las descargas abiertas de contratación pública, organizadas según OCDS. Hito 2 diagnosticó 1.007.920 procesos nacionales y USD 30.952.880.306,92 adjudicados para el conjunto descargado. Dentro de la ventana 2021–2025 hay 993.425 procesos. Son controles nacionales de H2: todavía no representan el sector central filtrado.» (Origen: `docs/h2/calidad.csv`, `docs/h3/evidencia/controles-esperados.csv`.)
+«Delimitamos el sector al gobierno central: Presidencia, ministerios e institutos que dependen de ellos; los gobiernos locales y sus empresas quedan fuera. Hoy el modelo tiene 274.787 procesos de ministerios, por 5.470 millones, y 313 de la Presidencia, por 41 millones. Los institutos están en cero a propósito: 9.495 procesos no tienen respaldo suficiente de adscripción y no los mezclamos. Quienes deciden con estos datos son las propias entidades, SERCOP y el Ministerio de Economía.» Cifras: evidencia del modelo por tipo de entidad y año; casos dudosos de la semilla.
 
-**Transición:** «La ventana y la clasificación de compradores determinan qué entra en el indicador.»
+### 4. Preguntas de negocio · Francis Bravo · 30 s
 
-## Diapositiva 4 | 60 s | Ismael Freire
+«Con esos decisores planteamos tres preguntas sobre una misma línea de tiempo. P1 describe la historia de 2021 a 2025: cuánto se adjudicó por método y tipo de entidad. P2 diagnostica en ese mismo periodo qué métodos se desvían más de lo estimado. P3 proyecta el primer semestre de 2026. Todo el modelo está construido para responderlas.» Transición: «Ismael explica de dónde salen los datos.»
 
-«La fecha de negocio es la del proceso, y por eso los 14.495 procesos fechados en 2026 quedan fuera de la ventana 2021–2025. También dejamos fuera institutos cuya adscripción no está respaldada: la evidencia de la semilla registra 9.495 procesos y USD 128,24 millones. Se cuentan en la conciliación, no desaparecen del diagnóstico. Hito 2 identifica faltantes y otros problemas de calidad; Hito 3 aplica reglas explícitas sin convertir un dato ausente en cero.» (Origen: `diseno-dimensional.md`, `semilla-entidades.md`, `controles-esperados.csv`, `docs/h2/calidad.csv`; los 9.495 procesos y USD 128,24 millones son casos dudosos de institutos dentro de los registros sin clasificar.)
+## Bloque 2. Datos y calidad (2 min)
 
-**Transición:** «Con esos límites, construimos una estrella de un hecho y tres dimensiones.»
+### 5. Fuentes de datos e integración · Ismael Freire · 40 s
 
-## Diapositiva 5 | 60 s | Harry Guajan
+«Trabajamos con siete fuentes abiertas. Cinco son los archivos anuales de SERCOP en el estándar internacional de contratación abierta, de 2021 a 2025: un millón de procesos. La sexta es el catálogo institucional del MDEP, que nos dice qué tipo de entidad es cada comprador por su RUC. La séptima, el directorio gob.ec, solo sirve de contraste. Todo pasa por Power Query, donde aplicamos las 21 acciones que salieron del diagnóstico, y llega a Power BI como un modelo de 275.100 procesos.» Cifras: totales de control del Hito 2 y del modelo.
 
-«El grano es un proceso de contratación identificado por `ocid`, dentro del periodo y con comprador aprobado como parte del sector. El hecho guarda sus medidas y claves. Las dimensiones describen tiempo, entidad y método. La vista de modelo que mostramos tiene `FactContratacion` al centro y las tres dimensiones conectadas.» (Origen del grano y diseño: `diseno-dimensional.md`; captura `modelo.png`.)
+### 6. Diagnóstico de calidad y tratamiento aplicado · Ismael Freire · 40 s
 
-**Transición:** «La forma importa, pero también importa cómo preservamos los importes.»
+«En el Hito 2 medimos la calidad con 26 controles en seis dimensiones y 21 dieron hallazgos. En este hito cada uno tiene su paso en Power Query, con un total de control antes y después. Tres ejemplos. Unicidad: 1.801 procesos tenían varias adjudicaciones; se suman por proceso y la suma no cambia. Completitud: 109.793 licitaciones no traen valor estimado y se dejan vacías, porque un vacío no es un cero. Consistencia: el mismo comprador aparece escrito de 425 formas, por eso unimos siempre por RUC.» Cifras: calidad del Hito 2 (Q-06, Q-01, Q-13) y bitácora.
 
-## Diapositiva 6 | 60 s | Harry Guajan
+### 7. Conciliación: del registro nacional al sector · Ismael Freire · 40 s
 
-«Cuando un proceso tiene varias adjudicaciones, primero sumamos sus importes al nivel del proceso; así evitamos repetir el valor estimado al unir tablas. Si falta un importe, queda vacío. En Power BI se observan tres relaciones de uno a varios y filtro único desde las dimensiones al hecho. Esa estructura facilita segmentar sin guardar tasas como si fueran importes.» (Origen de reglas: `diseno-dimensional.md` y `runbook-modelo.md`; relaciones confirmadas por el equipo el 22/11/2026 y visibles en `modelo.png`.)
+«Así pasamos del país al sector, sin pérdidas silenciosas. De 1.007.920 procesos, 14.495 tienen fecha de 2026 y quedan fuera de la ventana. Después salen 669.686 de otras funciones o de gobiernos locales, y 48.639 dudosos o sin clasificar, entre ellos 9.495 de institutos. Quedan 275.100 procesos y 5.511,80 millones de dólares. En cada etapa las filas y las sumas cuadran al centavo.» Transición: «Harry presenta el modelo.» Cifras: cadena de totales del cálculo independiente.
 
-**Transición:** «Ahora conciliamos el resultado del modelo con el alcance del sector.»
+## Bloque 3. Modelo dimensional (2 min aquí y 1 min en la diapositiva 11)
 
-## Diapositiva 7 | 60 s | Johann Pasquel
+### 8. Modelo dimensional en estrella · Harry Guajan · 70 s
 
-«El hecho contiene 275.100 filas. No contiene institutos: los casos dudosos se excluyeron y permanecen contabilizados en el control de alcance. La medida suma USD 5.511.799.162,58, y coincide con el cálculo independiente realizado año por año en Python. Las 14.495 filas de 2026 también quedan fuera del modelo por la ventana acordada.» (Origen: cifras de filas y conciliación confirmadas en Power BI el 22/11/2026; controles de alcance y periodo: `controles-esperados.csv`; semilla: `semilla-entidades.md`.)
+«Seguimos los cuatro pasos de Kimball, abajo en la franja. El proceso es la contratación pública hasta la adjudicación. El grano: una fila por proceso del gobierno central, identificado por su ocid. Las dimensiones responden a las preguntas: DimTiempo mensual con 60 meses, DimEntidad con 587 compradores y su tipo, y DimMetodo con 28 combinaciones de método y procedimiento. En el centro, FactContratacion con 275.100 filas y solo medidas sumables. Las tasas, como la desviación de P2, no se guardan en la tabla: serán medidas.» Por qué un solo hecho: las tres preguntas usan el proceso como unidad; un hecho por adjudicación repetiría el estimado.
 
-**Transición:** «Veamos ahora la página de prueba en funcionamiento.»
+### 9. Implementación en Power BI · Harry Guajan · 50 s
 
-## Diapositiva 8 | 60 s | Johann Pasquel
+«Este es el modelo real en Power BI Desktop. Las tres dimensiones se unen al hecho con relaciones de uno a varios y filtro en una sola dirección, como pide la guía. Las claves están ocultas para que quien arme un informe solo vea atributos con sentido. La medida base es el monto adjudicado. La carga no fue trivial: hubo que optimizar las consultas y subir la memoria de evaluación, y comprobamos que ningún total cambió.» Transición: «Johann lo muestra funcionando.»
 
-«En la página de prueba tenemos el procedimiento en las filas, el año en las columnas y la medida Monto adjudicado en los valores. El total visible es USD 5.511.799.162,58. Voy a señalar la tarjeta y después el total general de la matriz; ambos permiten comprobar el mismo resultado.» (Origen: captura `pagina-prueba.png` y confirmación de Power BI del 22/11/2026.)
+## Bloque 4. Demostración en Power BI (2 min)
 
-### Demo paso a paso en Power BI Desktop (incluida en los 60 s)
+### 10. Demostración: monto adjudicado por procedimiento y año · Johann Pasquel · 120 s
 
-1. Tener abierto el `.pbix` final en la página de prueba antes de iniciar; señalar la pestaña de la página.
-2. Señalar la matriz y leer su estructura: `Procedimiento` en filas y años 2021–2025 en columnas.
-3. Señalar la tarjeta **Monto adjudicado** y leer el total subyacente: USD 5.511.799.162,58. El visual puede abreviarlo como 5,51bn.
-4. Señalar el total general de la matriz: USD 5.511.799.162,58; aclarar que coincide con la tarjeta y con el cálculo anual independiente en Python.
-5. Seleccionar un año en el encabezado de la matriz solo si la interacción está lista; señalar que la selección filtra los procedimientos y luego limpiar la selección. No cambiar consultas ni refrescar durante la presentación.
+1) Abrir el .pbix ya cargado en la página de prueba (no recargar datos). 2) «Esta matriz cruza el procedimiento con el año usando la medida Monto adjudicado.» Señalar la fila Total: 463 millones en 2021, 986 en 2022, 1.519 en 2023, 1.308 en 2024 y 1.235 en 2025. 3) Señalar la tarjeta: 5,51 mil millones. 4) «Este total también lo calculamos aparte en Python, año por año, y coincide al centavo: 5.511.799.162,58.» 5) Filtrar un año para mostrar que DimTiempo filtra el hecho. 6) «Esto ya responde en parte P1: el monto por método y año.» Plan B si Power BI falla: quedarse en esta diapositiva; la captura es la misma página.
 
-**Plan B:** si Power BI falla, compartir `docs/h3/evidencia/capturas/pagina-prueba.png`. Señalar los años, el total de la matriz y la tarjeta; leer USD 5.511.799.162,58. Para explicar relaciones, cambiar a `docs/h3/evidencia/capturas/modelo.png`. Decir claramente que se está mostrando la captura de la prueba, no una interacción en vivo.
+## Bloque 3 y 5. Resultados preliminares y próximos pasos (2 min)
 
-**Transición:** «La prueba permite leer P1; no pretende responder por sí sola el pronóstico P3.»
+### 11. Resultados preliminares y estado de las preguntas · Jorge Torres · 60 s
 
-## Diapositiva 9 | 60 s | Jorge Torres
+«Con lo que acaban de ver ya hay una primera lectura de P1: dos procedimientos, la subasta inversa electrónica y la compra directa por catálogo, concentran casi dos tercios del monto adjudicado del gobierno central en cinco años. ¿Cuánto responde hoy el modelo? P1, en parte: falta el tipo instituto. P2 ya tiene los dos importes en el hecho; falta la medida de desviación. P3 tiene los 60 meses de historia; falta el pronóstico y su error.» Cifras: matriz de la página de prueba; 1.804.987.010,45 + 1.770.404.336,62 = 64,9 % de 5.511.799.162,58.
 
-«En la matriz se aprecia la distribución del monto por procedimiento y año. El total coincide con la tarjeta y con la verificación independiente año por año. Esta página demuestra una lectura descriptiva para P1; no es todavía un pronóstico. P3 necesita una serie mensual, una validación temporal y una medida de error que permita juzgar el resultado antes de usarlo para programar.» (Origen del total y la conciliación: confirmación de Power BI del 22/11/2026; imagen: `pagina-prueba.png`; alcance de P3: `docs/requirements/hito1.md`.)
+### 12. Recomendamos confirmar la adscripción de los institutos antes de medir P2 y P3 · Jorge Torres · 60 s
 
-**Transición:** «Cierro con la recomendación para llevar este avance a una entrega defendible.»
+«Cerramos con una recomendación concreta: antes de medir la desviación y el pronóstico hay que confirmar la adscripción de los institutos. Hoy 9.495 procesos y 128 millones de dólares quedan fuera por falta de respaldo, y por eso el tipo instituto está vacío. En el segundo bimestre el modelo pasa a PostgreSQL con un ETL de un solo comando, se agrega la historia de las entidades y el cubo, y al final el tablero con P2 y P3. Gracias; quedamos atentos a sus preguntas.» Cifras: casos dudosos de la semilla de entidades.
 
-## Diapositiva 10 | 60 s | Jorge Torres
+## Tiempos
 
-«Recomendamos resolver y documentar primero los casos dudosos de entidades, manteniendo visible cuánto queda excluido. Después, validar el pronóstico mensual de P3 con una separación temporal y reportar su error; solo entonces usarlo para apoyar la programación. Mantendremos la conciliación por año como control de cambios. Así el siguiente avance amplía el análisis sin ocultar las limitaciones de cobertura.» (Origen: regla y casos por resolver en `semilla-entidades.md`; validación de P3 y métrica propuesta en `docs/requirements/hito1.md`; recomendación del equipo.)
+| Diapositiva | Quién | Segundos |
+|---|---|---|
+| 1. Trazabilidad de la contratación pública del gobierno central | Francis Bravo | 15 |
+| 2. Planteamiento del problema | Francis Bravo | 40 |
+| 3. Alcance y decisores | Francis Bravo | 35 |
+| 4. Preguntas de negocio | Francis Bravo | 30 |
+| 5. Fuentes de datos e integración | Ismael Freire | 40 |
+| 6. Diagnóstico de calidad y tratamiento aplicado | Ismael Freire | 40 |
+| 7. Conciliación: del registro nacional al sector | Ismael Freire | 40 |
+| 8. Modelo dimensional en estrella | Harry Guajan | 70 |
+| 9. Implementación en Power BI | Harry Guajan | 50 |
+| 10. Demostración: monto adjudicado por procedimiento y año | Johann Pasquel | 120 |
+| 11. Resultados preliminares y estado de las preguntas | Jorge Torres | 60 |
+| 12. Recomendamos confirmar la adscripción de los institutos antes de medir P2 y P3 | Jorge Torres | 60 |
+| **Total** | | **600** |
 
-## Control de tiempo
+## Plan B de la demo
 
-| Diapositiva | Segundos | Acumulado |
-|---|---:|---:|
-| 1 | 60 | 60 |
-| 2 | 60 | 120 |
-| 3 | 60 | 180 |
-| 4 | 60 | 240 |
-| 5 | 60 | 300 |
-| 6 | 60 | 360 |
-| 7 | 60 | 420 |
-| 8 (incluye demo) | 60 | 480 |
-| 9 | 60 | 540 |
-| 10 | 60 | 600 |
-| **Total** | **600** | **10:00** |
+Si Power BI falla, Johann se queda en la diapositiva 10: la captura es la misma página de prueba y el total está en el recuadro de la derecha.
 
-## Lista de ensayo
+## Ensayo
 
-- [ ] Hacer dos ensayos completos con cronómetro; respetar los 600 segundos.
-- [ ] Cada integrante abre el `.pbix` una vez antes de exponer y comprueba la página de prueba.
-- [ ] Ensayar la demo y el plan B con las dos capturas guardadas localmente.
-- [ ] Leer en voz alta los importes y practicar la transición entre cada bloque.
+- [ ] Dos ensayos completos con cronómetro; cada bloque cierra en su tiempo.
+- [ ] Cada integrante abre el `.pbix` una vez antes de exponer y ubica la página de prueba.
+- [ ] Ensayo de preguntas por persona sobre su propio bloque, con `preguntas-esperadas.md`.
+- [ ] El `.pbix` abierto en la página de prueba antes de empezar (no recargar datos en vivo).
