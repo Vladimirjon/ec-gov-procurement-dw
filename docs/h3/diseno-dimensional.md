@@ -1,6 +1,6 @@
 # Diseño dimensional del Hito 3 (los cuatro pasos de Kimball)
 
-- **Estado:** propuesta. Las tres decisiones de la sección 9.2 las aprueba el líder en el chat; todo lo demás sigue lo ya decidido (ADR 0001, 0004 y 0005, y la regla de fecha `releases.date` del 21/11/2026).
+- **Estado:** aprobado por el líder el 22/11/2026 en el chat: decisiones (a), (b) y (c) de la sección 9.2, con las precisiones de la sección 6.5. Lo demás sigue lo ya decidido (ADR 0001, 0004 y 0005, y la regla de fecha `releases.date` del 21/11/2026).
 - **Fecha:** 22/11/2026. **Equipo:** Grupo 5. **Sector:** gobierno central de Ecuador.
 - **Fuente de:** la construcción en Power Query (#70, #71), la sección de diseño del PDF (#73) y las diapositivas (#74).
 - **Alcance de esta nota:** diseño y reglas. El modelo **no está construido ni probado** en Power BI Desktop: lo que aquí se afirma de Power BI es un diseño, no un resultado.
@@ -59,7 +59,7 @@ Boceto para el documento; la imagen del PDF y de las diapositivas es la captura 
 ```mermaid
 flowchart TB
     DT["<b>DimTiempo</b><br/>IdTiempo (PK)<br/>FechaMes<br/>Anio · Semestre · Trimestre<br/>Mes · NombreMes · AnioMes"]
-    DE["<b>DimEntidad</b><br/>IdEntidad (PK)<br/>RucRaiz<br/>Entidad<br/>TipoEntidad<br/>EntidadRectora"]
+    DE["<b>DimEntidad</b><br/>IdEntidad (PK)<br/>RucRaiz<br/>Entidad<br/>TipoEntidad<br/>EntidadRectora<br/>VigenteDesde · VigenteHasta"]
     DM["<b>DimMetodo</b><br/>IdMetodo (PK)<br/>MetodoOCDS<br/>Metodo<br/>Procedimiento"]
     FC["<b>FactContratacion</b><br/>IdTiempo (FK)<br/>IdEntidad (FK)<br/>IdMetodo (FK)<br/>ocid (degenerada)<br/>MontoAdjudicado Σ<br/>ValorEstimado Σ<br/>NumProcesos Σ<br/>NumAdjudicaciones Σ<br/>ProcesoConAmbosImportes Σ"]
     DT -->|"1 : *"| FC
@@ -110,8 +110,9 @@ Los meses de 2026 no están: P3 proyecta el primer semestre de 2026 a partir de 
 | `Entidad` | Nombre de una sola fila por raíz, tomado del catálogo del MDEP o de la semilla; nunca se une por nombre (Q-13) |
 | `TipoEntidad` | `Presidencia`, `Ministerio`, `Instituto` o `Sin clasificar` (semilla de #68, ADR 0001 regla 6) |
 | `EntidadRectora` | Ministerio u órgano superior cuando conste y esté respaldado; si no, vacío |
+| `VigenteDesde`, `VigenteHasta` | Fechas de vigencia de la clasificación si la fuente las da (`valid_from` y `valid_to` de la semilla); vacías si no. Informativas: no filtran ni reasignan procesos (sección 6.5) |
 
-«Sin clasificar» se añade como una fila más antes de numerar el índice. Se espera con 0 filas en el hecho: es una salvaguarda por si faltara una clave, no un destino de datos. La clasificación vigente en la fecha del proceso (SCD tipo 2) pasa al DW de H4 (ADR 0004 y 0005); en H3 hay una sola versión por raíz. El número de filas depende de #68 (cota superior medida: 3.362 raíces en la ventana, antes de filtrar por sector).
+«Sin clasificar» se añade como una fila más antes de numerar el índice. Se espera con 0 filas en el hecho: es una salvaguarda por si faltara una clave, no un destino de datos. La clasificación vigente en la fecha del proceso (SCD tipo 2) pasa al DW de H4 (ADR 0004 y 0005); en H3 hay una sola versión por raíz y la vigencia se guarda como columnas, sin implementarla (sección 6.5). El número de filas depende de #68 (cota superior medida: 3.362 raíces en la ventana, antes de filtrar por sector).
 
 **DimMetodo.** Una fila por par (método, procedimiento): 27 pares observados más «Sin licitación», 28 filas (propuesta (a), sección 9.2).
 
@@ -141,7 +142,16 @@ Jerarquía método → procedimiento en una sola tabla. Los 27 pares: abierto 7 
 | Menos: sin clasificar o dudosos (incluye los 43 sin raíz) | n | n | Lo mide #68 |
 | **Filas de FactContratacion** | n | n | Total de control de #70 |
 
-La tabla `ControlAlcance` (Motivo, Anio, Procesos, MontoAdjudicado) guarda esos conteos en el `.pbix` con los mismos pasos, sin relaciones con el modelo, para mostrar el peso excluido en la página de prueba y en la presentación. Es una tabla de control, no un hecho: no participa en ninguna medida de P1 a P3.
+La tabla `ControlAlcance` (Motivo, Anio, Procesos, MontoAdjudicado) guarda esos conteos en el `.pbix` con los mismos pasos, sin relaciones con el modelo, para mostrar el peso excluido en la página de prueba y en la presentación. `Motivo` toma cuatro valores que no se mezclan: «Fuera de la ventana 2021-2025», «Fuera del gobierno central», «Dudoso o sin clasificar» y «En el hecho»; cada uno con su conteo de procesos y su monto adjudicado, y `Anio` es el año de `releases.date`. Es una tabla de control, no un hecho: no participa en ninguna medida de P1 a P3.
+
+Cómo leer los totales: USD 28.187.165.730,91 es el control **nacional** dentro de la ventana, antes de clasificar compradores. El total del gobierno central es la suma de las filas de `FactContratacion` y se obtiene recién al aplicar la clasificación de #68; la diferencia entre ambos es la suma de los dos motivos de exclusión por entidad.
+
+### 6.5 Cruce de entidades y vigencia histórica (alineado con ADR 0001 y #68)
+
+- **Orden de cruce (ADR 0001, regla 7).** Primero por `buyer_id` completo, sin modificarlo; si no coincide, por la raíz `EC-RUC-{13}` solo si el patrón se validó en la semilla; nunca por `buyer_name`. Cada resultado se resume en la raíz, que es el grano de `DimEntidad`. Medido: solo 16,69 % del monto adjudicado cruza con `buyer_id` completo y 80,84 % lo hace por la raíz (Q-E06), así que la regla por raíz es la que sostiene el modelo.
+- **Raíz con clasificaciones distintas.** Si dos `buyer_id` de una misma raíz recibieran una clasificación distinta en la semilla, la raíz se trata como dudosa y sus procesos quedan fuera del hecho y contados bajo «Dudoso o sin clasificar» hasta que el líder la resuelva. El diseño no elige entre ellas.
+- **Tres motivos de exclusión, separados y sin solaparse.** Fuera de alcance (`fuera_de_alcance` en la semilla: gobiernos locales, empresas, otras funciones del Estado), dudoso o sin clasificar (`sin_clasificar`, estado `dudosa` o `propuesta`, y los 43 procesos sin raíz por `buyer_id` sin patrón, Q-E08) y fuera de la ventana. Un proceso se cuenta en el primer motivo que le toca, en el orden de la tabla de conciliación.
+- **Vigencia histórica y entidades fusionadas en H3.** `DimEntidad` tiene una sola fila por raíz con la clasificación que fije la semilla; no hay versiones por fecha (ADR 0004 y 0005 llevan el SCD tipo 2 al DW de H4; Q-E04 documenta que el catálogo del MDEP es una fotografía al 31/08/2026, sin historia). Cada raíz antigua de una cartera fusionada conserva su propia fila, con su tipo y con `EntidadRectora` apuntando al ministerio actual cuando conste y esté respaldado, de modo que la serie se puede leer por ministerio actual sin reasignar procesos por fecha. Las fechas `VigenteDesde` y `VigenteHasta` se guardan solo si la fuente las da, como columnas informativas. Qué raíces se incluyen o excluyen por haber sido gobierno central en algún periodo de 2021 a 2025 es una decisión de alcance de #68 (Q-E05) y el líder la aprueba en el chat; hasta entonces esas raíces quedan como dudosas, fuera y contadas.
 
 ## 7. Pregunta → hechos y dimensiones (guía 4.2)
 
@@ -152,6 +162,10 @@ La tabla `ControlAlcance` (Motivo, Anio, Procesos, MontoAdjudicado) guarda esos 
 | **P3.** Monto adjudicado esperado por mes del primer semestre de 2026, por tipo de entidad | `MontoAdjudicado` | `DimTiempo` (`IdTiempo`, mes), `DimEntidad` (`TipoEntidad`) | Monto proyectado mensual (pronóstico de la serie) y error de validación WAPE = Σ\|real − proyectado\| ÷ Σ real × 100 sobre los 12 meses de 2025 | El pronóstico es un resultado de un modelo, no un dato de la fuente, y el WAPE es una razón. Ambos son medidas del bimestre 2; el hecho aporta la serie observada de 60 meses |
 
 Control de referencia para la medida de P2, a nivel nacional y antes de filtrar por sector (no es la respuesta de P2): dentro de la ventana, 861.904 procesos con ambos importes suman USD 20.547.138.708,22 de adjudicado y USD 21.456.965.754,58 de estimado, una desviación agregada de −4,24 %. Sirve para comprobar que la medida DAX calcula bien antes de aplicar el filtro de entidades.
+
+### 7.1 Página de prueba (demostración)
+
+Se propone P1: una matriz con `Anio` y `TipoEntidad` en las filas, `Metodo` en las columnas y la suma de `MontoAdjudicado` como valor, con `Procedimiento` como nivel de profundización. Muestra las tres dimensiones a la vez y permite comprobar el total contra la bitácora y contra `ControlAlcance`. Queda **por verificar en Power BI Desktop** (#71): las relaciones de uno a varios con filtro único, la conciliación del total del sector y el funcionamiento de la página.
 
 ## 8. Convenciones y qué se oculta
 
@@ -180,23 +194,24 @@ Control de referencia para la medida de P2, a nivel nacional y antes de filtrar 
 | D-9 | Sin cuarta dimensión (proveedor, geografía) | Proveedor: ninguna pregunta lo usa y puede ser una persona natural; el repositorio no guarda datos de personas (`CLAUDE.md`). Geografía: ninguna pregunta la usa. Se prefieren pocas dimensiones bien pensadas (guía, sección 8) | Guía H3, P1 a P3 |
 | D-10 | Estrella con `DimEntidad` y `DimMetodo` desnormalizadas | Copo de nieve (tipo y método en tablas aparte): Power BI rinde mejor con estrella (guía 3.3) | Guía H3 |
 
-### 9.2 Decisiones propuestas al líder (con recomendación)
+### 9.2 Decisiones aprobadas por el líder el 22/11/2026
 
-**(a) Método: con o sin `procurementMethodDetails`.**
+**(a) Método: con o sin `procurementMethodDetails`. Aprobada con detalle normalizado.**
 - **Recomendación firme: con detalle, colapsado a procedimiento** (`Metodo` → `Procedimiento`, 28 filas).
 - **Motivo.** Con solo `procurementMethod` (4 valores) P2 mezclaría en «abierto» la subasta inversa (USD 8.438,96 millones, 109.792 licitaciones), la licitación (USD 6.387,50 millones, 5.321) y la cotización (USD 3.028,49 millones, 10.007), tres procedimientos de peso muy distinto que «abierto» agrupa. Con los 704 detalles completos, 681 son nombres de convenios del catálogo y no métodos: el 97 % de los miembros sería ruido y las celdas de método × tipo de entidad × año quedarían casi vacías. El colapso usa una regla observada (el texto anterior a « en el convenio») y no inventa categorías.
 - **Alternativas.** (i) Solo 4 métodos: 5 filas, más simple, pierde la lectura por procedimiento. (ii) 704 detalles: descartada por lo anterior. Elegir (i) es reversible sin tocar la forma del hecho: se oculta `Procedimiento` y quedan los 4 métodos.
-- **Qué falta para cerrarla:** que el líder confirme la traducción de las etiquetas de `Metodo` (Abierto, Selectivo, Limitado, Directo), una elección del equipo y no de la fuente.
+- **Confirmado por el líder:** etiquetas de `Metodo` Abierto, Selectivo, Limitado y Directo (elección del equipo, no de la fuente). `Metodo` es el nivel principal en P1 y P2 y `Procedimiento` el de profundización: «Abierto» se desglosa en subasta inversa, licitación y cotización.
 
-**(b) Alcance de entidades y peso excluido.**
+**(b) Alcance de entidades y peso excluido. Aprobada.**
 - **Recomendación firme:** el hecho solo contiene procesos de Presidencia, ministerios e institutos (ya decidido); lo demás se excluye y se muestra con una tabla de control `ControlAlcance` (sección 6.4), alimentada con los mismos pasos de conciliación, más una nota en el PDF con el porcentaje de procesos y de monto excluido por motivo.
 - **Motivo.** Los 1.007.920 procesos incluyen gobiernos locales, empresas y otras funciones del Estado (6.100 `buyer_id`, 3.364 raíces); meterlos al hecho para «verlos» agrandaría el `.pbix` (el de H2 pesa 243 MB) y obligaría a filtrar siempre en DAX, con riesgo de mezclar alcances. La tabla de control da el mismo dato sin ese riesgo.
 - **Alternativa descartada.** Conservar todos los procesos con `TipoEntidad` = «Fuera de alcance» o «Sin clasificar» en el hecho: el total cuadra con el nacional sin tabla aparte, pero contradice la regla ya decidida (ADR 0001, regla 6).
 - **Los casos dudosos** (compradores que podrían ser del gobierno central con denominaciones históricas, Q-E05: 41.776 procesos y USD 765,66 millones sin cruce con el catálogo) se aprueban en el chat con la lista corta de #68. Mientras no se aprueben quedan fuera y contados.
 
-**(c) Segundo hecho `FactAdjudicacion`.**
+**(c) Segundo hecho `FactAdjudicacion`. Aprobada: un solo hecho.**
 - **Recomendación firme: descartarlo en H3**, dejarlo anotado para H4.
 - **Motivo.** P1, P2 y P3 se contestan completas a grano de proceso: el método, la entidad y el periodo son atributos del proceso, y la suma de las adjudicaciones por proceso es igual a la suma de sus filas. Solo 1.801 procesos (0,19 %) tienen varias adjudicaciones y pesan 1,06 % del monto adjudicado; por qué hay varias no se midió (Q-06). A grano de adjudicación la fecha tendría que ser la de la adjudicación (13,96 % a 17,63 % de cobertura, Q-03) y no la de `releases.date`, y ninguna de las tres preguntas necesitaría una dimensión nueva (el proveedor no se usa y puede ser una persona natural).
+- **Condición para reabrirla en H4:** que aparezca una pregunta que exija analizar adjudicaciones individuales.
 - **Si se añadiera en H4:** reutiliza `DimTiempo`, `DimEntidad` y `DimMetodo`, que ya son conformadas, y no cambia `FactContratacion`.
 
 ## 10. Verificación contra los criterios del issue y la rúbrica
@@ -209,7 +224,7 @@ Control de referencia para la medida de P2, a nivel nacional y antes de filtrar 
 | P1, P2 y P3 asociadas a hechos y dimensiones; P2 y P3 explican la medida DAX que falta y por qué no se guarda | Sí | Sección 7 |
 | Ninguna tasa, porcentaje ni promedio en una tabla de hechos | Sí: solo importes, conteos y una marca 0/1 | Sección 6.1 |
 | Varias adjudicaciones, importes vacíos y compradores no clasificados decididos por escrito | Sí | Sección 6.4 |
-| Decisiones del líder marcadas como propuesta con recomendación | Sí: (a), (b), (c) | Sección 9.2 |
+| Decisiones del líder con su recomendación | Sí: (a), (b) y (c), aprobadas el 22/11/2026 | Sección 9.2 |
 | Sin marcas pendientes | Sí | Todo el documento |
 | Estrella, no copo de nieve | Sí: tres dimensiones desnormalizadas, relaciones directas | Secciones 5 y 8 |
 
