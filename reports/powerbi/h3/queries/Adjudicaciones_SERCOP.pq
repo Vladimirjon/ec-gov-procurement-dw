@@ -24,11 +24,12 @@ let
     #"Campos de adjudicación sin importes vacíos de oferta" = Table.SelectColumns(
         #"Cinco años anexados", {"ocid", "id", "AnioProceso", "amount", "currency"}
     ),
-    #"Importe adjudicado decimal anulable" = Table.TransformColumns(
+    // Table.Buffer: la tabla se calcula una vez; las guardas no vuelven a leer los CSV.
+    #"Importe adjudicado decimal anulable" = Table.Buffer(Table.TransformColumns(
         #"Campos de adjudicación sin importes vacíos de oferta",
         {{"amount", each if _ = null or Text.Trim(_) = "" then null else Decimal.From(_, "en-US"),
           type nullable Decimal.Type}}
-    ),
+    )),
     #"Unicidad de adjudicación verificada" =
         if Table.RowCount(Table.Distinct(Table.SelectColumns(#"Importe adjudicado decimal anulable", {"ocid", "id"})))
             <> Table.RowCount(#"Importe adjudicado decimal anulable")

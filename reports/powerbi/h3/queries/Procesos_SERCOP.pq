@@ -21,9 +21,10 @@ let
         )
     ),
     #"Cinco años anexados" = Table.Combine(#"CSV anuales UTF-8 con saltos entre comillas"),
-    #"Campos para comprobar claves" = Table.SelectColumns(
+    // Table.Buffer: la tabla se calcula una vez; las guardas no vuelven a leer los CSV.
+    #"Campos para comprobar claves" = Table.Buffer(Table.SelectColumns(
         #"Cinco años anexados", {"ocid", "buyer_id", "buyer_name", "date", "AnioProceso"}
-    ),
+    )),
     #"Claves completas verificadas" =
         if Table.RowCount(Table.SelectRows(#"Campos para comprobar claves", each
             [ocid] = null or Text.Trim([ocid]) = "" or [buyer_id] = null or Text.Trim([buyer_id]) = ""

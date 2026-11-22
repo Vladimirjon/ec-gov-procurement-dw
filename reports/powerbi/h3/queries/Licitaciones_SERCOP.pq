@@ -36,11 +36,12 @@ let
         #"Campos para limpiar licitaciones",
         {{"procurementMethodDetails", NormalizarTexto, type nullable text}}
     ),
-    #"Importe estimado decimal anulable" = Table.TransformColumns(
+    // Table.Buffer: la tabla se calcula una vez; las guardas no vuelven a leer los CSV.
+    #"Importe estimado decimal anulable" = Table.Buffer(Table.TransformColumns(
         #"Método sin espacios repetidos ni saltos de línea",
         {{"value_amount", each if _ = null or Text.Trim(_) = "" then null else Decimal.From(_, "en-US"),
           type nullable Decimal.Type}}
-    ),
+    )),
     #"Unicidad de licitación verificada" =
         if Table.RowCount(Table.Distinct(Table.SelectColumns(#"Importe estimado decimal anulable", {"ocid"})))
             <> Table.RowCount(#"Importe estimado decimal anulable")
