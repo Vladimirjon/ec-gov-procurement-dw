@@ -72,6 +72,9 @@ def test_measure_counts_windows_amounts_and_multiple_awards(tmp_path):
     assert result["awarded_outside_window"] == 40.0
     assert result["processes_with_several_awards"] == 1
     assert result["extra_award_rows"] == 1
+    assert result["extra_award_rows_in_window"] == 1
+    assert result["award_rows_in_window"] == 4
+    assert result["tender_rows_in_window"] == 3
     assert result["estimated_overcount_if_award_rows_joined_1_to_n"] == 100.0
     assert result["processes_with_awarded_amount"] == 3
     assert result["processes_with_award_rows_and_no_amount"] == 1
@@ -101,3 +104,26 @@ def test_main_writes_json_and_never_overwrites(tmp_path):
     except FileExistsError:
         return
     raise AssertionError("the output file was overwritten")
+
+
+def test_measure_rejects_two_downloads_of_the_same_year(tmp_path):
+    for sello in ("20990101-000000", "20990102-000000"):
+        folder = tmp_path / f"sercop-portal-csv-2090-{sello}"
+        folder.mkdir()
+    try:
+        module.measure(tmp_path)
+    except ValueError as error:
+        assert "2090" in str(error)
+        return
+    raise AssertionError("two folders for one year were accepted")
+
+
+def test_measure_rejects_a_repeated_ocid(tmp_path):
+    row = ["o1", "EC-RUC-1000000000001", "2021-02-01T10:00:00-05:00"]
+    build_year(tmp_path, 2090, [row, row], [["o1", "", "open", "Licitación"]], [["o1", "5.00"]])
+    try:
+        module.measure(tmp_path)
+    except ValueError as error:
+        assert "ocid" in str(error)
+        return
+    raise AssertionError("a repeated ocid was accepted")

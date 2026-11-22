@@ -18,12 +18,12 @@ Medición hecha el 22/11/2026 sobre los CSV del portal descargados el 21/11/2026
 | Tema | Cifra medida | Control de H2 | Consecuencia para el diseño |
 |---|---|---|---|
 | Procesos y ventana | 1.007.920 procesos; 993.425 con `releases.date` entre 2021 y 2025; 14.495 con fecha de 2026; 0 anteriores a 2021; los 60 meses de la ventana tienen procesos | Total 1.007.920 y 0 vacíos en `date` (S-05); 60 meses sin vacío (Q-10) | `DimTiempo` cubre 2021-01 a 2025-12. Los 14.495 procesos de 2026 se excluyen y se cuentan |
-| Monto adjudicado | Total nacional USD 30.952.880.306,92; dentro de la ventana USD 28.187.165.730,91; fuera (2026) USD 2.765.714.576,01 en 14.016 procesos con importe | Total 30.952.880.306,92 (calidad y portada de H2) | El total de control de H3 es el de la ventana; el de H2 se concilia sumando lo excluido |
+| Monto adjudicado | Total nacional USD 30.952.880.306,92; dentro de la ventana USD 28.187.165.730,91; fuera (2026) USD 2.765.714.576,01 en 14.016 procesos con importe | Total 30.952.880.306,92 (calidad y portada de H2) | Cada control se etiqueta por etapa (sección 6.4): nacional descargado (el de H2), nacional 2021-2025 (USD 28.187.165.730,91) y sector listo para combinar (lo mide #68) |
 | Año del archivo frente a fecha | 81.898 procesos de la ventana tienen un año de archivo distinto del de su `releases.date` | Q-10 | El año sale de `releases.date`; el año del archivo queda fuera del modelo (decisión D-7) |
 | Método | `procurementMethod` toma 4 valores (`open` 129.718, `selective` 576.278, `direct` 272.593, `limited` 2.759 licitaciones); `procurementMethodDetails` toma 704 valores (1 vacío); cada detalle pertenece a un solo método | Hito 1 (cuatro valores) | Jerarquía estricta: el detalle puede ser un nivel inferior sin duplicar filas |
 | Detalle del método | 681 de los 704 detalles son del catálogo electrónico (780.097 licitaciones, 79,49 %) y terminan en el nombre de un convenio; los otros 23 son procedimientos (22 con nombre y 1 vacío) | Q-11 (saltos de línea en el detalle) | Se colapsa a 27 pares método-procedimiento (decisión propuesta (a)) |
 | Procesos sin licitación | 26.572 procesos no tienen fila en `tender` (sin método ni valor estimado); ninguno tiene adjudicación | 26.572 (matriz de cobertura de H2) | `DimMetodo` necesita el miembro «Sin licitación» |
-| Adjudicaciones múltiples | 1.801 procesos con más de una adjudicación (0,19 % de los 964.475 con adjudicación), 10.827 filas adicionales, USD 327.040.896,43 de adjudicado (1,06 % del total); los 1.801 tienen valor estimado | Q-06 | Se suman dentro del proceso. Unir `awards` fila a fila repetiría el valor estimado y lo inflaría en USD 1.558.960.424,49 (6,22 % de USD 25.072.968.705,53) |
+| Adjudicaciones múltiples | 1.801 procesos con más de una adjudicación (0,19 % de los 964.475 con adjudicación), 10.827 filas adicionales en el universo descargado (9.917 dentro de la ventana, con 1.682 procesos), USD 327.040.896,43 de adjudicado (1,06 % del total); los 1.801 tienen valor estimado | Q-06 | Se suman dentro del proceso. Unir `awards` fila a fila repetiría el valor estimado y lo inflaría en USD 1.558.960.424,49 (6,22 % de USD 25.072.968.705,53) |
 | Importes ausentes | 964.450 procesos con importe adjudicado; 25 con filas de adjudicación y todos los importes vacíos; ninguno con importes parciales; 871.555 licitaciones con valor estimado | 43.470 sin monto adjudicado y 109.793 sin valor estimado (Q-01, matriz de cobertura) | Las 25 adjudicaciones sin importe dan monto vacío, no 0; ningún proceso mezcla importes presentes y vacíos |
 | Procesos con ambos importes | 868.576 (86,18 %); 861.904 dentro de la ventana; 2.979 solo con valor estimado y 95.874 solo con monto adjudicado | 868.576 (Q-01) | La desviación de P2 se calcula solo sobre el conjunto con ambos importes (marca aditiva) |
 | Compradores | 6.100 `buyer_id` distintos que se reducen a 3.364 raíces `EC-RUC-{13}` (3.362 dentro de la ventana); 43 procesos con `buyer_id` sin patrón, sin raíz | Q-07, Q-E06 y Q-E08 | `DimEntidad` tiene una fila por raíz; el sufijo es una unidad y no una entidad. Los 43 procesos sin raíz quedan como no clasificados |
@@ -34,11 +34,11 @@ Qué **no** se pudo medir todavía (y por qué): cuántos de los 3.362 comprador
 
 | Tabla de hechos | Proceso | Grano | Dimensiones | Hechos |
 |---|---|---|---|---|
-| **FactContratacion** | Adjudicación de procesos de contratación pública del gobierno central, desde el proceso hasta la adjudicación según OCDS | Un proceso de contratación (`ocid`) del gobierno central cuya fecha de publicación cae entre enero de 2021 y diciembre de 2025 | Tiempo (mes), Entidad (raíz de RUC), Método (método y procedimiento) | Monto adjudicado, valor estimado, número de procesos, número de adjudicaciones y marca de proceso con ambos importes |
+| **FactContratacion** | Adjudicación de procesos de contratación pública del gobierno central, desde el proceso hasta la adjudicación según OCDS | Un proceso de contratación (`ocid`) del gobierno central cuya fecha del release (`releases.date`) cae entre enero de 2021 y diciembre de 2025 | Tiempo (mes), Entidad (raíz de RUC), Método (método y procedimiento) | Monto adjudicado, valor estimado, número de procesos, número de adjudicaciones y marca de proceso con ambos importes |
 
 **Paso 1, proceso de negocio.** La actividad que se mide es la contratación del gobierno central: desde que el proceso se publica hasta que se adjudica. Es el proceso que nombran las tres preguntas del Hito 1 (monto adjudicado, desviación frente al valor estimado y serie mensual). La ejecución del contrato queda fuera: solo el 15,33 % de los contratos de 2025 trae importe (ADR 0005, punto 5).
 
-**Paso 2, grano.** Una fila es un proceso (`ocid`) del gobierno central con `releases.date` entre 2021-01 y 2025-12. El `ocid` es único: 0 repetidos en los 1.007.920 procesos (Q-06). Dos consecuencias: (1) el periodo de un proceso lo fija la fecha de su publicación (`releases.date`, decidida el 21/11/2026; es la única fecha presente en el 100 % de los procesos, Q-03), no la fecha de adjudicación, que solo consta en 13,96 % a 17,63 %; (2) las adjudicaciones se suman dentro del proceso, de modo que el grano no cambia cuando un proceso tiene varias.
+**Paso 2, grano.** Una fila es un proceso (`ocid`) del gobierno central con `releases.date` entre 2021-01 y 2025-12. El `ocid` es único: 0 repetidos en los 1.007.920 procesos (Q-06). Dos consecuencias: (1) el periodo de un proceso lo fija la fecha del release (`releases.date`, decidida el 21/11/2026; es la única fecha presente en el 100 % de los procesos, Q-03), no la fecha de adjudicación, que solo consta en 13,96 % a 17,63 %. OCDS define la fecha del release como la de registro o publicación de la información que ese release contiene ([referencia del esquema](https://standard.open-contracting.org/latest/en/schema/reference/)), así que P1 y P3 son series por fecha del release y no por fecha de publicación inicial del proceso. Inferencia: los identificadores de los releases del portal terminan en `-compiled`, lo que sugiere que son releases compilados cuya fecha refleja el último registro; esto explicaría los procesos con fecha de un año posterior al del archivo (Q-10) y no se verificó con SERCOP; (2) las adjudicaciones se suman dentro del proceso, de modo que el grano no cambia cuando un proceso tiene varias.
 
 **Paso 3, dimensiones.** `DimTiempo`, `DimEntidad` y `DimMetodo`: las perspectivas que nombran P1, P2 y P3 (año y mes, tipo de entidad, método) y nada más. Cumplen el mínimo de la guía (tres dimensiones, una de tiempo). No se agrega una cuarta (decisión D-9).
 
@@ -80,7 +80,7 @@ Tabla de control aparte (sin relaciones, no es parte de la estrella): `ControlAl
 | Columna | Tipo | Regla | Origen |
 |---|---|---|---|
 | `IdTiempo` | entero (FK) | Año y mes de `releases.date` tal como se escriben (hora de Ecuador, sin convertir de zona): `Año × 100 + Mes` | `Procesos_SERCOP.date` |
-| `IdEntidad` | entero (FK) | Clave de la fila de `DimEntidad` cuya `RucRaiz` es la raíz de 13 dígitos de `buyer_id` (`EC-RUC-{13}` con o sin sufijo); nunca por nombre | `Procesos_SERCOP.buyer_id`, semilla (#68) |
+| `IdEntidad` | entero (FK) | Clave de la fila de `DimEntidad` de la raíz de 13 dígitos del comprador. Solo se asigna a los procesos admitidos por la secuencia única de la sección 6.5 (pasos 1 a 5); nunca por un cruce directo de la raíz con `DimEntidad` ni por nombre | `Procesos_SERCOP.buyer_id`, semilla (#68) |
 | `IdMetodo` | entero (FK) | Clave de `DimMetodo` por `procurementMethod` y procedimiento; «Sin licitación» si el proceso no tiene fila en `tender` | `Licitaciones_SERCOP` |
 | `ocid` | texto (dimensión degenerada) | Identificador del proceso; sin tabla propia (decisión D-6) | `Procesos_SERCOP.ocid` |
 | `MontoAdjudicado` | decimal anulable | Suma de `amount` de las adjudicaciones del proceso. **Vacío** si el proceso no tiene adjudicaciones o todos sus importes están vacíos (43.470 procesos del universo nacional, ver nota) | `Adjudicaciones_SERCOP.amount` |
@@ -127,7 +127,7 @@ Jerarquía método → procedimiento en una sola tabla. Los 27 pares: abierto 7 
 
 ### 6.4 Adjudicaciones múltiples, vacíos y compradores fuera del hecho
 
-**Adjudicaciones múltiples.** Se agrupa `awards` por `ocid` y se suma `amount` antes de unir con el proceso (el hecho tiene exactamente una fila por `ocid`). Efecto en el total de control: el monto adjudicado no cambia (la suma por proceso es la suma de las filas) y `Σ NumAdjudicaciones` es igual a las filas de `awards` del universo; el valor estimado no se repite. Si se uniera `awards` fila a fila, el hecho tendría 10.827 filas de más y `ValorEstimado` sumaría USD 1.558,96 millones de más. La causa de las adjudicaciones múltiples (lotes, ítems u otra) no se midió (Q-06); no cambia el diseño porque ninguna de las tres preguntas desglosa por adjudicación.
+**Adjudicaciones múltiples.** Se agrupa `awards` por `ocid` y se suma `amount` antes de unir con el proceso (el hecho tiene exactamente una fila por `ocid`). Efecto en los controles: el monto adjudicado no cambia (la suma por proceso es la suma de las filas) y `Σ NumAdjudicaciones` es igual a las filas de `awards` de los procesos de la etapa que se controla (975.302 en el nacional descargado, 960.375 en el nacional 2021-2025); el valor estimado no se repite. Si se uniera `awards` fila a fila, el hecho tendría filas de más (10.827 en el nacional descargado, 9.917 en el nacional 2021-2025) y `ValorEstimado` sumaría USD 1.558,96 millones de más en el nacional descargado. La causa de las adjudicaciones múltiples (lotes, ítems u otra) no se midió (Q-06); no cambia el diseño porque ninguna de las tres preguntas desglosa por adjudicación.
 
 **Vacío frente a cero.** Un importe ausente es un valor vacío del tipo decimal, no 0: Q-01 lo exige para el valor estimado (un 0 daría divisiones por cero) y Q-12 muestra un caso de 0 en el JSON que el CSV deja vacío. `SUM` en DAX ignora los vacíos y `DIVIDE` devuelve vacío si el denominador es vacío o cero. La marca `ProcesoConAmbosImportes` separa con claridad «sin dato» de «importe 0». Los conteos (`NumProcesos`, `NumAdjudicaciones`) son 0 cuando no hay nada que contar, y eso sí es un cero verdadero.
 
@@ -135,22 +135,41 @@ Jerarquía método → procedimiento en una sola tabla. Los 27 pares: abierto 7 
 
 | Paso | Procesos | Monto adjudicado (USD) | Estado de la cifra |
 |---|---:|---:|---|
-| Universo nacional descargado | 1.007.920 | 30.952.880.306,92 | Medido (control de H2) |
+| Etapa 1: nacional descargado | 1.007.920 | 30.952.880.306,92 | Medido (control de H2) |
 | Menos: fecha fuera de 2021-01 a 2025-12 | 14.495 | 2.765.714.576,01 | Medido |
-| Dentro de la ventana | 993.425 | 28.187.165.730,91 | Medido |
+| Etapa 2: nacional 2021-2025 | 993.425 | 28.187.165.730,91 | Medido |
 | Menos: fuera del gobierno central | n | n | Lo mide #68 |
 | Menos: sin clasificar o dudosos (incluye los 43 sin raíz) | n | n | Lo mide #68 |
-| **Filas de FactContratacion** | n | n | Total de control de #70 |
+| **Etapa 3: sector listo para combinar = filas de FactContratacion** | n | n | Control de #70 |
 
 La tabla `ControlAlcance` (Motivo, Anio, Procesos, MontoAdjudicado) guarda esos conteos en el `.pbix` con los mismos pasos, sin relaciones con el modelo, para mostrar el peso excluido en la página de prueba y en la presentación. `Motivo` toma cuatro valores que no se mezclan: «Fuera de la ventana 2021-2025», «Fuera del gobierno central», «Dudoso o sin clasificar» y «En el hecho»; cada uno con su conteo de procesos y su monto adjudicado, y `Anio` es el año de `releases.date`. Es una tabla de control, no un hecho: no participa en ninguna medida de P1 a P3.
 
-Cómo leer los totales: USD 28.187.165.730,91 es el control **nacional** dentro de la ventana, antes de clasificar compradores. El total del gobierno central es la suma de las filas de `FactContratacion` y se obtiene recién al aplicar la clasificación de #68; la diferencia entre ambos es la suma de los dos motivos de exclusión por entidad.
+**Cada control pertenece a una etapa y solo cuadra en ella.** Una cifra de una etapa no es el control de otra:
+
+| Control | Etapa 1: nacional descargado | Etapa 2: nacional 2021-2025 | Etapa 3: sector listo para combinar |
+|---|---:|---:|---|
+| Procesos (`ocid` únicos) | 1.007.920 | 993.425 | n (lo mide #68) |
+| Filas de licitación | 981.348 | 966.853 | n |
+| Filas de adjudicación (Σ `NumAdjudicaciones`) | 975.302 | 960.375 | n |
+| Procesos con varias adjudicaciones | 1.801 | 1.682 | n |
+| Filas adicionales por adjudicaciones múltiples | 10.827 | 9.917 | n |
+| Monto adjudicado (USD) | 30.952.880.306,92 | 28.187.165.730,91 | n |
+| Valor estimado (USD) | 25.072.968.705,53 | 22.805.452.044,61 | n |
+| Procesos con ambos importes | 868.576 | 861.904 | n |
+
+Fuente: `docs/h3/evidencia/medicion-diseno-dimensional-20261122.json` (etapas 1 y 2, cifras nacionales sin filtrar por sector). Uso: las acciones de H2 se controlan en la etapa 1 (antes y después); el filtro de fecha explica el paso de la etapa 1 a la 2 (14.495 procesos); el filtro por entidad explica el paso de la 2 a la 3 y lo cuenta `ControlAlcance`. En la etapa 3, la prueba de #70 es que al unir con las tres dimensiones el número de filas y las sumas de `MontoAdjudicado`, `ValorEstimado`, `NumAdjudicaciones` y `ProcesoConAmbosImportes` no cambian, y que ninguna fila queda con el miembro «Sin clasificar». USD 28.187.165.730,91 no es el total del gobierno central: ese total es la suma de las filas de `FactContratacion` y se obtiene al aplicar la clasificación de #68.
 
 ### 6.5 Cruce de entidades y vigencia histórica (alineado con ADR 0001 y #68)
 
-- **Orden de cruce (ADR 0001, regla 7).** Primero por `buyer_id` completo, sin modificarlo; si no coincide, por la raíz `EC-RUC-{13}` solo si el patrón se validó en la semilla; nunca por `buyer_name`. Cada resultado se resume en la raíz, que es el grano de `DimEntidad`. Medido: solo 16,69 % del monto adjudicado cruza con `buyer_id` completo y 80,84 % lo hace por la raíz (Q-E06), así que la regla por raíz es la que sostiene el modelo.
-- **Raíz con clasificaciones distintas.** Si dos `buyer_id` de una misma raíz recibieran una clasificación distinta en la semilla, la raíz se trata como dudosa y sus procesos quedan fuera del hecho y contados bajo «Dudoso o sin clasificar» hasta que el líder la resuelva. El diseño no elige entre ellas.
-- **Tres motivos de exclusión, separados y sin solaparse.** Fuera de alcance (`fuera_de_alcance` en la semilla: gobiernos locales, empresas, otras funciones del Estado), dudoso o sin clasificar (`sin_clasificar`, estado `dudosa` o `propuesta`, y los 43 procesos sin raíz por `buyer_id` sin patrón, Q-E08) y fuera de la ventana. Un proceso se cuenta en el primer motivo que le toca, en el orden de la tabla de conciliación.
+- **Secuencia única para asignar `IdEntidad` (ADR 0001, regla 7; la ejecuta #70 sobre la semilla de #68).** Se aplica a los procesos de la etapa 2, en este orden y sin atajos:
+  1. Obtener la raíz de 13 dígitos del `buyer_id` (patrón `EC-RUC-{13}` con o sin sufijo). Sin patrón: no hay raíz y el proceso es «Dudoso o sin clasificar» (43 procesos, Q-E08).
+  2. Buscar el comprador en la semilla: primero por `buyer_id` completo, sin modificarlo; si no coincide, por la raíz, solo si el patrón se validó en la semilla; nunca por `buyer_name`. Sin coincidencia: «Dudoso o sin clasificar».
+  3. Resolver conflictos por raíz: si las filas de la semilla de una misma raíz no coinciden en el tipo de entidad o alguna no está aprobada, la raíz entera es dudosa. La coincidencia exacta no se impone sobre un conflicto: lo dudoso queda fuera (ADR 0001, regla 6) y el diseño no elige entre las clasificaciones; la resuelve el líder en el chat.
+  4. Admitir solo los procesos cuyo resultado es Presidencia, ministerio o instituto con estado aprobado. `fuera_de_alcance` cuenta como «Fuera del gobierno central».
+  5. Asignar `IdEntidad`, solo a los procesos admitidos, con la fila de `DimEntidad` de su raíz.
+
+  Medido: solo 16,69 % del monto adjudicado cruza con `buyer_id` completo y 80,84 % lo hace por la raíz (Q-E06): la raíz es la que sostiene el modelo, pero pasa siempre por los pasos 3 y 4.
+- **Tres motivos de exclusión, separados y sin solaparse.** Fuera de alcance (`fuera_de_alcance` en la semilla: gobiernos locales, empresas, otras funciones del Estado), dudoso o sin clasificar (`sin_clasificar`, estado `dudosa` o `propuesta`, y los 43 procesos sin raíz por `buyer_id` sin patrón, Q-E08) y fuera de la ventana. Un proceso se cuenta en el primer motivo que le toca, en el orden de la tabla de conciliación (ventana, luego los pasos 1 a 4 de esta secuencia).
 - **Vigencia histórica y entidades fusionadas en H3.** `DimEntidad` tiene una sola fila por raíz con la clasificación que fije la semilla; no hay versiones por fecha (ADR 0004 y 0005 llevan el SCD tipo 2 al DW de H4; Q-E04 documenta que el catálogo del MDEP es una fotografía al 31/08/2026, sin historia). Cada raíz antigua de una cartera fusionada conserva su propia fila, con su tipo y con `EntidadRectora` apuntando al ministerio actual cuando conste y esté respaldado, de modo que la serie se puede leer por ministerio actual sin reasignar procesos por fecha. Las fechas `VigenteDesde` y `VigenteHasta` se guardan solo si la fuente las da, como columnas informativas. Qué raíces se incluyen o excluyen por haber sido gobierno central en algún periodo de 2021 a 2025 es una decisión de alcance de #68 (Q-E05) y el líder la aprueba en el chat; hasta entonces esas raíces quedan como dudosas, fuera y contadas.
 
 ## 7. Pregunta → hechos y dimensiones (guía 4.2)
@@ -165,7 +184,7 @@ Control de referencia para la medida de P2, a nivel nacional y antes de filtrar 
 
 ### 7.1 Página de prueba (demostración)
 
-Se propone P1: una matriz con `Anio` y `TipoEntidad` en las filas, `Metodo` en las columnas y la suma de `MontoAdjudicado` como valor, con `Procedimiento` como nivel de profundización. Muestra las tres dimensiones a la vez y permite comprobar el total contra la bitácora y contra `ControlAlcance`. Queda **por verificar en Power BI Desktop** (#71): las relaciones de uno a varios con filtro único, la conciliación del total del sector y el funcionamiento de la página.
+Se propone P1: una matriz con `Anio` y `TipoEntidad` en las filas, `Metodo` en las columnas y la suma de `MontoAdjudicado` como valor, con `Procedimiento` como nivel de profundización. Muestra las tres dimensiones a la vez y permite comprobar el total de la matriz (etapa 3) contra la bitácora y contra la fila «En el hecho» de `ControlAlcance`. La serie de P1 y P3 es por fecha del release. Queda **por verificar en Power BI Desktop** (#71): las relaciones de uno a varios con filtro único, la conciliación del total del sector y el funcionamiento de la página.
 
 ## 8. Convenciones y qué se oculta
 
@@ -186,7 +205,7 @@ Se propone P1: una matriz con `Anio` y `TipoEntidad` en las filas, `Metodo` en l
 | D-1 | Un hecho a grano de proceso y tres dimensiones | Hecho a grano de adjudicación: ver decisión (c). Hecho por proceso y mes: no hay medidas que cambien por mes dentro de un proceso | ADR 0004 y 0005 |
 | D-2 | Sumar las adjudicaciones dentro del proceso | Unir `awards` fila a fila: 10.827 filas de más y valor estimado inflado en USD 1.558,96 millones (6,22 %). Tomar solo una adjudicación: pierde monto | Issue #67, Q-06; medición de la sección 2 |
 | D-3 | Importe ausente = vacío; conteos = 0 | Imputar 0: rompe la desviación de P2 (Q-01) y confunde «sin dato» con «importe 0» (Q-12) | Q-01, Q-12 |
-| D-4 | Fecha de negocio `releases.date`; ventana 2021-01 a 2025-12 | Fecha de adjudicación: solo 13,96 % a 17,63 % de cobertura (Q-03). Año del archivo: desfasa 81.898 procesos de la ventana (Q-10). Consecuencia declarada: el total de control de H3 es el de la ventana (USD 28.187.165.730,91) y los 14.495 procesos de 2026 (USD 2.765.714.576,01) se informan aparte | Decisión del líder (21/11/2026), ADR 0001 (periodo) |
+| D-4 | Fecha del release (`releases.date`) como fecha de negocio; ventana 2021-01 a 2025-12 | Fecha de adjudicación: solo 13,96 % a 17,63 % de cobertura (Q-03). Año del archivo: desfasa 81.898 procesos de la ventana (Q-10). Consecuencia declarada: los controles se etiquetan por etapa (sección 6.4); la ventana da USD 28.187.165.730,91 a nivel nacional, que no es el total del sector, y los 14.495 procesos de 2026 (USD 2.765.714.576,01) se informan aparte | Decisión del líder (21/11/2026), ADR 0001 (periodo) |
 | D-5 | `IdTiempo` = `AAAAMM` y tiempo mensual | Clave de índice desde 1: obliga a un cruce sin ventaja. Grano diario (`FechaID` AAAAMMDD, sugerido en Q-04): 1.826 filas sin pregunta que las use; P1 es anual y P3 mensual | Guía (nivel de la dimensión de tiempo), P1 y P3 |
 | D-6 | `ocid` como dimensión degenerada en el hecho | Quitarlo: no se podría probar el grano (filas = `ocid` distintos) ni mostrar el detalle de un proceso. Costo: una columna de texto de alta cardinalidad; si el `.pbix` resulta demasiado grande, se quita y la prueba de grano se hace en Power Query | ADR 0004, punto 2 |
 | D-7 | El año del archivo (`AnioProceso`) no entra al modelo | Columna del hecho: sería la única columna que no es clave, medida ni dimensión degenerada y ninguna pregunta la usa. Se conserva en la consulta intermedia, que no se carga, para el control por archivo | Q-10 |
@@ -228,7 +247,7 @@ Se propone P1: una matriz con `Anio` y `TipoEntidad` en las filas, `Metodo` en l
 | Sin marcas pendientes | Sí | Todo el documento |
 | Estrella, no copo de nieve | Sí: tres dimensiones desnormalizadas, relaciones directas | Secciones 5 y 8 |
 
-**Lo probado:** las cifras de las secciones 2 y 6, medidas con `scripts/measure_h3_design.py` sobre los CSV de 2021 a 2025 (pruebas sintéticas del script en `tests/unit/test_measure_h3_design.py`) y contrastadas con los controles de H2 (1.007.920 procesos, 981.348 licitaciones, 975.302 adjudicaciones, USD 30.952.880.306,92 adjudicado, USD 25.072.968.705,53 estimado, 868.576 procesos con ambos importes, 1.801 con varias adjudicaciones y 10.827 filas adicionales).
+**Lo probado:** las cifras de las secciones 2 y 6, medidas con `scripts/measure_h3_design.py` sobre los CSV de 2021 a 2025 (el script rechaza dos descargas del mismo año y `ocid` repetidos en `releases`; pruebas sintéticas en `tests/unit/test_measure_h3_design.py`) y contrastadas con los controles de H2 (1.007.920 procesos, 981.348 licitaciones, 975.302 adjudicaciones, USD 30.952.880.306,92 adjudicado, USD 25.072.968.705,53 estimado, 868.576 procesos con ambos importes, 1.801 con varias adjudicaciones y 10.827 filas adicionales).
 
 **Lo simulado:** nada.
 

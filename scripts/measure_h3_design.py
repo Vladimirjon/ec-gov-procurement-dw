@@ -53,6 +53,11 @@ def procedure_of(detail):
 
 def load_tables(base):
     folders = sorted(base.glob("sercop-portal-csv-*"))
+    years = Counter(int(folder.name.split("-")[3]) for folder in folders)
+    repeated_years = sorted(y for y, n in years.items() if n > 1)
+    if repeated_years:
+        # Two downloads of the same year would add their awards twice: reject before measuring.
+        raise ValueError(f"more than one download folder for the year(s) {repeated_years}: keep a single one")
     processes = {}  # ocid -> (year-month as int, root or None, archive year)
     buyer_ids = set()
     tenders = {}  # ocid -> (method, detail, estimated amount or None)
@@ -61,6 +66,10 @@ def load_tables(base):
     for folder in folders:
         year = int(folder.name.split("-")[3])
         for row in read_rows(folder / f"releases_{year}.csv"):
+            if row["ocid"] in processes:
+                raise ValueError(
+                    "an ocid appears more than once in releases: the grain would not be one row per process"
+                )
             moment = datetime.fromisoformat(row["date"])
             match = ROOT_RE.match(row["buyer_id"])
             processes[row["ocid"]] = (moment.year * 100 + moment.month, match and match.group(1), year)
@@ -153,6 +162,10 @@ def measure(base):
     out["processes_with_award_rows_and_no_amount"] = len(awards) - len(has_amount)
     out["processes_with_partial_amounts"] = sum(1 for v in awards.values() if 0 < v[2] < v[0])
     out["processes_with_several_awards"] = len(multiple)
+    out["processes_with_several_awards_in_window"] = len(multiple & in_window)
+    out["tender_rows_in_window"] = sum(1 for o in in_window if o in tenders)
+    out["award_rows_in_window"] = sum(awards[o][0] for o in in_window if o in awards)
+    out["extra_award_rows_in_window"] = sum(awards[o][0] - 1 for o in multiple & in_window)
     out["extra_award_rows"] = sum(awards[o][0] - 1 for o in multiple)
     out["awarded_in_processes_with_several_awards"] = awarded(multiple)
     estimated = [t[2] for t in tenders.values() if t[2] is not None]
