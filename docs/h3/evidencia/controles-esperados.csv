@@ -1,0 +1,301 @@
+tabla,anio_archivo,paso,filas_antes,filas_despues,suma_antes_usd,suma_despues_usd,filas_excluidas,metrica,valor
+releases,2021,Cinco años anexados,167058,167058,,,0,,
+releases,2021,Campos para comprobar claves,167058,167058,,,0,,
+releases,2021,Claves completas verificadas,167058,167058,,,0,,
+releases,2021,Unicidad de proceso verificada,167058,167058,,,0,,
+releases,2021,Fecha de negocio desde releases.date,167058,167058,,,0,,
+releases,2021,Año y mes desde la fecha de negocio,167058,167058,,,0,,
+releases,2021,Raíz de RUC desde buyer_id,167058,167058,,,0,,
+releases,2021,Columnas finales de procesos,167058,167058,,,0,,
+releases,2021,Diagnóstico,,,,,,buyer_id_malformado,0
+releases,2021,Diagnóstico,,,,,,duplicados_excluidos,0
+releases,2021,Diagnóstico,,,,,,fecha_fuera_2021_2025,0
+releases,2021,Diagnóstico,,,,,,fecha_otro_anio,18235
+releases,2021,Diagnóstico,,,,,,vacios_buyer_id,0
+releases,2021,Diagnóstico,,,,,,vacios_buyer_name,0
+releases,2021,Diagnóstico,,,,,,vacios_date,0
+releases,2021,Diagnóstico,,,,,,vacios_ocid,0
+releases,2022,Cinco años anexados,212324,212324,,,0,,
+releases,2022,Campos para comprobar claves,212324,212324,,,0,,
+releases,2022,Claves completas verificadas,212324,212324,,,0,,
+releases,2022,Unicidad de proceso verificada,212324,212324,,,0,,
+releases,2022,Fecha de negocio desde releases.date,212324,212324,,,0,,
+releases,2022,Año y mes desde la fecha de negocio,212324,212324,,,0,,
+releases,2022,Raíz de RUC desde buyer_id,212324,212324,,,0,,
+releases,2022,Columnas finales de procesos,212324,212324,,,0,,
+releases,2022,Diagnóstico,,,,,,buyer_id_malformado,7
+releases,2022,Diagnóstico,,,,,,duplicados_excluidos,0
+releases,2022,Diagnóstico,,,,,,fecha_fuera_2021_2025,0
+releases,2022,Diagnóstico,,,,,,fecha_otro_anio,23758
+releases,2022,Diagnóstico,,,,,,vacios_buyer_id,0
+releases,2022,Diagnóstico,,,,,,vacios_buyer_name,0
+releases,2022,Diagnóstico,,,,,,vacios_date,0
+releases,2022,Diagnóstico,,,,,,vacios_ocid,0
+releases,2023,Cinco años anexados,217913,217913,,,0,,
+releases,2023,Campos para comprobar claves,217913,217913,,,0,,
+releases,2023,Claves completas verificadas,217913,217913,,,0,,
+releases,2023,Unicidad de proceso verificada,217913,217913,,,0,,
+releases,2023,Fecha de negocio desde releases.date,217913,217913,,,0,,
+releases,2023,Año y mes desde la fecha de negocio,217913,217913,,,0,,
+releases,2023,Raíz de RUC desde buyer_id,217913,217913,,,0,,
+releases,2023,Columnas finales de procesos,217913,217913,,,0,,
+releases,2023,Diagnóstico,,,,,,buyer_id_malformado,25
+releases,2023,Diagnóstico,,,,,,duplicados_excluidos,0
+releases,2023,Diagnóstico,,,,,,fecha_fuera_2021_2025,0
+releases,2023,Diagnóstico,,,,,,fecha_otro_anio,19076
+releases,2023,Diagnóstico,,,,,,vacios_buyer_id,0
+releases,2023,Diagnóstico,,,,,,vacios_buyer_name,0
+releases,2023,Diagnóstico,,,,,,vacios_date,0
+releases,2023,Diagnóstico,,,,,,vacios_ocid,0
+releases,2024,Cinco años anexados,219185,219185,,,0,,
+releases,2024,Campos para comprobar claves,219185,219185,,,0,,
+releases,2024,Claves completas verificadas,219185,219185,,,0,,
+releases,2024,Unicidad de proceso verificada,219185,219185,,,0,,
+releases,2024,Fecha de negocio desde releases.date,219185,219185,,,0,,
+releases,2024,Año y mes desde la fecha de negocio,219185,219185,,,0,,
+releases,2024,Raíz de RUC desde buyer_id,219185,219185,,,0,,
+releases,2024,Columnas finales de procesos,219185,219185,,,0,,
+releases,2024,Diagnóstico,,,,,,buyer_id_malformado,9
+releases,2024,Diagnóstico,,,,,,duplicados_excluidos,0
+releases,2024,Diagnóstico,,,,,,fecha_fuera_2021_2025,3
+releases,2024,Diagnóstico,,,,,,fecha_otro_anio,20832
+releases,2024,Diagnóstico,,,,,,vacios_buyer_id,0
+releases,2024,Diagnóstico,,,,,,vacios_buyer_name,0
+releases,2024,Diagnóstico,,,,,,vacios_date,0
+releases,2024,Diagnóstico,,,,,,vacios_ocid,0
+releases,2025,Cinco años anexados,191440,191440,,,0,,
+releases,2025,Campos para comprobar claves,191440,191440,,,0,,
+releases,2025,Claves completas verificadas,191440,191440,,,0,,
+releases,2025,Unicidad de proceso verificada,191440,191440,,,0,,
+releases,2025,Fecha de negocio desde releases.date,191440,191440,,,0,,
+releases,2025,Año y mes desde la fecha de negocio,191440,191440,,,0,,
+releases,2025,Raíz de RUC desde buyer_id,191440,191440,,,0,,
+releases,2025,Columnas finales de procesos,191440,191440,,,0,,
+releases,2025,Diagnóstico,,,,,,buyer_id_malformado,2
+releases,2025,Diagnóstico,,,,,,duplicados_excluidos,0
+releases,2025,Diagnóstico,,,,,,fecha_fuera_2021_2025,14492
+releases,2025,Diagnóstico,,,,,,fecha_otro_anio,14492
+releases,2025,Diagnóstico,,,,,,vacios_buyer_id,0
+releases,2025,Diagnóstico,,,,,,vacios_buyer_name,0
+releases,2025,Diagnóstico,,,,,,vacios_date,0
+releases,2025,Diagnóstico,,,,,,vacios_ocid,0
+releases,TOTAL,Cinco años anexados,1007920,1007920,,,0,,
+releases,TOTAL,Campos para comprobar claves,1007920,1007920,,,0,,
+releases,TOTAL,Claves completas verificadas,1007920,1007920,,,0,,
+releases,TOTAL,Unicidad de proceso verificada,1007920,1007920,,,0,,
+releases,TOTAL,Fecha de negocio desde releases.date,1007920,1007920,,,0,,
+releases,TOTAL,Año y mes desde la fecha de negocio,1007920,1007920,,,0,,
+releases,TOTAL,Raíz de RUC desde buyer_id,1007920,1007920,,,0,,
+releases,TOTAL,Columnas finales de procesos,1007920,1007920,,,0,,
+releases,TOTAL,Diagnóstico,,,,,,buyer_id_malformado,43
+releases,TOTAL,Diagnóstico,,,,,,duplicados_excluidos,0
+releases,TOTAL,Diagnóstico,,,,,,fecha_fuera_2021_2025,14495
+releases,TOTAL,Diagnóstico,,,,,,fecha_otro_anio,96393
+releases,TOTAL,Diagnóstico,,,,,,vacios_buyer_id,0
+releases,TOTAL,Diagnóstico,,,,,,vacios_buyer_name,0
+releases,TOTAL,Diagnóstico,,,,,,vacios_date,0
+releases,TOTAL,Diagnóstico,,,,,,vacios_ocid,0
+tender,2021,Cinco años anexados,165616,165616,3682296515.41,3682296515.41,0,,
+tender,2021,Campos para limpiar licitaciones,165616,165616,3682296515.41,3682296515.41,0,,
+tender,2021,Método sin espacios repetidos ni saltos de línea,165616,165616,3682296515.41,3682296515.41,0,,
+tender,2021,Importe estimado decimal anulable,165616,165616,3682296515.41,3682296515.41,0,,
+tender,2021,Unicidad de licitación verificada,165616,165616,3682296515.41,3682296515.41,0,,
+tender,2021,Moneda solo USD verificada,165616,165616,3682296515.41,3682296515.41,0,,
+tender,2021,Importes negativos excluidos,165616,165616,3682296515.41,3682296515.41,0,,
+tender,2021,Indicador de importe estimado,165616,165616,3682296515.41,3682296515.41,0,,
+tender,2021,Columnas finales de licitaciones,165616,165616,3682296515.41,3682296515.41,0,,
+tender,2021,Diagnóstico,,,,,,detalle_normalizado,2790
+tender,2021,Diagnóstico,,,,,,duplicados_excluidos,0
+tender,2021,Diagnóstico,,,,,,importes_cero,0
+tender,2021,Diagnóstico,,,,,,importes_vacios,19050
+tender,2021,Diagnóstico,,,,,,moneda_excluidas,0
+tender,2021,Diagnóstico,,,,,,negativos_excluidos,0
+tender,2022,Cinco años anexados,203147,203147,5855681059.39,5855681059.39,0,,
+tender,2022,Campos para limpiar licitaciones,203147,203147,5855681059.39,5855681059.39,0,,
+tender,2022,Método sin espacios repetidos ni saltos de línea,203147,203147,5855681059.39,5855681059.39,0,,
+tender,2022,Importe estimado decimal anulable,203147,203147,5855681059.39,5855681059.39,0,,
+tender,2022,Unicidad de licitación verificada,203147,203147,5855681059.39,5855681059.39,0,,
+tender,2022,Moneda solo USD verificada,203147,203147,5855681059.39,5855681059.39,0,,
+tender,2022,Importes negativos excluidos,203147,203147,5855681059.39,5855681059.39,0,,
+tender,2022,Indicador de importe estimado,203147,203147,5855681059.39,5855681059.39,0,,
+tender,2022,Columnas finales de licitaciones,203147,203147,5855681059.39,5855681059.39,0,,
+tender,2022,Diagnóstico,,,,,,detalle_normalizado,4475
+tender,2022,Diagnóstico,,,,,,duplicados_excluidos,0
+tender,2022,Diagnóstico,,,,,,importes_cero,0
+tender,2022,Diagnóstico,,,,,,importes_vacios,26356
+tender,2022,Diagnóstico,,,,,,moneda_excluidas,0
+tender,2022,Diagnóstico,,,,,,negativos_excluidos,0
+tender,2023,Cinco años anexados,213841,213841,4798618255.15,4798618255.15,0,,
+tender,2023,Campos para limpiar licitaciones,213841,213841,4798618255.15,4798618255.15,0,,
+tender,2023,Método sin espacios repetidos ni saltos de línea,213841,213841,4798618255.15,4798618255.15,0,,
+tender,2023,Importe estimado decimal anulable,213841,213841,4798618255.15,4798618255.15,0,,
+tender,2023,Unicidad de licitación verificada,213841,213841,4798618255.15,4798618255.15,0,,
+tender,2023,Moneda solo USD verificada,213841,213841,4798618255.15,4798618255.15,0,,
+tender,2023,Importes negativos excluidos,213841,213841,4798618255.15,4798618255.15,0,,
+tender,2023,Indicador de importe estimado,213841,213841,4798618255.15,4798618255.15,0,,
+tender,2023,Columnas finales de licitaciones,213841,213841,4798618255.15,4798618255.15,0,,
+tender,2023,Diagnóstico,,,,,,detalle_normalizado,3359
+tender,2023,Diagnóstico,,,,,,duplicados_excluidos,0
+tender,2023,Diagnóstico,,,,,,importes_cero,0
+tender,2023,Diagnóstico,,,,,,importes_vacios,21993
+tender,2023,Diagnóstico,,,,,,moneda_excluidas,0
+tender,2023,Diagnóstico,,,,,,negativos_excluidos,0
+tender,2024,Cinco años anexados,212386,212386,5518333500.28,5518333500.28,0,,
+tender,2024,Campos para limpiar licitaciones,212386,212386,5518333500.28,5518333500.28,0,,
+tender,2024,Método sin espacios repetidos ni saltos de línea,212386,212386,5518333500.28,5518333500.28,0,,
+tender,2024,Importe estimado decimal anulable,212386,212386,5518333500.28,5518333500.28,0,,
+tender,2024,Unicidad de licitación verificada,212386,212386,5518333500.28,5518333500.28,0,,
+tender,2024,Moneda solo USD verificada,212386,212386,5518333500.28,5518333500.28,0,,
+tender,2024,Importes negativos excluidos,212386,212386,5518333500.28,5518333500.28,0,,
+tender,2024,Indicador de importe estimado,212386,212386,5518333500.28,5518333500.28,0,,
+tender,2024,Columnas finales de licitaciones,212386,212386,5518333500.28,5518333500.28,0,,
+tender,2024,Diagnóstico,,,,,,detalle_normalizado,2611
+tender,2024,Diagnóstico,,,,,,duplicados_excluidos,0
+tender,2024,Diagnóstico,,,,,,importes_cero,0
+tender,2024,Diagnóstico,,,,,,importes_vacios,24060
+tender,2024,Diagnóstico,,,,,,moneda_excluidas,0
+tender,2024,Diagnóstico,,,,,,negativos_excluidos,0
+tender,2025,Cinco años anexados,186358,186358,5218039375.30,5218039375.30,0,,
+tender,2025,Campos para limpiar licitaciones,186358,186358,5218039375.30,5218039375.30,0,,
+tender,2025,Método sin espacios repetidos ni saltos de línea,186358,186358,5218039375.30,5218039375.30,0,,
+tender,2025,Importe estimado decimal anulable,186358,186358,5218039375.30,5218039375.30,0,,
+tender,2025,Unicidad de licitación verificada,186358,186358,5218039375.30,5218039375.30,0,,
+tender,2025,Moneda solo USD verificada,186358,186358,5218039375.30,5218039375.30,0,,
+tender,2025,Importes negativos excluidos,186358,186358,5218039375.30,5218039375.30,0,,
+tender,2025,Indicador de importe estimado,186358,186358,5218039375.30,5218039375.30,0,,
+tender,2025,Columnas finales de licitaciones,186358,186358,5218039375.30,5218039375.30,0,,
+tender,2025,Diagnóstico,,,,,,detalle_normalizado,3072
+tender,2025,Diagnóstico,,,,,,duplicados_excluidos,0
+tender,2025,Diagnóstico,,,,,,importes_cero,0
+tender,2025,Diagnóstico,,,,,,importes_vacios,18334
+tender,2025,Diagnóstico,,,,,,moneda_excluidas,0
+tender,2025,Diagnóstico,,,,,,negativos_excluidos,0
+tender,TOTAL,Cinco años anexados,981348,981348,25072968705.53,25072968705.53,0,,
+tender,TOTAL,Campos para limpiar licitaciones,981348,981348,25072968705.53,25072968705.53,0,,
+tender,TOTAL,Método sin espacios repetidos ni saltos de línea,981348,981348,25072968705.53,25072968705.53,0,,
+tender,TOTAL,Importe estimado decimal anulable,981348,981348,25072968705.53,25072968705.53,0,,
+tender,TOTAL,Unicidad de licitación verificada,981348,981348,25072968705.53,25072968705.53,0,,
+tender,TOTAL,Moneda solo USD verificada,981348,981348,25072968705.53,25072968705.53,0,,
+tender,TOTAL,Importes negativos excluidos,981348,981348,25072968705.53,25072968705.53,0,,
+tender,TOTAL,Indicador de importe estimado,981348,981348,25072968705.53,25072968705.53,0,,
+tender,TOTAL,Columnas finales de licitaciones,981348,981348,25072968705.53,25072968705.53,0,,
+tender,TOTAL,Diagnóstico,,,,,,detalle_normalizado,16307
+tender,TOTAL,Diagnóstico,,,,,,duplicados_excluidos,0
+tender,TOTAL,Diagnóstico,,,,,,importes_cero,0
+tender,TOTAL,Diagnóstico,,,,,,importes_vacios,109793
+tender,TOTAL,Diagnóstico,,,,,,moneda_excluidas,0
+tender,TOTAL,Diagnóstico,,,,,,negativos_excluidos,0
+awards,2021,Cinco años anexados,166983,166983,4676997257.82,4676997257.82,0,,
+awards,2021,Campos de adjudicación sin importes vacíos de oferta,166983,166983,4676997257.82,4676997257.82,0,,
+awards,2021,Importe adjudicado decimal anulable,166983,166983,4676997257.82,4676997257.82,0,,
+awards,2021,Unicidad de adjudicación verificada,166983,166983,4676997257.82,4676997257.82,0,,
+awards,2021,Moneda solo USD verificada,166983,166983,4676997257.82,4676997257.82,0,,
+awards,2021,Importes negativos excluidos,166983,166983,4676997257.82,4676997257.82,0,,
+awards,2021,"Adjudicaciones agrupadas por ocid (suma, conteo)",166983,164266,4676997257.82,4676997257.82,0,,
+awards,2021,Diagnóstico,,,,,,duplicados_excluidos,0
+awards,2021,Diagnóstico,,,,,,filas_adicionales,2717
+awards,2021,Diagnóstico,,,,,,grupos_todos_null,3
+awards,2021,Diagnóstico,,,,,,importes_cero,0
+awards,2021,Diagnóstico,,,,,,importes_vacios,3
+awards,2021,Diagnóstico,,,,,,moneda_excluidas,0
+awards,2021,Diagnóstico,,,,,,negativos_excluidos,0
+awards,2021,Diagnóstico,,,,,,ocid_sin_proceso,0
+awards,2021,Diagnóstico,,,,,,poblados_correctedValue_amount,0
+awards,2021,Diagnóstico,,,,,,poblados_enteredValue_amount,0
+awards,2021,Diagnóstico,,,,,,procesos_ambos_importes,146314
+awards,2021,Diagnóstico,,,,,,procesos_varias_adjudicaciones,386
+awards,2022,Cinco años anexados,200173,200173,7118687591.72,7118687591.72,0,,
+awards,2022,Campos de adjudicación sin importes vacíos de oferta,200173,200173,7118687591.72,7118687591.72,0,,
+awards,2022,Importe adjudicado decimal anulable,200173,200173,7118687591.72,7118687591.72,0,,
+awards,2022,Unicidad de adjudicación verificada,200173,200173,7118687591.72,7118687591.72,0,,
+awards,2022,Moneda solo USD verificada,200173,200173,7118687591.72,7118687591.72,0,,
+awards,2022,Importes negativos excluidos,200173,200173,7118687591.72,7118687591.72,0,,
+awards,2022,"Adjudicaciones agrupadas por ocid (suma, conteo)",200173,197726,7118687591.72,7118687591.72,0,,
+awards,2022,Diagnóstico,,,,,,duplicados_excluidos,0
+awards,2022,Diagnóstico,,,,,,filas_adicionales,2447
+awards,2022,Diagnóstico,,,,,,grupos_todos_null,6
+awards,2022,Diagnóstico,,,,,,importes_cero,0
+awards,2022,Diagnóstico,,,,,,importes_vacios,6
+awards,2022,Diagnóstico,,,,,,moneda_excluidas,0
+awards,2022,Diagnóstico,,,,,,negativos_excluidos,0
+awards,2022,Diagnóstico,,,,,,ocid_sin_proceso,0
+awards,2022,Diagnóstico,,,,,,poblados_correctedValue_amount,0
+awards,2022,Diagnóstico,,,,,,poblados_enteredValue_amount,0
+awards,2022,Diagnóstico,,,,,,procesos_ambos_importes,175903
+awards,2022,Diagnóstico,,,,,,procesos_varias_adjudicaciones,424
+awards,2023,Cinco años anexados,212989,212989,6037778222.93,6037778222.93,0,,
+awards,2023,Campos de adjudicación sin importes vacíos de oferta,212989,212989,6037778222.93,6037778222.93,0,,
+awards,2023,Importe adjudicado decimal anulable,212989,212989,6037778222.93,6037778222.93,0,,
+awards,2023,Unicidad de adjudicación verificada,212989,212989,6037778222.93,6037778222.93,0,,
+awards,2023,Moneda solo USD verificada,212989,212989,6037778222.93,6037778222.93,0,,
+awards,2023,Importes negativos excluidos,212989,212989,6037778222.93,6037778222.93,0,,
+awards,2023,"Adjudicaciones agrupadas por ocid (suma, conteo)",212989,211214,6037778222.93,6037778222.93,0,,
+awards,2023,Diagnóstico,,,,,,duplicados_excluidos,0
+awards,2023,Diagnóstico,,,,,,filas_adicionales,1775
+awards,2023,Diagnóstico,,,,,,grupos_todos_null,5
+awards,2023,Diagnóstico,,,,,,importes_cero,0
+awards,2023,Diagnóstico,,,,,,importes_vacios,5
+awards,2023,Diagnóstico,,,,,,moneda_excluidas,0
+awards,2023,Diagnóstico,,,,,,negativos_excluidos,0
+awards,2023,Diagnóstico,,,,,,ocid_sin_proceso,0
+awards,2023,Diagnóstico,,,,,,poblados_correctedValue_amount,0
+awards,2023,Diagnóstico,,,,,,poblados_enteredValue_amount,0
+awards,2023,Diagnóstico,,,,,,procesos_ambos_importes,191312
+awards,2023,Diagnóstico,,,,,,procesos_varias_adjudicaciones,329
+awards,2024,Cinco años anexados,210445,210445,6895826062.72,6895826062.72,0,,
+awards,2024,Campos de adjudicación sin importes vacíos de oferta,210445,210445,6895826062.72,6895826062.72,0,,
+awards,2024,Importe adjudicado decimal anulable,210445,210445,6895826062.72,6895826062.72,0,,
+awards,2024,Unicidad de adjudicación verificada,210445,210445,6895826062.72,6895826062.72,0,,
+awards,2024,Moneda solo USD verificada,210445,210445,6895826062.72,6895826062.72,0,,
+awards,2024,Importes negativos excluidos,210445,210445,6895826062.72,6895826062.72,0,,
+awards,2024,"Adjudicaciones agrupadas por ocid (suma, conteo)",210445,208171,6895826062.72,6895826062.72,0,,
+awards,2024,Diagnóstico,,,,,,duplicados_excluidos,0
+awards,2024,Diagnóstico,,,,,,filas_adicionales,2274
+awards,2024,Diagnóstico,,,,,,grupos_todos_null,6
+awards,2024,Diagnóstico,,,,,,importes_cero,0
+awards,2024,Diagnóstico,,,,,,importes_vacios,6
+awards,2024,Diagnóstico,,,,,,moneda_excluidas,0
+awards,2024,Diagnóstico,,,,,,negativos_excluidos,0
+awards,2024,Diagnóstico,,,,,,ocid_sin_proceso,0
+awards,2024,Diagnóstico,,,,,,poblados_correctedValue_amount,0
+awards,2024,Diagnóstico,,,,,,poblados_enteredValue_amount,0
+awards,2024,Diagnóstico,,,,,,procesos_ambos_importes,187672
+awards,2024,Diagnóstico,,,,,,procesos_varias_adjudicaciones,362
+awards,2025,Cinco años anexados,184712,184712,6223591171.73,6223591171.73,0,,
+awards,2025,Campos de adjudicación sin importes vacíos de oferta,184712,184712,6223591171.73,6223591171.73,0,,
+awards,2025,Importe adjudicado decimal anulable,184712,184712,6223591171.73,6223591171.73,0,,
+awards,2025,Unicidad de adjudicación verificada,184712,184712,6223591171.73,6223591171.73,0,,
+awards,2025,Moneda solo USD verificada,184712,184712,6223591171.73,6223591171.73,0,,
+awards,2025,Importes negativos excluidos,184712,184712,6223591171.73,6223591171.73,0,,
+awards,2025,"Adjudicaciones agrupadas por ocid (suma, conteo)",184712,183098,6223591171.73,6223591171.73,0,,
+awards,2025,Diagnóstico,,,,,,duplicados_excluidos,0
+awards,2025,Diagnóstico,,,,,,filas_adicionales,1614
+awards,2025,Diagnóstico,,,,,,grupos_todos_null,5
+awards,2025,Diagnóstico,,,,,,importes_cero,0
+awards,2025,Diagnóstico,,,,,,importes_vacios,5
+awards,2025,Diagnóstico,,,,,,moneda_excluidas,0
+awards,2025,Diagnóstico,,,,,,negativos_excluidos,0
+awards,2025,Diagnóstico,,,,,,ocid_sin_proceso,0
+awards,2025,Diagnóstico,,,,,,poblados_correctedValue_amount,0
+awards,2025,Diagnóstico,,,,,,poblados_enteredValue_amount,0
+awards,2025,Diagnóstico,,,,,,procesos_ambos_importes,167375
+awards,2025,Diagnóstico,,,,,,procesos_varias_adjudicaciones,300
+awards,TOTAL,Cinco años anexados,975302,975302,30952880306.92,30952880306.92,0,,
+awards,TOTAL,Campos de adjudicación sin importes vacíos de oferta,975302,975302,30952880306.92,30952880306.92,0,,
+awards,TOTAL,Importe adjudicado decimal anulable,975302,975302,30952880306.92,30952880306.92,0,,
+awards,TOTAL,Unicidad de adjudicación verificada,975302,975302,30952880306.92,30952880306.92,0,,
+awards,TOTAL,Moneda solo USD verificada,975302,975302,30952880306.92,30952880306.92,0,,
+awards,TOTAL,Importes negativos excluidos,975302,975302,30952880306.92,30952880306.92,0,,
+awards,TOTAL,"Adjudicaciones agrupadas por ocid (suma, conteo)",975302,964475,30952880306.92,30952880306.92,0,,
+awards,TOTAL,Diagnóstico,,,,,,duplicados_excluidos,0
+awards,TOTAL,Diagnóstico,,,,,,filas_adicionales,10827
+awards,TOTAL,Diagnóstico,,,,,,grupos_todos_null,25
+awards,TOTAL,Diagnóstico,,,,,,importes_cero,0
+awards,TOTAL,Diagnóstico,,,,,,importes_vacios,25
+awards,TOTAL,Diagnóstico,,,,,,moneda_excluidas,0
+awards,TOTAL,Diagnóstico,,,,,,negativos_excluidos,0
+awards,TOTAL,Diagnóstico,,,,,,ocid_sin_proceso,0
+awards,TOTAL,Diagnóstico,,,,,,poblados_correctedValue_amount,0
+awards,TOTAL,Diagnóstico,,,,,,poblados_enteredValue_amount,0
+awards,TOTAL,Diagnóstico,,,,,,procesos_ambos_importes,868576
+awards,TOTAL,Diagnóstico,,,,,,procesos_varias_adjudicaciones,1801
