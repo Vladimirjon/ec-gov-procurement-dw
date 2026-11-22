@@ -84,6 +84,8 @@ def main() -> int:
         ("MDEP truncated RUCs (12 digits)", "1.266"),
         ("MDEP distinct entity codes", "603"),
         ("MDEP normalized RUCs", "3.080"),
+        ("Tabla Licitaciones_SERCOP", "Licitaciones_SERCOP"),
+        ("Grano Licitaciones_SERCOP", "Una fila = una etapa o convocatoria de licitación"),
     ]
     for label, val in expected_dicc_numbers:
         found = val in diccionario_xml
@@ -110,6 +112,9 @@ def main() -> int:
         ("Q-09 unexplained difference USD", "1.095,11"),
         ("Q-09 relative diff pct", "-14,96 %"),
         ("Q-10 processes outside file year 2021", "18.235"),
+        ("Q-11 total fields with line breaks", "800"),
+        ("Q-11 line breaks procurementMethodDetails", "796"),
+        ("Q-11 tender control total", "981.348"),
         ("Q-E01 truncated RUCs MDEP", "1.266"),
         ("Q-E01 pct truncated MDEP", "40,32 %"),
         ("Q-E02 duplicated RUCs MDEP", "60"),

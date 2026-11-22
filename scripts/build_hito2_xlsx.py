@@ -479,7 +479,7 @@ def generate_portada_sheet() -> tuple[list[list[tuple[str, int]]], list[float], 
             ("Hoja 4: Calidad", 3),
             ("Plantilla 6.3: Diagnóstico de calidad", 2),
             (
-                "Diagnóstico en seis dimensiones: hallazgos Q-01..Q-10, Q-E01..Q-E08, S-01..S-03 y "
+                "Diagnóstico en seis dimensiones: hallazgos Q-01..Q-11, Q-E01..Q-E08, S-01..S-04 y "
                 "Matriz Tabla × Dimensión",  # noqa: RUF001
                 2,
             ),
@@ -618,7 +618,7 @@ def generate_calidad_sheet(
     # Section 1 Header
     rows.append(
         [
-            ("1. Diagnóstico de calidad multidimensional (Hallazgos Q-01..Q-10, Q-E01..Q-E08 y S-01..S-03)", 9),
+            ("1. Diagnóstico de calidad multidimensional (Hallazgos Q-01..Q-11, Q-E01..Q-E08 y S-01..S-04)", 9),
             ("", 9),
             ("", 9),
             ("", 9),
@@ -680,16 +680,25 @@ def generate_calidad_sheet(
     ]
     rows.append([(h, 12) for h in matrix_headers])
 
-    # Pre-defined mapping matching the findings
+    # Pre-defined mapping matching the findings across the 4 queries
     matrix_rows = [
         (
             "Procesos_SERCOP",
-            "Q-01, Q-03",
-            "Q-04, Q-05, Q-E08",
-            "Q-07, Q-08",
+            "Q-03",
+            "Q-04, Q-E08",
+            "Q-07",
             "Q-06",
             "S-01",
             "Q-10",
+        ),
+        (
+            "Licitaciones_SERCOP",
+            "Q-01",
+            "Q-04, Q-05, Q-11",
+            "Q-08",
+            "S-04",
+            "S-01",
+            "Q-03",
         ),
         (
             "Adjudicaciones_SERCOP",

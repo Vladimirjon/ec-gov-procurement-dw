@@ -238,9 +238,10 @@ def test_build_hito2_xlsx_production_workbook():
         assert "CC BY 3.0 EC" in fuentes_xml
         assert "6A7AD388D0B1B4D4C71C7BD82BDB78C4A43B24E84EF8C1E6584DE0662E88AEAA" in fuentes_xml
 
-        # 3. Diccionario checks: 3 tables, grain, units
+        # 3. Diccionario checks: 4 tables, grain, units
         diccionario_xml = zf.read("xl/worksheets/sheet3.xml").decode("utf-8")
         assert "Tabla: Procesos_SERCOP" in diccionario_xml
+        assert "Tabla: Licitaciones_SERCOP" in diccionario_xml
         assert "Tabla: Adjudicaciones_SERCOP" in diccionario_xml
         assert "Tabla: Entidades_MDEP" in diccionario_xml
         assert "USD" in diccionario_xml
@@ -249,13 +250,13 @@ def test_build_hito2_xlsx_production_workbook():
         assert "amount" in diccionario_xml
         assert "Medida del hecho" in diccionario_xml
 
-        # 4. Calidad checks: Q-01..Q-10, Q-E01..Q-E08, S-01..S-03, matrix
+        # 4. Calidad checks: Q-01..Q-11, Q-E01..Q-E08, S-01..S-04, matrix
         calidad_xml = zf.read("xl/worksheets/sheet4.xml").decode("utf-8")
-        for i in range(1, 11):
+        for i in range(1, 12):
             assert f"Q-{i:02d}" in calidad_xml
         for i in range(1, 9):
             assert f"Q-E{i:02d}" in calidad_xml
-        for i in range(1, 4):
+        for i in range(1, 5):
             assert f"S-{i:02d}" in calidad_xml
         assert "Matriz de control: Tabla × Dimensión" in calidad_xml  # noqa: RUF001
 
