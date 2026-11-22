@@ -6,6 +6,7 @@ claim to validate every fact, interpretation, or number in the workbook.
 """
 
 import csv
+from decimal import ROUND_HALF_UP, Decimal
 import importlib.util
 import json
 from pathlib import Path
@@ -164,6 +165,47 @@ def evidence_checks(root: Path) -> tuple[list[str], int]:
         require(label, number(value) in row[field])
     percentage = f"{both / releases * 100:.2f}".replace(".", ",") + " %"
     require("P2 porcentaje nacional", percentage in coverage["P2"]["decision"])
+    awards_empty = sum(p["completeness"]["awards_amount"]["empty"] for p in profiles)
+    awards_positive = sum(p["completeness"]["awards_amount"]["positive"] for p in profiles)
+    amount_row = next(
+        r
+        for r in _read_csv(root / "docs/h2/diccionario.csv")
+        if r["tabla"] == "Adjudicaciones_SERCOP" and r["campo"] == "amount"
+    )
+    require(
+        "Diccionario awards.amount positivos",
+        f"{number(awards_positive)} adjudicaciones" in amount_row["observacion_perfil"],
+    )
+    require("Diccionario awards.amount vacíos", f"{awards_empty} filas vacías" in amount_row["observacion_perfil"])
+    require(
+        "Diccionario awards.amount vacíos por año",
+        all(f"{p['completeness']['awards_amount']['empty']}" in amount_row["observacion_perfil"] for p in profiles),
+    )
+
+    accuracy = json.loads(
+        (root / "docs/h2/evidencia/exactitud-licitaciones-json-vs-csv.json").read_text(encoding="utf-8")
+    )["years"]
+    q12 = quality["Q-12"]["problema_evidencia"]
+    total = lambda key: sum(y[key] for y in accuracy.values())  # noqa: E731
+    require("Q-12 filas de tender", number(total("json_tender_rows")) in q12 and total("json_tender_rows") == tenders)
+    require(
+        "Q-12 filas solo en un formato",
+        total("tender_rows_only_in_json") == 0 and total("tender_rows_only_in_csv") == 0,
+    )
+    require("Q-12 importes en ambos formatos", total("amount_present_in_both") == tenders - empty_tender)
+    require("Q-12 importes idénticos", number(total("amount_identical")) in q12)
+    require("Q-12 importes con diferencia de redondeo", number(total("amount_differs_up_to_0_01")) in q12)
+    require("Q-12 ninguna diferencia mayor a 0,01", total("amount_differs_more_than_0_01") == 0)
+    require("Q-12 método de contratación", total("procurement_method_differs") == 0)
+    require(
+        "Q-12 detalle solo en espacios",
+        total("method_details_differs") == total("method_details_differs_only_in_whitespace") == 796 and "796" in q12,
+    )
+    require("Q-12 caso de importe 0", total("json_amount_zero_csv_empty") == 1 and total("amount_only_in_csv") == 0)
+    for year, stats in accuracy.items():
+        difference = Decimal(stats["sum_difference_json_minus_csv"]).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+        shown = f"{difference:+.2f}".replace(".", ",") if year == "2023" else f"{difference:.2f}".replace(".", ",")
+        require(f"Q-12 diferencia de suma {year}", shown in q12)
     for date_key in ("release_date", "award_date"):
         months = set().union(*(p["timeliness"][date_key]["monthly_distribution"] for p in profiles))
         complete = all(f"{y}-{m:02d}" in months for y in range(2021, 2026) for m in range(1, 13))

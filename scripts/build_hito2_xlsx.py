@@ -3,7 +3,7 @@
 Produces deliverables/h2/Proyecto_Grupo5_Hito2.xlsx from the four versioned CSVs:
 - docs/h2/fuentes.csv (Template 6.1 + License + SHA-256)
 - docs/h2/diccionario.csv (Template 6.2 with grain, roles, units, profilings)
-- docs/h2/calidad.csv (Template 6.3 with Q-01..Q-10, Q-E01..Q-E08, S-01..S-03 and 3x6 matrix)
+- docs/h2/calidad.csv (Template 6.3 with Q-01..Q-12, Q-E01..Q-E08, S-01..S-04 and 4x6 matrix)
 - docs/h2/cobertura.csv (Template 6.4 with P1..P3, availability and decisions)
 
 Only the Python standard library is used (zipfile, xml.etree.ElementTree, csv).
@@ -697,7 +697,7 @@ def generate_calidad_sheet(
             "Q-04, Q-05, Q-11",
             "Q-08",
             "S-04",
-            "No medida",
+            "Q-12",
             "Q-03",
         ),
         (

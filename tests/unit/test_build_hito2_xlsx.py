@@ -322,8 +322,10 @@ def test_evidence_comparison_detects_a_changed_source(tmp_path: Path):
         "docs/h2/fuentes.csv",
         "docs/h2/calidad.csv",
         "docs/h2/cobertura.csv",
+        "docs/h2/diccionario.csv",
         "docs/h2/evidencia/descargas-sercop.csv",
         "docs/h2/evidencia/descargas-entidades.csv",
+        "docs/h2/evidencia/exactitud-licitaciones-json-vs-csv.json",
         *(f"docs/h2/evidencia/perfil-calidad-sercop-{year}.json" for year in range(2021, 2026)),
     ]:
         destination = tmp_path / relative
@@ -331,6 +333,14 @@ def test_evidence_comparison_detects_a_changed_source(tmp_path: Path):
         shutil.copyfile(REPO_ROOT / relative, destination)
     errors, _ = compare.evidence_checks(tmp_path)
     assert errors == []
+    accuracy = tmp_path / "docs/h2/evidencia/exactitud-licitaciones-json-vs-csv.json"
+    accuracy_data = json.loads(accuracy.read_text(encoding="utf-8"))
+    accuracy_data["years"]["2025"]["amount_identical"] += 1
+    accuracy.write_text(json.dumps(accuracy_data), encoding="utf-8", newline="\n")
+    errors, _ = compare.evidence_checks(tmp_path)
+    assert "Q-12 importes idénticos" in errors
+    accuracy_data["years"]["2025"]["amount_identical"] -= 1
+    accuracy.write_text(json.dumps(accuracy_data), encoding="utf-8", newline="\n")
     profile = tmp_path / "docs/h2/evidencia/perfil-calidad-sercop-2021.json"
     data = json.loads(profile.read_text(encoding="utf-8"))
     data["control_totals"]["processes_with_both_amounts"] += 1
