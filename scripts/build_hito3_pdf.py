@@ -393,7 +393,7 @@ def transformation_log(c: Counter, rows: list[dict[str, str]]) -> str:
                     )
                     for r in group
                 ],
-                "Plantilla 6.3 de la guía del profesor. Los nombres de paso reproducen las consultas M; varias acciones pueden referirse al mismo paso. Las mediciones S sin hallazgos no requieren una acción correctiva.",
+                "Plantilla 6.3 de la guía del profesor. Los nombres de paso reproducen las consultas M; varias acciones pueden referirse al mismo paso. S-01 (1.007.920 como control y diferencias con el portal) y S-03 (baja cobertura de la fecha de adjudicación) se documentan en la Parte 4.2 (Tablas 5 y 6 y Limitaciones); S-02, S-04 y S-05 no proponían acción en el H2.",
             )
         )
         if index:
