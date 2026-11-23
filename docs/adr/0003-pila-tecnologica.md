@@ -73,3 +73,11 @@ CI con GitHub Actions y Dependabot.
   que este ADR dejaba para el Hito 4, se adelanta al Hito 1 por decisión del
   líder; `pre-commit` sigue en el Hito 4. Las herramientas no cambian: `uv`,
   `ruff` y `pytest`.
+- **2026-11-22 (issue #76, registro de un hecho; no fija la versión del DW).**
+  PostgreSQL no es una dependencia de Python, así que no aparece en
+  `pyproject.toml` ni en `uv.lock`. La única versión probada es la **17.12**
+  (imagen oficial `postgres:17.12-bookworm`, `sha256:837bed18782820fe967067cb5328b02b0d9992c1be9a37ee0c9c492cfc03af3b`),
+  con la que se ejecutó `warehouse/ddl/001_dw_schema.sql` dos veces sin
+  errores en un contenedor desechable (`docs/h3/evidencia/ddl-ejecucion-20261122.txt`).
+  La versión que usará el DW queda pendiente de que el líder cree el
+  `compose.yaml` del Hito 4, que es donde se fija.

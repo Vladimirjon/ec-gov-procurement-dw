@@ -24,8 +24,9 @@ ADR o a un PDF del profesor, mandan ellos. No afirmes nada que no exista.
 - `tests/unit/`: pruebas de los scripts de `scripts/`. `pyproject.toml`, `uv.lock`
   y `.python-version` declaran el entorno (Python 3.14, `ruff` y `pytest`).
 - `src/ec_gov_procurement_dw/{extract,load,quality,snapshot}`,
-  `warehouse/{ddl,seeds}`, `notebooks/`, `reports/powerbi`: esqueleto, aún sin
-  código.
+  `warehouse/seeds`, `notebooks/`, `reports/powerbi`: esqueleto, aún sin
+  código. `warehouse/ddl/001_dw_schema.sql` es el DDL de respaldo del modelo H3
+  (cuatro tablas de `dw`; `stg` y `audit` vacíos), probado en PostgreSQL 17.12.
 - `deliverables/`: versiones finales de los entregables por hito (`h1` a `h6`).
 - `data/` y `Instrucciones_Curso/`: locales, ignorados por Git. Los PDF del
   profesor y su texto en `Instrucciones_Curso/_md/` mandan sobre todo lo demás.
