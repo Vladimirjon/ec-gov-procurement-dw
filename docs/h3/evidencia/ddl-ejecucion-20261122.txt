@@ -1,0 +1,119 @@
+Validación del DDL de respaldo del Hito 3 · 22/11/2026
+PostgreSQL 17.12, imagen oficial postgres:17.12-bookworm.
+Base recién inicializada en un contenedor temporal sin red externa ni puertos publicados.
+Salida real de PowerShell y psql con finales LF y sin espacios al final de línea.
+
+$ docker pull postgres:17.12-bookworm
+Digest: sha256:837bed18782820fe967067cb5328b02b0d9992c1be9a37ee0c9c492cfc03af3b
+Status: Downloaded newer image for postgres:17.12-bookworm
+docker.io/library/postgres:17.12-bookworm
+
+$ docker image inspect postgres:17.12-bookworm --format '{{index .RepoDigests 0}}'
+postgres@sha256:837bed18782820fe967067cb5328b02b0d9992c1be9a37ee0c9c492cfc03af3b
+[exit 0]
+$ docker run --pull never --detach --rm --network none --name dw-issue76-20261122-6bc4 --env POSTGRES_HOST_AUTH_METHOD=trust postgres:17.12-bookworm@sha256:837bed18782820fe967067cb5328b02b0d9992c1be9a37ee0c9c492cfc03af3b
+7c8ac6994ad676973a70c85df5e423052e2929e8f83fcb82374d3388d5b86774
+[exit 0]
+$ docker exec dw-issue76-20261122-6bc4 pg_isready -h 127.0.0.1 -U postgres -d postgres
+127.0.0.1:5432 - accepting connections
+[exit 0]
+$ docker exec dw-issue76-20261122-6bc4 psql -X -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'SHOW server_version;' -c "SELECT schema_name FROM information_schema.schemata WHERE schema_name IN ('dw', 'stg', 'audit') ORDER BY 1;"
+         server_version
+---------------------------------
+ 17.12 (Debian 17.12-1.pgdg12+1)
+(1 row)
+
+ schema_name
+-------------
+(0 rows)
+
+[exit 0]
+$ docker cp warehouse/ddl/001_dw_schema.sql dw-issue76-20261122-6bc4:/tmp/001_dw_schema.sql
+[exit 0]
+$ docker exec dw-issue76-20261122-6bc4 psql -X -U postgres -d postgres -v ON_ERROR_STOP=1 -f /tmp/001_dw_schema.sql
+BEGIN
+CREATE SCHEMA
+CREATE SCHEMA
+CREATE SCHEMA
+CREATE TABLE
+COMMENT
+CREATE TABLE
+COMMENT
+CREATE TABLE
+COMMENT
+CREATE TABLE
+COMMENT
+COMMIT
+[exit 0]
+$ docker exec dw-issue76-20261122-6bc4 psql -X -U postgres -d postgres -v ON_ERROR_STOP=1 -f /tmp/001_dw_schema.sql
+BEGIN
+CREATE SCHEMA
+CREATE SCHEMA
+CREATE SCHEMA
+CREATE TABLE
+psql:/tmp/001_dw_schema.sql:10: NOTICE:  schema "dw" already exists, skipping
+COMMENT
+psql:/tmp/001_dw_schema.sql:11: NOTICE:  schema "stg" already exists, skipping
+psql:/tmp/001_dw_schema.sql:12: NOTICE:  schema "audit" already exists, skipping
+psql:/tmp/001_dw_schema.sql:23: NOTICE:  relation "dim_date" already exists, skipping
+CREATE TABLE
+psql:/tmp/001_dw_schema.sql:37: NOTICE:  relation "dim_entity" already exists, skipping
+COMMENT
+CREATE TABLE
+psql:/tmp/001_dw_schema.sql:48: NOTICE:  relation "dim_method" already exists, skipping
+COMMENT
+CREATE TABLE
+psql:/tmp/001_dw_schema.sql:70: NOTICE:  relation "fact_contract_process" already exists, skipping
+COMMENT
+COMMIT
+[exit 0]
+$ docker exec dw-issue76-20261122-6bc4 psql -X -U postgres -d postgres -v ON_ERROR_STOP=1 -c '\dt dw.*' -c '\d dw.fact_contract_process' -c "SELECT s.schema_name, count(t.tablename) AS tables FROM information_schema.schemata s LEFT JOIN pg_tables t ON t.schemaname = s.schema_name WHERE s.schema_name IN ('dw', 'stg', 'audit') GROUP BY s.schema_name ORDER BY 1;"
+                 List of relations
+ Schema |         Name          | Type  |  Owner
+--------+-----------------------+-------+----------
+ dw     | dim_date              | table | postgres
+ dw     | dim_entity            | table | postgres
+ dw     | dim_method            | table | postgres
+ dw     | fact_contract_process | table | postgres
+(4 rows)
+
+                   Table "dw.fact_contract_process"
+          Column           |  Type   | Collation | Nullable | Default
+---------------------------+---------+-----------+----------+---------
+ date_id                   | bigint  |           | not null |
+ entity_id                 | bigint  |           | not null |
+ method_id                 | bigint  |           | not null |
+ ocid                      | text    |           | not null |
+ awarded_amount            | numeric |           |          |
+ estimated_amount          | numeric |           |          |
+ process_count             | bigint  |           | not null |
+ award_count               | bigint  |           | not null |
+ process_with_both_amounts | bigint  |           | not null |
+Indexes:
+    "fact_contract_process_pkey" PRIMARY KEY, btree (ocid)
+Check constraints:
+    "fact_contract_process_award_count_check" CHECK (award_count >= 0)
+    "fact_contract_process_check" CHECK (process_with_both_amounts =
+CASE
+    WHEN awarded_amount IS NOT NULL AND estimated_amount IS NOT NULL THEN 1
+    ELSE 0
+END)
+    "fact_contract_process_process_count_check" CHECK (process_count = 1)
+Foreign-key constraints:
+    "fact_contract_process_date_id_fkey" FOREIGN KEY (date_id) REFERENCES dw.dim_date(date_id)
+    "fact_contract_process_entity_id_fkey" FOREIGN KEY (entity_id) REFERENCES dw.dim_entity(entity_id)
+    "fact_contract_process_method_id_fkey" FOREIGN KEY (method_id) REFERENCES dw.dim_method(method_id)
+
+ schema_name | tables
+-------------+--------
+ audit       |      0
+ dw          |      4
+ stg         |      0
+(3 rows)
+
+[exit 0]
+$ docker stop dw-issue76-20261122-6bc4
+dw-issue76-20261122-6bc4
+[exit 0]
+$ docker ps -a --filter 'name=^/dw-issue76-20261122-6bc4$' --format '{{.Names}}'
+[exit 0]
