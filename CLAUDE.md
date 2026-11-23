@@ -91,7 +91,7 @@ script cambia sin un resumen nuevo en `docs/sources/` que registre su hash.
   `deliverables/h1/` (6 páginas); el líder retocó el Word a mano, así que
   regenerarlo con `scripts/build_hito1_docx.py` sobrescribe esos retoques.
 
-## Hitos 2 y 3 (en curso: vencen el 21/11 y el 22/11/2026)
+## Hitos 2 y 3 (H3 entregado el 22/11/2026)
 - **Tareas:** issues de los milestones H2 y H3 de GitHub; el issue de
   coordinación tiene el mapa, las decisiones D1 a D8 y el plan de recorte. Cada
   issue es el encargo completo para un agente. Decisiones en
@@ -127,9 +127,12 @@ script cambia sin un resumen nuevo en `docs/sources/` que registre su hash.
 - **Nombres de archivo** (`EquipoX` = `Grupo5`). **H2, según el aula virtual:**
   `H2FC-BravoFreireGuajanPasquelTorres.pbix` y un solo PDF
   `H2BravoFreireGuajanPasquelTorres.pdf` (partes 4.2 a 4.5; encabezado con Título,
-  Equipo #, Nombres y Fecha); el libro `.xlsx` queda en `deliverables/h2/`. H3 hasta
-  confirmar con el aula: `Proyecto_Grupo5_Hito3.pbix`, `..._Hito3_Diseno.pdf`,
-  `..._Hito3_Presentacion.pdf` y `..._Hito3_Bitacora.xlsx`. Fecha en portada:
+  Equipo #, Nombres y Fecha); el libro `.xlsx` queda en `deliverables/h2/`. **H3,
+  nombres finales comunicados por el líder:** `H3MD-BravoFreireGuajanPasquelTorres.pbix`
+  (no versionado, solo aula), `H3BravoFreireGuajanPasquelTorres.pdf` (diseño y
+  bitácora) y `H3PresentacionBravoFreireGuajanPasquelTorres.pptx`. Entregado el
+  22/11/2026 según el líder; vencía a las 23:59. La subida al aula virtual la
+  confirma el líder. Fecha en portada:
   21/11/26 (H2) y 22/11/26 (H3). H3: documento de máximo 8 páginas sin anexos;
   presentación de 10 min + 5, todos exponen.
 - **Datos ya medidos (H1, nacionales, sin filtrar por sector):** 190.619

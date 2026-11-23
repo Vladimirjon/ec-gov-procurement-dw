@@ -28,7 +28,7 @@ deliverables/
 |---|---|---|
 | H1 | Documento con el perfil del sector y la matriz de 3 preguntas, máx. 6 páginas sin anexos. Al inicio: nombre del equipo, sector y fecha | `Hito1_Apellido1Apellido2ApellidoN.pdf` |
 | H2 | `.pbix` con las fuentes conectadas y un libro de Excel (o Word/PDF; en el aula, un solo PDF) con Fuentes, Diccionario, Calidad y Cobertura. Vence el 21/11/2026 | `H2FC-BravoFreireGuajanPasquelTorres.pbix` y `H2BravoFreireGuajanPasquelTorres.pdf` (el aula pidió un solo PDF con las partes 4.2 a 4.5; está en `h2/`) |
-| H3 | `.pbix` con el modelo dimensional, documento de diseño en PDF (máx. 8 páginas sin anexos) y diapositivas en PDF; presentación de 10 min + 5 de preguntas. Vence el 22/11/2026 | `Proyecto_Grupo5_Hito3.pbix`, `h3/Proyecto_Grupo5_Hito3_Diseno.pdf` y `h3/Proyecto_Grupo5_Hito3_Presentacion.pdf` |
+| H3 | `.pbix` con el modelo dimensional, PDF de diseño (parte 4.2, máximo 8 páginas) y bitácora (4.3), y presentación de 10 min + 5 de preguntas. Entregado el 22/11/2026 según el líder; la subida al aula virtual la confirma el líder | `H3MD-BravoFreireGuajanPasquelTorres.pbix` (no versionado, solo aula virtual), `h3/H3BravoFreireGuajanPasquelTorres.pdf` y `h3/H3PresentacionBravoFreireGuajanPasquelTorres.pptx` (versionados, [PR #92](https://github.com/Vladimirjon/ec-gov-procurement-dw/pull/92); nombres finales comunicados por el líder en el cierre del 22/11) |
 | H4 | Scripts ETL, carga inicial e incremental, bitácora de cargas y reporte de reconciliación | **[PENDIENTE]** guía del profesor |
 | H5 | Consultas OLAP, tablero `.pbix`, notebook del modelo analítico y resumen de 1 página | **[PENDIENTE]** guía del profesor |
 | H6 | Repositorio final, `.pbix`, informe técnico de 1 página, presentación de 20 min y coevaluación | **[PENDIENTE]** guía del profesor |
@@ -64,8 +64,8 @@ La guía escribe `Proyecto_EquipoX_Hito2` y `Proyecto_EquipoX_Hito3` sin definir
 (decisión del líder, 21/11/2026, ADR 0005): pesan cientos de MB (el de H2,
 243 MB), GitHub rechaza archivos de más de 100 MB y están en `.gitignore`; se
 entregan por el aula virtual. Llevan datos embebidos y rutas locales, nunca
-datos de personas. Aquí entran el libro de Excel de H2 y los PDF de H3, cuando
-el líder los apruebe por PR. Las consultas M y los runbooks que producen
+datos de personas. Aquí entran el libro de Excel de H2 y el PDF y la presentación PPTX de H3,
+aprobados por el líder por PR. Las consultas M y los runbooks que producen
 el modelo viven en `reports/powerbi/` y `docs/h2/`, `docs/h3/`.
 
 ### Libro de Excel del Hito 2
